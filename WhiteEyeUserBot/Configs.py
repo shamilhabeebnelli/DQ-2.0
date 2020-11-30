@@ -161,7 +161,7 @@ if ENV:
         TAG_FEATURE = os.environ.get("TAG_FEATURE", "DISABLE")
         ASSISTANT_LOG = int(os.environ.get("ASSISTANT_LOG", False))
         UPSTREAM_REPO = os.environ.get(
-            "UPSTREAM_REPO", "https://github.com/MrDayamZaidi/WhiteEyeUserBot"
+            "UPSTREAM_REPO", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
         )
         ALIVE_IMAGE = os.environ.get(
             "ALIVE_IMAGE", "https://telegra.ph/file/63a02b3ef3245b321e54a.jpg"
