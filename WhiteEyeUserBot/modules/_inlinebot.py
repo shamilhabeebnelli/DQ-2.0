@@ -40,7 +40,7 @@ async def inline_handler(event):
             text=f"**Showing Stats For {DEFAULTUSER}'s WhiteEye** \nNote --> Only Owner Can Check This \n(C) @WhiteEyeOT",
             buttons=[
                 [custom.Button.inline("Show Stats ", data="terminator")],
-                [Button.url("Repo 🇮🇳", "https://github.com/MrDayamZaidi/WhiteEyeUserbot")],
+                [Button.url("Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserbot")],
                 [Button.url("Join Channel ❤️", "t.me/WhiteEyeot")],
             ],
         )
