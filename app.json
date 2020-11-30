@@ -10,7 +10,7 @@
     "telegram-WhiteEyeUserBot",
     "productivity"
   ],
-  "repository": "https://github.com/MrDayamZaidi/WhiteEyeUserBot",
+  "repository": "https://github.com/WhiteEye-Org/WhiteEyeUserBot",
   "website": "starkgang.ml",
   "success_url": "t.me/WhiteEyeOT",
   "stack": "container",
@@ -63,7 +63,7 @@
       "required": false
     },
     "GIT_REPO_NAME": {
-      "description": "Your repo name Example: mrdayamzaidi/WhiteEyeUserBot, but GITHUB_ACCESS_TOKEN must be setup first.",
+      "description": "Your repo name Example: WhiteEye-Org/WhiteEyeUserBot, but GITHUB_ACCESS_TOKEN must be setup first.",
       "value": "",
       "required": false
     },
