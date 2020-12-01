@@ -11,7 +11,7 @@ from WhiteEyeUserBot.Configs import Config
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
-    WARN_PIC = "https://telegra.ph/file/63a02b3ef3245b321e54a.jpg"
+    WARN_PIC = "https://telegra.ph/file/63d2f8bcdae4da2ec5e7e.jpg"
 else:
     WARN_PIC = PMPERMIT_PIC
 
