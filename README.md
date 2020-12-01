@@ -1,4 +1,4 @@
-<p align="center"><a href="https://t.me/WhiteEyeOT"><img src="https://telegra.ph/file/8fd20da09c09b03d583a7.png" width="5000"></a></p> 
+<p align="center"><a href="https://t.me/WhiteEyeOT"><img src="https://telegra.ph/file/63d2f8bcdae4da2ec5e7e.jpg" width="5000"></a></p> 
 <h1 align="center"><b>WHITEEYE-USERBOT 🇮🇳 </b></h1>
 <h4 align="center">A Powerful, Smart And Simple Userbot In Telethon.</h4>
 
