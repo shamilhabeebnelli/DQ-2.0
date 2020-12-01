@@ -20,6 +20,7 @@ from PIL import Image
 from telethon.tl.types import MessageMediaPhoto
 
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot import CMD_HELP
 
 sedpath = "./starkgangz/"
 if not os.path.isdir(sedpath):
@@ -158,3 +159,19 @@ async def iamthug(event):
     background.save(ok, "PNG")
     await borg.send_file(event.chat_id, ok)
     await hmm.delete()
+
+CMD_HELP.update(
+    {
+        "imagetools": "**imagetools**\
+        \n\n**Syntax : **`.cit`\
+        \n**Usage :** colourizes the given picture\
+        \n\n**Syntax : **`.toon`\
+        \n**Usage :** makes toon of the given image\
+        \n\n**Syntax : **`.nst`\
+        \n**Usage :** removes colours from image\
+        \n\n**Syntax : ** `.thug`\
+        \n**Usage :** makes a thug life meme image\
+        \n\n**Syntax : ** `.tig`\
+        \n**Usage :** Makes a triggered gif of the replied image"
+    }
+)    
