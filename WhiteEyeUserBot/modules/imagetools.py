@@ -19,8 +19,8 @@ import requests
 from PIL import Image
 from telethon.tl.types import MessageMediaPhoto
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 sedpath = "./starkgangz/"
 if not os.path.isdir(sedpath):
@@ -160,6 +160,7 @@ async def iamthug(event):
     await borg.send_file(event.chat_id, ok)
     await hmm.delete()
 
+
 CMD_HELP.update(
     {
         "imagetools": "**imagetools**\
@@ -174,4 +175,4 @@ CMD_HELP.update(
         \n\n**Syntax : ** `.tig`\
         \n**Usage :** Makes a triggered gif of the replied image"
     }
-)    
+)
