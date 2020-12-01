@@ -1,4 +1,4 @@
-from WhiteEyeUserBotot import CMD_LIST
+from WhiteEyeUserBot import CMD_LIST
 
 
 @command(pattern="^.helper ?(.*)")
