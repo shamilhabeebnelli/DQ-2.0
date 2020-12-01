@@ -13,12 +13,14 @@
 
 import asyncio
 import io
+import os
 import re
 
 from telethon import Button, custom, events
 from telethon.tl.functions.users import GetFullUserRequest
 
 from WhiteEyeUserBot import bot
+from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.modules.sql_helper.blacklist_assistant import (
     add_nibba_in_db,
     is_he_added,
@@ -39,8 +41,11 @@ async def start(event):
     bot_username = starkbot.username
     replied_user = await event.client(GetFullUserRequest(event.sender_id))
     firstname = replied_user.user.first_name
+    devlop = await bot.get_me()
+    hmmwow = devlop.first_name
     vent = event.chat_id
-    starttext = f"Hello, {firstname} ! Nice To Meet You, Well I Am {bot_id}, An Powerfull Assistant Bot. \n\nMy [➤ Master](tg://user?id={bot.uid}) \nYou Can Talk/Contact My Master Using This Bot. \n\nIf You Want Your Own Assistant You Can Deploy From Button Below. \n\nPowered By [WhiteEye Userbot](t.me/WhiteEyeOT)"
+    mypic = Config.ASSISTANT_START_PIC
+    starttext = f"Hello, {firstname} ! Nice To Meet You, Well I Am {bot_id}, An Powerfull Assistant Bot. \n\nMy Master [{hmmwow}](tg://user?id={bot.uid}) \nYou Can Talk/Contact My Master Using This Bot. \n\nIf You Want Your Own Assistant You Can Deploy From Button Below. \n\nPowered By [WhiteEye Userbot](t.me/WhiteEyeOT)"
     if event.sender_id == bot.uid:
         await tgbot.send_message(
             vent,
@@ -60,15 +65,18 @@ async def start(event):
             pass
         elif not already_added(event.sender_id):
             add_usersid_in_db(event.sender_id)
-        await tgbot.send_message(
+        await tgbot.send_file(
             event.chat_id,
-            message=starttext,
+            file=mypic,
+            caption=starttext,
             link_preview=False,
             buttons=[
                 [custom.Button.inline("Deploy your WhiteEye 🇮🇳", data="deploy")],
                 [Button.url("Help Me ❓", "t.me/WhiteEyeot")],
             ],
         )
+        if os.path.exists(mypic):
+            os.remove(mypic)
 
 
 # Data's
@@ -82,8 +90,8 @@ async def help(event):
             event.chat_id,
             message="You Can Deploy WhiteEye In Heroku By Following Steps Bellow, You Can See Some Quick Guides On Support Channel Or On Your Own Assistant Bot. \nThank You For Contacting Me.",
             buttons=[
-                [Button.url("Deploy Tutorial 📺", "https://youtu.be/xfHcm_e92eQ")],
-                [Button.url("Need Help ❓", "t.me/WhiteEyeOT")],
+                [Button.url("Deploy Tutorial 📺", "hey")],
+                [Button.url("Need Help ❓", "t.me/WhiteEyeot")],
             ],
         )
 
@@ -169,16 +177,25 @@ async def sedlyfsir(event):
     userstobc = get_all_users()
     error_count = 0
     sent_count = 0
+    hmmok = ""
+    if msgtobroadcast == None:
+        await event.reply("`Wait. What? Broadcast None?`")
+        return
+    elif msgtobroadcast == " ":
+        await event.reply("`Wait. What? Broadcast None?`")
+        return
     for starkcast in userstobc:
         try:
             sent_count += 1
+            await tgbot.send_message(
+                int(starkcast.chat_id),
+                "**Hey, You Have Received A New Broadcast Message**",
+            )
             await tgbot.send_message(int(starkcast.chat_id), msgtobroadcast)
             await asyncio.sleep(0.2)
         except Exception as e:
-            try:
-                logger.info(f"Error : {error_count}\nError : {e} \nUsers : {chat_id}")
-            except:
-                pass
+            hmmok += f"Errors : {e} \n"
+            error_count += 1
     await tgbot.send_message(
         event.chat_id,
         f"Broadcast Done in {sent_count} Group/Users and I got {error_count} Error and Total Number Was {len(userstobc)}",
@@ -235,4 +252,3 @@ async def starkisnoob(event):
         await tgbot.send_message(
             user_id, "Congo! You Have Been Unblacklisted By My Master."
         )
-
