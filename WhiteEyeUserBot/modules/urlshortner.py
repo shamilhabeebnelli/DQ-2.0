@@ -1,7 +1,7 @@
 import pyshorteners
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="urlshort (.*)"))
@@ -19,10 +19,11 @@ async def vom(event):
     except Exception as e:
         await event.edit("SomeThing Went Wrong. \nError : " + e)
 
+
 CMD_HELP.update(
     {
         "urlshortner": "UrlShortner\
 \n\nSyntax : .urlshort <link>\
 \nUsage : Shortens Your Url"
     }
-)        
+)

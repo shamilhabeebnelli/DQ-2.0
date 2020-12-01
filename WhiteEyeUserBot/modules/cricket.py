@@ -5,8 +5,8 @@ plugin for @WhiteEyeOT
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"score$"))
@@ -68,8 +68,8 @@ async def _(event):
         await event.client.delete_messages(
             conv.chat_id, [msg_start.id, msg.id, response.id, respond.id]
         )
-        
-        
+
+
 CMD_HELP.update(
     {
         "cricket": "**Plugin :** `cricket`\

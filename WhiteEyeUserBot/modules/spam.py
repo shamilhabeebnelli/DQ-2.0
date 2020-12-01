@@ -7,6 +7,7 @@
 from asyncio import wait
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -25,10 +26,11 @@ async def spammer(e):
                 LOGGER_GROUP, "#SPAM \n\n" "Spam was executed successfully"
             )
 
+
 CMD_HELP.update(
     {
         "spam": "Spam\
 \n\nSyntax : .spam <numaric value> <text>\
 \nUsage : Spamming PLugin Must Try On Yourself Becasue This Causes FloodWait"
     }
-)            
+)

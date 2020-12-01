@@ -8,6 +8,7 @@ import asyncio
 import random
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -234,10 +235,11 @@ async def _(event):
             link_preview=True,
         )
 
+
 CMD_HELP.update(
     {
         "nono": "**nono**\
 \n\n**Syntax : **`.non`\
 \n**Usage :** Tells You Abour Chat id, Group id."
     }
-)      
+)

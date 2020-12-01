@@ -6,8 +6,8 @@ Available Commands:
 .emoji -_-"""
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="emoji (.*)"))
@@ -34,7 +34,7 @@ async def _(event):
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 2])
 
-            
+
 CMD_HELP.update(
     {
         "emojis": "**Emojis**\

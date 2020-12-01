@@ -1,8 +1,8 @@
 """.admin Plugin for @UniBorg"""
 from telethon.tl.types import ChannelParticipantsAdmins
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("join"))
@@ -38,7 +38,7 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
-    
+
 CMD_HELP.update(
     {
         "design": "**Design**\

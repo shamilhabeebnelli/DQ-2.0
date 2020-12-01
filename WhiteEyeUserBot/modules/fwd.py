@@ -1,8 +1,8 @@
 """Enable Seen Counter in any message,Credits To Xtra-Tg Owner 
 to know how many users have seen your message
 Syntax: .fwd as reply to any message"""
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="frwd"))
@@ -25,7 +25,8 @@ async def _(event):
         await borg.forward_messages(event.chat_id, fwd_message)
         await fwd_message.delete()
         await event.delete()
-        
+
+
 CMD_HELP.update(
     {
         "fwd": "**Fwd**\

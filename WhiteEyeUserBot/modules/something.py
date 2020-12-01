@@ -1,7 +1,7 @@
 """ Whatever Plugin by Noobs of Telegram i.e. @pureindialover """
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"lmoon"))
@@ -61,7 +61,7 @@ async def sprinkle(event):
         "✨.•*¨*.¸.•*¨*.¸¸.•*¨*• ƸӜƷ\n🌸🌺🌸🌺🌸🌺🌸🌺\n Sprinkled with love❤\n🌷🌻🌷🌻🌷🌻🌷🌻\n ¨*.¸.•*¨*. ¸.•*¨*.¸¸.•*¨`*•.✨\n🌹🍀🌹🍀🌹🍀🌹🍀"
     )
 
-   
+
 CMD_HELP.update(
     {
         "something": "Something\

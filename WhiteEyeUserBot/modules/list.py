@@ -9,8 +9,9 @@ By:- @Zero_cool7870
 
 import os
 
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply
+
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="ls ?(.*)"))
 @WhiteEye.on(WhiteEye_on_cmd(pattern="ls ?(.*)", allow_sudo=True))
@@ -42,12 +43,12 @@ async def lst(event):
             caption="`Output is huge. Sending as a file...`",
         )
         await event.delete()
-	
-	
+
+
 CMD_HELP.update(
     {
         "list": "**List**\
 \n\n**Syntax : **`.ls`\
 \n**Usage :** Lists All Files In Current Directory."
     }
-)	
+)

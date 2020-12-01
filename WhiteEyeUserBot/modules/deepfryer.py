@@ -34,8 +34,9 @@ from random import randint, uniform
 
 from PIL import Image, ImageEnhance, ImageOps
 from telethon.tl.types import DocumentAttributeFilename
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="deepfry(?: |$)(.*)", outgoing=True))
@@ -144,9 +145,8 @@ async def check_media(reply_message):
         return False
     else:
         return data
-    
-    
-    
+
+
 CMD_HELP.update(
     {
         "deepfryer": "**Deepfryer**\

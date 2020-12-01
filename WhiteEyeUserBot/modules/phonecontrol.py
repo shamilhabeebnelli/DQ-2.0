@@ -4,8 +4,9 @@ import asyncio
 
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="battery ?(.*)", allow_sudo=True))
@@ -183,10 +184,11 @@ async def _(event):
                 event.chat_id, response.message, reply_to=event.message.reply_to_msg_id
             )
 
+
 CMD_HELP.update(
     {
         "phonecontrol": "PhoneControl**\
 \n\n**Syntax : .battery, .pmute, .pring, .pviberate\
 \nUsage : controls Your Phone"
     }
-)            
+)

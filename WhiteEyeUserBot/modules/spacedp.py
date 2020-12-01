@@ -7,8 +7,8 @@ import urllib
 import requests
 from telethon.tl import functions
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 # Space lovers
 COLLECTION_STRINGS = [
@@ -65,10 +65,11 @@ async def main(event):
 
         await asyncio.sleep(3600)  # Edit this to your required needs
 
+
 CMD_HELP.update(
     {
         "spacedp": "SpaceDP\
 \n\nSyntax : .spacedp\
 \nUsage : Changes Your Profile Pic Frequently With Space dps"
     }
-)        
+)

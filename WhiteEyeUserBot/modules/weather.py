@@ -7,8 +7,8 @@ import time
 
 import aiohttp
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="weathers (.*)"))
@@ -72,10 +72,11 @@ async def _(event):
             await event.reply(file=out_file)
     await event.edit(input_str)
 
+
 CMD_HELP.update(
     {
         "weather": "Weather\
 \n\nSyntax : .weather <city or country>, weathers <city or country>, .wttr <city or country>\
 \nUsage :Tell You About Weather Conditions First Letter Of City And Country Should Be Capital"
     }
-)    
+)

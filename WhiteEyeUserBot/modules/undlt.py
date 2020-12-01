@@ -1,7 +1,7 @@
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="undlt"))
@@ -21,11 +21,12 @@ async def _(event):
         )
         await asyncio.sleep(3)
         await event.delete()
-        
+
+
 CMD_HELP.update(
     {
         "undlt": "Undlt\
 \n\nSyntax : .undlt\
 \nUsage : Only Works In Group"
     }
-)        
+)

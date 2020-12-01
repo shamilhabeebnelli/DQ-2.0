@@ -1,4 +1,4 @@
-#AutoBio plugin for WhiteEye
+# AutoBio plugin for WhiteEye
 # Using this might lead to ban of your account, use at your own risk.
 # Re-Written by @MrDayamZaidi
 
@@ -8,9 +8,8 @@ import time
 from telethon.errors import FloodWaitError
 from telethon.tl import functions
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
-
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 DEL_TIME_OUT = 60
 
@@ -39,5 +38,6 @@ async def _(event):
             Var.PRIVATE_GROUP_ID, "#Auto_Bio\nSuccessfully enabled auto-bio."
         )
         await asyncio.sleep(DEL_TIME_OUT)
-        
+
+
 CMD_HELP.update({"autobio": ".autobio\nUse - Auto-changing profile bio, with time"})

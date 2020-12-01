@@ -2,8 +2,8 @@
 Syntax: .decide"""
 import requests
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("decide"))
@@ -19,11 +19,11 @@ async def _(event):
     )
     await event.delete()
 
-    
+
 CMD_HELP.update(
     {
         "decide": "**Decide**\
 \n\n**Syntax : **`.decide`\
 \n**Usage :** Use this plugin to quickly make a decision."
     }
-)  
+)

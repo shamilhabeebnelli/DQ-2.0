@@ -1,5 +1,6 @@
 from telethon import events
 from telethon.utils import pack_bot_file_id
+
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.modules.sql_helper.welcome_sql import (
     add_welcome_setting,
@@ -103,10 +104,11 @@ async def _(event):
     else:
         await event.edit("No Welcome Message found")
 
+
 CMD_HELP.update(
     {
         "welcome": "Welcome\
 \n\nSyntax : .savewelcome <text>, .clearwelcome\
 \nUsage : Send Welcome Notes When SomeOne Joins The Group"
     }
-)        
+)

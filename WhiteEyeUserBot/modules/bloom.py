@@ -20,10 +20,9 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
 from telethon.tl import functions
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP
-
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
@@ -75,5 +74,6 @@ async def autopic(event):
             await asyncio.sleep(20)
         except BaseException:
             return
-        
+
+
 CMD_HELP.update({"bloom": ".bloom\nUse - Auto-changing coulour dps, with time."})

@@ -1,7 +1,8 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="ctg ?(.*)", allow_sudo=True))
@@ -34,10 +35,11 @@ async def _(event):
             await event.delete()
             await event.client.send_message(event.chat_id, response.message)
 
+
 CMD_HELP.update(
     {
         "chotatweak": "**ChotatWeak**\
 \n\n**Syntax : **`.ctg`\
 \n**Usage :** Reply to an link"
     }
-)            
+)

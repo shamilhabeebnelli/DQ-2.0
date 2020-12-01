@@ -16,8 +16,8 @@ import os
 from glitch_this import ImageGlitcher
 from telethon.tl.types import MessageMediaPhoto
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 glitcher = ImageGlitcher()
 DURATION = 200  # Set this to however many centiseconds each frame should be visible for
@@ -56,12 +56,12 @@ async def glitch(event):
     for starky in (pathsn, photolove):
         if starky and os.path.exists(starky):
             os.remove(starky)
-            
-            
+
+
 CMD_HELP.update(
     {
         "glitch": "**Glitch**\
 \n\n**Syntax : **`.glitch <reply to a image>`\
 \n**Usage :** Creates glitch gif of given image."
     }
-)     
+)

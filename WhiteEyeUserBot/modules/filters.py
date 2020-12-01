@@ -11,15 +11,15 @@ import re
 
 from telethon import utils
 from telethon.tl import types
-from WhiteEyeUserBot import CMD_HELP
 
+from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.modules.sql_helper.filter_sql import (
     add_filter,
     get_all_filters,
     remove_all_filters,
     remove_filter,
 )
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 DELETE_TIMEOUT = 0
 TYPE_TEXT = 0
@@ -149,7 +149,7 @@ async def on_all_snip_delete(event):
     remove_all_filters(event.chat_id)
     await sadness.edit(f"filters **in current chat** deleted successfully")
 
-    
+
 CMD_HELP.update(
     {
         "filters": "**Filters**\

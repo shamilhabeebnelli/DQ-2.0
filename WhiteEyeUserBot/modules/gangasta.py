@@ -1,7 +1,7 @@
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("gangasta ?(.*)"))
@@ -22,8 +22,8 @@ async def _(event):
         await event.edit("🔥🔥🔥")
         await asyncio.sleep(0.3)
         await event.edit("EVERyBOdy iZ GangSTur UNtIL I ArRivE 🔥🔥🔥")
-        
-        
+
+
 CMD_HELP.update(
     {
         "gangasta": "**Gangasta**\
@@ -31,4 +31,3 @@ CMD_HELP.update(
 \n**Usage :** shows your gangster skills."
     }
 )
-   

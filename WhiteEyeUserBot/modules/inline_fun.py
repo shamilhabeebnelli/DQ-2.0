@@ -1,6 +1,6 @@
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot import CMD_HELP
 from var import Var
+from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="stat$"))
@@ -54,6 +54,7 @@ async def mod(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
+
 CMD_HELP.update(
     {
         "inline_fun": "**Inline Fun**\
@@ -67,4 +68,3 @@ CMD_HELP.update(
 \n**Usage :** Provides mod APK for given app."
     }
 )
-    

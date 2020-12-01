@@ -8,7 +8,7 @@ import bs4
 import requests
 
 from .. import CMD_HELP
-from ..utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from ..utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="app (.*)"))

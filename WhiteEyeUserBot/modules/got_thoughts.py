@@ -8,8 +8,10 @@ command .gott
 
 import asyncio
 import random
-from WhiteEyeUserBot import CMD_HELP
+
 from telethon import events
+
+from WhiteEyeUserBot import CMD_HELP
 
 
 @WhiteEye.on(events.NewMessage(pattern=r"\.gott", outgoing=True))
@@ -214,12 +216,12 @@ async def _(event):
     if x == 40:
 
         await event.edit('`"I wish I was the monster you think I am!"`')
-        
-        
+
+
 CMD_HELP.update(
     {
         "got_thoughts": "**Got_Thoughts**\
 \n\n**Syntax : **`.gott`\
 \n**Usage :** Gives You Some Thoughts From Game of Thrones."
     }
-)     
+)

@@ -3,8 +3,8 @@
 # (c) Shrimadhav U K
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="type (.*)"))
@@ -38,11 +38,12 @@ async def _(event):
         except Exception as e:
             logger.warn(str(e))
         await asyncio.sleep(DELAY_BETWEEN_EDITS)
-        
+
+
 CMD_HELP.update(
     {
         "typing": "Typing\
 \n\nSyntax : .typing <text>\
 \nUsage : Types Your Text Slowly"
     }
-)        
+)

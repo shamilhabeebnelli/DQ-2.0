@@ -2,8 +2,10 @@
 Syntax: .meaning <word>"""
 
 import requests
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="meaning (.*)"))
 async def _(event):
@@ -44,10 +46,11 @@ async def _(event):
         pass
     await event.edit(caption_str)
 
+
 CMD_HELP.update(
     {
         "meaning": "**Meaning**\
 \n\n**Syntax : **`.meaning <text>`\
 \n**Usage :** Gives Pronenciation."
     }
-)    
+)

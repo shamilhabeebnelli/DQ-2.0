@@ -6,8 +6,9 @@ Available Commands:
 .unshort <short url>"""
 import requests
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 
 @WhiteEye.on(WhiteEye_on_cmd("dns (.*)"))
 async def _(event):
@@ -51,12 +52,12 @@ async def _(event):
         await event.edit(
             "Input URL {} returned status_code {}".format(input_str, r.status_code)
         )
-        
-        
+
+
 CMD_HELP.update(
     {
         "dagd": ".dns\nUse - Find DNS records.\
         \n\n.url <link>\nUse - Shorten the link via da.gd\
         \n\n.unshort <link>\nUse - UnShorten the URL."
     }
-)    
+)

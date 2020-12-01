@@ -580,6 +580,7 @@ async def _(event):
             '`"If we put solar panels above parking lots, then our cars wouldn\'t get hot and we would have a lot of clean energy."`'
         )
 
+
 CMD_HELP.update(
     {"being_logical": ".belo\nUse - Generate quotes that have some logic, lol!"}
 )

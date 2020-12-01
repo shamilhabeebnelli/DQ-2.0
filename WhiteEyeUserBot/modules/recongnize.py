@@ -45,12 +45,12 @@ async def _(event):
             await cat.edit("sorry, I couldnt find it")
 
         await event.client.send_read_acknowledge(conv.chat_id)
-        
+
+
 CMD_HELP.update(
     {
         "recognize": "Recognize\
 \n\nSyntax : .recognize <reply to image>\
 \nUsage : A Very Usefull plugin"
     }
-)        
-
+)

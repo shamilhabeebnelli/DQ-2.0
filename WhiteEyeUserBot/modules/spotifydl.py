@@ -7,8 +7,8 @@ from telethon.errors.rpcerrorlist import (
 )
 from telethon.tl.functions.messages import ImportChatInviteRequest
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("spotifydl ?(.*)"))
@@ -42,11 +42,12 @@ async def _(event):
             await event.delete()
         except YouBlockedUserError:
             await event.edit("**Error:** `unblock` @DeezLoadBot `and retry!`")
-            
+
+
 CMD_HELP.update(
     {
         "spotify": "**Spotify**\
 \n\n**Syntax : **`.Spotifydl <link> .spotifydl <song>`\
 \n**Usage :** Downloads A Song And Searches Songs For You"
     }
-)            
+)

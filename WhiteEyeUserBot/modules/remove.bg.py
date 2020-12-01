@@ -1,4 +1,3 @@
-
 """Remove.BG Plugin for @UniBorg
 Syntax: .rmbg https://link.to/image.extension
 Syntax: .rmbg as reply to a media"""
@@ -61,7 +60,9 @@ async def _(event):
         end = datetime.now()
         ms = (end - start).seconds
         await event.edit(
-            "Removed image's Background in {} seconds, powered by @WhiteEyeOT".format(ms)
+            "Removed image's Background in {} seconds, powered by @WhiteEyeOT".format(
+                ms
+            )
         )
     else:
         await event.edit(

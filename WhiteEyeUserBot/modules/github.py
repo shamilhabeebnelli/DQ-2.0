@@ -2,8 +2,8 @@
 Syntax: .github USERNAME"""
 import requests
 
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @borg.on(WhiteEye_on_cmd("github (.*)"))
@@ -44,12 +44,12 @@ Profile Created: {}""".format(
         await event.delete()
     else:
         await edit_or_reply(event, "`{}`: {}".format(input_str, r.text))
-        
-          
+
+
 CMD_HELP.update(
     {
         "github": "**Github**\
 \n\n**Syntax : **`.github <username>`\
 \n**Usage :** Gives A link Of The repo."
     }
-) 
+)

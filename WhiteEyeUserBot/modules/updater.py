@@ -15,9 +15,8 @@ from os import environ, execle, path, remove
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from var import Var
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 UPSTREAM_REPO_BRANCH = "master"
@@ -115,6 +114,8 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     else:
         await event.edit("**Please set up HEROKU_API_KEY variable.")
     return
+
+
 async def update(event, repo, ups_rem, ac_br):
     try:
         ups_rem.pull(ac_br)
@@ -188,24 +189,20 @@ async def upstream(event):
         return
 
     if changelog == "" and not force_update:
-        await event.edit(
-            f"Your userbot is up-to-date with `{UPSTREAM_REPO_BRANCH}`!"
-        )
+        await event.edit(f"Your userbot is up-to-date with `{UPSTREAM_REPO_BRANCH}`!")
         return repo.__del__()
 
     if conf == "" and force_update is False:
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
-        return await event.respond(
-            "Do .update now or .update deploy to update."
-        )
+        return await event.respond("Do .update now or .update deploy to update.")
 
     if force_update:
-        await event.edit(
-            "Force-syncing to latest stable userbot code, please wait..."
-        )
+        await event.edit("Force-syncing to latest stable userbot code, please wait...")
 
     if conf == "now":
-        await event.edit("Perfoming a quick update, please wait, do .Ping after 2 Min ...")
+        await event.edit(
+            "Perfoming a quick update, please wait, do .Ping after 2 Min ..."
+        )
         await update(event, repo, ups_rem, ac_br)
     return

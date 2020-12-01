@@ -2,8 +2,9 @@ from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 
 async def get_full_user(event):
     args = event.pattern_match.group(1).split(":", 1)
@@ -94,7 +95,9 @@ async def gspider(WhiteEyeUserBot):
         ]
         for i in testWhiteEyeUserBot:
             try:
-                await WhiteEyeUserBot.client.edit_permissions(i, user, view_messages=False)
+                await WhiteEyeUserBot.client.edit_permissions(
+                    i, user, view_messages=False
+                )
                 a += 1
                 await WhiteEye.edit(f"**GBANNED // Total Affected Chats **: `{a}`")
             except:
@@ -158,7 +161,9 @@ async def gspider(WhiteEyeUserBot):
         ]
         for i in testWhiteEyeUserBot:
             try:
-                await WhiteEyeUserBot.client.edit_permissions(i, user, send_messages=True)
+                await WhiteEyeUserBot.client.edit_permissions(
+                    i, user, send_messages=True
+                )
                 a += 1
                 await WhiteEye.edit(f"**UNGBANNING // AFFECTED CHATS - {a} **")
             except:
@@ -204,9 +209,8 @@ async def handler(rkG):
                         except:
                             rkG.reply("`No Permission To Ban`")
                             return
-                        
-                        
-                        
+
+
 CMD_HELP.update(
     {
         "gban_gmute": "**Gban_Gmute**\

@@ -13,6 +13,7 @@ Available Commands:
 import asyncio
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -200,11 +201,12 @@ async def _(event):
             await asyncio.sleep(animation_interval)
 
             await event.edit(animation_chars[i % 7])
-            
+
+
 CMD_HELP.update(
     {
         "os": "Os**\
 \n\n**Syntax : .Os\
 \nUsage : Installs Windows 10"
     }
-)            
+)

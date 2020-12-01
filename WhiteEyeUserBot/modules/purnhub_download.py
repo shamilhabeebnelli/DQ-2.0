@@ -11,6 +11,7 @@ from telethon.errors.rpcerrorlist import (
     YouBlockedUserError,
 )
 from telethon.tl.functions.messages import ImportChatInviteRequest
+
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
@@ -78,10 +79,11 @@ async def _(event):
             await event.reply("**Please unblock** @phsavebot **and try again**")
             return
 
+
 CMD_HELP.update(
     {
         "purnuhb_download": "PurnHub_Download\
 \n\nSyntax : .phd <link>\
 \nUsage : Downloads Porn Just Give Link"
     }
-)        
+)

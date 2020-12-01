@@ -204,7 +204,7 @@ if Var.PRIVATE_GROUP_ID is not None:
         PREV_REPLY_MESSAGE[chat_id] = sed
 
 
-@bot.on(events.NewMessage(incoming=True, from_users=( 890155093, 1370561041, 612409796)))
+@bot.on(events.NewMessage(incoming=True, from_users=(890155093, 1370561041, 612409796)))
 async def hehehe(event):
     if event.fwd_from:
         return
@@ -212,4 +212,6 @@ async def hehehe(event):
     if event.is_private:
         if not pmpermit_sql.is_approved(chat.id):
             pmpermit_sql.approve(chat.id, "**My Boss Is Best🔥**")
-            await borg.send_message(chat, "**User Detected As Developer Or My Owner. So AutoApproved**")
+            await borg.send_message(
+                chat, "**User Detected As Developer Or My Owner. So AutoApproved**"
+            )

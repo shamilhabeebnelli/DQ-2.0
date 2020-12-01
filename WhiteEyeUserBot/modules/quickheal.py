@@ -8,6 +8,7 @@ Available Commands:
 import asyncio
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -123,11 +124,12 @@ async def _(event):
             await asyncio.sleep(animation_interval)
 
             await event.edit(animation_chars[i % 11])
-            
+
+
 CMD_HELP.update(
     {
         "quickheal": "QuickHeal\
 \n\nSyntax : .quickheal <reply to file>\
 \nUsage : Prank Scanning Of Files"
     }
-)            
+)

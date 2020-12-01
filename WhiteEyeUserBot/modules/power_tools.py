@@ -8,8 +8,8 @@ Available Commands:
 import os
 import sys
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("restart"))
@@ -36,10 +36,11 @@ async def _(event):
     await event.edit("Turning off ...Manually turn me on later")
     await borg.disconnect()
 
+
 CMD_HELP.update(
     {
         "power_tools": "Power_Tools\
 \n\nSyntax : .shutdown, .restart\
 \nUsage : Plugin to Shutdown Or Restart You Bot"
     }
-)    
+)

@@ -15,7 +15,7 @@ import asyncio
 from telethon import events
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
+
 
 @WhiteEye.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
 async def _(event):
@@ -129,7 +129,6 @@ async def _(event):
             await asyncio.sleep(animation_interval)
 
             await event.edit(animation_chars[i % 11])
-            
-            
+
+
 CMD_HELP.update({"chod": "Random animation plugins.\n.chod\n.sqh\n.quickheal"})
-      

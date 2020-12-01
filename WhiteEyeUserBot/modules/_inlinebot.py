@@ -9,7 +9,6 @@ from youtubesearchpython import SearchVideos
 
 from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, CMD_LIST
 
-
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
     WARN_PIC = "https://telegra.ph/file/63d2f8bcdae4da2ec5e7e.jpg"
@@ -40,7 +39,11 @@ async def inline_handler(event):
             text=f"**Showing Stats For {DEFAULTUSER}'s WhiteEye** \nNote --> Only Owner Can Check This \n(C) @WhiteEyeOT",
             buttons=[
                 [custom.Button.inline("Show Stats ", data="terminator")],
-                [Button.url("Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserbot")],
+                [
+                    Button.url(
+                        "Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserbot"
+                    )
+                ],
                 [Button.url("Join Channel ❤️", "t.me/WhiteEyeot")],
             ],
         )

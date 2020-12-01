@@ -1,7 +1,7 @@
 import asyncio
 
-from WhiteEyeUserBot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 
 
 @command(outgoing=True, pattern=r"^.gmute ?(\d+)?")
@@ -135,11 +135,11 @@ async def watcher(event):
     if is_muted(event.sender_id, "gmute"):
         await event.delete()
 
-        
+
 CMD_HELP.update(
     {
         "gMUTE": "**Gmute**\
 \n\n**Syntax : **`.gmute <reply><mention><id>`\
 \n**Usage :** Mutes A user All over where you are admin ."
     }
-)     
+)

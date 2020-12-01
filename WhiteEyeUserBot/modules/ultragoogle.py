@@ -12,8 +12,9 @@ import requests
 from bs4 import BeautifulSoup
 from google_images_download import google_images_download
 
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
+
 
 def progress(current, total):
     logger.info(
@@ -158,10 +159,11 @@ More Info: Open this <a href="{the_location}">Link</a> in {ms} seconds""".format
         )
     await event.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
+
 CMD_HELP.update(
     {
         "ultragoogle": "UltraGoogle\
 \n\nSyntax : .search<text>, .image<text>, .grs<text>\
 \nUsage : A Searching Plugin by google"
     }
-)    
+)

@@ -7,8 +7,8 @@ import os
 import time
 from datetime import datetime
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
@@ -59,11 +59,12 @@ async def _(event):
             await event.edit("File Not Found {}".format(input_str))
     else:
         await event.edit("Syntax // .rnupload file.name as reply to a Telegram media")
-        
+
+
 CMD_HELP.update(
     {
         "rename": "Rename\
 \n\nSyntax : .rename <reply to file with new name>\
 \nUsage : Renaming Plugin"
     }
-)        
+)

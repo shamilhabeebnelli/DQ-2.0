@@ -20,6 +20,7 @@ import requests
 
 from WhiteEyeUserBot import CMD_HELP
 
+
 @command(pattern="^.labstack ?(.*)")
 async def labstack(event):
     if event.fwd_from:
@@ -78,10 +79,11 @@ async def labstack(event):
         t_response_arry + "\nMax Days:" + str(max_days), link_preview=False
     )
 
+
 CMD_HELP.update(
     {
         "labstack": "**Labstack**\
 \n\n**Syntax : **`.labstack`\
 \n**Usage :** Reply To Any Media Or File."
     }
-)   
+)

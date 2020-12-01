@@ -9,6 +9,7 @@ import os
 import time
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 if not os.path.isdir("./SAVED"):
@@ -230,6 +231,8 @@ async def handler(event):
 
     else:
         await event.edit("⛔️File Not Found സാധനം കയ്യിലില്ല😬")
-        
-        
-CMD_HELP.update({"file": ".ls <directory>" "\nUsage: File Manager plugin for WhiteEyeUserBot."})
+
+
+CMD_HELP.update(
+    {"file": ".ls <directory>" "\nUsage: File Manager plugin for WhiteEyeUserBot."}
+)

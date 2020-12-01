@@ -2,8 +2,8 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("scan ?(.*)", allow_sudo=True))
@@ -44,9 +44,8 @@ async def _(event):
                 await event.edit(
                     f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}"
                 )
-                
-                
+
+
 CMD_HELP.update(
     {"antivirus": "➟ `.scan <reply to pic/doc>`\nUse - Scan the pic/doc for viruses."}
 )
-        

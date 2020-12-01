@@ -5,8 +5,8 @@ from iplookup import iplookup
 from selenium import webdriver
 from youtube_search import YoutubeSearch
 
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="wshot ?(.*)"))
@@ -157,10 +157,11 @@ async def _(event):
     except:
         await event.edit("Some Thing Went Wrong.")
 
+
 CMD_HELP.update(
     {
         "webtools": "WebTools\
 \n\nSyntax : .wshot<link> .ip<address>, .bin<code>, .iban<username>, .gitdl<link>, .yts<link>\
 \nUsage : Usefull Plugin For Coders"
     }
-)        
+)

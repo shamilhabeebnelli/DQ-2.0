@@ -1,8 +1,8 @@
 """.admin Plugin for @UniBorg"""
 from telethon.tl.types import ChannelParticipantsAdmins
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("warn1"))
@@ -130,10 +130,11 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
+
 CMD_HELP.update(
     {
         "warnbun": "WarnBun\
 \n\nSyntax : .warn1<reason>, .warn2<reason>, .warn3<reason>\
 \nUsage : Gives Warn And Ban"
     }
-)    
+)

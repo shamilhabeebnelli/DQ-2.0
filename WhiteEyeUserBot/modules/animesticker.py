@@ -4,7 +4,7 @@ import random
 import re
 
 from WhiteEyeUserBot import CMD_HELP, bot
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 EMOJI_PATTERN = re.compile(
     "["
@@ -54,5 +54,6 @@ async def waifu(animu):
         hide_via=True,
     )
     await animu.delete()
+
 
 CMD_HELP.update({"waifu": ".waifu : Anime that makes your writing fun."})

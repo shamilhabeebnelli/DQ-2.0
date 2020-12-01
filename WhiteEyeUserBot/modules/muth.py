@@ -3,8 +3,10 @@ Available Commands
 .muth"""
 
 import asyncio
-from WhiteEyeUserBot import CMD_HELP
+
 from telethon import events
+
+from WhiteEyeUserBot import CMD_HELP
 
 
 @WhiteEye.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
@@ -42,12 +44,12 @@ async def _(event):
             await asyncio.sleep(animation_interval)
 
             await event.edit(animation_chars[i % 8])
-            
-            
+
+
 CMD_HELP.update(
     {
         "muth": "**Muth**\
 \n\n**Syntax : **`.muth`\
 \n**Usage :** Try YourSelf"
     }
-)            
+)

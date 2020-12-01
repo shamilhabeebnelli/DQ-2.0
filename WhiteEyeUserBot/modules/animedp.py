@@ -1,7 +1,7 @@
 # Made By @TelebotSupport Keep Credits If You Are Goanna Kang This Lol
 # And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
 # Usage .animedp I'm Not Responsible For Any Ban caused By This
-# Rewriten by @mrdayamzaidi 
+# Rewriten by @mrdayamzaidi
 # Made for @WhiteEyeOT
 
 import asyncio
@@ -13,8 +13,8 @@ import urllib
 import requests
 from telethon.tl import functions
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 COLLECTION_STRING = [
     "cute-anime-wallpapers-hd",
@@ -71,6 +71,7 @@ async def main(event):
         os.system("rm -rf donottouch.jpg")
 
         await asyncio.sleep(600)  # Edit this to your required needs
+
 
 CMD_HELP.update(
     {"animedp": "➟ `.animedp`\nStart auto-changing anime profile pic for your account."}

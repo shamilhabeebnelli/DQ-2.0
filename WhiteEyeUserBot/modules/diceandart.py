@@ -1,7 +1,7 @@
 from telethon.tl.types import InputMediaDice
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 # EMOJI CONSTANTS
 DART_E_MOJI = "🎯"
@@ -10,7 +10,9 @@ BALL_E_MOJI = "🏀"
 # EMOJI CONSTANTS
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern=f"({DART_E_MOJI}|{DICE_E_MOJI}|{BALL_E_MOJI}) ?(.*)"))
+@WhiteEye.on(
+    WhiteEye_on_cmd(pattern=f"({DART_E_MOJI}|{DICE_E_MOJI}|{BALL_E_MOJI}) ?(.*)")
+)
 async def _(event):
     if event.fwd_from:
         return
@@ -29,7 +31,8 @@ async def _(event):
                 r = await reply_message.reply(file=InputMediaDice(emoticon=emoticon))
         except:
             pass
-        
+
+
 CMD_HELP.update(
     {
         "diceandart": "**Diceandart**\
@@ -41,4 +44,3 @@ CMD_HELP.update(
 \n**Usage :** Creates a dart game. ."
     }
 )
-

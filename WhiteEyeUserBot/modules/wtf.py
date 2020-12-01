@@ -7,8 +7,8 @@ Available Commands:
 
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("wtf"))
@@ -30,11 +30,12 @@ async def _(event):
 
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 5])
-        
+
+
 CMD_HELP.update(
     {
         "wtf": "Wtf\
 \n\nSyntax : .wtf <reply>\
 \nUsage : Fun Plugin"
     }
-)        
+)

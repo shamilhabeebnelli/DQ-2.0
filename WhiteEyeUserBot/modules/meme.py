@@ -7,6 +7,7 @@ By : - @Zero_cool7870
 import asyncio
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -87,10 +88,11 @@ async def meme(event):
     )
     await asyncio.sleep(sleepValue)
 
+
 CMD_HELP.update(
     {
         "meme": "**Meme**\
 \n\n**Syntax : **`.meme <text>`\
 \n**Usage :** Creates Flooting words for you"
     }
-)    
+)

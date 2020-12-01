@@ -33,13 +33,11 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 15])
-        
-        
+
     CMD_HELP.update(
-    {
-        "hypnotize": "**Hypnotize**\
+        {
+            "hypnotize": "**Hypnotize**\
 \n\n**Syntax : **`.hypno`\
 \n**Usage :** Hypnotizes Your Enemy ."
-    }
-)
-    
+        }
+    )

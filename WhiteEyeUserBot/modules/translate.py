@@ -5,8 +5,9 @@ Available Commands:
 
 import emoji
 from googletrans import Translator
+
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("tr ?(.*)"))
@@ -45,10 +46,11 @@ async def _(event):
     except Exception as exc:
         await edit_or_reply(event, str(exc))
 
+
 CMD_HELP.update(
     {
         "translate": "Translate\
 \n\nSyntax : .tr <language code><reply to massage>\
 \nUsage : converts the language"
     }
-)        
+)

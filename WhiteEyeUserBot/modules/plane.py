@@ -2,6 +2,7 @@
 import asyncio
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -27,10 +28,11 @@ async def _(event):
     await asyncio.sleep(3)
     await event.delete()
 
+
 CMD_HELP.update(
     {
         "plane": "Plane**\
 \n\n**Syntax : .plane\
 \nUsage : Animation Plugin"
     }
-)            
+)

@@ -5,8 +5,8 @@ import io
 
 import requests
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("screencapture (.*)"))
@@ -45,10 +45,11 @@ async def _(event):
     else:
         await event.edit(response_api.text)
 
+
 CMD_HELP.update(
     {
         "screencapture": "ScreenCapture\
 \n\nSyntax : .screencapture <link>\
 \nUsage : Gives You A Screenshot Of The Given Link"
     }
-)        
+)

@@ -23,6 +23,7 @@ from datetime import datetime
 
 from telethon import events
 from telethon.tl import functions, types
+
 from WhiteEyeUserBot import CMD_HELP
 
 global USER_AFK  # pylint:disable=E0602
@@ -184,10 +185,11 @@ async def on_afk(event):
             await last_afk_message[event.chat_id].delete()  # pylint:disable=E0602
         last_afk_message[event.chat_id] = msg  # pylint:disable=E0602
 
+
 CMD_HELP.update(
     {
         "afk": "Afk\
 \n\nSyntax : .afk <reason>\
 \nUsage : Lets You Go Offline For Long With Notification to others if they wanna talk you"
     }
-)        
+)

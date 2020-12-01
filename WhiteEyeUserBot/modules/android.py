@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from requests import get
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 GITHUB = "https://github.com"
 DEVICES_DATA = (
@@ -121,7 +121,9 @@ async def codename_info(request):
     await edit_or_reply(request, reply)
 
 
-@WhiteEye.on(WhiteEye_on_cmd(outgoing=True, pattern=r"specs(?: |)([\S]*)(?: |)([\s\S]*)"))
+@WhiteEye.on(
+    WhiteEye_on_cmd(outgoing=True, pattern=r"specs(?: |)([\S]*)(?: |)([\s\S]*)")
+)
 @WhiteEye.on(sudo_cmd(pattern="specs(?: |)([\S]*)(?: |)([\s\S]*)", allow_sudo=True))
 async def devices_specifications(request):
     """ Mobile devices specifications """

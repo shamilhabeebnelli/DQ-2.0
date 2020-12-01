@@ -5,8 +5,8 @@ from datetime import datetime
 
 import requests
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="stt (.*)"))
@@ -72,12 +72,12 @@ async def _(event):
             os.remove(required_file_name)
     else:
         await event.edit("Reply to a voice message, to get the relevant transcript.")
-        
-        
+
+
 CMD_HELP.update(
     {
         "stt": "Stt\
 \n\nSyntax : .stt <reply to voice massage>\
 \nUsage : A Fun Plugin"
     }
-)        
+)

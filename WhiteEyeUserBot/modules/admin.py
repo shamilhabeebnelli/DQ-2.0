@@ -44,7 +44,7 @@ from telethon.tl.types import (
 )
 
 from WhiteEyeUserBot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from WhiteEyeUserBot.utils import errors_handler, WhiteEye_on_cmd, register, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, errors_handler, register, sudo_cmd
 
 # =================== CONSTANT ===================
 PP_TOO_SMOL = "`The image is too small`"

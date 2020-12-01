@@ -13,8 +13,6 @@
 
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-                             
-
 
 
 """Emoji
@@ -25,8 +23,8 @@ Available Commands:
 
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("WhiteEyeBot"))
@@ -47,11 +45,12 @@ async def _(event):
 
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 18])
-        
+
+
 CMD_HELP.update(
     {
         "WhiteEyeBot": "WhiteEyeBot\
 \n\nSyntax : .support\
 \nUsage : Join @WhiteEyeot"
     }
-)        
+)

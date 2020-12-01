@@ -8,8 +8,9 @@ from datetime import datetime
 
 import qrcode
 from bs4 import BeautifulSoup
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 def progress(current, total):
@@ -122,11 +123,11 @@ async def _(event):
     await asyncio.sleep(5)
     await event.delete()
 
+
 CMD_HELP.update(
     {
         "qr_code": "Qr_Code\
 \n\nSyntax : .getqr<reply>, .makeqr<text>\
 \nUsage : Try YourSelf"
     }
-)    
-  
+)

@@ -8,7 +8,9 @@ Available Commands:
 import asyncio
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
+
 
 @WhiteEye.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
 async def _(event):
@@ -55,10 +57,11 @@ async def _(event):
 
             await event.edit(animation_chars[i % 19])
 
+
 CMD_HELP.update(
     {
         "mtn": "**Mtn**\
 \n\n**Syntax : **`.mtn`\
 \n**Usage :** A Prank of boosting your network"
     }
-)            
+)

@@ -4,8 +4,8 @@ Check https://t.me/tgbeta/3505"""
 
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 NO_PM_LOG_USERS = []
 
@@ -36,7 +36,8 @@ async def approve_p_m(event):
                 await event.edit("Won't Log Messages from this chat")
                 await asyncio.sleep(3)
                 await event.delete()
-                
+
+
 CMD_HELP.update(
     {
         "log_pms": "**Log_Pms**\

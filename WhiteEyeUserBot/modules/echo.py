@@ -21,6 +21,7 @@ Echoes the message via your bot
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"echo (.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"echo ( .*)", allow_sudo=True))
 async def _(event):
@@ -33,10 +34,9 @@ async def _(event):
         await event.client.send_message(event.chat_id, f"Please add @{bxt} here first!")
         await event.delete()
 
-        
+
 CMD_HELP.update(
     {
         "echo": ".echo <mssg>\nUse - Echoes the message you send via your bot. You must add it to this chat first, ofc."
     }
 )
-  

@@ -7,8 +7,9 @@ Credits to @mariodevs
 
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 
 @WhiteEye.on(WhiteEye_on_cmd("nope"))
 async def _(event):
@@ -33,11 +34,12 @@ async def _(event):
 
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 18])
-        
+
+
 CMD_HELP.update(
     {
         "np": "**Np**\
 \n\n**Syntax : **`.nope`\
 \n**Usage :** NOOOOOO"
     }
-)        
+)

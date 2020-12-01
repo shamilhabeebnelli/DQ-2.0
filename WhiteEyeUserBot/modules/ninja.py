@@ -6,8 +6,9 @@ import asyncio
 
 import telethon.utils
 from telethon import events
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 async def get_target_message(event):
@@ -51,12 +52,12 @@ async def delete(event):
             await borg.edit_message(chat, target, text)
         else:
             await borg.delete_messages(chat, target, revoke=True)
-            
-            
+
+
 CMD_HELP.update(
     {
         "ninja": "**Ninja**\
 \n\n**Syntax : **`.del <reply>, .edit <reply to your own msg>`\
 \n**Usage :** Edits And Deletes Massage"
     }
-)            
+)

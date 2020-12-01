@@ -9,8 +9,8 @@ from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="clone ?(.*)"))
@@ -121,7 +121,8 @@ async def get_full_user(event):
                 return replied_user, None
             except Exception as e:
                 return None, e
-            
+
+
 CMD_HELP.update(
     {
         "clone": "**Clone**\
@@ -129,4 +130,3 @@ CMD_HELP.update(
 \n**Usage :** Get Telegram Profile Picture and other information and set as own profile."
     }
 )
-           

@@ -17,7 +17,7 @@ from telethon.tl.types import DocumentAttributeVideo
 
 from WhiteEyeUserBot import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
 from WhiteEyeUserBot.events import register
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):

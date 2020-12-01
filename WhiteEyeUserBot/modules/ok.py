@@ -7,8 +7,8 @@ Available Commands:
 
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("(.*)"))
@@ -45,11 +45,12 @@ async def _(event):
 
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 18])
-            
+
+
 CMD_HELP.update(
     {
         "ok": "Ok**\
 \n\n**Syntax : .ok\
 \nUsage : Try YourSelf"
     }
-)           
+)

@@ -7,8 +7,8 @@ from telethon.events import NewMessage
 from telethon.tl.custom import Dialog
 from telethon.tl.types import Channel, Chat, User
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 logging.basicConfig(
     format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
@@ -148,6 +148,7 @@ def user_full_name(user):
     names = [i for i in list(names) if i]
     full_name = " ".join(names)
     return full_name
+
 
 CMD_HELP.update(
     {

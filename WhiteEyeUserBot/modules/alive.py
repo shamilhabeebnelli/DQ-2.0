@@ -21,9 +21,8 @@ import time
 
 from uniborg.util import WhiteEye_on_cmd, sudo_cmd
 
-from WhiteEyeUserBot import ALIVE_NAME, Lastupdate, CMD_HELP
+from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, Lastupdate
 from WhiteEyeUserBot.Configs import Config
-
 
 
 # Functions
@@ -70,9 +69,11 @@ pm_caption += "✯ **Heroku Database** : `AWS - Working Properly`\n\n"
 pm_caption += "✯**[Join Our Channel]**(https://t.me/WhiteEyeOT)\n"
 pm_caption += "✯ **License** : [GNU General Public License v3.0](https://github.com/mrdayamzaidi/WhiteEyeUserBot/blob/main/LICENSE)\n"
 pm_caption += "✯ **Copyright** : By [WhiteEyeUserBotOwner](https://t.me/mrdayamzaidi)\n"
-pm_caption += "[🇮🇳 Deploy WhiteEyeUserBot 🇮🇳](https://github.com/mrdayamzaidi/WhiteEyeUserBot)\n"
+pm_caption += (
+    "[🇮🇳 Deploy WhiteEyeUserBot 🇮🇳](https://github.com/mrdayamzaidi/WhiteEyeUserBot)\n"
+)
 
-                                                                                       
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"online"))
 @WhiteEye.on(sudo_cmd(pattern=r"alive", allow_sudo=True))
 async def WhiteEye(alive):
@@ -90,5 +91,3 @@ CMD_HELP.update(
 \n**Usage :** Check if UserBot is Alive"
     }
 )
-
-

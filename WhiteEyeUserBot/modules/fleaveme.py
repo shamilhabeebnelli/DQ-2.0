@@ -8,6 +8,7 @@ Available Commands:
 import asyncio
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -51,13 +52,11 @@ async def _(event):
             await asyncio.sleep(animation_interval)
 
             await event.edit(animation_chars[i % 17])
-            
-            
-    
+
     CMD_HELP.update(
-    {
-        "fleaveme": "**Fleaveme**\
+        {
+            "fleaveme": "**Fleaveme**\
 \n\n**Syntax : **`.fleave`\
 \n**Usage :** Prank plugin."
-    }
-)
+        }
+    )

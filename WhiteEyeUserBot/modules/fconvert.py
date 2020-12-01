@@ -6,8 +6,8 @@ import os
 import time
 from datetime import datetime
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, progress
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, progress
 
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):
@@ -175,12 +175,12 @@ async def _(event):
             ms_two = (end_two - end).seconds
             os.remove(new_required_file_name)
             await event.edit(f"converted in {ms_two} seconds")
-            
-            
+
+
 CMD_HELP.update(
     {
         "fconvert": "**FConvert**\
 \n\n**Syntax : **`.nfc <reply to file>`\
 \n**Usage :** Changes Format og file"
     }
-)           
+)

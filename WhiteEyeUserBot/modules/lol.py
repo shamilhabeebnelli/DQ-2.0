@@ -7,8 +7,8 @@ cmd: .lol
 import asyncio
 import random
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"lol"))
@@ -79,12 +79,12 @@ async def _(event):
         await event.edit("hola lol")
     if x == 28:
         await event.edit("llllllllllllllooooooooooollllllllll")
-        
-        
+
+
 CMD_HELP.update(
     {
         "lol": "**Lol**\
 \n\n**Syntax : **`.lol`\
 \n**Usage :** Yet Another Fun Plugin."
     }
-)        
+)

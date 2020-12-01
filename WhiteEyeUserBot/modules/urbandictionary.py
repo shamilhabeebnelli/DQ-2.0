@@ -5,8 +5,8 @@
 Syntax: .ud Query"""
 import urbandict
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("ud (.*)"))
@@ -33,10 +33,11 @@ async def _(event):
     except:
         await event.edit("No result found for **" + str + "**")
 
+
 CMD_HELP.update(
     {
         "urbandictionnary": "UrBanDictionary\
 \n\nSyntax : .ud <query>\
 \nUsage : Find Meaning Of The Queary"
     }
-)        
+)

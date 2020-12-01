@@ -3,8 +3,9 @@ Syntax: .xkcd <search>"""
 from urllib.parse import quote
 
 import requests
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="xkcd ?(.*)"))
@@ -53,10 +54,11 @@ Year: {}""".format(
     else:
         await livinglegend.edit("xkcd n.{} not found!".format(xkcd_id))
 
+
 CMD_HELP.update(
     {
         "xkcd": "Xkcd\
 \n\nSyntax : .xkcd <query>\
 \nUsage : Gives Funny results"
     }
-)        
+)

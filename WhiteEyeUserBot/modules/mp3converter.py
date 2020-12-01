@@ -6,8 +6,8 @@ import os
 import time
 from datetime import datetime
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, progress
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, progress
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="convert (.*)"))  # pylint:disable=E0602
@@ -117,10 +117,11 @@ async def _(event):
             os.remove(new_required_file_name)
             await event.edit(f"converted in {ms_two} seconds")
 
+
 CMD_HELP.update(
     {
         "mp3converter": "**Mp3Converter**\
 \n\n**Syntax : **`.convert mp3 <reply to file>`\
 \n**Usage :** Converts File Into Mp3"
     }
-)            
+)

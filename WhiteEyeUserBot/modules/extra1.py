@@ -13,8 +13,8 @@ Available Commands:
 
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"(.*)"))
@@ -130,7 +130,7 @@ async def _(event):
 
             await event.edit(animation_chars[i % 10])
 
-   
+
 CMD_HELP.update(
     {
         "extra1": "**Extra1**\

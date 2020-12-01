@@ -4,6 +4,7 @@ originaly from : @corsicanu_bot
 """
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -25,11 +26,12 @@ async def shout(args):
         result = "".join(result)
         msg = "\n" + result
         await args.edit("`" + msg + "`")
-        
+
+
 CMD_HELP.update(
     {
         "shout": "Shout\
 \n\nSyntax : .Shout <text>\
 \nUsage : convets text into ASCII art"
     }
-)        
+)

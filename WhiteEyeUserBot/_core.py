@@ -1,4 +1,4 @@
-# Copyright (C) By @MrDayamZaidi  
+# Copyright (C) By @MrDayamZaidi
 # WhiteEyeUserbot 🇮🇳
 #    WhiteEye - UserBot
 #    Copyright (C) 2020 WhiteEye

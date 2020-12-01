@@ -352,6 +352,7 @@ async def _(event):
     output_str = emoticons[index]
     await event.edit(output_str)
 
+
 CMD_HELP.update(
     {
         "letmeabuse": "**LetMeAbuse**\

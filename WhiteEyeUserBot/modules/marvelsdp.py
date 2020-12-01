@@ -16,8 +16,7 @@ import urllib
 import requests
 from telethon.tl import functions
 
-from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 COLLECTION_STRING = [
     "avengers-logo-wallpaper",

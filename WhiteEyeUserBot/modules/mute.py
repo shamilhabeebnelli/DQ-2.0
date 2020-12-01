@@ -14,8 +14,8 @@
 
 import asyncio
 
-from WhiteEyeUserBot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 
 
 @command(outgoing=True, pattern=r"^.mute ?(\d+)?")
@@ -218,11 +218,12 @@ async def hehehe(event):
                 chat,
                 "`This inbox has been blessed by my master. Consider yourself lucky.`\n**Increased Stability and Karma** (づ￣ ³￣)づ",
             )
-            
+
+
 CMD_HELP.update(
     {
         "mute": "**Mute**\
 \n\n**Syntax : **`.mute <username><reply>`\
 \n**Usage :** Mutes A Person"
     }
-)            
+)

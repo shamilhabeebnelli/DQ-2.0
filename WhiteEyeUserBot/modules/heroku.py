@@ -13,7 +13,7 @@ import requests
 from telegraph import Telegraph
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 telegraph = Telegraph()
 tgnoob = telegraph.create_account(short_name="WhiteEye 🇮🇳")
@@ -23,7 +23,9 @@ heroku_api = "https://api.heroku.com"
 
 
 @WhiteEye.on(
-    WhiteEye_on_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True)
+    WhiteEye_on_cmd(
+        pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True
+    )
 )
 @WhiteEye.on(
     sudo_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", allow_sudo=True)
@@ -227,8 +229,8 @@ async def _(givelogs):
         reply_to=givelogs.id,
         caption=suger,
     )
-   
-   
+
+
 CMD_HELP.update(
     {
         "heroku": "**Heroku**\

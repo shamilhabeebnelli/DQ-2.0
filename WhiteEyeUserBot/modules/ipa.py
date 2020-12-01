@@ -8,8 +8,8 @@ from pathlib import Path
 
 from telethon.tl.types import InputMessagesFilterDocument
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, load_module
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, load_module
 
 
 @WhiteEye.on(WhiteEye_on_cmd("ipa (.*)"))
@@ -47,7 +47,8 @@ async def install(event):
                     os.path.basename(downloaded_file_name)
                 ),
             )
-            
+
+
 CMD_HELP.update(
     {
         "ipa": "**Ipa**\

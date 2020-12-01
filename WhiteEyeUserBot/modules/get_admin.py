@@ -6,8 +6,8 @@ from telethon.tl.types import (
     ChannelParticipantsAdmins,
 )
 
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("get_ad?(m)in ?(.*)"))
@@ -63,7 +63,8 @@ async def _(event):
         await event.delete()
     else:
         await admeme.edit(mentions)
-        
+
+
 CMD_HELP.update(
     {
         "get_admin": "**Get_admin**\
@@ -71,4 +72,3 @@ CMD_HELP.update(
 \n**Usage :** lists all the admins in a group."
     }
 )
-   

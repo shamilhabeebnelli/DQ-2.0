@@ -13,6 +13,7 @@ Available Commands:
 import asyncio
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -108,11 +109,12 @@ async def _(event):
             await asyncio.sleep(animation_interval)
 
             await event.edit(animation_chars[i % 117])
-            
+
+
 CMD_HELP.update(
     {
         "moon": "**Moon**\
 \n\n**Syntax : **`.moon`\
 \n**Usage :** Moon Animations."
     }
-)            
+)

@@ -1,5 +1,5 @@
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, load_module, remove_plugin
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, load_module, remove_plugin
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="load ?(.*)", outgoing=True))
@@ -33,10 +33,11 @@ async def unload(event):
             "Successfully unload {shortname}\n{}".format(shortname, str(e))
         )
 
+
 CMD_HELP.update(
     {
         "load_unload": "**Load_Unload**\
 \n\n**Syntax : **`.load <module name> .unload <module name>`\
 \n**Usage :** If You Don't Want To Use A Specific Plugin Use This Plugin."
     }
-)        
+)

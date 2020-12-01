@@ -11,8 +11,9 @@ import urllib
 import requests
 from telethon.tl import functions
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 COLLECTION_STRING = [
     "avengers-logo-wallpaper",
     "avengers-hd-wallpapers-1080p",
@@ -68,5 +69,6 @@ async def main(event):
         os.system("rm -rf donottouch.jpg")
 
         await asyncio.sleep(600)  # Edit this to your required needs
-        
+
+
 CMD_HELP.update({"avengersdp": ".avengersdp\nUse - Auto-changing dp of avengers."})

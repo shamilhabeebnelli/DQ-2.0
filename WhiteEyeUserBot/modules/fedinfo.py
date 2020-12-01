@@ -1,4 +1,3 @@
-  
 #    WhiteEye - UserBot
 #    Copyright (C) 2020 WhiteEye
 
@@ -90,6 +89,3 @@ CMD_HELP.update(
         \n\n.fedinfo <fedid>\nUse - To see info about the fed."
     }
 )
-
-                
-       

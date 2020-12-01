@@ -16,8 +16,6 @@
 # you may not use this file except in compliance with the License.
 
 
-
-
 """
 Get detailed info about any user
 """
@@ -29,7 +27,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 TMP_DOWNLOAD_DIRECTORY = "./"
 
@@ -157,6 +155,7 @@ async def fetch_info(replied_user, event):
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
 
     return caption
+
 
 CMD_HELP.update(
     {

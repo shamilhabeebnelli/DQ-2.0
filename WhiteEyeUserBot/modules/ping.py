@@ -1,9 +1,8 @@
 import time
 from datetime import datetime
 
-from WhiteEyeUserBot import Lastupdate
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
-from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot import CMD_HELP, Lastupdate
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 def get_readable_time(seconds: int) -> str:
@@ -47,11 +46,12 @@ async def _(event):
     await starkislub.edit(
         f"**█▀█ █▀█ █▄░█ █▀▀ █ \n█▀▀ █▄█ █░▀█ █▄█ ▄**\n ➲ `{ms}` \n ➲ `{uptime}`"
     )
-    
+
+
 CMD_HELP.update(
     {
         "ping": "Ping**\
 \n\n**Syntax : .ping\
 \nUsage : Shows If The Bot Is Working Or Not"
     }
-)            
+)

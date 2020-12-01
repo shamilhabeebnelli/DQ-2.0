@@ -11,8 +11,8 @@ import re
 from telethon import events
 
 import WhiteEyeUserBot.modules.sql_helper.blacklist_sql as sql
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(events.NewMessage(incoming=True))
@@ -91,7 +91,7 @@ async def on_delete_blacklist(event):
         f"Removed {successful} / {len(to_unblacklist)} from the blacklist"
     )
 
-    
+
 CMD_HELP.update(
     {
         "blacklist": "**Blacklist**\

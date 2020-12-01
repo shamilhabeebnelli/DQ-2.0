@@ -1,13 +1,12 @@
-  
 """Malayalam Calendar plugin for Indian Bot
 SYNTAX: .calendar YYYY-MM-DD"""
 import json
 from datetime import datetime
 
 import requests
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
-from WhiteEyeUserBot import CMD_HELP
 
+from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="calendar (.*)"))
@@ -38,11 +37,10 @@ async def _(event):
         await (event, "SYNTAX: .calendar YYYY-MM-DD")
     end = datetime.now()
     (end - start).seconds
-    
-    
+
+
 CMD_HELP.update(
     {
         "calender": ".calendar <YYYY-MM-DD>\nUse - To get the date in the malayalam calendar."
     }
 )
-  

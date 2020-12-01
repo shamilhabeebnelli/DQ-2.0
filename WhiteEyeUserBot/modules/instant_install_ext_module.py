@@ -17,8 +17,8 @@ from pathlib import Path
 
 from telethon.tl.types import InputMessagesFilterDocument
 
-from WhiteEyeUserBot.utils import command, load_module
 from var import Var
+from WhiteEyeUserBot.utils import command, load_module
 
 
 @command(pattern="^.extdl", outgoing=True)

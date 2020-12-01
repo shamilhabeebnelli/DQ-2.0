@@ -5,8 +5,8 @@
 
 import logging
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 logger = logging.getLogger(__name__)
 
@@ -78,10 +78,11 @@ if 1 == 1:
 
                 return
 
+
 CMD_HELP.update(
     {
         "poto": "Poto\
 \n\nSyntax : .poto <reply>\
 \nUsage : Plugin to get all Profile Photo Of The User"
     }
-)            
+)

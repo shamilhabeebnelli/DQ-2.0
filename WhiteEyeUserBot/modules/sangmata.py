@@ -1,7 +1,8 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("sg ?(.*)"))
@@ -179,10 +180,11 @@ async def _(event):
         else:
             await event.edit(f"{response.message.message}")
 
+
 CMD_HELP.update(
     {
         "sangmata": "SangMata\
 \n\nSyntax : .sg <reply>\
 \nUsage : Gives You Details About The User"
     }
-)            
+)

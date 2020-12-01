@@ -5,7 +5,6 @@ except ImportError:
 
 import os
 
-
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 

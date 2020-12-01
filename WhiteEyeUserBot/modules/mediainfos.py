@@ -8,9 +8,9 @@ from typing import Tuple
 
 from telegraph import Telegraph
 
+from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot import CMD_HELP
 
 telegraph = Telegraph()
 tgnoob = telegraph.create_account(short_name="WhiteEye 🇮🇳")
@@ -51,12 +51,12 @@ async def _(event):
     await event.edit(f"`This MediaInfo Can Be Found` [Here](https://telegra.ph/{km})")
     if os.path.exists(file_path):
         os.remove(file_path)
-        
-        
+
+
 CMD_HELP.update(
     {
         "mediainfos": "**MediaInfos**\
 \n\n**Syntax : **`.MediaInfo`\
 \n**Usage :** Reply To Image."
     }
-)        
+)

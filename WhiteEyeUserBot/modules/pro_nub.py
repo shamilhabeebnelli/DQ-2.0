@@ -10,8 +10,8 @@
 
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("(.*)"))
@@ -151,10 +151,11 @@ async def _(event):
             await event.edit(animation_chars[i % 8])
             await asyncio.sleep(animation_interval)
 
+
 CMD_HELP.update(
     {
         "pro_nub": "Pro_Nob\
 \n\nSyntax : .unoob, .menoob, upro, .mepro\
 \nUsage : Amazing Plugin To Give Respect"
     }
-)            
+)

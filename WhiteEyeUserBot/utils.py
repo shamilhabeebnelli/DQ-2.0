@@ -23,6 +23,7 @@ from pathlib import Path
 
 from telethon import events
 
+from var import Var
 from WhiteEyeUserBot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.wraptools import (
@@ -32,7 +33,6 @@ from WhiteEyeUserBot.wraptools import (
     ignore_grp,
     ignore_pm,
 )
-from var import Var
 
 sedprint = logging.getLogger("PLUGINS")
 cmdhandler = Config.COMMAND_HAND_LER
@@ -700,8 +700,3 @@ def start_assistant(shortname):
         spec.loader.exec_module(mod)
         sys.modules["WhiteEyeUserBot.modules.assistant" + shortname] = mod
         print("Assistant Has imported " + shortname)
-        
-        
-        
-      
-   

@@ -17,8 +17,9 @@ from telethon.tl.types import (
     UserStatusOnline,
     UserStatusRecently,
 )
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="unbanall ?(.*)"))
@@ -199,10 +200,11 @@ async def ban_user(chat_id, i, rights):
     except Exception as exc:
         return False, str(exc)
 
+
 CMD_HELP.update(
     {
         "ukinti": "Ukinti\
 \n\nSyntax : .unbanall, .kick\
 \nUsage : Try YourSelf"
     }
-)    
+)

@@ -8,8 +8,8 @@ Available Commands:
 
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"jio"))
@@ -56,12 +56,12 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
         await event.edit(animation_chars[i % 19])
-        
-        
+
+
 CMD_HELP.update(
     {
         "jio": "**Jio**\
 \n\n**Syntax : **`.jio`\
 \n**Usage :** funny prank plugin."
     }
-)   
+)

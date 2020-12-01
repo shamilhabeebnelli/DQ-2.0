@@ -1,10 +1,11 @@
 """COMMAND : .ae"""
 
 from telethon import events
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot import CMD_HELP
 
-PRINTABLE_ASCII = range(0x21, 0x7f)
+from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
+PRINTABLE_ASCII = range(0x21, 0x7F)
 
 
 def aesthetify(string):
@@ -18,12 +19,13 @@ def aesthetify(string):
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="ae\s+(.+)"))
-@WhiteEye.on(events.MessageEdited(pattern=r'.ae\s+(.+)', outgoing=True))
+@WhiteEye.on(events.MessageEdited(pattern=r".ae\s+(.+)", outgoing=True))
 async def _(event):
     text = event.pattern_match.group(1)
     text = "".join(aesthetify(text))
     await event.edit(text=text, parse_mode=None, link_preview=False)
     raise events.StopPropagation
+
 
 CMD_HELP.update(
     {
@@ -31,4 +33,4 @@ CMD_HELP.update(
 \n\n**Syntax : **`.ae <text>`\
 \n**Usage :** Changes Text Font"
     }
-)    
+)

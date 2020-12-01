@@ -1,5 +1,3 @@
-
-  
 # (c) @WhiteEyeOT
 # By @xditya. Kangers keep credits xD I  HAVE KEPT
 # All in one code.
@@ -19,9 +17,8 @@ from collections import deque
 
 from telethon import events
 
-from WhiteEyeUserBot import ALIVE_NAME
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
-from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "WhiteEye"
 
@@ -1141,10 +1138,11 @@ async def _(event):
     await wait([event.respond(repmessage) for i in range(count)])
     await event.delete()
 
+
 CMD_HELP.update(
     {
         "edits": "**Edits**\
 \n\n**Syntax : **`.helper <edits> to know more im lazy to write `\
 \n**Usage :** Very Funny."
     }
-)    
+)

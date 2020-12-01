@@ -5,7 +5,9 @@ from telethon import __version__, functions
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="mf ?(.*)", allow_sudo=True))  # pylint:disable=E0602
+@WhiteEye.on(
+    WhiteEye_on_cmd(pattern="mf ?(.*)", allow_sudo=True)
+)  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

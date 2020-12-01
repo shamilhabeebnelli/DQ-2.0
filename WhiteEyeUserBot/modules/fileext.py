@@ -2,8 +2,9 @@
 Syntax: .filext EXTENSION"""
 import requests
 from bs4 import BeautifulSoup
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="filext (.*)"))
@@ -30,11 +31,12 @@ async def _(event):
                 status_code, input_str
             )
         )
-        
+
+
 CMD_HELP.update(
     {
         "fileext": "**File Extension**\
 \n\n**Syntax : **`.filext <extension>`\
 \n**Usage :** Gives details about the extension."
     }
-)   
+)

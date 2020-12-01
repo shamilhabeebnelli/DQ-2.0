@@ -8,8 +8,8 @@ import io
 import sys
 import traceback
 
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("eval"))
@@ -79,4 +79,3 @@ CMD_HELP.update(
 \n**Usage :** Run python code using this plugin."
     }
 )
-

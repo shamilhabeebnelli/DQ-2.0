@@ -1,10 +1,9 @@
-
-  
 # Originally By X-TRA TG
 # ©WhiteEyeUserBot@2020
 """COMMAND : .kill"""
 
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
 
 
@@ -41,11 +40,12 @@ async def _(event):
         for i in animation_ttl:
 
             await event.edit(animation_chars[i % 103])
-            
+
+
 CMD_HELP.update(
     {
         "kill": "Kill\
 \n\nSyntax : .kill\
 \nUsage : Kill A User"
     }
-)            
+)

@@ -6,7 +6,7 @@ from youtubesearchpython import SearchVideos
 
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.Configs import Config
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="ytmusic ?(.*)"))
@@ -66,4 +66,3 @@ CMD_HELP.update(
 \n**Usage :** Downloads songs from ytmusic"
     }
 )
-

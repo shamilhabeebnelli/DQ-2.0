@@ -2,8 +2,8 @@ import asyncio
 
 from telethon.errors.rpcerrorlist import MessageIdInvalidError
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="dump ?(.*)"))
@@ -43,11 +43,12 @@ async def _(message):
                 await message.edit(something_else)
             except MessageIdInvalidError:
                 return
-            
+
+
 CMD_HELP.update(
     {
         "dumpster": "**Dumpster**\
 \n\n**Syntax : **`.dump`\
 \n**Usage :** just a dumping funny prank plugin."
     }
-)      
+)

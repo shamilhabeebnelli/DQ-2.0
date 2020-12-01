@@ -1,7 +1,7 @@
 # Ported from other Telegram UserBots for TeleBot//Made for TeleBot
 # Kangers, don't remove this line
 # @xditya
-# Rewriten by @mrdayamzaidi 
+# Rewriten by @mrdayamzaidi
 # Made for @WhiteEyeOT
 
 #    WhiteEye - UserBot
@@ -19,7 +19,6 @@
 
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-                             
 
 
 """COMMAND : .pbio, .ppic, .pname, .delpfp {n}"""
@@ -30,25 +29,23 @@ from telethon.tl import functions
 from telethon.tl.functions.photos import DeletePhotosRequest, GetUserPhotosRequest
 from telethon.tl.types import InputPhoto
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="pbio (.*)"))  
+@WhiteEye.on(WhiteEye_on_cmd(pattern="pbio (.*)"))
 async def _(event):
     if event.fwd_from:
         return
     bio = event.pattern_match.group(1)
     try:
-        await borg(
-            functions.account.UpdateProfileRequest(about=bio)  
-        )
+        await borg(functions.account.UpdateProfileRequest(about=bio))
         await event.edit("Succesfully changed my profile bio")
     except Exception as e:  # pylint:disable=C0103,W0703
         await event.edit(str(e))
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="pname ((.|\n)*)"))  
+@WhiteEye.on(WhiteEye_on_cmd(pattern="pname ((.|\n)*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -59,27 +56,27 @@ async def _(event):
         first_name, last_name = names.split("\\n", 1)
     try:
         await borg(
-            functions.account.UpdateProfileRequest(   
+            functions.account.UpdateProfileRequest(
                 first_name=first_name, last_name=last_name
             )
         )
         await event.edit("My name was changed successfully")
-    except Exception as e:  
+    except Exception as e:
         await event.edit(str(e))
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="ppic")) 
+@WhiteEye.on(WhiteEye_on_cmd(pattern="ppic"))
 async def _(event):
     if event.fwd_from:
         return
     reply_message = await event.get_reply_message()
     await event.edit("Downloading Profile Picture to my local ...")
-    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):  
-        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)  
+    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
+        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     photo = None
     try:
         photo = await borg.download_media(  # pylint:disable=E0602
-            reply_message, Config.TMP_DOWNLOAD_DIRECTORY  
+            reply_message, Config.TMP_DOWNLOAD_DIRECTORY
         )
     except Exception as e:  # pylint:disable=C0103,W0703
         await event.edit(str(e))
@@ -88,19 +85,15 @@ async def _(event):
             await event.edit("now, Uploading to @Telegram ...")
             file = await borg.upload_file(photo)  # pylint:disable=E0602
             try:
-                await borg(
-                    functions.photos.UploadProfilePhotoRequest(  
-                        file
-                    )
-                )
+                await borg(functions.photos.UploadProfilePhotoRequest(file))
             except Exception as e:  # pylint:disable=C0103,W0703
                 await event.edit(str(e))
             else:
                 await event.edit("My profile picture was succesfully changed")
     try:
         os.remove(photo)
-    except Exception as e:  
-        logger.warn(str(e))  
+    except Exception as e:
+        logger.warn(str(e))
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="delpfp ?(.*)"))
@@ -129,7 +122,7 @@ async def remove_profilepic(delpfp):
     await delpfp.client(DeletePhotosRequest(id=input_photos))
     await delpfp.edit(f"`Successfully deleted {len(input_photos)} profile picture(s).`")
 
-    
+
 CMD_HELP.update(
     {
         "account_edits": "➟ .pbio <text>\n     To change your profile bio to <text>.\
@@ -138,4 +131,3 @@ CMD_HELP.update(
          \n\n➟ .delpfp <number>(optional)\n    To delete 'n' number of profile pics, one if no number specified."
     }
 )
-

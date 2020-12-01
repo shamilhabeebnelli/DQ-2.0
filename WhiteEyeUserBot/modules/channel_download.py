@@ -7,8 +7,8 @@ By: @Zero_cool7870
 import os
 import subprocess
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="getc"))
@@ -69,6 +69,7 @@ async def get_media(event):
     output = output.replace("\n'", "")
     await event.edit("Downloaded " + output + " files.")
 
+
 CMD_HELP.update(
     {
         "channel_download": "**Channel Download**\
@@ -78,4 +79,3 @@ CMD_HELP.update(
 \n**Usage :** Downloads given number of messages from given channel."
     }
 )
-

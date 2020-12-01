@@ -7,8 +7,8 @@ from datetime import datetime
 
 from selenium import webdriver
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("screenlong (.*)"))
@@ -67,11 +67,12 @@ async def _(event):
         await event.edit(f"Completed screencapture Process in {ms} seconds")
     except Exception:
         await event.edit(traceback.format_exc())
-        
+
+
 CMD_HELP.update(
     {
         "screenlong": "ScreenLong\
 \n\nSyntax : .screenlong <link>\
 \nUsage : Cptures A Long Screenshot of Given Link"
     }
-)        
+)

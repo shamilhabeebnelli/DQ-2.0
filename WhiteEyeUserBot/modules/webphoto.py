@@ -1,4 +1,3 @@
-  
 # Imports
 from os import system as cmd
 from random import choice as c
@@ -6,8 +5,8 @@ from random import choice as c
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 # Important-vars
 CHROME_DRIVER = "/app/.chromedriver/bin/chromedriver"

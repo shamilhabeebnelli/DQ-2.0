@@ -1,5 +1,3 @@
-
-  
 #    TeleBot - UserBot
 #    Copyright (C) 2020 Telebot
 
@@ -21,8 +19,8 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from heroku_config import Var
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 telegraph = Telegraph()
 mee = telegraph.create_account(short_name="WhiteEye")
@@ -62,12 +60,12 @@ async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-       (event, "**Reply to a URL.**")
-       
+        (event, "**Reply to a URL.**")
+
     reply_message = await event.get_reply_message()
     if not reply_message.text:
-       (event, "**Reply to a url message.**")
-        
+        (event, "**Reply to a url message.**")
+
     chat = "@chotamreaderbot"
     reply_message.sender
     (event, "**Making instant view...**")
@@ -297,8 +295,8 @@ async def _(event):
                 )
             except YouBlockedUserError:
                 await x.edit("**Error:** `unblock` @fontsgenbot `and retry!")
-                
-                
+
+
 CMD_HELP.update(
     {
         "botfns": ".purl <reply to file>\nUse - Get a direct download link of that file/doc/pic/vid\
@@ -315,12 +313,8 @@ CMD_HELP.update(
         \n\n.font <text>\nUse - Generate some stylish fonts."
     }
 )
-       
-                
-                
-                
-                
-                
+
+
 #    WhiteEye - UserBot
 #    Copyright (C) 2020 WhiteEye
 
@@ -336,4 +330,3 @@ CMD_HELP.update(
 
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-                             

@@ -1,6 +1,6 @@
 import random
 
-from uniborg.util import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from uniborg.util import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 from WhiteEyeUserBot import CMD_HELP
 

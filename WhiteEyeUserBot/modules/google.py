@@ -2,8 +2,8 @@ from re import findall
 
 from search_engine_parser import GoogleSearch
 
-from WhiteEyeUserBot.utils import register
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import register
 
 
 @register(outgoing=True, pattern=r"^\.gs (.*)")
@@ -33,7 +33,7 @@ async def gsearch(q_event):
         "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
     )
 
-   
+
 CMD_HELP.update(
     {
         "google": "**Google**\
@@ -41,4 +41,3 @@ CMD_HELP.update(
 \n**Usage :** Get the Google search result for given text."
     }
 )
-

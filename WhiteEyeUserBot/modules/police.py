@@ -1,10 +1,7 @@
 import asyncio
 
+from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-
-from WhiteEyeUserBot import ALIVE_NAME
-
-from WhiteEyeUserBot import CMD_HELP
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "WhiteEyeUserbot"
 
@@ -42,11 +39,12 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
         await event.edit(animation_chars[i % 12])
-        
+
+
 CMD_HELP.update(
     {
         "police": "Police\
 \n\nSyntax : .police \
 \nUsage : Yet Another Fun Plugin"
     }
-)        
+)

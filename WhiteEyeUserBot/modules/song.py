@@ -4,9 +4,8 @@ import os
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from WhiteEyeUserBot import bot
+from WhiteEyeUserBot import CMD_HELP, bot
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot import CMD_HELP
 
 try:
     pass
@@ -103,10 +102,11 @@ async def DeezLoader(Deezlod):
         )
         await Deezlod.delete()
 
+
 CMD_HELP.update(
     {
         "song": "Songs\
 \n\nSyntax : .songs <name of song>\
 \nUsage : Gives You Results of The Searched Music"
     }
-)        
+)

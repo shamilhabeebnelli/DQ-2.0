@@ -3,8 +3,9 @@ command: .singer singer name - song name
 by @quiec
 """
 from PyLyrics import *
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="singer (.*)"))
@@ -31,10 +32,11 @@ async def _(event):
     except ValueError:
         await event.edit("Song not found")
 
+
 CMD_HELP.update(
     {
         "singer": "Singer\
 \n\nSyntax : .singer <Artist>-<Song>\
 \nUsage : First Letter Should Be Capital"
     }
-)        
+)

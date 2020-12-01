@@ -3,9 +3,8 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from WhiteEyeUserBot import bot
+from WhiteEyeUserBot import CMD_HELP, bot
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot import CMD_HELP
 
 
 # @register(outgoing=True, pattern="^.q(?: |$)(.*)")
@@ -41,11 +40,11 @@ async def _(event):
             await event.delete()
             await bot.forward_messages(event.chat_id, response.message)
 
-            
+
 CMD_HELP.update(
     {
         "quotly": "**Quotly**\
 \n\n**Syntax : **`.qbot media <reply to some message>`\
 \n**Usage :** you will get quoted message."
     }
-)           
+)

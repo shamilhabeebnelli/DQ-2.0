@@ -7,8 +7,9 @@ By @loxxi
 
 import requests
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 
 @WhiteEye.on(WhiteEye_on_cmd("ggl (.*)"))
 async def _(event):
@@ -26,6 +27,7 @@ async def _(event):
     else:
         await event.edit("something is wrong. please try again later.")
 
+
 CMD_HELP.update(
     {
         "howtogoogle": "**How To Google**\
@@ -33,4 +35,3 @@ CMD_HELP.update(
 \n**Usage :** Animates how to Google with search query."
     }
 )
-     

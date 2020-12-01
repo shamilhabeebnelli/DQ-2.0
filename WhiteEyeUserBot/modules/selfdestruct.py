@@ -7,8 +7,8 @@
 
 import time
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("sd", outgoing=True))
@@ -29,10 +29,11 @@ async def selfdestruct(destroy):
         time.sleep(counter)
         await smsg.delete()
 
+
 CMD_HELP.update(
     {
         "selfdestruct": "SelfDestruct\
 \n\nSyntax : .sd <time in seconds><text>\
 \nUsage : Destructs Your Massage in Given Time"
     }
-)        
+)

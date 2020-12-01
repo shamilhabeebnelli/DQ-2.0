@@ -6,7 +6,9 @@ By: @Zero_cool7870
 """
 import requests
 from telethon import events
+
 from WhiteEyeUserBot import CMD_HELP
+
 
 async def download_file_from_google_drive(id):
     URL = "https://docs.google.com/uc?export=download"
@@ -92,7 +94,7 @@ async def g_download(event):
     file_name = await download_file_from_google_drive(file_id)
     await event.edit("File Downloaded.\nName: `" + str(file_name) + "`")
 
-    
+
 CMD_HELP.update(
     {
         "get_admin": "**Get_admin**\

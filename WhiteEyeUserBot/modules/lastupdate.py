@@ -2,8 +2,8 @@
 import time
 from datetime import datetime
 
-from WhiteEyeUserBot.__init__ import Lastupdate
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.__init__ import Lastupdate
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
@@ -46,12 +46,12 @@ async def _(event):
     (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - Lastupdate))
     await event.edit(f"🔰 WhiteEye Userbot Has Been Restarted Or Updated {uptime} Ago !")
-    
-    
+
+
 CMD_HELP.update(
     {
         "lastupdate": "**LastUpdate**\
 \n\n**Syntax : **`.latestupdate`\
 \n**Usage :** Last Timing When You Updated Your UserBot."
     }
-)    
+)

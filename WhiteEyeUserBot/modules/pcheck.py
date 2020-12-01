@@ -13,8 +13,8 @@
 import requests
 from telethon.tl.types import MessageMediaPhoto
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"pcheck"))
@@ -41,10 +41,11 @@ async def pcheck(event):
         else:
             await event.edit("Response UnsucessFull. Try Again.")
 
+
 CMD_HELP.update(
     {
         "pcheck": "PCheck**\
 \n\n**Syntax : .pcheck <reply to image>\
 \nUsage : Check If The Image Is Related To Porn"
     }
-)            
+)

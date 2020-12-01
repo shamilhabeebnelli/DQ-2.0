@@ -1,7 +1,7 @@
 import random
 
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 METOOSTR = [
     "`Me too thanks`",
@@ -163,12 +163,12 @@ async def _(event):
     event.pattern_match.group(1)
     reply_text = GEY_STRINGS[bro]
     await edit_or_reply(event, reply_text)
-    
-    
+
+
 CMD_HELP.update(
     {
         "gaali2": "**Gaali2**\
 \n\n**Syntax : **`.run, .metoo, .rapee, .insultt, .proo, .abusee, .geyy`\
 \n**Usage :** Fun Plugin"
     }
-)    
+)
