@@ -1,7 +1,7 @@
 import asyncio
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "WhiteEye"
 
