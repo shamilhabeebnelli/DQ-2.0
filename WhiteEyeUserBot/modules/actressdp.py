@@ -59,7 +59,7 @@ async def animepp():
 async def main(event):
 
     await event.edit(
-        "**Starting Actress Profile Pic...\n\nDone !!! Check Your DP in 5 seconds. \n By [WhiteEye](https://github.com/MrDayamZaidi/WhiteEyeUserBot)**"
+        "**Starting Actress Profile Pic...\n\nDone !!! Check Your DP in 5 seconds. \n By [WhiteEye](https://github.com/WhiteEye-Org/WhiteEyeUserBot)**"
     )
 
     while True:
