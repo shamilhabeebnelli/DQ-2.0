@@ -6,11 +6,11 @@
 
 
 
-                                                                  # Support
+                                                                 # Support
 
 <p align="center"><a"https://t.me/WhiteEyeChannel"><img src="https://img.shields.io/badge/Join-Telegram%20Channel-red.svg?logo=Telegram"<a></p>
 
-<p align="center"><a"https://t.me/WhiteEyeOT"><img src="https://img.shields.io/badge/Join-Telegram%20Group-blue.svg?logo=telegram"<a></>
+<p align="center"><a"https://t.me/WhiteEyeOT"><img src="https://img.shields.io/badge/Join-Telegram%20Group-blue.svg?logo=telegram"<a></p>
 
 
 
@@ -22,9 +22,9 @@
 
 
 
-# Deploy
+                                                                  # Deploy
 
-[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/WhiteEye-Org/WhiteEyeUserBot)
+<p align= "center"><a"[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/WhiteEye-Org/WhiteEyeUserBot)"<a></p>
 # String
 
 [![Run on Repl.it](https://telegra.ph/file/1b2ca5fd16997b21b4b41.jpg)](https://repl.it/@mrdayamzaidi/WhiteEyeUserbot)
