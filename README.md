@@ -8,7 +8,7 @@
 
 # Support
 
-<a href="https://t.me/WhiteEyeChannel"><img src="https://img.shields.io/badge/Join-Telegram%20Channel-red.svg?logo=Telegram"></a>
+<p href="center"><a"https://t.me/WhiteEyeChannel"><img src="https://img.shields.io/badge/Join-Telegram%20Channel-red.svg?logo=Telegram"<a></p>
 
 <a href="https://t.me/WhiteEyeOT"><img src="https://img.shields.io/badge/Join-Telegram%20Group-blue.svg?logo=telegram"></a>
 
