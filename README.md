@@ -6,7 +6,7 @@
 
 
 
-                                                      SUPPORT
+                                                       SUPPORT
 
 <p align="center"><a"https://t.me/WhiteEyeChannel"><img src="https://img.shields.io/badge/Join-Telegram%20Channel-red.svg?logo=Telegram"<a></p>
 
