@@ -15,8 +15,9 @@ from os import environ, execle, path, remove
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from var import Var
+from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+from var import Var
 
 UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 UPSTREAM_REPO_BRANCH = "master"
@@ -28,16 +29,14 @@ requirements_path = path.join(
 
 
 async def gen_chlog(repo, diff):
-    ch_log = "Update(s) \n\n"
+    ch_log = "**ChangeLog** \n\n"
     for c in repo.iter_commits(diff):
-        ch_log += f"🔨 #{c.count()} : {c.summary} 👷 {c.author}__\n"
+        ch_log += f"🔨 **#{c.count()} :** [{c.summary}]({UPSTREAM_REPO_URL}/commit/{c}) 👷 __{c.author}__\n"
     return ch_log
 
 
 async def print_changelogs(event, ac_br, changelog):
-    changelog_str = (
-        f"**Updates available in {ac_br} branch!\n\nChangelog:**\n{changelog}"
-    )
+    changelog_str = f"**Updates available in {ac_br} branch!\n\n{changelog}"
     if len(changelog_str) > 4096:
         await event.edit("**Changelog is too big, sending as a file.**")
         file = open("output.txt", "w+")
@@ -46,7 +45,9 @@ async def print_changelogs(event, ac_br, changelog):
         await event.client.send_file(event.chat_id, "output.txt")
         remove("output.txt")
     else:
-        await event.client.send_message(event.chat_id, changelog_str)
+        await event.client.send_message(
+            event.chat_id, changelog_str, link_preview=False
+        )
     return True
 
 
@@ -76,7 +77,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 "**Please set up the** `HEROKU_APP_NAME` **variable"
                 " to be able to deploy your userbot.**"
             )
-            repo.__del()
+            repo.__del__()
             return
         for app in heroku_applications:
             if app.name == HEROKU_APP_NAME:
@@ -84,7 +85,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 break
         if heroku_app is None:
             await event.edit(
-                f"{txt}\n" "Invalid Heroku credentials for deploying userbot dyno."
+                f"{txt}\n" "**Invalid Heroku credentials for deploying userbot dyno.**"
             )
             return repo.__del__()
         ups_rem.fetch(ac_br)
@@ -100,11 +101,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         try:
             remote.push(refspec="HEAD:refs/heads/master", force=True)
         except Exception as error:
-            await event.edit(f"{txt}\nHere is the error log:\n{error}")
+            await event.edit(f"{txt}\nHere is the error log:\n`{error}`")
             return repo.__del__()
         build = app.builds(order_by="created_at", sort="desc")[0]
         if build.status == "failed":
-            await event.edit("Build failed!**\nCancelled or there were some errors.`")
+            await event.edit("**Build failed!**\nCancelled or there were some errors.`")
             await asyncio.sleep(5)
             return await event.delete()
         else:
@@ -112,7 +113,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 "**Successfully updated!**\nBot is restarting, will be back up in a few seconds."
             )
     else:
-        await event.edit("**Please set up HEROKU_API_KEY variable.")
+        await event.edit("**Please set up** `HEROKU_API_KEY` **variable.**")
     return
 
 
@@ -123,7 +124,7 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     await event.edit(
-        "Soft Update Sucessfull, Please Wait For Some Time To Get This Process Completed."
+        "**Soft Update Sucessfull, Please Wait For Some Time To Get This Process Completed.**"
     )
     # Spin a new instance of bot
     args = [sys.executable, "-m", "WhiteEyeUserBot"]
@@ -134,27 +135,27 @@ async def update(event, repo, ups_rem, ac_br):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"update( now| deploy|$)"))
 async def upstream(event):
     "For .update command, check if the bot is up to date, update if specified"
-    await event.edit("Checking for updates, please wait...")
+    await event.edit("**Checking for updates, please wait...**")
     conf = event.pattern_match.group(1).strip()
     off_repo = UPSTREAM_REPO_URL
     force_update = False
     try:
-        txt = "Oops.. Updater cannot continue due to "
+        txt = "**Oops.. Updater cannot continue due to "
         txt += "some problems**\n`LOGTRACE:`\n"
         repo = Repo()
     except NoSuchPathError as error:
-        await event.edit(f"{txt}\n**Directory {error} was not found.")
+        await event.edit(f"{txt}\n**Directory** `{error}` **was not found.**")
         return repo.__del__()
     except GitCommandError as error:
-        await event.edit(f"{txt}\nEarly failure! `{error}`")
+        await event.edit(f"{txt}\n**Early failure!** `{error}`")
         return repo.__del__()
     except InvalidGitRepositoryError as error:
         if conf is None:
             return await event.edit(
-                f"Unfortunately, the directory {error} "
+                f"**Unfortunately, the directory {error} "
                 "does not seem to be a git repository.\n"
-                "But we can fix that by force updating the userbot using "
-                ".update now."
+                "But we can fix that by force updating the userbot using **"
+                "`.update now.`"
             )
         repo = Repo.init()
         origin = repo.create_remote("upstream", off_repo)
@@ -167,8 +168,8 @@ async def upstream(event):
     ac_br = repo.active_branch.name
     if ac_br != UPSTREAM_REPO_BRANCH:
         await event.edit(
-            f"Looks like you are using your own custom branch: ({ac_br}). \n"
-            "Please switch to master branch."
+            f"**Looks like you are using your own custom branch: ({ac_br}). \n"
+            "Please switch to** `master` **branch.**"
         )
         return repo.__del__()
     try:
@@ -183,26 +184,43 @@ async def upstream(event):
     """ - Special case for deploy - """
     if conf == "deploy":
         await event.edit(
-            "Perfoming a Power Update, Please Wait. It Usually Takes 5 min."
+            "**Perfoming a Power Update, Please Wait. It Usually Takes 5 min.**"
         )
         await deploy(event, repo, ups_rem, ac_br, txt)
         return
 
     if changelog == "" and not force_update:
-        await event.edit(f"Your userbot is up-to-date with `{UPSTREAM_REPO_BRANCH}`!")
+        await event.edit(
+            f"**Your userbot is up-to-date with `{UPSTREAM_REPO_BRANCH}`!**"
+        )
         return repo.__del__()
 
     if conf == "" and force_update is False:
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
-        return await event.respond("Do .update now or .update deploy to update.")
+        return await event.respond(
+            "**Do** `.update now` **or** `.update deploy` **to update.**"
+        )
 
     if force_update:
-        await event.edit("Force-syncing to latest stable userbot code, please wait...")
+        await event.edit(
+            "**Force-syncing to latest stable userbot code, please wait...**"
+        )
 
     if conf == "now":
-        await event.edit(
-            "Perfoming a quick update, please wait, do .Ping after 2 Min ..."
-        )
+        await event.edit("**Perfoming a quick update, please wait...**")
         await update(event, repo, ups_rem, ac_br)
     return
+
+
+CMD_HELP.update(
+    {
+        "update": ">`.update`"
+        "\nUsage: Checks if the main userbot repository has any updates "
+        "and shows a changelog if so."
+        "\n\n>`.update now`"
+        "\nUsage: Performs a quick update."
+        "\n\n>`.update deploy`"
+        "\nUsage: Performs a full update (recommended)."
+    }
+)
