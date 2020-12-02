@@ -44,7 +44,7 @@
 
 
   --> 
-- <opencv_storage>
+<opencv_storage>
 - <cascade type_id="opencv-cascade-classifier">
   <stageType>BOOST</stageType> 
   <featureType>HAAR</featureType> 
