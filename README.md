@@ -6,7 +6,7 @@
 
 
 
-                                                                 # Support
+                                                      # Support
 
 <p align="center"><a"https://t.me/WhiteEyeChannel"><img src="https://img.shields.io/badge/Join-Telegram%20Channel-red.svg?logo=Telegram"<a></p>
 
@@ -22,7 +22,7 @@
 
 
 
-                                                                  # Deploy
+# Deploy
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/WhiteEye-Org/WhiteEyeUserBot)
 # String
