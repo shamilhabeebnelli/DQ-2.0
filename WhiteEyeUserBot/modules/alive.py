@@ -19,11 +19,10 @@
 # CREDITS: @WhySooSerious, @Sur_vivor
 import time
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
-
 from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, Lastupdate
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.modules import currentversion
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 
 # Functions
