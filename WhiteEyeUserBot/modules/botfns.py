@@ -145,7 +145,7 @@ async def _(event):
         )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="stats$"))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="status$"))
 @WhiteEye.on(sudo_cmd(pattern="stats$", allow_sudo=True))
 async def stats(event):
     if event.fwd_from:
@@ -303,7 +303,7 @@ CMD_HELP.update(
         \n\n.reader <reply to url>\nUse - Get an instant view of that site.\
         \n\n.aud <reply to youtube link>\nUse - Get audo from that youtube video\
         \n\n.instadl <reply to instagram url>\\nUse - Download that instagram post.\
-        \n\n.stats\nUse - To see the stats of your bot.\
+        \n\n.status\nUse - To see the stats of your bot.\
         \n\n.xogame\nUse - Start an XO-Game\
         \n\n.whisper <message> <target username/id>\nUse - Send a whisper message to that person.\
         \n\n.crack <app name>\nUse - Get the crack/mod of an app.\
