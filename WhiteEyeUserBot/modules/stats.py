@@ -45,3 +45,12 @@ async def _(event):
             ms, u, g, c, bc, b
         )
     )
+    
+CMD_HELP.update(
+    {
+        "stats": "**Stats**\
+\n\n**Syntax : **`.stats`\
+\n**Usage :** Shows user account stats."
+    }
+)
+    
