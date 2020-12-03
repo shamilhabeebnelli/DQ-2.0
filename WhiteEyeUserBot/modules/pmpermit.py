@@ -36,7 +36,7 @@ USER_BOT_NO_WARN = (
     f"`My Master {DEFAULTUSER} is Not Available Right Now !` \n"
     "**Choose A Reason For What You Have Came Here For** 👀 \n\n"
     "**My Boss {DEFAULTUSER} Will Approve You Soon!**"
-    "**Don't Try To Spam My Master's Inbox**\n\n"
+    "**Don't Try To Spam My Master's Inbox** \n\n"
     f"**{CUSTOM_MIDDLE_PMP}**"
 )
 if Var.PRIVATE_GROUP_ID is not None:
