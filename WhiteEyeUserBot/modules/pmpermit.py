@@ -214,4 +214,4 @@ async def hehehe(event):
         if not pmpermit_sql.is_approved(chats.id):
             pmpermit_sql.approve(chats.id, "**My Boss Is Best🔥**")
             await borg.send_message(
-                chats, "**User Detected As Developer Or My Owner. So AutoApprove.
+                chats, "**User Detected As Developer Or My Owner. So AutoApprove**"
