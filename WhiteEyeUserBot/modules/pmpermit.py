@@ -35,7 +35,7 @@ USER_BOT_NO_WARN = (
     "**Hello, This is WhiteEye PM Protection Service ⚠️**\n\n"
     f"`My Master {DEFAULTUSER} is Busy Right Now !` \n"
     "**I Request You To Choose A Reason For What You Have Came Here For** 👀 \n\n"
-    f"**{CUSTOM_MIDDLE_PMP}**" 
+    f"**{CUSTOM_MIDDLE_PMP}**"
 )
 if Var.PRIVATE_GROUP_ID is not None:
 
