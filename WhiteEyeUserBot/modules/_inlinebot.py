@@ -7,8 +7,7 @@ import requests
 from telethon import Button, custom, events, functions
 from youtubesearchpython import SearchVideos
 
-from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, CMD_LIST
-from WhiteEyeUserBot import inlinestats
+from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, CMD_LIST, inlinestats
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
