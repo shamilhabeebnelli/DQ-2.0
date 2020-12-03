@@ -1,7 +1,7 @@
+from var import Var
 from WhiteEyeUserBot import topfunc
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from var import Var
 
 idgen = topfunc.id_generator
 findnemo = topfunc.stark_finder
