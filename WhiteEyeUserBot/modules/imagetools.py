@@ -1,4 +1,3 @@
-# Api Provided By @PythonvsAno
 #    Copyright (C) Midhun KM 2020
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -15,8 +14,10 @@
 import os
 
 import cv2
+import numpy as np
 import requests
 from PIL import Image
+from telegraph import upload_file
 from telethon.tl.types import MessageMediaPhoto
 
 from WhiteEyeUserBot import CMD_HELP
@@ -30,33 +31,50 @@ if not os.path.isdir(sedpath):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"cit"))
 @WhiteEye.on(sudo_cmd(pattern=r"cit", allow_sudo=True))
 async def hmm(event):
-    life = Config.DEEP_API_KEY
-    if life == None:
-        life = "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
-        await event.edit("No Api Key Found, Please Add it. For Now Using Local Key")
     if not event.reply_to_msg_id:
         await event.reply("Reply to any Image.")
         return
-    headers = {"api-key": life}
-    hmm = await event.edit("Colourzing..")
+    hmmu = await event.edit("Colourzing..")
     sed = await event.get_reply_message()
     if isinstance(sed.media, MessageMediaPhoto):
         img = await borg.download_media(sed.media, sedpath)
-    elif "image" in response.media.document.mime_type.split("/"):
+    elif "image" in sed.media.document.mime_type.split("/"):
         img = await borg.download_media(sed.media, sedpath)
     else:
         await event.edit("Reply To Image")
         return
-    img_file = {
-        "image": open(img, "rb"),
-    }
-    url = "https://api.deepai.org/api/colorizer"
-    r = requests.post(url=url, files=img_file, headers=headers).json()
-    sedimg = r["output_url"]
-    await borg.send_file(event.chat_id, sedimg)
-    await hmm.delete()
-    if os.path.exists(img):
-        os.remove(img)
+    net = cv2.dnn.readNetFromCaffe(
+        "./resources/imgcolour/colouregex.prototxt",
+        "./resources/imgcolour/colorization_release_v2.caffemodel",
+    )
+    pts = np.load("./resources/imgcolour/pts_in_hull.npy")
+    class8 = net.getLayerId("class8_ab")
+    conv8 = net.getLayerId("conv8_313_rh")
+    pts = pts.transpose().reshape(2, 313, 1, 1)
+    net.getLayer(class8).blobs = [pts.astype("float32")]
+    net.getLayer(conv8).blobs = [np.full([1, 313], 2.606, dtype="float32")]
+    image = cv2.imread(img)
+    scaled = image.astype("float32") / 255.0
+    lab = cv2.cvtColor(scaled, cv2.COLOR_BGR2LAB)
+    resized = cv2.resize(lab, (224, 224))
+    L = cv2.split(resized)[0]
+    L -= 50
+    net.setInput(cv2.dnn.blobFromImage(L))
+    ab = net.forward()[0, :, :, :].transpose((1, 2, 0))
+    ab = cv2.resize(ab, (image.shape[1], image.shape[0]))
+    L = cv2.split(lab)[0]
+    colorized = np.concatenate((L[:, :, np.newaxis], ab), axis=2)
+    colorized = cv2.cvtColor(colorized, cv2.COLOR_LAB2BGR)
+    colorized = np.clip(colorized, 0, 1)
+    colorized = (255 * colorized).astype("uint8")
+    file_name = "Colour.png"
+    ok = sedpath + "/" + file_name
+    cv2.imwrite(ok, colorized)
+    await borg.send_file(event.chat_id, ok)
+    await hmmu.delete()
+    for files in (ok, img):
+        if files and os.path.exists(files):
+            os.remove(files)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"toon"))
@@ -74,7 +92,7 @@ async def hmm(event):
     sed = await event.get_reply_message()
     if isinstance(sed.media, MessageMediaPhoto):
         img = await borg.download_media(sed.media, sedpath)
-    elif "image" in response.media.document.mime_type.split("/"):
+    elif "image" in sed.media.document.mime_type.split("/"):
         img = await borg.download_media(sed.media, sedpath)
     else:
         await event.edit("Reply To Image")
@@ -106,7 +124,7 @@ async def hmm(event):
     sed = await event.get_reply_message()
     if isinstance(sed.media, MessageMediaPhoto):
         img = await borg.download_media(sed.media, sedpath)
-    elif "image" in response.media.document.mime_type.split("/"):
+    elif "image" in sed.media.document.mime_type.split("/"):
         img = await borg.download_media(sed.media, sedpath)
     else:
         await event.edit("Reply To Image")
@@ -159,6 +177,35 @@ async def iamthug(event):
     background.save(ok, "PNG")
     await borg.send_file(event.chat_id, ok)
     await hmm.delete()
+    for files in (ok, img):
+        if files and os.path.exists(files):
+            os.remove(files)
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"tig"))
+@WhiteEye.on(sudo_cmd(pattern=r"tig", allow_sudo=True))
+async def lolmetrg(event):
+    await event.edit("`Triggered This Image`")
+    sed = await event.get_reply_message()
+    if isinstance(sed.media, MessageMediaPhoto):
+        img = await borg.download_media(sed.media, sedpath)
+    elif "image" in sed.media.document.mime_type.split("/"):
+        img = await borg.download_media(sed.media, sedpath)
+    else:
+        await event.edit("Reply To Image")
+        return
+    url_s = upload_file(img)
+    imglink = f"https://telegra.ph{url_s[0]}"
+    lolul = f"https://some-random-api.ml/canvas/triggered?avatar={imglink}"
+    r = requests.get(lolul)
+    open("triggered.gif", "wb").write(r.content)
+    lolbruh = "triggered.gif"
+    await borg.send_file(
+        event.chat_id, lolbruh, caption="You got triggered....", reply_to=sed
+    )
+    for files in (lolbruh, img):
+        if files and os.path.exists(files):
+            os.remove(files)
 
 
 CMD_HELP.update(
