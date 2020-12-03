@@ -16,10 +16,9 @@ import secrets
 from random import *
 
 from password_strength import PasswordStats
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import admin_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, admin_cmd
 
 
 @WhiteEye.on(admin_cmd(pattern="passcheck (.*)"))
