@@ -2,9 +2,8 @@ from datetime import datetime
 
 from telethon.tl.types import Channel, Chat, User
 
-from WhiteEyeUserBot import bot
+from WhiteEyeUserBot import CMD_HELP, bot
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot import CMD_HELP
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"stats"))
