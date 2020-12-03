@@ -34,7 +34,7 @@ botisnoob = Var.TG_BOT_USER_NAME_BF_HER
 USER_BOT_NO_WARN = (
     "**Hello, This is WhiteEye Personal Massage Protection Service ⚠️**\n\n"
     f"`My Master {DEFAULTUSER} is Not Available Right Now !` \n"
-    "**Choose A Reason For What You Have Came Here For** 👀 \n\n"
+    "**Choose A Reason For What You Have Came.** 👀 \n\n"
     "My Boss Will Approve You Soon!`"
     f"**{CUSTOM_MIDDLE_PMP}**"
 )
