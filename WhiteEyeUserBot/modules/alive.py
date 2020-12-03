@@ -19,10 +19,11 @@
 # CREDITS: @WhySooSerious, @Sur_vivor
 import time
 
-from uniborg.util import WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, Lastupdate
 from WhiteEyeUserBot.Configs import Config
+from WhiteEyeUserBot.modules import currentversion
 
 
 # Functions
@@ -60,6 +61,7 @@ PM_IMG = Config.ALIVE_IMAGE
 pm_caption = "👑 WhiteEye IS: WORKING 👑\n\n"
 pm_caption += "✯ **SYSTEMS STATS**\n"
 pm_caption += "✯ **Telethon Version:** `1.15.0` \n"
+pm_caption += f"➥ **Version** : `{currentversion}`\n"
 pm_caption += "✯ **Python:** `3.7.4` \n"
 pm_caption += f"✯ **Uptime** : `{uptime}` \n"
 pm_caption += "✯ **Database Status:**  `Functional`\n"
