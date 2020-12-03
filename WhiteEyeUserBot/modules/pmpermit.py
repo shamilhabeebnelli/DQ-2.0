@@ -32,10 +32,10 @@ USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avo
 botisnoob = Var.TG_BOT_USER_NAME_BF_HER
 
 USER_BOT_NO_WARN = (
-    "**Hi, This is WhiteEye Personal Massage Protection Service ⚠️**\n\n"
-    f"`My Master {DEFAULTUSER} is Not Available Right Now!` \n"
-    "**Choose A Reason For What You Have Came Here For! My Boss {DEFAULTUSER} Will Approve You Soon. So Please Dont't Try To Spam My Master's inbox** 👀 \n\n"
-    f"**{CUSTOM_MIDDLE_PMP}**"
+    "**Hello, This is WhiteEye PM Protection Service ⚠️**\n\n"
+    f"`My Master {DEFAULTUSER} is Busy Right Now !` \n"
+    "**I Request You To Choose A Reason For What You Have Came Here For** 👀 \n\n"
+    f"**{CUSTOM_MIDDLE_PMP}**" 
 )
 if Var.PRIVATE_GROUP_ID is not None:
 
