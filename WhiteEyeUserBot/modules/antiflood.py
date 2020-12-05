@@ -3,7 +3,7 @@ import asyncio
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 
-import WhiteEyeUserBot.plugins.sql_helper.antiflood_sql as sql
+import WhiteEyeUserBot.modules.sql_helper.antiflood_sql as sql
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
