@@ -1,8 +1,8 @@
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-
 from asyncio import wait
 
 from telethon import events
+
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @borg.on(WhiteEye_on_cmd(pattern=r"hola"))
@@ -11,56 +11,80 @@ async def hi(event):
         return
     await event.edit("╔┓┏╦━╦┓╔┓╔━━╗\n║┗┛║┗╣┃║┃║X X  ║\n║┏┓║┏╣┗╣┗╣╰╯║\n╚┛┗╩━╩━╩━╩━━╝")
 
+
 @borg.on(WhiteEye_on_cmd(pattern=r"plus"))
 async def hi(event):
     if event.fwd_from:
         return
-    await event.edit("╭━━━━━━━━━━━━━╮\n┃╱╱╱╱╱╱╱╱┏┓╱╱╱┃\n┃╱╱╱┏┓╱╱┏╯┃╱╱╱┃\n┃╱╱┏┛┗┓╱┗┓┃╱╱╱┃\n┃╱╱┗┓┏┛╱╱┃┃╱╱╱┃\n┃╱╱╱┗┛╱╱╱┃┃╱╱╱┃\n┃╱╱╱╱╱╱╱╱┗┛╱╱╱┃\n╰━━━━━━━━━━━━━╯")
+    await event.edit(
+        "╭━━━━━━━━━━━━━╮\n┃╱╱╱╱╱╱╱╱┏┓╱╱╱┃\n┃╱╱╱┏┓╱╱┏╯┃╱╱╱┃\n┃╱╱┏┛┗┓╱┗┓┃╱╱╱┃\n┃╱╱┗┓┏┛╱╱┃┃╱╱╱┃\n┃╱╱╱┗┛╱╱╱┃┃╱╱╱┃\n┃╱╱╱╱╱╱╱╱┗┛╱╱╱┃\n╰━━━━━━━━━━━━━╯"
+    )
+
+
 @borg.on(WhiteEye_on_cmd(pattern=r"yes"))
 async def hi(event):
     if event.fwd_from:
         return
-    await event.edit("┏┓┏┓╭━━┓╭━━╮▕▔▔▏\n┃┃┃┃┃┏━┛┃╭━┛▕┈┈▏\n┃╰╯┃┃┗━┓┃╰━╮▕┈┈▏\n╰━╮┃┃┏━┛╰━╮┃┈╲╱┈\n┏━╯┃┃┗━┓┏━╯┃┈╭╮┈\n╰━━╯╰━━┛╰━━╯┈╰╯┈")
+    await event.edit(
+        "┏┓┏┓╭━━┓╭━━╮▕▔▔▏\n┃┃┃┃┃┏━┛┃╭━┛▕┈┈▏\n┃╰╯┃┃┗━┓┃╰━╮▕┈┈▏\n╰━╮┃┃┏━┛╰━╮┃┈╲╱┈\n┏━╯┃┃┗━┓┏━╯┃┈╭╮┈\n╰━━╯╰━━┛╰━━╯┈╰╯┈"
+    )
+
 
 @borg.on(WhiteEye_on_cmd(pattern=r"lol"))
 async def hi(event):
     if event.fwd_from:
         return
-    await event.edit("▂▂╱▔▔▔▔▔▔▔▔▔▔▔▔╲\n╲▂┈╭╮┈┈╭━━╮╭╮┈┈▕\n┈┈▏┃┃┈┈┃╭╮┃┃┃┈┈▕\n┈┈▏┃╰━╮┃╰╯┃┃╰━╮▕\n┈┈▏╰━━╯╰━━╯╰━━╯▕\n┈┈╲▂▂▂▂▂▂▂▂▂▂▂▂╱")
-    
-    
+    await event.edit(
+        "▂▂╱▔▔▔▔▔▔▔▔▔▔▔▔╲\n╲▂┈╭╮┈┈╭━━╮╭╮┈┈▕\n┈┈▏┃┃┈┈┃╭╮┃┃┃┈┈▕\n┈┈▏┃╰━╮┃╰╯┃┃╰━╮▕\n┈┈▏╰━━╯╰━━╯╰━━╯▕\n┈┈╲▂▂▂▂▂▂▂▂▂▂▂▂╱"
+    )
+
+
 @borg.on(WhiteEye_on_cmd(pattern=r"android"))
 async def hi(event):
     if event.fwd_from:
         return
-    await event.edit("┈┈┈╲┈┈┈┈╱┈┈┈┈┈┈┈\n┈┈┈╱▔▔▔▔╲┈┈┈┈┈┈┈\n┈┈┃┈▇┈┈▇┈┃┈┈┈┈┈┈\n╭╮┣━━━━━━┫╭╮┈┈┈┈\n┃┃┃┈┈┈┈┈┈┃┃┃┈┈┈┈\n╰╯┃┈┈┈┈┈┈┃╰╯┈┈┈┈\n┈┈╰┓┏━━┓┏╯┈┈┈┈┈┈\n┈┈┈╰╯┈┈╰╯┈┈┈┈┈┈┈")
+    await event.edit(
+        "┈┈┈╲┈┈┈┈╱┈┈┈┈┈┈┈\n┈┈┈╱▔▔▔▔╲┈┈┈┈┈┈┈\n┈┈┃┈▇┈┈▇┈┃┈┈┈┈┈┈\n╭╮┣━━━━━━┫╭╮┈┈┈┈\n┃┃┃┈┈┈┈┈┈┃┃┃┈┈┈┈\n╰╯┃┈┈┈┈┈┈┃╰╯┈┈┈┈\n┈┈╰┓┏━━┓┏╯┈┈┈┈┈┈\n┈┈┈╰╯┈┈╰╯┈┈┈┈┈┈┈"
+    )
+
+
 @borg.on(WhiteEye_on_cmd(pattern=r"hmm"))
 async def hi(event):
     if event.fwd_from:
         return
-    await event.edit("┈┈╱▔▔▔▔▔╲┈┈┈HM┈HM\n┈╱┈┈╱▔╲╲╲▏┈┈┈HMMM\n╱┈┈╱━╱▔▔▔▔▔╲━╮┈┈\n▏┈▕┃▕╱▔╲╱▔╲▕╮┃┈┈\n▏┈▕╰━▏▊▕▕▋▕▕━╯┈┈\n╲┈┈╲╱▔╭╮▔▔┳╲╲┈┈┈\n┈╲┈┈▏╭━━━━╯▕▕┈┈┈\n┈┈╲┈╲▂▂▂▂▂▂╱╱┈┈┈\n┈┈┈┈▏┊┈┈┈┈┊┈┈┈╲┈\n┈┈┈▏┊┈┈┈┈┊▕╲┈┈╲\n┈╱▔╲▏┊┈┈┈┈┊▕╱▔╲▕\n┈▏┈┈┈╰┈┈┈┈╯┈┈┈▕▕\n┈╲┈┈┈╲┈┈┈┈╱┈┈┈╱┈╲\n┈┈╲┈┈▕▔▔▔▔▏┈┈╱╲╲╲▏\n┈╱▔┈┈▕┈┈┈┈▏┈┈▔╲▔▔\n┈╲▂▂▂╱┈┈┈┈╲▂▂▂╱┈")
-    
+    await event.edit(
+        "┈┈╱▔▔▔▔▔╲┈┈┈HM┈HM\n┈╱┈┈╱▔╲╲╲▏┈┈┈HMMM\n╱┈┈╱━╱▔▔▔▔▔╲━╮┈┈\n▏┈▕┃▕╱▔╲╱▔╲▕╮┃┈┈\n▏┈▕╰━▏▊▕▕▋▕▕━╯┈┈\n╲┈┈╲╱▔╭╮▔▔┳╲╲┈┈┈\n┈╲┈┈▏╭━━━━╯▕▕┈┈┈\n┈┈╲┈╲▂▂▂▂▂▂╱╱┈┈┈\n┈┈┈┈▏┊┈┈┈┈┊┈┈┈╲┈\n┈┈┈▏┊┈┈┈┈┊▕╲┈┈╲\n┈╱▔╲▏┊┈┈┈┈┊▕╱▔╲▕\n┈▏┈┈┈╰┈┈┈┈╯┈┈┈▕▕\n┈╲┈┈┈╲┈┈┈┈╱┈┈┈╱┈╲\n┈┈╲┈┈▕▔▔▔▔▏┈┈╱╲╲╲▏\n┈╱▔┈┈▕┈┈┈┈▏┈┈▔╲▔▔\n┈╲▂▂▂╱┈┈┈┈╲▂▂▂╱┈"
+    )
+
+
 @borg.on(WhiteEye_on_cmd(pattern=r"happybirthday"))
 async def hi(event):
     if event.fwd_from:
         return
-    await event.edit("¸.•°*”˜˜”*°•.¸☆ ★ ☆¸.•°*”˜˜”*°\n╔╗╔╦══╦═╦═╦╗╔╗ ★ ★ \n║╚╝║══║═║═║╚╝║ ☆¸.•° \n║╔╗║╔╗║╔╣╔╩╗╔╝ ★\n╚╝╚╩╝╚╩╝╚╝═╚╝★Birthday!★")
-    
+    await event.edit(
+        "¸.•°*”˜˜”*°•.¸☆ ★ ☆¸.•°*”˜˜”*°\n╔╗╔╦══╦═╦═╦╗╔╗ ★ ★ \n║╚╝║══║═║═║╚╝║ ☆¸.•° \n║╔╗║╔╗║╔╣╔╩╗╔╝ ★\n╚╝╚╩╝╚╩╝╚╝═╚╝★Birthday!★"
+    )
+
+
 @borg.on(WhiteEye_on_cmd(pattern=r"WTF"))
 async def hi(event):
     if event.fwd_from:
         return
-    await event.edit("┏┓┏┓┏┓┏━━━┓┏━━━┓\n┃┃┃┃┃┃┗┓╱┏┛┃╱┏━┛\n┃┗┛┗┛┃┈┃╱┃┈┃╱┗┓\n┃╱╱╱╱┃┈┃╱┃┈┃╱┏┛\n┗━━━━┛◯┗━┛◯┗━┛◯")
- 
+    await event.edit(
+        "┏┓┏┓┏┓┏━━━┓┏━━━┓\n┃┃┃┃┃┃┗┓╱┏┛┃╱┏━┛\n┃┗┛┗┛┃┈┃╱┃┈┃╱┗┓\n┃╱╱╱╱┃┈┃╱┃┈┃╱┏┛\n┗━━━━┛◯┗━┛◯┗━┛◯"
+    )
+
+
 @borg.on(WhiteEye_on_cmd(pattern=r"lmao"))
 async def hi(event):
     if event.fwd_from:
         return
-    await event.edit("┏┓┈╭━━╮╭━━╮╭━━╮\n┃┃┈┃┃┃┃┃╭╮┃┃╭╮┃\n┃┗┓┃┃┃┃┃┏┓┃┃╰╯┃\n┗━┛┗┻┻┛┗┛┗┛╰━━╯")
+    await event.edit(
+        "┏┓┈╭━━╮╭━━╮╭━━╮\n┃┃┈┃┃┃┃┃╭╮┃┃╭╮┃\n┃┗┓┃┃┃┃┃┏┓┃┃╰╯┃\n┗━┛┗┻┻┛┗┛┗┛╰━━╯"
+    )
 
 
 @borg.on(events.NewMessage(pattern=r"\.spam", outgoing=True))
-
 async def spammer(e):
 
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -76,8 +100,11 @@ async def spammer(e):
                 LOGGER_GROUP, "#SPAM \n\n" "Spam was executed successfully"
             )
 
+
 @borg.on(WhiteEye_on_cmd(pattern=r"no"))
 async def hi(event):
     if event.fwd_from:
         return
-    await event.edit("███╗░░██╗░█████╗░ \n████╗░██║██╔══██╗ \n██╔██╗██║██║░░██║ \n██║╚████║██║░░██║ \n██║░╚███║╚█████╔╝ \n╚═╝░░╚══╝░╚════╝░ ")
+    await event.edit(
+        "███╗░░██╗░█████╗░ \n████╗░██║██╔══██╗ \n██╔██╗██║██║░░██║ \n██║╚████║██║░░██║ \n██║░╚███║╚█████╔╝ \n╚═╝░░╚══╝░╚════╝░ "
+    )
