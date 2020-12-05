@@ -3,6 +3,7 @@ from asyncio import wait
 from telethon import events
 
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+from WhiteEyeUserBot import CMD_HELP
 
 
 @borg.on(WhiteEye_on_cmd(pattern=r"hola"))
@@ -108,3 +109,12 @@ async def hi(event):
     await event.edit(
         "███╗░░██╗░█████╗░ \n████╗░██║██╔══██╗ \n██╔██╗██║██║░░██║ \n██║╚████║██║░░██║ \n██║░╚███║╚█████╔╝ \n╚═╝░░╚══╝░╚════╝░ "
     )
+
+    
+CMD_HELP.update(
+    {
+        "artist": "**Artist**\
+\n\n**Syntax : **`.hola, .plus, .android, .lol, .yes, .hmm, .happybirthday, .WTF, .lmao, .no`\
+\n**Usage :** ASCII Plugin"
+    }
+)    
