@@ -5,6 +5,7 @@ from telethon.tl.types import ChatBannedRights
 
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+from WhiteEyeUserBot import antiflood_spl as sql
 
 CHAT_FLOOD = sql.__load_flood_settings()
 # warn mode for anti flood
