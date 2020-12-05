@@ -15,9 +15,9 @@
 from WhiteEyeUserBot import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Unknown"
-PM_IMG = "https://telegra.ph/file/63a02b3ef3245b321e54a.jpg"
+PM_IMG = "https://telegra.ph/file/63d2f8bcdae4da2ec5e7e.jpg"
 pm_caption = "👑 WhiteEye's Assistant IS: WORKING 👑\n\n"
-pm_caption += "✯ **SYSTEMS STATS**\n"
+pm_caption += "✯ **WhiteEye Stats**\n"
 pm_caption += "✯ **Telethon Version:** `1.15.0` \n"
 pm_caption += "✯ **Python:** `3.7.4` \n"
 pm_caption += "✯ **Database Status:**  `Functional`\n"
@@ -25,8 +25,8 @@ pm_caption += "✯ **Current Branch** : `master`\n"
 pm_caption += f"✯ **My Boss** : {DEFAULTUSER} \n"
 pm_caption += "✯ **Heroku Database** : `AWS - Working Properly`\n\n"
 pm_caption += "✯**[Join Our Channel]**(https://t.me/WhiteEyeOT)\n"
-pm_caption += "✯ **License** : [GNU General Public License v3.0](https://github.com/mrdayamzaidi/WhiteEyeUserBot/blob/main/LICENSE)\n"
-pm_caption += "✯ **Copyright** : By [WhiteEyeUserBotOwner](https://t.me/mrdayamzaidi)\n"
+pm_caption += "✯ **License** : [GNU General Public License v3.0](https://github.com/WhiteEye-Org/WhiteEyeUserBot/blob/main/LICENSE)\n"
+pm_caption += "✯ **Copyright** : By [WhiteEye](https://t.me/WhiteEyeOT)\n"
 pm_caption += "[Assistant By WhiteEye 🇮🇳]"
 
 # only Owner Can Use it
