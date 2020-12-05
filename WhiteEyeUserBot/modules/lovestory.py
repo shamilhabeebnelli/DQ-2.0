@@ -45,3 +45,11 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
         await event.edit(animation_chars[i % 103])
+
+CMD_HELP.update(
+    {
+        "lovestory": "LoveStory\
+\n\nSyntax : .lovestory \
+\nUsage : Yet Another Fun Plugin"
+    }
+)        
