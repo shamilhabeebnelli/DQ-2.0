@@ -124,7 +124,7 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     await event.edit(
-        "**Soft Update Sucessfull, Please Wait For Some Time To Get This Process Completed.**"
+        "**⚜️Updating WhiteEye⚜️\n\nYou are the 👑KING👑 Boss!!\n\nPlease wait 2min😁😁\nThen try .online to check` 😎😎\n\n**Powered by :-**\n©@WhiteEyeOT**"
     )
     # Spin a new instance of bot
     args = [sys.executable, "-m", "WhiteEyeUserBot"]
