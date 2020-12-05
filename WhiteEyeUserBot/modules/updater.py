@@ -124,7 +124,7 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     await event.edit(
-        "**⚜️Updating WhiteEye⚜️\n\nYou are the 👑KING👑 Boss!!\n\nPlease wait 2min😁😁\nThen try .online to check` 😎😎\n\n**Powered by :-**\n©@WhiteEyeOT**"
+        "**⚜️Updating WhiteEye⚜️\n\nYou are the 👑KING👑 Boss!!\n\nPlease wait 2min\nThen try .online to check` \n\n**Powered by :-**\n©[WhiteEyeOT](https://t.me/whiteeyeot)**"
     )
     # Spin a new instance of bot
     args = [sys.executable, "-m", "WhiteEyeUserBot"]
