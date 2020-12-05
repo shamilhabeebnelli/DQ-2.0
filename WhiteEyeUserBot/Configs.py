@@ -164,7 +164,7 @@ if ENV:
             "UPSTREAM_REPO", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
         )
         ALIVE_IMAGE = os.environ.get(
-            "ALIVE_IMAGE", "https://telegra.ph/file/63d2f8bcdae4da2ec5e7e.jpg"
+            "ALIVE_IMAGE", " https://telegra.ph/file/d49925e6f3112fbc82f33.mp4"
         )
         TESSDATA_PREFIX = os.environ.get(
             "TESSDATA_PREFIX", "./.apt/usr/share/tesseract-ocr/4.00/tessdata"
