@@ -1,7 +1,7 @@
 from telethon.events import ChatAction
-from WhiteEyeUserBot.Configs import Config
 
 from WhiteEyeUserBot import sclient
+from WhiteEyeUserBot.Configs import Config
 
 """Bans Spammers/Scammer At time Of Arrival 
 If You Add Him The Bot Won't Restrict."""
