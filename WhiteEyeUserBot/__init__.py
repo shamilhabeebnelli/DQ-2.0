@@ -16,6 +16,8 @@
 # you may not use this file except in compliance with the License.
 
 
+
+
 import asyncio
 import os
 import sys
@@ -200,5 +202,12 @@ km = "./resources/imgcolour/colorization_release_v2.caffemodel"
 if os.path.exists(km):
     pass
 else:
-    pathz = "./resources/imgcolour/"
-    sedlyf = wget.download(link, out=pathz)
+    try:
+        sedlyf = wget.download(link, out=pathz)
+    except:
+        sed.info("I Wasn't Able To Download Cafee Model. Skipping")
+if Config.ANTI_SPAMINC_TOKEN is not None:
+    try:
+        sclient = Connect(Config.ANTI_SPAMINC_TOKEN)
+    except Exception as e:
+        sed.info("Antispaminc Client Failed to Start " + e)
