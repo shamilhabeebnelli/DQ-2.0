@@ -51,6 +51,7 @@ if ENV:
         # Get a Free API Key from OCR.Space
         OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
         DEEP_API_KEY = os.environ.get("DEEP_API_KEY", None)
+        ANTI_SPAMINC_TOKEN = os.environ.get("ANTI_SPAMINC_TOKEN", None)
         # Send .get_id in any group with all your administration bots (added)
         G_BAN_LOGGER_GROUP = int(os.environ.get("G_BAN_LOGGER_GROUP", -1001198699233))
         # TG API limit. An album can have atmost 10 media!
@@ -131,11 +132,9 @@ if ENV:
         TEMP_DIR = os.environ.get("TEMP_DIR", None)
         CHANNEL_ID = int(os.environ.get("CHANNEL_ID", -100))
         # Google Chrome Stuff
-        CHROME_DRIVER = os.environ.get(
-            "CHROME_DRIVER", "/app/.chromedriver/bin/chromedriver"
-        )
+        CHROME_DRIVER = os.environ.get("CHROME_DRIVER", "/usr/bin/chromedriver")
         GOOGLE_CHROME_BIN = os.environ.get(
-            "GOOGLE_CHROME_BIN", "/app/.apt/usr/bin/google-chrome"
+            "GOOGLE_CHROME_BIN", "/usr/bin/google-chrome"
         )
         # Google Drive ()
         G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
@@ -159,6 +158,7 @@ if ENV:
         PM_DATA = os.environ.get("PM_DATA", "ENABLE")
         ENABLE_ASSISTANTBOT = os.environ.get("ENABLE_ASSISTANTBOT", "ENABLE")
         TAG_FEATURE = os.environ.get("TAG_FEATURE", "DISABLE")
+        ANTISPAM_FEATURE = os.environ.get("ANTISPAM_FEATURE", "ENABLE")
         ASSISTANT_LOG = int(os.environ.get("ASSISTANT_LOG", False))
         UPSTREAM_REPO = os.environ.get(
             "UPSTREAM_REPO", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
@@ -166,8 +166,12 @@ if ENV:
         ALIVE_IMAGE = os.environ.get(
             "ALIVE_IMAGE", "https://telegra.ph/file/63d2f8bcdae4da2ec5e7e.jpg"
         )
+        ASSISTANT_START_PIC = os.environ.get(
+            "ASSISTANT_START_PIC",
+            "https://www.logolynx.com/images/logolynx/72/7257d2ac93b97c8a2c7308266052df13.png",
+        )
         TESSDATA_PREFIX = os.environ.get(
-            "TESSDATA_PREFIX", "./.apt/usr/share/tesseract-ocr/4.00/tessdata"
+            "TESSDATA_PREFIX", "/usr/share/tesseract-ocr/4.00/tessdata"
         )
 
 
