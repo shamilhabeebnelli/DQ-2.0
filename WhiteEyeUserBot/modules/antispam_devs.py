@@ -1,4 +1,3 @@
-
 import secrets
 
 from WhiteEyeUserBot import sclient
