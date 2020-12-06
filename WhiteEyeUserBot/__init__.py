@@ -35,6 +35,7 @@ from telethon.sessions import StringSession
 from var import Var
 
 from .function import WhiteEyefunction as topfunc
+from .Configs import Config
 
 Lastupdate = time.time()
 
