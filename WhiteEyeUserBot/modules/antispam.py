@@ -1,5 +1,5 @@
 from telethon.events import ChatAction
-from WhiteEyeuserBot.Configs import Config
+from WhiteEyeUserBot.Configs import Config
 
 from WhiteEyeUserBot import sclient
 
