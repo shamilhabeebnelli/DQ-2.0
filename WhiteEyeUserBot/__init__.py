@@ -198,14 +198,7 @@ AFKREASON = None
 link = "https://people.eecs.berkeley.edu/~rich.zhang/projects/2016_colorization/files/demo_v2/colorization_release_v2.caffemodel"
 km = "./resources/imgcolour/colorization_release_v2.caffemodel"
 if os.path.exists(km):
-    pass
+    return
 else:
-    try:
-        sedlyf = wget.download(link, out=pathz)
-    except:
-        sed.info("I Wasn't Able To Download Cafee Model. Skipping")
-if Configs.ANTI_SPAMINC_TOKEN is not None:
-    try:
-        sclient = Connect(Config.ANTI_SPAMINC_TOKEN)
-    except Exception as e:
-        sed.info("Antispaminc Client Failed to Start " + e)
+    pathz = "./resources/imgcolour/"
+    sedlyf = wget.download(link, out=pathz)
