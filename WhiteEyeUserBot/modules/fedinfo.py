@@ -1,4 +1,4 @@
-#    WhiteEye - UserBot
+#    TeleBot - UserBot
 #    Copyright (C) 2020 WhiteEye
 
 #    This program is free software: you can redistribute it and/or modify
