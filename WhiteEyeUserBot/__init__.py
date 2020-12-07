@@ -14,7 +14,6 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # you may not use this file except in compliance with the License.
-
 import asyncio
 import logging
 import os
@@ -40,7 +39,7 @@ from .Configs import Config
 from .function import WhiteEyefunction as topfunc
 
 Lastupdate = time.time()
-
+sedprint = logging.getLogger("WARNING")
 from var import Var
 
 if Var.STRING_SESSION:
@@ -109,12 +108,8 @@ if bool(ENV):
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
 
     # Chrome For Carbon
-    CHROME_DRIVER = os.environ.get(
-        "CHROME_DRIVER", "/app/.chromedriver/bin/chromedriver"
-    )
-    GOOGLE_CHROME_BIN = os.environ.get(
-        "GOOGLE_CHROME_BIN", "/app/.apt/usr/bin/google-chrome"
-    )
+    CHROME_DRIVER = os.environ.get("CHROME_DRIVER", "/usr/bin/chromedriver")
+    GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN", "/usr/bin/google-chrome")
 
     # Heroku Credentials for updater.
     HEROKU_MEMEZ = sb(os.environ.get("HEROKU_MEMEZ", "False"))
@@ -194,26 +189,28 @@ COUNT_PM = {}
 LASTMSG = {}
 SUDO_LIST = {}
 CMD_HELP = {}
-
+CUSTOM_PMPERMIT_MSG = {}
+CUSTOM_BOTSTART = {}
 ISAFK = False
 AFKREASON = None
 # End of PaperPlaneExtended Support Vars
 link = "https://people.eecs.berkeley.edu/~rich.zhang/projects/2016_colorization/files/demo_v2/colorization_release_v2.caffemodel"
 km = "./resources/imgcolour/colorization_release_v2.caffemodel"
+pathz = "./resources/imgcolour/"
 if os.path.exists(km):
     pass
 else:
     try:
         sedlyf = wget.download(link, out=pathz)
     except:
-        sed.info("I Wasn't Able To Download Cafee Model. Skipping")
+        sedprint.info("I Wasn't Able To Download Cafee Model. Skipping")
 
 if Config.ANTI_SPAMINC_TOKEN == None:
     sclient = None
-    sed.info("[Warning] - AntispamInc is None")
+    sedprint.info("[Warning] - AntispamInc is None")
 else:
     try:
         sclient = Connect(Config.ANTI_SPAMINC_TOKEN)
     except TokenNotFound:
         sclient = None
-        sed.info("[Warning] - Invalid AntispamInc Key")
+        sedprint.info("[Warning] - Invalid AntispamInc Key")
