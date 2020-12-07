@@ -49,7 +49,8 @@ async def _(event):
         str(e)
     hmmyes = sclient.is_banned(user_id)
     if hmmyes.banned == True:
-        oki = f"Wait, This Guy is Banned In AntispamInc. For Reason : {hmmyes.reason}"
+        oki = f"""ANTISPAM INC BANNED: True 
+Reason : {hmmyes.reason}"""
     else:
         oki = " "
     caption = f"""<b>Extracted Userdata From Telegram DATABASE By WhiteEye<b>
