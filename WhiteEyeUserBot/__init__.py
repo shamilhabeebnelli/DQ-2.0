@@ -15,7 +15,6 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # you may not use this file except in compliance with the License.
 
-
 import asyncio
 import logging
 import os
@@ -24,10 +23,9 @@ import time
 from distutils.util import strtobool as sb
 from logging import DEBUG, INFO, basicConfig, getLogger
 
-import antispaminc
 import pylast
 import wget
-from antispaminc.connect import Connect
+from antispaminc.connect import Connect, TokenNotFound
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
