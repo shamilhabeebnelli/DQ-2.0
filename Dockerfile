@@ -19,6 +19,7 @@ RUN apt-get install -y\
     libjpeg-dev \
     libffi-dev \
     libpq-dev \
+    libsqlite3-dev \
     libwebp-dev \
     libgl1 \
     musl \
@@ -35,7 +36,7 @@ RUN apt-get install -y\
     python3-pip \
     libreadline-dev \
     zipalign \
-    sqlite \
+    sqlite3 \
     ffmpeg \
     libsqlite3-dev \
     axel \
@@ -57,7 +58,7 @@ RUN rm -r /root/.cache
 RUN axel https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt install -y ./google-chrome-stable_current_amd64.deb && rm google-chrome-stable_current_amd64.deb
 RUN axel https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && chmod +x chromedriver && mv -f chromedriver /usr/bin/ && rm chromedriver_linux64.zip
 RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/master.zip && unzip opencv.zip && mv -f opencv-master /usr/bin/ && rm opencv.zip
-RUN git clone https://github.com/MrDayamZaidi/WhiteEyeUserBot /root/WhiteEyeUserBot
+RUN git clone https://github.com/WhiteEye-Org/WhiteEyeUserBot /root/WhiteEyeUserBot
 RUN mkdir /root/WhiteEyeUserBot/bin/
 WORKDIR /root/WhiteEyeUserBot/
 RUN chmod +x /usr/local/bin/*
