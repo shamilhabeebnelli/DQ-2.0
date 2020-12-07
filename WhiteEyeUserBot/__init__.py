@@ -16,7 +16,9 @@
 # you may not use this file except in compliance with the License.
 
 
+
 import asyncio
+import logging
 import os
 import sys
 import time
@@ -25,17 +27,19 @@ from logging import DEBUG, INFO, basicConfig, getLogger
 
 import pylast
 import wget
+from antispaminc.connect import Connect
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
 from requests import get
+from telegraph import Telegraph, exceptions, upload_file
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 
 from var import Var
 
 from .Configs import Config
-from .function import WhiteEyefunction as topfunc
+from .function import fridayfunction as topfunc
 
 Lastupdate = time.time()
 
