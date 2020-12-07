@@ -52,20 +52,21 @@ async def _(event):
         oki = f"""ANTISPAM INC BANNED: True 
 Reason : {hmmyes.reason}"""
     else:
-        oki = " "
-    caption = f"""<b>Extracted Userdata From Telegram DATABASE By WhiteEye<b>
-<b>🔥Telegram ID</b>: <code>{user_id}</code>
-<b>🤟Permanent Link</b>: <a href='tg://user?id={user_id}'>Click Here</a>
-<b>🗣️First Name</b>: <code>{first_name}</code>
-<b>🗣️Second Name</b>: <code>{last_name}</code>
-<b>👨🏿‍💻BIO</b>: {user_bio}
-<b>🎃DC ID</b>: {dc_id}
-<b>⚡NO OF PSS</b> : {replied_user_profile_photos_count}
-<b>🤔IS RESTRICTED</b>: {replied_user.user.restricted}
-<b>✅VERIFIED</b>: {replied_user.user.verified}
-<b>🙄IS A BOT</b>: {replied_user.user.bot}
-<b>👥Groups in Common</b>: {common_chats}
-<b>{oki}</b>
+        pass
+    shazam = replied_user_profile_photos_count
+    caption = f"""<b>INFO<b>
+|__<b>Telegram ID</b>: <code>{user_id}</code>
+|___<b>Permanent Link</b>: <a href='tg://user?id={user_id}'>Click Here</a>
+|____<b>First Name</b>: <code>{first_name}</code>
+|_____<b>Second Name</b>: <code>{last_name}</code>
+|______<b>BIO</b>: <code>{user_bio}</code>
+|_______<b>DC ID</b>: <code>{dc_id}</code>
+|_________<b>NO OF PSS</b>: <code>{shazam}</code>
+|__________<b>IS RESTRICTED</b>: <code>{replied_user.user.restricted}</code>
+|____________<b>VERIFIED</b>: <code>{replied_user.user.verified}</code>
+|_____________<b>IS A BOT</b>: <code>{replied_user.user.bot}</code>
+|_______________<b>Groups in Common</b>: <code>{common_chats}</code>
+|_________________{oki}
 """
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
