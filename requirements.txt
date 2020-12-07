@@ -1,12 +1,13 @@
 Pillow
 quote
+antispaminc
 python-magic
 glitch_this
 PyGithub
 pytesseract
 youtube-dl
 opencv-contrib-python
-telethon
+telethon>=1.17
 iplookup
 wget
 numpy
@@ -44,7 +45,7 @@ python-dotenv
 pytz
 qrcode
 regex
-requests>=2.18.4
+requests
 search-engine-parser>=0.4.2
 selenium
 speedtest-cli>=2.0.2
