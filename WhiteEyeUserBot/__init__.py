@@ -23,8 +23,8 @@ import time
 from distutils.util import strtobool as sb
 from logging import DEBUG, INFO, basicConfig, getLogger
 
-import sed
 import pylast
+import sed
 import wget
 from antispaminc.connect import Connect, TokenNotFound
 from dotenv import load_dotenv
