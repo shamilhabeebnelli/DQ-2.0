@@ -158,7 +158,7 @@ if ENV:
         PM_DATA = os.environ.get("PM_DATA", "ENABLE")
         ENABLE_ASSISTANTBOT = os.environ.get("ENABLE_ASSISTANTBOT", "ENABLE")
         TAG_FEATURE = os.environ.get("TAG_FEATURE", "DISABLE")
-        ANTISPAM_FEATURE = os.environ.get("ANTISPAM_FEATURE", "ENABLE")
+        ANTISPAM_FEATURE = os.environ.get("ANTISPAM_FEATURE", "DISABLE")
         ASSISTANT_LOG = int(os.environ.get("ASSISTANT_LOG", False))
         UPSTREAM_REPO = os.environ.get(
             "UPSTREAM_REPO", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
@@ -168,7 +168,7 @@ if ENV:
         )
         ASSISTANT_START_PIC = os.environ.get(
             "ASSISTANT_START_PIC",
-            "https://www.logolynx.com/images/logolynx/72/7257d2ac93b97c8a2c7308266052df13.png",
+            "https://telegra.ph/file/63d2f8bcdae4da2ec5e7e.jpg",
         )
         TESSDATA_PREFIX = os.environ.get(
             "TESSDATA_PREFIX", "/usr/share/tesseract-ocr/4.00/tessdata"
