@@ -211,6 +211,6 @@ if Config.ANTI_SPAMINC_TOKEN == None:
 else:
     try:
         sclient = Connect(Config.ANTI_SPAMINC_TOKEN)
-    except TokenNotFound:
+    except Exception as e:
         sclient = None
         sedprint.info("[Warning] - " + e)
