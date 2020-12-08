@@ -1,5 +1,7 @@
 import secrets
 
+from antispaminc.connect import RequestError
+
 from WhiteEyeUserBot import sclient
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
@@ -9,13 +11,13 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 @WhiteEye.on(WhiteEye_on_cmd(pattern="benheck(?: |$)(.*)"))
 async def oki(event):
     await event.edit("`Processing...`")
-    args = event.pattern_match.group(1).split(" ", 1)
     extra = None
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         user = await event.client.get_entity(previous_message.sender_id)
         extra = event.pattern_match.group(1)
     elif args:
+        args = event.pattern_match.group(1).split(" ", 1)
         userz = args[0]
         if userz.isnumeric():
             user = int(userz)
@@ -33,14 +35,14 @@ async def oki(event):
         if not user:
             await event.edit("Reply To User Or Mention a User.")
             return
-    gensys = sclient.ban(user, extra)
-    await borg.send_message("antispamincfed", f"/fban {user} {extra}")
-    if gensys["error"] == True:
-        await event.edit("Error : " + gensys["full"])
-    else:
+    try:
+        gensys = sclient.ban(user, extra)
+        await borg.send_message("antispamincfed", f"/fban {user} {extra}")
         await event.edit(
             f"**User :** `{user}` \n**Reason :** `{extra}` \n**Banned Sucessfully !**"
         )
+    except RequestError as e:
+        await event.edit('Errors : ' + e)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="heck(?: |$)(.*)"))
@@ -87,13 +89,15 @@ async def oki(event):
     noteme = stark[0]
     errorz = ""
     lolsed = stark[1]
-    async for user in client.iter_participants(noteme):
+    async for user in borg.iter_participants(noteme):
         lmaoded.append(user.id)
     for i in lmaoded:
-        gensys2 = sclient.ban(i, lolsed)
-        await borg.send_message("antispamincfed", f"/fban {i} {lolsed}")
-        if gensys2["error"] == True:
-            errorz += gensys2["full"]
-        else:
-            await event.edit(f"**User :** `{i}` \n**Banned Sucessfully !**")
-        await event.edit("Mass Ban Completed.")
+        try:
+            sclient.ban(i, lolsed)
+            await borg.send_message("antispamincfed", f"/fban {i} {lolsed}")
+        except RequestError:
+            errorz += 1
+        await event.edit(
+            f"**User :** `{i}` \n**Banned Sucessfully !** \n**Failed :** `{len(errorz)}`"
+        )
+    await event.edit("**DONE !**")
