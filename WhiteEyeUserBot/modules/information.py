@@ -53,7 +53,7 @@ async def _(event):
 Reason : {hmmyes.reason}"""
     else:
         pass
-   shazam = replied_user_profile_photos_count
+    shazam = replied_user_profile_photos_count
     caption = f"""<b>INFO<b>
 <b>Telegram ID</b>: <code>{user_id}</code>
 <b>Permanent Link</b>: <a href='tg://user?id={user_id}'>Click Here</a>
