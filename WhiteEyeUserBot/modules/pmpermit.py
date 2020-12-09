@@ -31,7 +31,7 @@ USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avo
 botisnoob = Var.TG_BOT_USER_NAME_BF_HER
 USER_BOT_NO_WARN = (
     "**Hello, This is WhiteEye PM Protection Service ⚠️**\n\n"
-    "**Caught You Here, Wanna Chat wWth My Msster** 😏 \n\n"
+    "**Caught You Here, Wanna Chat With My Master** 😏 \n\n"
     "Then Wait And Choose A Reason Given Below For What Have You Come For.If You Tried To Spam Then I'll Make It Sure That You're Being Blocked. \n\n"
 )
 
