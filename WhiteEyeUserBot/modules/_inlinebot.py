@@ -47,23 +47,22 @@ async def inline_handler(event):
                 ],
                 [Button.url("Join Channel ❤️", "t.me/WhiteEyeot")],
             ],
-        )
-        await event.answer([result])
-    elif event.query.user_id == bot.uid and query.startswith("**Hello"):
-        result = builder.photo(
-            file=WARN_PIC,
-            text=query,
-            buttons=[
-                [custom.Button.inline("Spamming", data="dontspamnigga")],
-                [
-                    custom.Button.inline(
-                        "Casual Talk",
-                        data="whattalk",
-                    )
-                ],
-                [custom.Button.inline("Requesting", data="askme")],
-            ],
-        )
+         )
+        if event.query.user_id == bot.uid and query.startswith("**Hello"):
+            result = builder.photo(
+                file=WARN_PIC,
+                text=query,
+                buttons=[
+                    [
+                        custom.Button.inline("❌ Spamming",data="wannaspam"),
+                        custom.Button.inline("📝 Chatting",data="casualbitching")
+                    ],
+                    [
+                        custom.Button.inline("❓ Doubt",data="askme"),
+                        custom.Button.inline("🛑 Others",data="others")
+                    ]
+                ]
+            )
         await event.answer([result])
 
 
