@@ -134,12 +134,12 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 f"Pasted {plugin_name} to {url}",
                 link_preview=False,
                 buttons=[[custom.Button.inline("Go Back", data="backme")]],
-        )
-    else:
-        await event.edit(
-            message=reply_pop_up_alert,
-            buttons=[[custom.Button.inline("Go Back", data="backme")]],
-        )
+            )
+        else:
+            await event.edit(
+                message=reply_pop_up_alert,
+                buttons=[[custom.Button.inline("Go Back", data="backme")]],
+            )
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"terminator")))
     async def rip(event):
