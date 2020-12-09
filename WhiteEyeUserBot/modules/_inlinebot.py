@@ -115,25 +115,25 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     )
     async def on_plug_in_callback_query_handler(event):
         if not event.query.user_id == bot.uid:
-        sedok = "Who The Fuck Are You? Get Your Own WhiteEye."
-        await event.answer(sedok, cache_time=0, alert=True)
-        return
-    plugin_name = event.data_match.group(1).decode("UTF-8")
-    if plugin_name in CMD_HELP:
-        help_string = f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
-    reply_pop_up_alert = help_string
-    reply_pop_up_alert += "\n\n**(C) @WhiteEyeOT** ".format(plugin_name)
-    if len(reply_pop_up_alert) >= 4096:
-        crackexy = "`Pasting Your Help Menu.`"
-        await event.answer(crackexy, cache_time=0, alert=True)
-        out_file = reply_pop_up_alert
-        url = "https://del.dog/documents"
-        r = requests.post(url, data=out_file.encode("UTF-8")).json()
-        url = f"https://del.dog/{r['key']}"
-        await event.edit(
-            f"Pasted {plugin_name} to {url}",
-            link_preview=False,
-            buttons=[[custom.Button.inline("Go Back", data="backme")]],
+            sedok = "Who The Fuck Are You? Get Your Own WhiteEye."
+            await event.answer(sedok, cache_time=0, alert=True)
+            return
+        plugin_name = event.data_match.group(1).decode("UTF-8")
+        if plugin_name in CMD_HELP:
+            help_string = f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
+        reply_pop_up_alert = help_string
+        reply_pop_up_alert += "\n\n**(C) @WhiteEyeOT** ".format(plugin_name)
+        if len(reply_pop_up_alert) >= 4096:
+            crackexy = "`Pasting Your Help Menu.`"
+            await event.answer(crackexy, cache_time=0, alert=True)
+            out_file = reply_pop_up_alert
+            url = "https://del.dog/documents"
+            r = requests.post(url, data=out_file.encode("UTF-8")).json()
+            url = f"https://del.dog/{r['key']}"
+            await event.edit(
+                f"Pasted {plugin_name} to {url}",
+                link_preview=False,
+                buttons=[[custom.Button.inline("Go Back", data="backme")]],
         )
     else:
         await event.edit(
