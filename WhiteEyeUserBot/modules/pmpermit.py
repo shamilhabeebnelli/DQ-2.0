@@ -2,13 +2,11 @@ import asyncio
 import io
 import os
 
-from telethon import events
-from telethon import functions
+from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
 import WhiteEyeUserBot.modules.sql_helper.pmpermit_sql as pmpermit_sql
-from WhiteEyeUserBot import ALIVE_NAME
-from WhiteEyeUserBot import CUSTOM_PMPERMIT
+from WhiteEyeUserBot import ALIVE_NAME, CUSTOM_PMPERMIT
 from WhiteEyeUserBot.Configs import Config
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
@@ -22,10 +20,12 @@ PREV_REPLY_MESSAGE = {}
 
 PM_ON_OFF = Config.PM_DATA
 
-DEFAULTUSER = (str(ALIVE_NAME)
-               if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku")
-CUSTOM_MIDDLE_PMP = (str(CUSTOM_PMPERMIT)
-                     if CUSTOM_PMPERMIT else "Protection By Black Pearl")
+DEFAULTUSER = (
+    str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
+)
+CUSTOM_MIDDLE_PMP = (
+    str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "Protection By Black Pearl"
+)
 USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avoid Over Spam , You Have Been Blocked By Userbot"
 
 botisnoob = Var.TG_BOT_USER_NAME_BF_HER
@@ -35,7 +35,8 @@ USER_BOT_NO_WARN = (
     "**Then wait or if u tried to spam then I'll make it sure that you're being blocked and no one gonna damn give u a fuck** \n\n"
     f"`My Master {DEFAULTUSER} is Busy Right Now !` \n"
     "**I Request You To Choose A Reason You Have Came For** 👀 \n\n"
-    f"**{CUSTOM_MIDDLE_PMP}**")
+    f"**{CUSTOM_MIDDLE_PMP}**"
+)
 
 if Var.PRIVATE_GROUP_ID is not None:
 
@@ -54,8 +55,9 @@ if Var.PRIVATE_GROUP_ID is not None:
                     await PREV_REPLY_MESSAGE[chat.id].delete()
                     del PREV_REPLY_MESSAGE[chat.id]
                 pmpermit_sql.approve(chat.id, "Approved Another Nibba")
-                await event.edit("Approved to pm [{}](tg://user?id={})".format(
-                    firstname, chat.id))
+                await event.edit(
+                    "Approved to pm [{}](tg://user?id={})".format(firstname, chat.id)
+                )
                 await asyncio.sleep(3)
                 await event.delete()
 
@@ -69,8 +71,9 @@ if Var.PRIVATE_GROUP_ID is not None:
         if event.is_private:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
-                await event.edit("Blocked [{}](tg://user?id={})".format(
-                    firstname, chat.id))
+                await event.edit(
+                    "Blocked [{}](tg://user?id={})".format(firstname, chat.id)
+                )
                 await asyncio.sleep(3)
                 await event.client(functions.contacts.BlockRequest(chat.id))
 
@@ -85,8 +88,8 @@ if Var.PRIVATE_GROUP_ID is not None:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
                 await event.edit(
-                    "Disapproved User [{}](tg://user?id={})".format(
-                        firstname, chat.id))
+                    "Disapproved User [{}](tg://user?id={})".format(firstname, chat.id)
+                )
                 await event.delete()
 
     @command(pattern="^.listapproved$")
@@ -193,7 +196,6 @@ if Var.PRIVATE_GROUP_ID is not None:
             except BaseException:
                 return
         botusername = Var.TG_BOT_USER_NAME_BF_HER
-        noob = "dontpm"
         tap = await bot.inline_query(botusername, USER_BOT_NO_WARN)
         sed = await tap[0].click(event.chat_id)
         PM_WARNS[chat_id] += 1
@@ -202,9 +204,7 @@ if Var.PRIVATE_GROUP_ID is not None:
         PREV_REPLY_MESSAGE[chat_id] = sed
 
 
-@bot.on(
-    events.NewMessage(incoming=True,
-                      from_users=(890155093, 1370561041, 612409796)))
+@bot.on(events.NewMessage(incoming=True, from_users=(890155093, 1370561041, 612409796)))
 async def hehehe(event):
     if event.fwd_from:
         return
