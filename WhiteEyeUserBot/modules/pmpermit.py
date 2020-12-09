@@ -2,13 +2,14 @@ import asyncio
 import io
 import os
 
-from telethon import events, functions
+from telethon import events
+from telethon import functions
 from telethon.tl.functions.users import GetFullUserRequest
 
 import WhiteEyeUserBot.modules.sql_helper.pmpermit_sql as pmpermit_sql
-from WhiteEyeUserBot import ALIVE_NAME, CUSTOM_PMPERMIT
+from WhiteEyeUserBot import ALIVE_NAME
+from WhiteEyeUserBot import CUSTOM_PMPERMIT
 from WhiteEyeUserBot.Configs import Config
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
@@ -21,42 +22,40 @@ PREV_REPLY_MESSAGE = {}
 
 PM_ON_OFF = Config.PM_DATA
 
-DEFAULTUSER = (
-    str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
-)
-CUSTOM_MIDDLE_PMP = (
-    str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "Protection By WhiteEye 🇮🇳"
-)
-USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avoid Over Spam , You Have Been Blocked By WhiteEyeUserbot"
+DEFAULTUSER = (str(ALIVE_NAME)
+               if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku")
+CUSTOM_MIDDLE_PMP = (str(CUSTOM_PMPERMIT)
+                     if CUSTOM_PMPERMIT else "Protection By Black Pearl")
+USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avoid Over Spam , You Have Been Blocked By Userbot"
 
 botisnoob = Var.TG_BOT_USER_NAME_BF_HER
-
 USER_BOT_NO_WARN = (
-    "**Hello, This is WhiteEye Personal Massage Protection Service ⚠️**\n\n"
+    "**Hello, This is WhiteEye PM Protection Service ⚠️**\n\n"
+    "**Hahah!! Caught u there,  wanna chat with my master** 😏 \n\n"
+    "**Then wait or if u tried to spam then I'll make it sure that you're being blocked and no one gonna damn give u a fuck** \n\n"
     f"`My Master {DEFAULTUSER} is Busy Right Now !` \n"
-    "**Choose A Reason For What You Have Came Here For** 👀 \n\n"
-    f"**{CUSTOM_MIDDLE_PMP}**"
-)
+    "**I Request You To Choose A Reason You Have Came For** 👀 \n\n"
+    f"**{CUSTOM_MIDDLE_PMP}**")
+
 if Var.PRIVATE_GROUP_ID is not None:
 
-    @borg.on(WhiteEye_on_cmd(pattern="(a|approve)"))
+    @command(pattern="^.a$")
     async def block(event):
         if event.fwd_from:
             return
         replied_user = await borg(GetFullUserRequest(event.chat_id))
         firstname = replied_user.user.first_name
-        chats = await event.get_chat()
+        chat = await event.get_chat()
         if event.is_private:
-            if not pmpermit_sql.is_approved(chats.id):
-                if chats.id in PM_WARNS:
-                    del PM_WARNS[chats.id]
-                if chats.id in PREV_REPLY_MESSAGE:
-                    await PREV_REPLY_MESSAGE[chats.id].delete()
-                    del PREV_REPLY_MESSAGE[chats.id]
-                pmpermit_sql.approve(chats.id, "Approved Another Nibba")
-                await event.edit(
-                    "Approved to pm [{}](tg://user?id={})".format(firstname, chats.id)
-                )
+            if not pmpermit_sql.is_approved(chat.id):
+                if chat.id in PM_WARNS:
+                    del PM_WARNS[chat.id]
+                if chat.id in PREV_REPLY_MESSAGE:
+                    await PREV_REPLY_MESSAGE[chat.id].delete()
+                    del PREV_REPLY_MESSAGE[chat.id]
+                pmpermit_sql.approve(chat.id, "Approved Another Nibba")
+                await event.edit("Approved to pm [{}](tg://user?id={})".format(
+                    firstname, chat.id))
                 await asyncio.sleep(3)
                 await event.delete()
 
@@ -70,13 +69,12 @@ if Var.PRIVATE_GROUP_ID is not None:
         if event.is_private:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
-                await event.edit(
-                    "Blocked [{}](tg://user?id={})".format(firstname, chat.id)
-                )
+                await event.edit("Blocked [{}](tg://user?id={})".format(
+                    firstname, chat.id))
                 await asyncio.sleep(3)
                 await event.client(functions.contacts.BlockRequest(chat.id))
 
-    @borg.on(WhiteEye_on_cmd(pattern="(da|disapprove)"))
+    @command(pattern="^.da$")
     async def approve_p_m(event):
         if event.fwd_from:
             return
@@ -87,11 +85,11 @@ if Var.PRIVATE_GROUP_ID is not None:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
                 await event.edit(
-                    "Disapproved User [{}](tg://user?id={})".format(firstname, chat.id)
-                )
+                    "Disapproved User [{}](tg://user?id={})".format(
+                        firstname, chat.id))
                 await event.delete()
 
-    @borg.on(WhiteEye_on_cmd(pattern="listapproved$"))
+    @command(pattern="^.listapproved$")
     async def approve_p_m(event):
         if event.fwd_from:
             return
@@ -134,16 +132,14 @@ if Var.PRIVATE_GROUP_ID is not None:
             return
 
         message_text = event.message.message
-        chat_ids = event.sender_id
+        chat_id = event.sender_id
 
         message_text.lower()
         if USER_BOT_NO_WARN == message_text:
-            # WhiteEyeUserBot's should not reply to other WhiteEyeUserBot's
-            # https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
             return
-        sender = await bot.get_entity(chat_ids)
+        sender = await bot.get_entity(chat_id)
 
-        if chat_ids == bot.uid:
+        if chat_id == bot.uid:
 
             # don't log Saved Messages
 
@@ -164,24 +160,24 @@ if Var.PRIVATE_GROUP_ID is not None:
         if PM_ON_OFF == "DISABLE":
             return
 
-        if not pmpermit_sql.is_approved(chat_ids):
+        if not pmpermit_sql.is_approved(chat_id):
             # pm permit
-            await do_pm_permit_action(chat_ids, event)
+            await do_pm_permit_action(chat_id, event)
 
-    async def do_pm_permit_action(chat_ids, event):
-        if chat_ids not in PM_WARNS:
-            PM_WARNS.update({chat_ids: 0})
-        if PM_WARNS[chat_ids] == 3:
+    async def do_pm_permit_action(chat_id, event):
+        if chat_id not in PM_WARNS:
+            PM_WARNS.update({chat_id: 0})
+        if PM_WARNS[chat_id] == 3:
             r = await event.reply(USER_BOT_WARN_ZERO)
             await asyncio.sleep(3)
-            await event.client(functions.contacts.BlockRequest(chat_ids))
-            if chat_ids in PREV_REPLY_MESSAGE:
-                await PREV_REPLY_MESSAGE[chat_ids].delete()
-            PREV_REPLY_MESSAGE[chat_ids] = r
+            await event.client(functions.contacts.BlockRequest(chat_id))
+            if chat_id in PREV_REPLY_MESSAGE:
+                await PREV_REPLY_MESSAGE[chat_id].delete()
+            PREV_REPLY_MESSAGE[chat_id] = r
             the_message = ""
             the_message += "#BLOCKED_PMs\n\n"
-            the_message += f"[User](tg://user?id={chat_ids}): {chat_ids}\n"
-            the_message += f"Message Counts: {PM_WARNS[chat_ids]}\n"
+            the_message += f"[User](tg://user?id={chat_id}): {chat_id}\n"
+            the_message += f"Message Counts: {PM_WARNS[chat_id]}\n"
             # the_message += f"Media: {message_media}"
             try:
                 await event.client.send_message(
@@ -197,24 +193,23 @@ if Var.PRIVATE_GROUP_ID is not None:
             except BaseException:
                 return
         botusername = Var.TG_BOT_USER_NAME_BF_HER
+        noob = "dontpm"
         tap = await bot.inline_query(botusername, USER_BOT_NO_WARN)
         sed = await tap[0].click(event.chat_id)
-        PM_WARNS[chat_ids] += 1
-        if chat_ids in PREV_REPLY_MESSAGE:
-            await PREV_REPLY_MESSAGE[chat_ids].delete()
-        PREV_REPLY_MESSAGE[chat_ids] = sed
+        PM_WARNS[chat_id] += 1
+        if chat_id in PREV_REPLY_MESSAGE:
+            await PREV_REPLY_MESSAGE[chat_id].delete()
+        PREV_REPLY_MESSAGE[chat_id] = sed
 
 
 @bot.on(
-    events.NewMessage(incoming=True, from_users=((890155093, 1370561041, 612409796)))
-)
+    events.NewMessage(incoming=True,
+                      from_users=(890155093, 1370561041, 612409796)))
 async def hehehe(event):
     if event.fwd_from:
         return
-    chats = await event.get_chat()
+    chat = await event.get_chat()
     if event.is_private:
-        if not pmpermit_sql.is_approved(chats.id):
-            pmpermit_sql.approve(chats.id, "**My Boss Is Best🔥**")
-            await borg.send_message(
-                chats, "**User Detected As Developer Or My Owner. So AutoApprove**"
-            )
+        if not pmpermit_sql.is_approved(chat.id):
+            pmpermit_sql.approve(chat.id, "**My Boss Is Best🔥**")
+            await borg.send_message(chat, "**User Detected As Developer. So Approved**")
