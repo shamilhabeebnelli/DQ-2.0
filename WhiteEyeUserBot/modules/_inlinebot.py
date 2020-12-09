@@ -135,7 +135,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             else:
                 reply_pop_up_alert = help_string
             reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
-                © Black Pearl".format(
+                © WhiteEye".format(
                 plugin_name
             )
             if len(help_string) >= 140:
