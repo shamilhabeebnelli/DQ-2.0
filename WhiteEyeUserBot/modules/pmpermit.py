@@ -32,7 +32,7 @@ botisnoob = Var.TG_BOT_USER_NAME_BF_HER
 USER_BOT_NO_WARN = (
     "**Hello, This is WhiteEye PM Protection Service ⚠️**\n\n"
     "**Caught You Here, Wanna Chat wWth My Msster** 😏 \n\n"
-    "**Then Wait And Choose A Reason Given Below For What Have You Come For.If You Tried To Spam Then I'll Make It Sure That You're Being Blocked And No One Gonna Damn Give You A Fuck** \n\n"
+    "Then Wait And Choose A Reason Given Below For What Have You Come For.If You Tried To Spam Then I'll Make It Sure That You're Being Blocked \n\n"
     f"**{CUSTOM_MIDDLE_PMP}**"
 )
 
