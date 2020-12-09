@@ -143,13 +143,13 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"terminator")))
-async def rip(event):
-    if event.query.user_id == bot.uid:
-        text = inlinestats
-        await event.answer(text, alert=True)
-    else:
-        txt = "You Can't View My Masters Stats"
-        await event.answer(txt, alert=True)
+    async def rip(event):
+        if event.query.user_id == bot.uid:
+            text = inlinestats
+            await event.answer(text, alert=True)
+        else:
+            txt = "You Can't View My Masters Stats"
+            await event.answer(txt, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"wannaspam")))
     async def rip(event):
