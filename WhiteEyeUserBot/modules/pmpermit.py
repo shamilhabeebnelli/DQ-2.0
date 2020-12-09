@@ -24,17 +24,15 @@ DEFAULTUSER = (
     str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
 )
 CUSTOM_MIDDLE_PMP = (
-    str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "Protection By Black Pearl"
+    str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "Protection By WhiteEye"
 )
-USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avoid Over Spam , You Have Been Blocked By Userbot"
+USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avoid Over Spam , You Have Been Blocked By WhiteEye"
 
 botisnoob = Var.TG_BOT_USER_NAME_BF_HER
 USER_BOT_NO_WARN = (
     "**Hello, This is WhiteEye PM Protection Service ⚠️**\n\n"
-    "**Hahah!! Caught u there,  wanna chat with my master** 😏 \n\n"
-    "**Then wait or if u tried to spam then I'll make it sure that you're being blocked and no one gonna damn give u a fuck** \n\n"
-    f"`My Master {DEFAULTUSER} is Busy Right Now !` \n"
-    "**I Request You To Choose A Reason You Have Came For** 👀 \n\n"
+    "**Caught You Here, Wanna Chat wWth My Msster** 😏 \n\n"
+    "**Then Wait And Choose A Reason Given Below For What Have You Come For.If You Tried To Spam Then I'll Make It Sure That You're Being Blocked And No One Gonna Damn Give You A Fuck** \n\n"
     f"**{CUSTOM_MIDDLE_PMP}**"
 )
 
