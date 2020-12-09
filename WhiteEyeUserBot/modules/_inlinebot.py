@@ -74,7 +74,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_popp_up_alert = "Please get your own Userbot, and don't use mine!"
+            reply_popp_up_alert = "Please get your own WhiteEyeUserbot, and don't use mine!"
             await event.answer(reply_popp_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
@@ -84,7 +84,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 "Menu Closed!!",
             )
         else:
-            reply_pop_up_alert = "Please get your own userbot from @BlackPearlsupport "
+            reply_pop_up_alert = "Please get your own WhiteEyeuserbot from @WhiteEyeOT "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
@@ -134,7 +134,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             else:
                 reply_pop_up_alert = help_string
             reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
-                © Black Pearl".format(
+                © WhiteEye".format(
                 plugin_name
             )
             if len(help_string) >= 140:
