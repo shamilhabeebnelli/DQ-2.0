@@ -8,7 +8,7 @@ from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
 from WhiteEyeUserBot import CMD_HELP, sclient
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
+from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("info ?(.*)"))
@@ -49,10 +49,10 @@ async def _(event):
         str(e)
     hmmyes = sclient.is_banned(user_id)
     if hmmyes.banned == True:
-        oki = f"""ANTISPAM INC BANNED: True 
-Reason : {hmmyes.reason}"""
+        oki = f"""<b>ANTISPAM INC BANNED:</b> <code>True</code> 
+<b>Reason :</b> <code>{hmmyes.reason}</code>"""
     else:
-        pass
+        oki = " "
     shazam = replied_user_profile_photos_count
     caption = f"""<b>INFO<b>
 <b>Telegram ID</b>: <code>{user_id}</code>
