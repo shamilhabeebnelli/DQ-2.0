@@ -1,4 +1,4 @@
-from WhiteEyeUserBotot import CMD_LIST
+from WhiteEyeUserBot import CMD_LIST
 
 
 @command(pattern="^.helper ?(.*)")
@@ -15,7 +15,7 @@ async def cmd_list(event):
                     string += "\n"
                 string += "\n"
             if len(string) > 4095:
-                await borg.send_message(event.chat_id, "Do .helper cmd")
+                await borg.send_message(event.chat_id, "Do .help cmd")
                 await asyncio.sleep(5)
             else:
                 await event.edit(string)
@@ -35,9 +35,6 @@ For More Help or Support Visit @WhiteEyeOT"""
                 tgbotusername, help_string
             )
             await results[0].click(
-                event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
-            )
-            await event.delete()
                 event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
             )
             await event.delete()
