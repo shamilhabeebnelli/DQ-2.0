@@ -7,6 +7,7 @@ Available Commands:
 import asyncio
 
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+from WhiteEyeUserBot import CMD_HELP
 
 
 @WhiteEye.on(WhiteEye_on_cmd("bsdk"))
