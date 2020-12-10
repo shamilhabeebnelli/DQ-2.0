@@ -29,7 +29,7 @@ async def cmd_list(event):
             else:
                 await event.edit(input_str + " is not a valid plugin!")
         else:
-            help_string = """𝑾𝒉𝒊𝒕𝒆𝑬𝒚𝒆𝑼𝒔𝒆𝒓𝑩𝒐𝒕 𝐚𝐬𝐬𝐢𝐬𝐭𝐢𝐧𝐠 𝐲𝐨𝐮 𝐡𝐨𝐰 𝐭𝐨 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐛𝐨𝐭 𝐚𝐧𝐝 𝐭𝐨 𝐫𝐞𝐯𝐞𝐚𝐥 𝐚𝐥𝐥 𝐭𝐡𝐞 𝐜𝐨𝐦𝐦𝐚𝐧𝐝𝐬 𝐲𝐨𝐮 𝐫𝐞𝐪𝐮𝐢𝐫𝐞!\n
+            help_string = """WhiteEye Userbot Modules Are Listed Here this is to reveal all commands of WhiteEye!\n
 For More Help or Support Visit @WhiteEyeOT"""
             results = await bot.inline_query(  # pylint:disable=E0602
                 tgbotusername, help_string
