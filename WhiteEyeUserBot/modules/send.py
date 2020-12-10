@@ -3,7 +3,7 @@ from datetime import datetime
 
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
-WhiteEyethumb = "./resources/IMG_20200929_103719_628.jpg"
+WhiteEyethumb = "./resources/20201201_001148.jpg"
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="send ?(.*)"))
