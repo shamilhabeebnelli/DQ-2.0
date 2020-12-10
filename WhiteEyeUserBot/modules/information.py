@@ -8,7 +8,7 @@ from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
 from WhiteEyeUserBot import CMD_HELP, sclient
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("info ?(.*)"))
