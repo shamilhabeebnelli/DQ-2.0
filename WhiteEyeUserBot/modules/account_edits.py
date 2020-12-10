@@ -3,6 +3,7 @@
 # @xditya
 # Rewriten by @mrdayamzaidi
 # Made for @WhiteEyeOT
+# Knagers keep the credit
 
 #    WhiteEye - UserBot
 #    Copyright (C) 2020 WhiteEye
