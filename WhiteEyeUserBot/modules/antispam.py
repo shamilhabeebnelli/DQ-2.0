@@ -29,6 +29,4 @@ async def ok(event):
                 pass
         else:
             pass
-© 2020 GitHub, Inc.
-Terms
-Privacy
+
