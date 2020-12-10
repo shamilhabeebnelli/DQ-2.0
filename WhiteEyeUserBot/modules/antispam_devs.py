@@ -1,7 +1,5 @@
 import secrets
 
-from antispaminc.connect import RequestError
-
 from WhiteEyeUserBot import sclient
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
@@ -12,6 +10,7 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 async def oki(event):
     await event.edit("`Processing...`")
     extra = None
+    args = event.pattern_match.group(1)
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         user = await event.client.get_entity(previous_message.sender_id)
@@ -41,8 +40,8 @@ async def oki(event):
         await event.edit(
             f"**User :** `{user}` \n**Reason :** `{extra}` \n**Banned Sucessfully !**"
         )
-    except RequestError as e:
-        await event.edit("Errors : " + e)
+    except Exception as e:
+        await event.edit("Errors : " + str(e))
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="heck(?: |$)(.*)"))
@@ -95,7 +94,7 @@ async def oki(event):
         try:
             sclient.ban(i, lolsed)
             await borg.send_message("antispamincfed", f"/fban {i} {lolsed}")
-        except RequestError:
+        except:
             errorz += 1
         await event.edit(
             f"**User :** `{i}` \n**Banned Sucessfully !** \n**Failed :** `{len(errorz)}`"
