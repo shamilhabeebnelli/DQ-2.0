@@ -1,4 +1,4 @@
-from WhiteEyeUserBot import CMD_LIST
+from WhiteEyeUserBotot import CMD_LIST
 
 
 @command(pattern="^.helper ?(.*)")
@@ -29,12 +29,15 @@ async def cmd_list(event):
             else:
                 await event.edit(input_str + " is not a valid plugin!")
         else:
-            help_string = """"WhiteEye Userbot Modules Are Listed Here this is to reveal all commands of WhiteEye!\n
+            help_string = """WhiteEye Userbot Modules Are Listed Here this is to reveal all commands of WhiteEye!\n
 For More Help or Support Visit @WhiteEyeOT"""
             results = await bot.inline_query(  # pylint:disable=E0602
                 tgbotusername, help_string
             )
             await results[0].click(
+                event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
+            )
+            await event.delete()
                 event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
             )
             await event.delete()
