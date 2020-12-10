@@ -1,14 +1,12 @@
-
-
-import random, re
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot import CMD_HELP
 import asyncio
-from telethon import events
+
+from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="alone ?(.*)"))
 async def _(event):
-     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("T")
         await asyncio.sleep(0.7)
         await event.edit("Th")
@@ -107,12 +105,15 @@ async def _(event):
         await asyncio.sleep(0.7)
         await event.edit("The Day I Learnt To Live Alone \nEverything Became Beautiful")
         await asyncio.sleep(0.7)
-        await event.edit("**The Day I Learnt To Live Alone \nEverything Became Beautiful**🙂")
-        
+        await event.edit(
+            "**The Day I Learnt To Live Alone \nEverything Became Beautiful**🙂"
+        )
+
+
 CMD_HELP.update(
     {
         "alone": "Alone\
 \n\nSyntax : .alone \
 \nUsage : Lyrics Of Alone Song"
     }
-)        
+)
