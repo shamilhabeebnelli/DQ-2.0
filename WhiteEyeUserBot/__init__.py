@@ -14,6 +14,8 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # you may not use this file except in compliance with the License.
+
+
 import asyncio
 import logging
 import os
@@ -24,7 +26,7 @@ from logging import DEBUG, INFO, basicConfig, getLogger
 
 import pylast
 import wget
-from antispaminc.connect import Connect, TokenNotFound
+from antispaminc.connect import Connect
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
@@ -213,4 +215,4 @@ else:
         sclient = Connect(Config.ANTI_SPAMINC_TOKEN)
     except Exception as e:
         sclient = None
-           sedprint.info("[Warning] - " + str(e))
+        sedprint.info("[Warning] - " + str(e))
