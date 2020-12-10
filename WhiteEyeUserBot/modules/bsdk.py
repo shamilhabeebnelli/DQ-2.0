@@ -6,10 +6,10 @@ Available Commands:
 
 import asyncio
 
-from userbot.utils import admin_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
-@borg.on(admin_cmd("bsdk"))
+@WhiteEye.on(WhiteEye_on_cmd("bsdk"))
 async def _(event):
     if event.fwd_from:
         return
@@ -43,3 +43,11 @@ async def _(event):
 
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 18])
+
+CMD_HELP.update(
+    {
+        "bsdk": "Bsdk\
+\n\nSyntax : .bsdk\
+\nUsage : Yet Another Fun Plugin"
+    }
+)        
