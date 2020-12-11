@@ -6,7 +6,6 @@ import asyncio
 import os
 import random
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 from WhiteEyeUserBot import (
     CMD_HELP,
     LOGS,
@@ -26,6 +25,7 @@ from WhiteEyeUserBot import (
     solarize,
     take_screen_shot,
 )
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 
 def random_color():
