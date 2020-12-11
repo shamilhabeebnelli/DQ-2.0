@@ -6,7 +6,7 @@ Available Commands:
 import asyncio
 
 from telethon.tl.functions.users import GetFullUserRequest
-from uniborg.util import WhiteEye_on_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 from WhiteEyeUserBot import CMD_HELP
 
