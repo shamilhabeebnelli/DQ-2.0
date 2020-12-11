@@ -21,9 +21,9 @@
 
 # GET APP_ID AND API_HASH
 
-[APP_ID](https:my.telegram.org)
+[APP_ID](https://my.telegram.org/auth)
 
-[API_HASH](https:my.telegram.org)
+[API_HASH](https://my.telegram.org/auth)
 
 
 
