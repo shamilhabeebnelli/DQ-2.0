@@ -1,6 +1,9 @@
 Pillow
+deep_translator
+langdetect
+PyDictionary
 quote
-the-python-bay
+the_python_bay
 textblob
 antispaminc
 python-magic
