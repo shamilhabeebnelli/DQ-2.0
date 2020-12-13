@@ -1,15 +1,3 @@
-#    Copyright (C) Midhun KM 2020
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 
@@ -77,38 +65,7 @@ async def hmm(event):
             os.remove(files)
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern=r"toon"))
-@WhiteEye.on(sudo_cmd(pattern=r"toon", allow_sudo=True))
-async def hmm(event):
-    life = Config.DEEP_API_KEY
-    if life == None:
-        life = "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
-        await event.edit("No Api Key Found, Please Add it. For Now Using Local Key")
-    if not event.reply_to_msg_id:
-        await event.reply("Reply to any Image.")
-        return
-    headers = {"api-key": life}
-    hmm = await event.edit("Toooning.....")
-    sed = await event.get_reply_message()
-    if isinstance(sed.media, MessageMediaPhoto):
-        img = await borg.download_media(sed.media, sedpath)
-    elif "image" in sed.media.document.mime_type.split("/"):
-        img = await borg.download_media(sed.media, sedpath)
-    else:
-        await event.edit("Reply To Image")
-        return
-    img_file = {
-        "image": open(img, "rb"),
-    }
-    url = "https://api.deepai.org/api/toonify"
-    r = requests.post(url=url, files=img_file, headers=headers).json()
-    sedimg = r["output_url"]
-    await borg.send_file(event.chat_id, sedimg)
-    await hmm.delete()
-    if os.path.exists(img):
-        os.remove(img)
-
-
+# Firstly Released By @DELETEDUSER420
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"nst"))
 @WhiteEye.on(sudo_cmd(pattern=r"nst", allow_sudo=True))
 async def hmm(event):
@@ -160,7 +117,7 @@ async def iamthug(event):
         await event.edit("Reply To Image")
         return
     imagePath = img
-    maskPath = "./resources/thuglife/mask.png"
+    maskPath = "./resources/thuglife/mask.PNG"
     cascPath = "./resources/thuglife/face_regex.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
     image = cv2.imread(imagePath)
@@ -177,6 +134,38 @@ async def iamthug(event):
     background.save(ok, "PNG")
     await borg.send_file(event.chat_id, ok)
     await hmm.delete()
+    for files in (ok, img):
+        if files and os.path.exists(files):
+            os.remove(files)
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"tni"))
+@WhiteEye.on(sudo_cmd(pattern=r"tni", allow_sudo=True))
+async def toony(event):
+    if not event.reply_to_msg_id:
+        await event.reply("Reply to any Image.")
+        return
+    hmmu = await event.edit("`Converting Toonized Image..`")
+    sed = await event.get_reply_message()
+    if isinstance(sed.media, MessageMediaPhoto):
+        img = await borg.download_media(sed.media, sedpath)
+    elif "image" in sed.media.document.mime_type.split("/"):
+        img = await borg.download_media(sed.media, sedpath)
+    else:
+        await event.edit("Reply To Image")
+        return
+    imagez = cv2.imread(img)
+    cartoon_image_style_2 = cv2.stylization(
+        imagez, sigma_s=60, sigma_r=0.5
+    )  ## Cartoonify process.
+    # Save it
+    file_name = "Tooned.png"
+    ok = sedpath + "/" + file_name
+    cv2.imwrite(ok, cartoon_image_style_2)
+    # Upload it
+    await borg.send_file(event.chat_id, ok)
+    await hmmu.delete()
+    # Remove all Files
     for files in (ok, img):
         if files and os.path.exists(files):
             os.remove(files)
@@ -208,18 +197,84 @@ async def lolmetrg(event):
             os.remove(files)
 
 
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"jail"))
+@WhiteEye.on(sudo_cmd(pattern=r"jail", allow_sudo=True))
+async def hmm(event):
+    if not event.reply_to_msg_id:
+        await event.reply("Reply to any Image.")
+        return
+    hmmu = await event.edit("hmm... Sending him to jail...🚶")
+    sed = await event.get_reply_message()
+    if isinstance(sed.media, MessageMediaPhoto):
+        img = await borg.download_media(sed.media, sedpath)
+    elif "image" in sed.media.document.mime_type.split("/"):
+        img = await borg.download_media(sed.media, sedpath)
+    else:
+        await event.edit("Reply To Image")
+        return
+    mon = "./resources/jail/jail.jpg"
+    foreground = Image.open(mon).convert("RGBA")
+
+    background = Image.open(img).convert("RGB")
+    with Image.open(img) as img:
+        width, height = img.size
+    fg_resized = foreground.resize((width, height))
+    background.paste(fg_resized, box=(0, 0), mask=fg_resized)
+
+    background.save("./starkgangz/testing.png")
+
+    file_name = "testing.png"
+    ok = "./starkgangz/" + file_name
+    await borg.send_file(event.chat_id, ok)
+    await hmmu.delete()
+    for files in (ok, img):
+        if files and os.path.exists(files):
+            os.remove(files)
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"greyscale"))
+@WhiteEye.on(sudo_cmd(pattern=r"greyscale", allow_sudo=True))
+async def hmm(event):
+    if not event.reply_to_msg_id:
+        await event.reply("Reply to any Image.")
+        return
+    hmmu = await event.edit("hmm.. Creating a black&White image...")
+    sed = await event.get_reply_message()
+    if isinstance(sed.media, MessageMediaPhoto):
+        img = await borg.download_media(sed.media, sedpath)
+    elif "image" in sed.media.document.mime_type.split("/"):
+        img = await borg.download_media(sed.media, sedpath)
+    else:
+        await event.edit("Reply To Image")
+        return
+    img1 = cv2.imread(img)
+
+    gray_img = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
+
+    cv2.imwrite("./starkgangz/testing.png", gray_img)
+    file_name = "testing.png"
+    ok = "./starkgangz/" + file_name
+    await borg.send_file(event.chat_id, ok)
+    await hmmu.delete()
+    for files in (ok, img):
+        if files and os.path.exists(files):
+            os.remove(files)
+
+
 CMD_HELP.update(
     {
         "imagetools": "**imagetools**\
         \n\n**Syntax : **`.cit`\
-        \n**Usage :** colourizes the given picture\
-        \n\n**Syntax : **`.toon`\
-        \n**Usage :** makes toon of the given image\
+        \n**Usage :** colourizes the given picture.\
         \n\n**Syntax : **`.nst`\
-        \n**Usage :** removes colours from image\
+        \n**Usage :** removes colours from image.\
         \n\n**Syntax : ** `.thug`\
-        \n**Usage :** makes a thug life meme image\
+        \n**Usage :** makes a thug life meme image.\
         \n\n**Syntax : ** `.tig`\
-        \n**Usage :** Makes a triggered gif of the replied image"
+        \n**Usage :** Makes a triggered gif of the replied image.\
+        \n\n**Syntax : ** `.jail`\
+        \n**Usage :** Makes a jail image of the replied image.\
+        \n\n**Syntax : ** `.greyscale`\
+        \n**Usage :** Makes a black and white image of the replied image."
     }
 )
