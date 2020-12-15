@@ -39,7 +39,7 @@ async def startmute(event):
             userid = event.chat_id
         else:
             return await event.edit(
-                "Please reply to a user or add their userid into the command to mute them."
+                "Succesfully Muted The Person."
             )
         chat_id = event.chat_id
         chat = await event.get_chat()
