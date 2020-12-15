@@ -38,9 +38,7 @@ async def startmute(event):
         elif private is True:
             userid = event.chat_id
         else:
-            return await event.edit(
-                "Succesfully Muted The Person."
-            )
+            return await event.edit("Succesfully Muted The Person.")
         chat_id = event.chat_id
         chat = await event.get_chat()
         if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
