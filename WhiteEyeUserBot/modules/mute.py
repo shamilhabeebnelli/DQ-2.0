@@ -67,7 +67,7 @@ async def startmute(event):
         except Exception as e:
             await event.edit("Error occured!\nError is " + str(e))
         else:
-            await event.edit("Successfully muted that person.\n**｀-´)⊃━☆ﾟ.*･｡ﾟ **")
+            await event.edit("Successfully muted that person.\n**")
 
 
 @command(outgoing=True, pattern=r"^.unmute ?(\d+)?")
@@ -91,7 +91,7 @@ async def endmute(event):
             userid = event.chat_id
         else:
             return await event.edit(
-                "Please reply to a user or add their userid into the command to unmute them."
+                "Succesfully Muted The Person."
             )
         chat_id = event.chat_id
         if not is_muted(userid, chat_id):
