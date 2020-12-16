@@ -186,7 +186,7 @@ async def demote(event):
             "I Could't Demote That User Probably Due To Less Permissions."
         )
         return
-    await event.reply("Demoted This User Sucessfully.")
+    await event.reply("Demoted This User Sucessfully. Now Take Mintos.")
 
 
 @assistant_cmd("pin", is_args=True)
