@@ -36,9 +36,9 @@ from WhiteEyeUserBot.modules.sql_helper.idadder_sql import (
 
 @assistant_cmd("start", is_args=False)
 async def start(event):
-    starkbot = await tgbot.get_me()
-    bot_id = starkbot.first_name
-    bot_username = starkbot.username
+    dayambot = await tgbot.get_me()
+    bot_id = dayambot.first_name
+    bot_username = dayambot.username
     replied_user = await event.client(GetFullUserRequest(event.sender_id))
     firstname = replied_user.user.first_name
     devlop = await bot.get_me()
@@ -205,22 +205,22 @@ async def sedlyfsir(event):
 @assistant_cmd("stats", is_args=False)
 @peru_only
 async def starkisnoob(event):
-    starkisnoob = get_all_users()
+    dayamisnoob = get_all_users()
     await event.reply(
-        f"**Stats Of Your Bot** \nTotal Users In Bot => {len(starkisnoob)}"
+        f"**Stats Of Your Bot** \nTotal Users In Bot => {len(dayamisnoob)}"
     )
 
 
 @assistant_cmd("help", is_args=False)
 @peru_only
-async def starkislub(event):
+async def dayamislub(event):
     grabonx = "Hello Here Are Some Commands \n➤ /start - Check if I am Alive \n➤ /ping - Pong! \n➤ /tr <lang-code> \n➤ /broadcast - Sends Message To all Users In Bot \n➤ /id - Shows ID of User And Media. \n➤ /addnote - Add Note \n➤ /notes - Shows Notes \n➤ /rmnote - Remove Note \n➤ /alive - Am I Alive? \n➤ /bun - Works In Group , Bans A User. \n➤ /unbun - Unbans A User in Group \n➤ /prumote - Promotes A User \n➤ /demute - Demotes A User \n➤ /pin - Pins A Message \n➤ /stats - Shows Total Users In Bot"
     await event.reply(grabonx)
 
 
 @assistant_cmd("block", is_args=False)
 @god_only
-async def starkisnoob(event):
+async def dayamisnoob(event):
     if event.sender_id == bot.uid:
         msg = await event.get_reply_message()
         msg.id
@@ -238,7 +238,7 @@ async def starkisnoob(event):
 
 @assistant_cmd("unblock", is_args=False)
 @god_only
-async def starkisnoob(event):
+async def dayamisnoob(event):
     if event.sender_id == bot.uid:
         msg = await event.get_reply_message()
         msg.id
