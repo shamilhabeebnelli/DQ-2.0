@@ -40,14 +40,14 @@ else:
     gendu = "Not Added ❌"
 
 if wttrapi:
-    starknoobs = "Added ✅"
+    dayamnoobs = "Added ✅"
 else:
-    starknoobs = "Not Added ❌"
+    dayamnoobs = "Not Added ❌"
 
 if hmmok:
-    meiko = "Added ✅"
+    arantxa = "Added ✅"
 else:
-    meiko = "Not Added ❌"
+    arantxa = "Not Added ❌"
 
 if isdbfine:
     dbstats = "Fine ✅"
