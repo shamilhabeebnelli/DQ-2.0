@@ -12,43 +12,77 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import secrets
-from random import *
+#    Copyright (C) @WhiteEyeOT 2020
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from password_strength import PasswordStats
+
+import os.path
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, admin_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
+
+sedpath = "./kaif/"
+if not os.path.isdir(sedpath):
+    os.makedirs(sedpath)
 
 
-@WhiteEye.on(admin_cmd(pattern="passcheck (.*)"))
+@WhiteEye.on(WhiteEye_on_cmd("savepass ?(.*)"))
+@WhiteEye.on(sudo_cmd("savepass ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    stats = PasswordStats(input_str)
-    sedbruh = stats.strength()
-    if stats.strength() >= 0.2:
-        await event.edit(
-            f"<b><u>Password Checked</b></u> \n<b>Password :</b> <code>{input_str}</code> \n<b>Strength :</b> <code>{sedbruh}</code> \n<b>Result :</b> <code>Good Password</code>",
-            parse_mode="HTML",
-        )
+    ujwal = input_str.split(":")
+    usermail = ujwal[0]
+    passwd = ujwal[1]
+    webo = ujwal[2]
+    if os.path.exists("./kaif/info.pablo"):
+        file = open("./kaif/info.pablo", "a")
     else:
-        await event.edit(
-            f"<b><u>Password Checked</b></u> \n<b>Password :</b> <code>{input_str}</code> \n<b>Strength :</b> <code>{sedbruh}</code> \n<b>Result :</b> <code>Bad Password</code>",
-            parse_mode="HTML",
-        )
+        file = open("./kaif/info.pablo", "x")
+        file.close()
+        file = open("./kaif/info.pablo", "a")
+
+    userName = usermail
+    password = passwd
+    website = webo
+
+    usrnm = "UserName: " + userName + "\n"
+    pwd = "Password: " + password + "\n"
+    web = "Website: " + website + "\n"
+
+    file.write("---------------------------------\n")
+    file.write(usrnm)
+    file.write(pwd)
+    file.write(web)
+    file.write("---------------------------------\n")
+    file.write("\n")
+    file.close
+    await event.edit(
+        f"<b><u>Password Saved Successfully</b></u>",
+        parse_mode="HTML",
+    )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern=r"passgen"))
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"viewpass"))
 async def hi(event):
     if event.fwd_from:
         return
-    okbabe = secrets.token_urlsafe(16)
-    stats = PasswordStats(okbabe)
-    sedbruh = stats.strength()
+    file = open("./kaif/info.pablo", "r")
+    content = file.read()
+    file.close()
     await event.edit(
-        f"<b>Password</b> : <code>{okbabe}</code> \n<b>Strength :</b> <code>{sedbruh}</code>",
+        f"<b><u>Here are your Saved Passwords</u></b>\n<code>{content}</code>",
         parse_mode="HTML",
     )
 
@@ -56,9 +90,11 @@ async def hi(event):
 CMD_HELP.update(
     {
         "password_helper": "**Password Helper**\
-\n\n**Syntax : **`.passgen`\
-\n**Usage :** This plugin generates good strong password for you.\
-\n\n**Syntax : **`.passcheck <your password>`\
-\n**Usage :** This plugin checks the strength of your password."
+\n\n**Syntax : **`.savepass email:password:website`\
+\n**Usage :** Saves the email, password and website.\
+\n\n**Syntax : **`.viewpass`\
+\n**Usage :** View all your saved emails and passwords.\
+\n\n**Example : **`.savepass myemail@gmail.com:mypassword:netflix.com`\
+\nThis above syntax is saving my Netflix account email and password."
     }
 )
