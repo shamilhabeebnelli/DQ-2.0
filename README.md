@@ -33,7 +33,7 @@
 
 
 
-# Deploy
+# DEPLOY
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/WhiteEye-Org/WhiteEyeUserBot)
 # String
@@ -43,7 +43,7 @@
 
 
 
-# Hard Way (For Devs)
+# HARD WAY (For Devs)
 
 Simply clone the repository and run the main file:
 ```sh
@@ -68,7 +68,7 @@ python3 -m WhiteEyeBot
 
 
 
-# Mandatory Vars
+# MANDATORY VARS
 ```
 [+] Only two of the environment variables are mandatory.
 
