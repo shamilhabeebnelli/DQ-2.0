@@ -1,52 +1,28 @@
-"""Dictionary Plugin for @UniBorg
-Syntax: .meaning <word>"""
+"""Syntax: .meaning <word>"""
 
-import requests
+from PyDictionary import PyDictionary
+from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("meaning (.*)"))
 @WhiteEye.on(sudo_cmd("meaning (.*)", allow_sudo=True))
 async def _(event):
-    stark = await edit_or_reply(event, "Finding Meaning.....")
+    dayam = await edit_or_reply(event, "Finding Meaning.....")
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    input_url = "https://bots.shrimadhavuk.me/dictionary/?s={}".format(input_str)
-    headers = {"USER-AGENT": "UniBorg"}
-    caption_str = f"Meaning of __{input_str}__\n"
-    try:
-        response = requests.get(input_url, headers=headers).json()
-        pronounciation = response.get("p")
-        meaning_dict = response.get("lwo")
-        for current_meaning in meaning_dict:
-            current_meaning_type = current_meaning.get("type")
-            current_meaning_definition = current_meaning.get("definition")
-            caption_str += (
-                f"**{current_meaning_type}**: {current_meaning_definition}\n\n"
-            )
-    except Exception as e:
-        caption_str = str(e)
-    reply_msg_id = event.message.id
-    if event.reply_to_msg_id:
-        reply_msg_id = event.reply_to_msg_id
-    try:
-        await borg.send_file(
-            event.chat_id,
-            pronounciation,
-            caption=f"Pronounciation of __{input_str}__",
-            force_document=False,
-            reply_to=reply_msg_id,
-            allow_cache=True,
-            voice_note=True,
-            silent=True,
-            supports_streaming=True,
-        )
-    except:
-        pass
-    await stark.edit(caption_str)
+    dictionary = PyDictionary()
+    a = dictionary.meaning(input_str)
+    b = a.get("Noun")
+    kaif = ""
+    for x in b:
+        kaif += x + "\n"
+    await dayam.edit(
+        f"<b> meaning of {input_str} is:-</b>\n {kaif}",
+        parse_mode="HTML",
+    )
 
 
 CMD_HELP.update(
