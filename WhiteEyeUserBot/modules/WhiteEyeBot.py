@@ -51,6 +51,6 @@ CMD_HELP.update(
     {
         "WhiteEyeBot": "WhiteEyeBot\
 \n\nSyntax : .support\
-\nUsage : Join @WhiteEyeot"
+\nUsage : Join @WhiteEyeDevs"
     }
 )
