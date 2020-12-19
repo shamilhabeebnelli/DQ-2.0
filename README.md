@@ -21,7 +21,7 @@
 
 # GET APP_ID AND API_HASH
 
-[![APP_ID](https://telegra.ph/file/e9f9eeaff85c9dbc5f864.png)](https://my.telegram.org/auth)
+[![APP_ID](https://telegra.ph/file/71f07091512ebcdce11c9.png)](https://my.telegram.org/auth)
 
 [![API_HASH](https://telegra.ph/file/e0f1bf53ae49add6b4e2c.png)](https://my.telegram.org/auth)
 
