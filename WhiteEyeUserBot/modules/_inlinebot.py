@@ -38,7 +38,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     [custom.Button.inline("Show Stats ", data="terminator")],
                     [
                         Button.url(
-                            "🇮🇳 Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
+                            "🇮🇳 Repo 🇮🇳",
+                            "https://github.com/WhiteEye-Org/WhiteEyeUserBot",
                         )
                     ],
                     [Button.url("Join Channel ⚓", "t.me/WhiteEyeOT")],
@@ -73,9 +74,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_popp_up_alert = (
-                "Please get your own WhiteEyeUserbot, and don't use mine Any Support [WhiteEyeDevs](https://t.me/whiteeyedevs)!"
-            )
+            reply_popp_up_alert = "Please get your own WhiteEyeUserbot, and don't use mine Any Support [WhiteEyeDevs](https://t.me/whiteeyedevs)!"
             await event.answer(reply_popp_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
@@ -85,9 +84,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 "Menu Closed!!",
             )
         else:
-            reply_pop_up_alert = (
-                "Please get your own WhiteEyeuserbot from [WhiteEyeDevs](https://t.me/whiteeyedevs) "
-            )
+            reply_pop_up_alert = "Please get your own WhiteEyeuserbot from [WhiteEyeDevs](https://t.me/whiteeyedevs) "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
