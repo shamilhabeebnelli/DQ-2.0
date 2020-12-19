@@ -534,7 +534,7 @@ def is_admin():
         @functools.wraps(func)
         async def wrapper(event):
             serena = bot.tgbot
-            sed = await serena.get_permissions(event.chat_id, event.sender_id)
+            sed = await arantxa.get_permissions(event.chat_id, event.sender_id)
             user = event.sender_id
             kek = bot.uid
             if sed.is_admin:
@@ -556,8 +556,8 @@ def is_bot_admin():
         @functools.wraps(func)
         async def wrapper(event):
             serena = bot.tgbot
-            pep = await serena.get_me()
-            sed = await serena.get_permissions(event.chat_id, pep)
+            pep = await arantxa.get_me()
+            sed = await arantxa.get_permissions(event.chat_id, pep)
             if sed.is_admin:
                 await func(event)
             else:
