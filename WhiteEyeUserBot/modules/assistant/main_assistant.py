@@ -1,4 +1,4 @@
-#    Copyright (C) Midhun KM 2020
+#    Copyright (C) Dayam Zaidi 2020
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
@@ -72,7 +72,7 @@ async def start(event):
             link_preview=False,
             buttons=[
                 [custom.Button.inline("Deploy your WhiteEye 🇮🇳", data="deploy")],
-                [Button.url("Help Me ❓", "t.me/WhiteEyeot")],
+                [Button.url("Help Me ❓", "t.me/WhiteEyeDevs")],
             ],
         )
         if os.path.exists(mypic):
@@ -91,7 +91,7 @@ async def help(event):
             message="You Can Deploy WhiteEye In Heroku By Following Steps Bellow, You Can See Some Quick Guides On Support Channel Or On Your Own Assistant Bot. \nThank You For Contacting Me.",
             buttons=[
                 [Button.url("Deploy Tutorial 📺", "hey")],
-                [Button.url("Need Help ❓", "t.me/WhiteEyeot")],
+                [Button.url("Need Help ❓", "t.me/WhiteEyeDevs")],
             ],
         )
 
