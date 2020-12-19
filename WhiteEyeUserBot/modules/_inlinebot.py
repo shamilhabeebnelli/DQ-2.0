@@ -38,7 +38,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     [custom.Button.inline("Show Stats ", data="terminator")],
                     [
                         Button.url(
-                            "Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
+                            "🇮🇳 Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
                         )
                     ],
                     [Button.url("Join Channel ⚓", "t.me/WhiteEyeOT")],
@@ -74,7 +74,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             await event.edit(buttons=buttons)
         else:
             reply_popp_up_alert = (
-                "Please get your own WhiteEyeUserbot, and don't use mine!"
+                "Please get your own WhiteEyeUserbot, and don't use mine Any Support [WhiteEyeDevs](https://t.me/whiteeyedevs)!"
             )
             await event.answer(reply_popp_up_alert, cache_time=0, alert=True)
 
@@ -86,7 +86,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
         else:
             reply_pop_up_alert = (
-                "Please get your own WhiteEyeuserbot from @WhiteEyeDevs "
+                "Please get your own WhiteEyeuserbot from [WhiteEyeDevs](https://t.me/whiteeyedevs) "
             )
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
@@ -104,7 +104,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please get your own WhiteEyeUserbot, and don't use mine Any Support Ask @WhiteEyeDevs!"
+            reply_pop_up_alert = "Please get your own WhiteEyeUserbot, and don't use mine Any Support Ask [WhiteEyeDevs](https://t.me/whiteeyedevs)!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
@@ -149,7 +149,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             else:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
         else:
-            reply_pop_up_alert = "You Cannot Become Barbosa Here!"
+            reply_pop_up_alert = "Please Get Your Own WhiteEyeUserBot And Dont Use Mine Nedd Any Support Ask [WhiteEyeDevs](https://t.me/whiteeyedevs)"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"terminator")))
@@ -207,7 +207,7 @@ def paginate_help(page_number, loaded_modules, prefix):
     helpable_modules = sorted(helpable_modules)
     modules = [
         custom.Button.inline(
-            "{} {} {}".format("🤛🏽", x, "🤜🏽"), data="us_plugin_{}".format(x)
+            "{} {} {}".format("🇮🇳", x, "🇮🇳"), data="us_plugin_{}".format(x)
         )
         for x in helpable_modules
     ]
