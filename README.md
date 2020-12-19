@@ -23,10 +23,6 @@
 
 [![APP_ID](https://telegra.ph/file/71f07091512ebcdce11c9.png)](https://my.telegram.org/auth)
 
-[![API_HASH](https://telegra.ph/file/e0f1bf53ae49add6b4e2c.png)](https://my.telegram.org/auth)
-
-
-
 
 
 
