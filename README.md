@@ -33,14 +33,35 @@
 
 
 
-
-
 # Deploy
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/WhiteEye-Org/WhiteEyeUserBot)
 # String
 
 [![Run on Repl.it](https://telegra.ph/file/1b2ca5fd16997b21b4b41.jpg)](https://repl.it/@mrdayamzaidi/WhiteEyeUserbot)
+
+
+
+
+# Hard Way (For Devs)
+
+Simply clone the repository and run the main file:
+```sh
+# Install Git First.
+git clone https://github.com/WhiteEye-Org/WhiteEyeUserBot
+# Open Git Cloned File
+cd WhiteEyeUserBot
+# Config Virtual Env
+virtualenv -p /usr/bin/python3 venv
+. ./venv/bin/activate
+# Install All Requirements 
+pip install -r requirements.txt
+# Create local_config.py with variables as given below
+# Start Bot 
+python3 -m WhiteEyeBot
+```
+
+
 
 
 
