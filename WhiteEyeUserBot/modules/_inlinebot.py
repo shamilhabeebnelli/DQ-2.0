@@ -33,7 +33,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if event.query.user_id == bot.uid and query == "stats":
             result = builder.article(
                 title="Stats",
-                text=f"**Showing Stats For {DEFAULTUSER}'s WhiteEye** \nNote --> Only Owner Can Check This \n(C) @Whiteeyeot",
+                text=f"**Showing Stats For {DEFAULTUSER}'s WhiteEye** \nNote --> Only Owner Can Check This \n(C) @WhiteEyeDevs",
                 buttons=[
                     [custom.Button.inline("Show Stats ", data="terminator")],
                     [
@@ -85,7 +85,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 "Menu Closed!!",
             )
         else:
-            reply_pop_up_alert = "Please get your own WhiteEyeuserbot from @WhiteEyeOT "
+            reply_pop_up_alert = "Please get your own WhiteEyeuserbot from @WhiteEyeDevs "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
@@ -103,7 +103,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             await event.edit(buttons=buttons)
         else:
             reply_pop_up_alert = (
-                "Please get your own WhiteEyeUserbot, and don't use mine!"
+                "Please get your own WhiteEyeUserbot, and don't use mine Any Support Ask @WhiteEyeDevs!"
             )
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
