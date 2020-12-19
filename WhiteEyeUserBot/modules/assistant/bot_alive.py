@@ -26,7 +26,7 @@ pm_caption += f"✯ **My Boss** : {DEFAULTUSER} \n"
 pm_caption += "✯ **Heroku Database** : `AWS - Working Properly`\n\n"
 pm_caption += "✯**[Join Our Channel]**(https://t.me/WhiteEyeOT)\n"
 pm_caption += "✯ **License** : [GNU General Public License v3.0](https://github.com/WhiteEye-Org/WhiteEyeUserBot/blob/main/LICENSE)\n"
-pm_caption += "✯ **Copyright** : By [WhiteEye](https://t.me/WhiteEyeOT)\n"
+pm_caption += "✯ **Copyright** : By [WhiteEye](https://t.me/WhiteEyeDevs)\n"
 pm_caption += "[Assistant By WhiteEye 🇮🇳]"
 
 # only Owner Can Use it
