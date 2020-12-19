@@ -23,7 +23,7 @@ from telethon.tl.types import (
 )
 
 from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Who is this"
 FILLED_UP_DADDY = "Invalid pack selected."
