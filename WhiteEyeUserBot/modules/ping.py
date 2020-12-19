@@ -44,12 +44,7 @@ async def _(event):
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - Lastupdate))
     await starkislub.edit(
-        f"""** ___   _____ _   _ ___   
-(  _ \(  _  ) ) ( )  _ \ 
-| |_) ) ( ) |  \| | ( (_)
-|  __/| | | |     | | __ 
-| |   | (_) | | \ | |(_ )
-(_)   (_____)_) (_)____/ 
+        f"""**█▓▒▒░░░PONG░░░▒▒▓█
 **\n ➲ `{ms}` \n ➲ `{uptime}`"""
     )
 
