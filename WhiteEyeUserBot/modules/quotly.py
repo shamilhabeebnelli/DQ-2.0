@@ -448,7 +448,7 @@ async def create_sticker(message):
     os.remove(".tmp/sticker.webp")
 
 
-@friday.on(WhiteEye_on_cmd(pattern=r"qbot(?: |$)(.*)"))
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"qbot(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
         return
