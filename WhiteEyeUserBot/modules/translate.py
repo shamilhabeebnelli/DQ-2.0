@@ -3,13 +3,13 @@ Available Commands:
 .tr LanguageCode as reply to a message
 .tr LangaugeCode | text to translate"""
 
-from deep_translator import GoogleTranslator
+import requests
+from google_trans_new import google_translator
 from googletrans import LANGUAGES
 from langdetect import detect
-from google_trans_new import google_translator
-import requests
+
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("tr ?(.*)"))
@@ -33,8 +33,7 @@ async def _(event):
     lan = lan.strip()
     try:
         translator = google_translator()
-        translated = translator.translate(text ,lang_tgt=lan)
-        lmao_bruh = text
+        translated = translator.translate(text, lang_tgt=lan)
         lmao = detect(text)
         after_tr_text = lmao
         source_lan = LANGUAGES[after_tr_text]
@@ -44,7 +43,7 @@ async def _(event):
 `{text}`
 **Translation ({transl_lan})**:
 `{translated}`"""
-      
+
         if len(output_str) >= 4096:
             out_file = output_str
             url = "https://del.dog/documents"
@@ -55,7 +54,8 @@ async def _(event):
             starky = output_str
         await edit_or_reply(event, starky)
     except Exception as e:
-      print(e)
+        print(e)
+
 
 CMD_HELP.update(
     {
