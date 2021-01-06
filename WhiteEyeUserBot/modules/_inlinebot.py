@@ -42,7 +42,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                             "https://github.com/WhiteEye-Org/WhiteEyeUserBot",
                         )
                     ],
-                    [Button.url("Join Channel ⚓", "t.me/WhiteEyeOT")],
+                    [Button.url("Join Channel ⚓", "t.me/WhiteEyedevs")],
                 ],
             )
         if event.query.user_id == bot.uid and query.startswith("**Hello"):
