@@ -1,5 +1,3 @@
-
-
 # Copyright (C) Is Distributed Between @mrdayamzaidi And @ZeltraxRockz
 # Please Ask At @WhiteEyeODevs Before Copying Any Module
 # WhiteEyeUserbot (2020-21)
