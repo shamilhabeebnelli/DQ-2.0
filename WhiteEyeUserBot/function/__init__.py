@@ -1,9 +1,7 @@
-# Copyright (C) Is Distributed Between @mrdayamzaidi And @ZeltraxRockz
-# Please Ask At @WhiteEyeOT Before Copying Any Module
-# WhiteEyeUserbot (2020-21)
+
 
 # Copyright (C) Is Distributed Between @mrdayamzaidi And @ZeltraxRockz
-# Please Ask At @WhiteEyeOT Before Copying Any Module
+# Please Ask At @WhiteEyeODevs Before Copying Any Module
 # WhiteEyeUserbot (2020-21)
 
 import asyncio
