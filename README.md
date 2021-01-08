@@ -79,6 +79,8 @@ python3 -m WhiteEyeBot
 
 # CREDIT'S
 
+[FRIDAY](https://t.me/fridayot)
+
 [TELEBOT](https://t.me/telebothelp)
 
 [CATUSERBOT](https://t.me/catuserbot17)
