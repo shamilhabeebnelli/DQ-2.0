@@ -43,7 +43,7 @@ import zipfile
 from WhiteEyeUserBot.Configs import Config
 
 sedpath = Config.TMP_DOWNLOAD_DIRECTORY
-from fridaybot import logging
+from WhiteEyeUserBot import logging
 
 logger = logging.getLogger("[--WARNING--]")
 if not os.path.isdir(sedpath):
