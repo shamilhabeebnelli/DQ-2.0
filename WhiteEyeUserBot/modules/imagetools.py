@@ -1,10 +1,12 @@
 import os
 from shutil import rmtree
+
 import cv2
 import numpy as np
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from telegraph import upload_file
+
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.function import convert_to_image, crop_vid, runcmd
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
@@ -27,7 +29,7 @@ async def hmm(event):
         "./resources/imgcolour/colouregex.prototxt",
         "./resources/imgcolour/colorization_release_v2.caffemodel",
     )
-    
+
     pts = np.load("./resources/imgcolour/pts_in_hull.npy")
     class8 = net.getLayerId("class8_ab")
     conv8 = net.getLayerId("conv8_313_rh")
@@ -175,7 +177,7 @@ async def hmm(event):
     hmmu = await event.reply("hmm... Sending him to jail...🚶")
     await event.get_reply_message()
     img = await convert_to_image(event, borg)
-    sed = await event.get_reply_message()
+    await event.get_reply_message()
     img = await convert_to_image(event, borg)
     mon = "./resources/jail/jail.jpg"
     foreground = Image.open(mon).convert("RGBA")
@@ -312,6 +314,8 @@ async def img(event):
         if files and os.path.exists(files):
             os.remove(files)
         event.delete()
+
+
 # Credits To These :
 # https://github.com/midnightmadwalk [TG: @MidnightMadwalk]
 # https://github.com/code-rgb [TG: @DeletedUser420]
@@ -368,7 +372,6 @@ async def spinshit(message):
     rmtree(path, ignore_errors=True)
 
 
-
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"lnews ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"lnews ?(.*)", allow_sudo=True))
 async def hmm(event):
@@ -382,16 +385,16 @@ async def hmm(event):
     hmmu = await event.reply("hmm... Starting Live News Stream...🚶")
     await event.get_reply_message()
     img = await convert_to_image(event, borg)
-    sed = await event.get_reply_message()
+    await event.get_reply_message()
     img = await convert_to_image(event, borg)
     background = Image.open(img)
     newss = "./resources/live/news.png"
     foreground = Image.open(newss)
     im = background.resize((2800, 1500))
-    im.paste(foreground, (0,0), mask = foreground)
+    im.paste(foreground, (0, 0), mask=foreground)
     d1 = ImageDraw.Draw(im)
     myFont = ImageFont.truetype("./resources/live/font(1).ttf", 165)
-    d1.text((7, 1251), text, font=myFont, fill =(0, 0, 0))
+    d1.text((7, 1251), text, font=myFont, fill=(0, 0, 0))
 
     im.save("./WhiteEye/livenews.png")
     file_name = "livenews.png"
@@ -401,8 +404,6 @@ async def hmm(event):
     for files in (ok, img):
         if files and os.path.exists(files):
             os.remove(files)
-
-
 
 
 CMD_HELP.update(
