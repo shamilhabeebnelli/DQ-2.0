@@ -26,7 +26,6 @@ from logging import DEBUG, INFO, basicConfig, getLogger
 
 import pylast
 import wget
-from antispaminc.connect import Connect
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
