@@ -8,6 +8,7 @@ import os
 import requests
 
 from WhiteEyeUserBot import CMD_HELP, OCR_SPACE_API_KEY, TEMP_DOWNLOAD_DIRECTORY, bot
+from WhiteEyeUserBot.utils import register
 
 
 async def ocr_space_file(
