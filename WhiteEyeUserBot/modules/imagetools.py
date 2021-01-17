@@ -333,7 +333,7 @@ async def img(event):
 # Credits To These :
 # https://github.com/midnightmadwalk [TG: @MidnightMadwalk]
 # https://github.com/code-rgb [TG: @DeletedUser420]
-# Ported By  https://github.com/WhiteEye-Org [TG: @MrDayamZaidi]
+# Ported By  https://github.com/StarkGang/FridayUserbot [TG: @StarkXd]
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"spin ?(.*)"))
