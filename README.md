@@ -87,7 +87,7 @@ python3 -m WhiteEyeBot
 
 [PAPERPLANE USERBOT](https://t.me/paperplanechannel)
 
-[ANTISPAMINC](https://t.me/antispaminc)
+[FRIDAY USERBOT](https://t.me/FRIDAYSUPPORTOFFICIAL)
 
 
 
