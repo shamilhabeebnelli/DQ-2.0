@@ -1,4 +1,4 @@
-# @WhiteEyeoT
+# @Fridayot
 
 import requests
 from iplookup import iplookup
