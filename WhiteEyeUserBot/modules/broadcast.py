@@ -20,6 +20,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from WhiteEyeUserBot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
+from .sql_helper import broadcast_sql as sql
 
 loggy_grp = Config.PRIVATE_GROUP_ID
 
