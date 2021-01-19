@@ -1,371 +1,224 @@
-import base64
-from asyncio import sleep
+#    Copyright (C) Midhun KM 2020
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
-from WhiteEyeUserBot import BOTLOG, BOTLOG_CHATID, CMD_HELP
+import io
+import os
+
 from WhiteEyeUserBot.Configs import Config
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
-
-from .sql_helper import broadcast_sql as sql
+from WhiteEyeUserBot.modules.sql_helper.broadcast_sql import (
+    add_chnnl_in_db,
+    already_added,
+    get_all_chnnl,
+    rm_channel,
+)
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+from WhiteEyeUserBot import CMD_HELP
 
 loggy_grp = Config.PRIVATE_GROUP_ID
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="sendto(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="sendto(?: |$)(.*)", allow_sudo=True))
-async def catbroadcast_send(event):
-    if event.fwd_from:
-        return
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
-        return await edit_delete(
-            event, "To which category should i send this message", parse_mode=parse_pre
-        )
-    reply = await event.get_reply_message()
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    if not reply:
-        return await edit_delete(
-            event, "what should i send to to this category ?", parse_mode=parse_pre
-        )
-    keyword = catinput_str.lower()
-    no_of_chats = sql.num_broadcastlist_chat(keyword)
-    group_ = Get(cat)
-    if no_of_chats == 0:
-        return await edit_delete(
-            event,
-            f"There is no category with name {keyword}. Check '.listall'",
-            parse_mode=parse_pre,
-        )
-    chats = sql.get_chat_broadcastlist(keyword)
-    catevent = await edit_or_reply(
-        event,
-        "sending this message to all groups in the category",
-        parse_mode=parse_pre,
-    )
-    try:
-        await event.client(group_)
-    except BaseException:
-        pass
-    i = 0
-    for chat in chats:
-        try:
-            if int(event.chat_id) == int(chat):
-                continue
-            await event.client.send_message(int(chat), reply)
-            i += 1
-        except:
-            pass
-        await sleep(0.5)
-    resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in category {keyword}.`"
-    await catevent.edit(resultext)
-    if BOTLOG:
-        await event.client.send_message(
-            loggy_grp,
-            f"A message is sent to {i} chats out of {no_of_chats} chats in category {keyword}",
-            parse_mode=parse_pre,
-        )
-
-
-@WhiteEye.on(WhiteEye_on_cmd(pattern="fwdto(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="fwdto(?: |$)(.*)", allow_sudo=True))
-async def catbroadcast_send(event):
-    if event.fwd_from:
-        return
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
-        return await edit_delete(
-            event, "To which category should i send this message", parse_mode=parse_pre
-        )
-    reply = await event.get_reply_message()
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    if not reply:
-        return await edit_delete(
-            event, "what should i send to to this category ?", parse_mode=parse_pre
-        )
-    keyword = catinput_str.lower()
-    no_of_chats = sql.num_broadcastlist_chat(keyword)
-    group_ = Get(cat)
-    if no_of_chats == 0:
-        return await edit_delete(
-            event,
-            f"There is no category with name {keyword}. Check '.listall'",
-            parse_mode=parse_pre,
-        )
-    chats = sql.get_chat_broadcastlist(keyword)
-    catevent = await edit_or_reply(
-        event,
-        "sending this message to all groups in the category",
-        parse_mode=parse_pre,
-    )
-    try:
-        await event.client(group_)
-    except BaseException:
-        pass
-    i = 0
-    for chat in chats:
-        try:
-            if int(event.chat_id) == int(chat):
-                continue
-            await event.client.forward_messages(int(chat), reply)
-            i += 1
-        except:
-            pass
-        await sleep(0.5)
-    resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in category {keyword}.`"
-    await catevent.edit(resultext)
-    if BOTLOG:
-        await event.client.send_message(
-            loggy_grp,
-            f"A message is forwared to {i} chats out of {no_of_chats} chats in category {keyword}",
-            parse_mode=parse_pre,
-        )
-
-
-@WhiteEye.on(WhiteEye_on_cmd(pattern="addto(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="addto(?: |$)(.*)", allow_sudo=True))
-async def catbroadcast_add(event):
-    if event.fwd_from:
-        return
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
-        return await edit_delete(
-            event, "In which category should i add this chat", parse_mode=parse_pre
-        )
-    keyword = catinput_str.lower()
-    check = sql.is_in_broadcastlist(keyword, event.chat_id)
-    if check:
-        return await edit_delete(
-            event,
-            f"This chat is already in this category {keyword}",
-            parse_mode=parse_pre,
-        )
-    sql.add_to_broadcastlist(keyword, event.chat_id)
-    await edit_delete(
-        event, f"This chat is Now added to category {keyword}", parse_mode=parse_pre
-    )
-    chat = await event.get_chat()
-    if BOTLOG:
-        try:
-            await event.client.send_message(
-                loggy_grp,
-                f"The Chat {chat.title} is added to category {keyword}",
-                parse_mode=parse_pre,
-            )
-        except:
-            await event.client.send_message(
-                loggy_grp,
-                f"The user {chat.first_name} is added to category {keyword}",
-                parse_mode=parse_pre,
-            )
-
-
-@WhiteEye.on(WhiteEye_on_cmd(pattern="rmfrom(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="rmfrom(?: |$)(.*)", allow_sudo=True))
-async def catbroadcast_remove(event):
-    if event.fwd_from:
-        return
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
-        return await edit_delete(
-            event, "From which category should i remove this chat", parse_mode=parse_pre
-        )
-    keyword = catinput_str.lower()
-    check = sql.is_in_broadcastlist(keyword, event.chat_id)
-    if not check:
-        return await edit_delete(
-            event, f"This chat is not in the category {keyword}", parse_mode=parse_pre
-        )
-    sql.rm_from_broadcastlist(keyword, event.chat_id)
-    await edit_delete(
-        event,
-        f"This chat is Now removed from the category {keyword}",
-        parse_mode=parse_pre,
-    )
-    chat = await event.get_chat()
-    if BOTLOG:
-        try:
-            await event.client.send_message(
-                loggy_grp,
-                f"The Chat {chat.title} is removed from category {keyword}",
-                parse_mode=parse_pre,
-            )
-        except:
-            await event.client.send_message(
-                BOTLOG_CHATID,
-                f"The user {chat.first_name} is removed from category {keyword}",
-                parse_mode=parse_pre,
-            )
-
-
-@WhiteEye.on(WhiteEye_on_cmd(pattern="list(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="list(?: |$)(.*)", allow_sudo=True))
-async def catbroadcast_list(event):
-    if event.fwd_from:
-        return
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
-        return await edit_delete(
-            event,
-            "Which category Chats should i list ?\nCheck .listall",
-            parse_mode=parse_pre,
-        )
-    keyword = catinput_str.lower()
-    no_of_chats = sql.num_broadcastlist_chat(keyword)
-    if no_of_chats == 0:
-        return await edit_delete(
-            event,
-            f"There is no category with name {keyword}. Check '.listall'",
-            parse_mode=parse_pre,
-        )
-    chats = sql.get_chat_broadcastlist(keyword)
-    catevent = await edit_or_reply(
-        event, f"Fetching info of the category {keyword}", parse_mode=parse_pre
-    )
-    resultlist = f"**The category '{keyword}' have '{no_of_chats}' chats and these are listed below :**\n\n"
-    errorlist = ""
-    for chat in chats:
-        try:
-            chatinfo = await event.client.get_entity(int(chat))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="badd ?(.*)"))
+async def _(event):
+    input_chnnl = event.pattern_match.group(1)
+    sed = 0
+    oks = 0
+    if input_chnnl == "all":
+        addall = [
+            d.entity
+            for d in await event.client.get_dialogs()
+            if (d.is_group or d.is_channel)
+        ]
+        await event.edit("`Adding All Channel TO DB.")
+        for i in addall:
             try:
-                if chatinfo.broadcast:
-                    resultlist += f" 👉 📢 **Channel** \n  •  **Name : **{chatinfo.title} \n  •  **id : **`{int(chat)}`\n\n"
-                else:
-                    resultlist += f" 👉 👥 **Group** \n  •  **Name : **{chatinfo.title} \n  •  **id : **`{int(chat)}`\n\n"
-            except AttributeError:
-                resultlist += f" 👉 👤 **User** \n  •  **Name : **{chatinfo.first_name} \n  •  **id : **`{int(chat)}`\n\n"
-        except:
-            errorlist += f" 👉 __This id {int(chat)} in database probably you may left the chat/channel or may be invalid id.\
-                            \nRemove this id from the database by using this command__ `.frmfrom {keyword} {int(chat)}` \n\n"
-    finaloutput = resultlist + errorlist
-    await edit_or_reply(catevent, finaloutput)
-
-
-@WhiteEye.on(WhiteEye_on_cmd(pattern="listall$"))
-@WhiteEye.on(sudo_cmd(pattern="listall$", allow_sudo=True))
-async def catbroadcast_list(event):
-    if event.fwd_from:
+                if i.broadcast:
+                    if i.creator or i.admin_rights:
+                        if already_added(i.id):
+                            oks += 1
+                        else:
+                            add_chnnl_in_db(i.id)
+                            sed += 1
+            except BaseException:
+                pass
+        await event.edit(
+            f"Process Completed. Added {sed} Channel To List. Failed {oks} Due to already Added !"
+        )
         return
-    if sql.num_broadcastlist_chats() == 0:
-        return await edit_delete(
-            event,
-            "you haven't created at least one category  check info for more help",
-            parse_mode=parse_pre,
-        )
-    chats = sql.get_broadcastlist_chats()
-    resultext = "**Here are the list of your category's :**\n\n"
-    for i in chats:
-        resultext += f" 👉 `{i}` __contains {sql.num_broadcastlist_chat(i)} chats__\n"
-    await edit_or_reply(event, resultext)
-
-
-@WhiteEye.on(WhiteEye_on_cmd(pattern="frmfrom(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="frmfrom(?: |$)(.*)", allow_sudo=True))
-async def catbroadcast_remove(event):
-    if event.fwd_from:
+    elif input_chnnl == "":
+        if event.is_channel and event.is_group:
+            input_chnnl = event.chat_id
+        else:
+            await event.edit("Please Give Group / Channel ID !")
+            return
+    if already_added(input_chnnl):
+        await event.edit("This Channel Already Found in Database.")
         return
-    catinput_str = event.pattern_match.group(1)
-    if not catinput_str:
-        return await edit_delete(
-            event, "From which category should i remove this chat", parse_mode=parse_pre
+    if not already_added(input_chnnl):
+        add_chnnl_in_db(input_chnnl)
+        await event.edit(f"Fine. I have Added {input_chnnl} To DataBase.")
+        await borg.send_message(loggy_grp, f"Added {input_chnnl} To DB")
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern="brm ?(.*)"))
+async def _(event):
+    input_chnnl = event.pattern_match.group(1)
+    all_chnnl = get_all_chnnl()
+    if input_chnnl == "all":
+        for channelz in all_chnnl:
+            rm_channel(channelz.chat_id)
+        await event.edit("Fine. Cleared All Channel Database")
+        return
+    if input_chnnl is "":
+        if event.is_channel and event.is_group:
+            input_chnnl = event.chat_id
+        else:
+            await event.edit("Please Give Group / Channel ID")
+            return
+    if already_added(input_chnnl):
+        rm_channel(input_chnnl)
+        await event.edit(f"Fine. I have Removed {input_chnnl} From DataBase.")
+        await borg.send_message(loggy_grp, f"Removed {input_chnnl} From DB")
+    elif not already_added(input_chnnl):
+        await event.edit(
+            "Are You Sure? , You Haven't Added This Group / Channel To Database"
         )
-    args = catinput_str.split(" ")
-    if len(args) != 2:
-        return await edit_delete(
-            event,
-            "Use proper syntax as shown .frmfrom category_name groupid",
-            parse_mode=parse_pre,
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern="broadcast"))
+async def _(event):
+    await event.edit("**Fine. Broadcasting in Progress. Kindly Wait !**")
+    sedpath = Config.TMP_DOWNLOAD_DIRECTORY
+    all_chnnl = get_all_chnnl()
+    if len(all_chnnl) == 0:
+        await event.edit("No Channel Or Group Found On Database. Please Check Again")
+        return
+    total_errors = 0
+    total_count = 0
+    errorno = ""
+    total_chnnl = len(all_chnnl)
+    if event.reply_to_msg_id:
+        hmm = await event.get_reply_message()
+    else:
+        event.edit("Reply To Some Message.")
+        return
+    if hmm and hmm.media:
+        ok = await borg.download_media(hmm.media, sedpath)
+        for channelz in all_chnnl:
+            try:
+                await borg.send_file(int(channelz.chat_id), file=ok, caption=hmm.text)
+                total_count += 1
+            except Exception as e:
+                total_errors += 1
+                errorno += f"{e} \n"
+        await borg.send_message(
+            loggy_grp,
+            f"Error : {total_errors}\nError : {errorno}",
         )
-    try:
-        groupid = int(args[0])
-        keyword = args[1].lower()
-    except ValueError:
-        try:
-            groupid = int(args[1])
-            keyword = args[0].lower()
-        except ValueError:
-            return await edit_delete(
-                event,
-                "Use proper syntax as shown .frmfrom category_name groupid",
-                parse_mode=parse_pre,
-            )
-    keyword = keyword.lower()
-    check = sql.is_in_broadcastlist(keyword, int(groupid))
-    if not check:
-        return await edit_delete(
-            event,
-            f"This chat {groupid} is not in the category {keyword}",
-            parse_mode=parse_pre,
+        if os.path.exists(ok):
+            os.remove(ok)
+    elif hmm and hmm.text:
+        for channelz in all_chnnl:
+            try:
+                await borg.send_message(int(channelz.chat_id), hmm.text)
+                total_count += 1
+            except Exception as e:
+                total_errors += 1
+                errorno += f"{e} \n"
+        await borg.send_message(
+            loggy_grp,
+            f"Error : {total_errors}\nError : {errorno}",
         )
-    sql.rm_from_broadcastlist(keyword, groupid)
-    await edit_delete(
-        event,
-        f"This chat {groupid} is Now removed from the category {keyword}",
-        parse_mode=parse_pre,
+    elif hmm.message.poll:
+        await event.edit("Bruh, This Can't Be Broadcasted.")
+        return
+    await event.edit(
+        f"BroadCast Success In : {total_count} \nFailed In : {total_errors} \nTotal Channel In DB : {total_chnnl}"
     )
-    chat = await event.get_chat()
-    if BOTLOG:
-        try:
-            await event.client.send_message(
-                loggy_grp,
-                f"The Chat {chat.title} is removed from category {keyword}",
-                parse_mode=parse_pre,
-            )
-        except:
-            await event.client.send_message(
-                loggy_grp,
-                f"The user {chat.first_name} is removed from category {keyword}",
-                parse_mode=parse_pre,
-            )
+    await borg.send_message(
+        loggy_grp,
+        f"BroadCast Success In : {total_count} \nFailed In : {total_errors} \nTotal Channel In DB : {total_chnnl}",
+    )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="delc(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="delc(?: |$)(.*)", allow_sudo=True))
-async def catbroadcast_delete(event):
-    if event.fwd_from:
+@WhiteEye.on(WhiteEye_on_cmd(pattern="bforward"))
+async def _(event):
+    all_chnnl = get_all_chnnl()
+    if len(all_chnnl) == 0:
+        await event.edit("No Channel Or Group Found On Database. Please Check Again")
         return
-    catinput_str = event.pattern_match.group(1)
-    check1 = sql.num_broadcastlist_chat(catinput_str)
-    if check1 < 1:
-        return await edit_delete(
-            event,
-            f"Are you sure that there is category {catinput_str}",
-            parse_mode=parse_pre,
-        )
+    total_errors = 0
+    total_count = 0
+    total_chnnl = len(all_chnnl)
+    if event.reply_to_msg_id:
+        hmm = await event.get_reply_message()
+    else:
+        event.edit("Reply To Some Message.")
+        return
     try:
-        sql.del_keyword_broadcastlist(catinput_str)
-        await edit_or_reply(
-            event,
-            f"Successfully deleted the category {catinput_str}",
-            parse_mode=parse_pre,
-        )
+        for forbard in all_chnnl:
+            await hmm.forward_to(forbard.chat_id)
+            total_count += 1
     except Exception as e:
-        await edit_delete(
-            event,
-            str(e),
-            parse_mode=parse_pre,
-        )
+        total_errors += 1
+        try:
+            logger.info(f"Error : {error_count}\nError : {e} \nUsers : {chat_id}")
+        except:
+            pass
+    await event.edit(
+        f"Forward Success in {total_count} And Failed In {total_errors} And Total Channel In Db is {total_chnnl}"
+    )
+    await borg.send_message(
+        loggy_grp,
+        f"Forward Success in {total_count} And Failed In {total_errors} And Total Channel In Db is {total_chnnl}",
+    )
 
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern="bstat"))
+async def _(event):
+    total_chnnl = get_all_chnnl()
+    chnnl_list = ""
+    for starked in total_chnnl:
+        try:
+            chnnl_list += ("==> {} \n").format(starked.chat_id)
+        except Exception:
+            pass
+    with io.BytesIO(str.encode(chnnl_list)) as tedt_file:
+        tedt_file.name = "dbchnnllist.txt"
+        await borg.send_file(
+            event.chat_id,
+            tedt_file,
+            force_document=True,
+            caption="Total Channel In DB.",
+            allow_cache=False,
+        )
 
 CMD_HELP.update(
     {
-        "broadcast": """**Plugin : ** `broadcast`
-  •  **Syntax : **`.sendto category_name`
-  •  **Function : **__will send the replied message to all the chats in give category__
-  •  **Syntax : **`.fwdto category_name`
-  •  **Function : **__will forward the replied message to all the chats in give category__
-  •  **Syntax : **`.addto category_name`
-  •  **Function : **__It will add this chat/user/channel to the category of the given name__
-  •  **Syntax : **`.rmfrom category_name`
-  •  **Function : **__To remove the Chat/user/channel from the given category name__
-  •  **Syntax : **`.list category_name`
-  •  **Function : **__Will show the list of all chats in the given category__
-  •  **Syntax : **`.listall`
-  •  **Function : **__Will show the list of all category names__
-  •  **Syntax : **`.frmfrom category_name chat_id`
-  •  **Function : **__To force remove the given chat_id from the given category name usefull when you left that chat or banned you there__
-  •  **Syntax : **`delc category_name`
-  •  **Function : **__Deletes the category completely in database__
-"""
+        "broadcast": "**broadcast**\
+        \n\n**Syntax : **`.badd <channel_id>`\
+        \n**Usage :** Adds the given channel/group to database.\
+        \n\n**Syntax : **`.badd all`\
+        \n**Usage :** Adds all the channel/groups to database where you are admin.\
+        \n\n**Syntax : **`.brm <channel_id>`\
+        \n**Usage :** Removes the Specified Channel From database.\
+        \n\n**Syntax : **`.brm all`\
+        \n**Usage :** Removes Everything From DataBase.\
+        \n\n**Syntax : **`.broadcast <Reply-To-Msg>`\
+        \n**Usage :**  Broadcasts To All Channel in DB, Even Supports Media.\
+        \n\n**Syntax : **`.forward <Reply-To-Msg>`\
+        \n**Usage :** Forwards To All Channel in Database.\
+        \n\n**Syntax : **`.bstat`\
+        \n**Usage :** Shows list of channels/groups in database."
     }
-)
+)  
