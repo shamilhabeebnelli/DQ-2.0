@@ -271,8 +271,8 @@ async def catbroadcast_list(event):
     await edit_or_reply(event, resultext)
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="frmfrom(?: |$)(.*)", command="frmfrom"))
-@WhiteEye.on(sudo_cmd(pattern="frmfrom(?: |$)(.*)", command="frmfrom", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="frmfrom(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="frmfrom(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_remove(event):
     if event.fwd_from:
         return
