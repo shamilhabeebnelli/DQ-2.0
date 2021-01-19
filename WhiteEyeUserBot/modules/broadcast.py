@@ -12,20 +12,29 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+import io
+import os
+
 import base64
 from asyncio import sleep
 
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
-from WhiteEyeUserBot import BOTLOG, BOTLOG_CHATID, CMD_HELP
+from WhiteEyeUserBot import CMD_HELP, BOTLOG, BOTLOG_CHATID
 from WhiteEyeUserBot.Configs import Config
+from WhiteEyeUserBot.modules.sql_helper.broadcast_sql import (
+    add_chnnl_in_db,
+    already_added,
+    get_all_chnnl,
+    rm_channel,
+)
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 loggy_grp = Config.PRIVATE_GROUP_ID
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="sendto(?: |$)(.*)", command="sendto"))
-@WhiteEye.on(sudo_cmd(pattern="sendto(?: |$)(.*)", command="sendto", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="sendto(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="sendto(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_send(event):
     if event.fwd_from:
         return
@@ -79,8 +88,8 @@ async def catbroadcast_send(event):
         )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="fwdto(?: |$)(.*)", command="fwdto"))
-@WhiteEye.on(sudo_cmd(pattern="fwdto(?: |$)(.*)", command="fwdto", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="fwdto(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="fwdto(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_send(event):
     if event.fwd_from:
         return
@@ -134,8 +143,8 @@ async def catbroadcast_send(event):
         )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="addto(?: |$)(.*)", command="addto"))
-@WhiteEye.on(sudo_cmd(pattern="addto(?: |$)(.*)", command="addto", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="addto(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="addto(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_add(event):
     if event.fwd_from:
         return
@@ -172,8 +181,8 @@ async def catbroadcast_add(event):
             )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="rmfrom(?: |$)(.*)", command="rmfrom"))
-@WhiteEye.on(sudo_cmd(pattern="rmfrom(?: |$)(.*)", command="rmfrom", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="rmfrom(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="rmfrom(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_remove(event):
     if event.fwd_from:
         return
@@ -210,8 +219,8 @@ async def catbroadcast_remove(event):
             )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="list(?: |$)(.*)", command="list"))
-@WhiteEye.on(sudo_cmd(pattern="list(?: |$)(.*)", command="list", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="list(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="list(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_list(event):
     if event.fwd_from:
         return
@@ -253,8 +262,8 @@ async def catbroadcast_list(event):
     await edit_or_reply(catevent, finaloutput)
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="listall$", command="listall"))
-@WhiteEye.on(sudo_cmd(pattern="listall$", command="listall", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="listall$"))
+@WhiteEye.on(sudo_cmd(pattern="listall$", allow_sudo=True))
 async def catbroadcast_list(event):
     if event.fwd_from:
         return
@@ -331,8 +340,8 @@ async def catbroadcast_remove(event):
             )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="delc(?: |$)(.*)", command="delc"))
-@WhiteEye.on(sudo_cmd(pattern="delc(?: |$)(.*)", command="delc", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="delc(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="delc(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_delete(event):
     if event.fwd_from:
         return
