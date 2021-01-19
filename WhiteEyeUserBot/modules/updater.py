@@ -184,7 +184,7 @@ async def upstream(event):
     """ - Special case for deploy - """
     if conf == "deploy":
         await event.edit(
-            "**Perfoming a Power Update, Please Wait. It Usually Takes 5 min.**"
+            "**Perfoming a Deep Update, Please Wait. It Usually Takes 20 min.**"
         )
         await deploy(event, repo, ups_rem, ac_br, txt)
         return
