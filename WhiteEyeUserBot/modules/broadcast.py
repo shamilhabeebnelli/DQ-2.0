@@ -15,6 +15,7 @@
 import io
 import os
 
+from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.modules.sql_helper.broadcast_sql import (
     add_chnnl_in_db,
@@ -23,7 +24,6 @@ from WhiteEyeUserBot.modules.sql_helper.broadcast_sql import (
     rm_channel,
 )
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot import CMD_HELP
 
 loggy_grp = Config.PRIVATE_GROUP_ID
 
@@ -203,6 +203,7 @@ async def _(event):
             allow_cache=False,
         )
 
+
 CMD_HELP.update(
     {
         "broadcast": "**broadcast**\
@@ -221,4 +222,4 @@ CMD_HELP.update(
         \n\n**Syntax : **`.bstat`\
         \n**Usage :** Shows list of channels/groups in database."
     }
-)  
+)
