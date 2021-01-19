@@ -19,7 +19,6 @@ from sqlalchemy import Column, String, UnicodeText, distinct, func
 from . import BASE, SESSION
 
 
-
 class CatBroadcast(BASE):
     __tablename__ = "catbroadcast"
     keywoard = Column(UnicodeText, primary_key=True)
