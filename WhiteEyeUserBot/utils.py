@@ -700,8 +700,8 @@ def start_assistant(shortname):
         spec.loader.exec_module(mod)
         sys.modules["WhiteEyeUserBot.modules.assistant" + shortname] = mod
         print("Assistant Has imported " + shortname)
-        
-        
+
+
 async def edit_or_reply(
     event,
     text,
@@ -765,4 +765,4 @@ async def edit_or_reply(
         return os.remove(file_name)
     await event.client.send_file(event.chat_id, file_name, caption=caption)
     await event.delete()
-    os.remove(file_name)        
+    os.remove(file_name)
