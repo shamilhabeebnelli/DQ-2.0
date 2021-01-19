@@ -12,22 +12,13 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import io
-import os
-
 import base64
 from asyncio import sleep
 
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
-from WhiteEyeUserBot import CMD_HELP, BOTLOG, BOTLOG_CHATID
+from WhiteEyeUserBot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from WhiteEyeUserBot.Configs import Config
-from WhiteEyeUserBot.modules.sql_helper.broadcast_sql import (
-    add_chnnl_in_db,
-    already_added,
-    get_all_chnnl,
-    rm_channel,
-)
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
 loggy_grp = Config.PRIVATE_GROUP_ID
