@@ -3,6 +3,7 @@ from asyncio import sleep
 
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
+from .sql_helper import broadcast_sql as sql
 from WhiteEyeUserBot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
