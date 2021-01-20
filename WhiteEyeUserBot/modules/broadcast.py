@@ -5,11 +5,11 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 from WhiteEyeUserBot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from WhiteEyeUserBot.Configs import Config
+from WhiteEyeUserBot.Server import parse_pre
 from WhiteEyeUserBot.utils import (
     WhiteEye_on_cmd,
     edit_delete,
     edit_or_reply,
-    parse_pre,
     sudo_cmd,
 )
 
