@@ -789,9 +789,4 @@ async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None
     return await catevent.delete()
 
 
-def parse_pre(text):
-    text = text.strip()
-    return (
-        text,
-        [MessageEntityPre(offset=0, length=len(add_surrogate(text)), language="")],
-    )
+  
