@@ -110,7 +110,7 @@ async def gspider(WhiteEyeUserBot):
     except:
         pass
     return await WhiteEye.edit(
-        f"**Gbanned [{user.first_name}](tg://user?id={user.id}) Affected Chats : {a} **"
+        f"**WhiteEye Gbanned [{user.first_name}](tg://user?id={user.id}) And Added To SpamWatch In The Chats Where Me Is Admin/Owner : {a} **"
     )
 
 
