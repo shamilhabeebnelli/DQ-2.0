@@ -787,6 +787,3 @@ async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None
         )
     await asyncio.sleep(time)
     return await catevent.delete()
-
-
-  
