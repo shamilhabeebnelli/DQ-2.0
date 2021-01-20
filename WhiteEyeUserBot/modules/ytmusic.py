@@ -23,9 +23,10 @@ async def _(event):
     mio = mi["search_result"]
     mo = mio[0]["link"]
     thum = mio[0]["title"]
+    whiteeyez = mio[0]["id"]
     mio[0]["id"]
     thums = mio[0]["channel"]
-    kekme = f"https://img.youtube.com/vi/{fridayz}/hqdefault.jpg"
+    kekme = f"https://img.youtube.com/vi/{whiteeyez}/hqdefault.jpg"
     await asyncio.sleep(0.6)
     if not os.path.isdir("./music/"):
         os.makedirs("./music/")
