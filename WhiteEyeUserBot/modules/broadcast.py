@@ -117,7 +117,7 @@ async def catbroadcast_send(event):
     await catevent.edit(resultext)
     if BOTLOG:
         await event.client.send_message(
-            loggy_grp,
+            BOTLOG_CHATID,
             f"A message is forwared to {i} chats out of {no_of_chats} chats in category {keyword}",
             parse_mode=parse_pre,
         )
