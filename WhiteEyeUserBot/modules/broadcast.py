@@ -5,7 +5,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 from WhiteEyeUserBot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from WhiteEyeUserBot.Configs import Config
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_delete, edit_or_reply, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_delete, edit_or_reply, sudo_cmd, parse_pre
 
 from .sql_helper import broadcast_sql as sql
 
