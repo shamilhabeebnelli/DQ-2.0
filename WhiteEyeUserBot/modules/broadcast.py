@@ -62,14 +62,14 @@ async def catbroadcast_send(event):
     await catevent.edit(resultext)
     if BOTLOG:
         await event.client.send_message(
-            loggy_grp,
+            BOTLOG_CHATID,
             f"A message is sent to {i} chats out of {no_of_chats} chats in category {keyword}",
             parse_mode=parse_pre,
         )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="fwd(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="fwd(?: |$)(.*)", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="fwdto(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="fwdto(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_send(event):
     if event.fwd_from:
         return
@@ -123,8 +123,8 @@ async def catbroadcast_send(event):
         )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="subto(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="subto(?: |$)(.*)", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="addto(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="addto(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_add(event):
     if event.fwd_from:
         return
@@ -149,7 +149,7 @@ async def catbroadcast_add(event):
     if BOTLOG:
         try:
             await event.client.send_message(
-                loggy_grp,
+                BOTLOG_CHATID,
                 f"The Chat {chat.title} is added to category {keyword}",
                 parse_mode=parse_pre,
             )
@@ -187,7 +187,7 @@ async def catbroadcast_remove(event):
     if BOTLOG:
         try:
             await event.client.send_message(
-                loggy_grp,
+                BOTLOG_CHATID,
                 f"The Chat {chat.title} is removed from category {keyword}",
                 parse_mode=parse_pre,
             )
@@ -261,7 +261,7 @@ async def catbroadcast_list(event):
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="frmfrom(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="frmfrom(?: |$)(.*)", allow_sudo=True))
+@WhiteEye.on(sudo_cmd(pattern="frmfrom(?: |$)(.*)", command="frmfrom", allow_sudo=True))
 async def catbroadcast_remove(event):
     if event.fwd_from:
         return
@@ -308,7 +308,7 @@ async def catbroadcast_remove(event):
     if BOTLOG:
         try:
             await event.client.send_message(
-                loggy_grp,
+                BOTLOG_CHATID,
                 f"The Chat {chat.title} is removed from category {keyword}",
                 parse_mode=parse_pre,
             )
