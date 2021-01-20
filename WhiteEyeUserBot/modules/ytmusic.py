@@ -6,7 +6,7 @@ from youtubesearchpython import SearchVideos
 
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.Configs import Config
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="ytmusic ?(.*)"))
@@ -23,7 +23,7 @@ async def _(event):
     mio = mi["search_result"]
     mo = mio[0]["link"]
     thum = mio[0]["title"]
-    WhiteEyez = mio[0]["id"]
+    mio[0]["id"]
     thums = mio[0]["channel"]
     kekme = f"https://img.youtube.com/vi/{fridayz}/hqdefault.jpg"
     await asyncio.sleep(0.6)
