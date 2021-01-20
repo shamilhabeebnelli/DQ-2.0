@@ -124,7 +124,7 @@ async def catbroadcast_send(event):
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="subto(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="addto(?: |$)(.*)", allow_sudo=True))
+@WhiteEye.on(sudo_cmd(pattern="subto(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_add(event):
     if event.fwd_from:
         return
