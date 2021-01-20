@@ -68,8 +68,8 @@ async def catbroadcast_send(event):
         )
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="fwdto(?: |$)(.*)"))
-@WhiteEye.on(sudo_cmd(pattern="fwdto(?: |$)(.*)", allow_sudo=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="fwd(?: |$)(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="fwd(?: |$)(.*)", allow_sudo=True))
 async def catbroadcast_send(event):
     if event.fwd_from:
         return
