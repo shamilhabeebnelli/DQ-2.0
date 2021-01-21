@@ -488,8 +488,8 @@ async def _ytdl(url, is_it, event, tgbot):
             file=hmmo, text=f"{ytdl_data['title']} \n**Uploaded Using @WhiteEyeDevs**"
         )
         os.remove(f"{ytdl_data['id']}.mp4")
-                  
-                  
+
+
 # Thanks To @HeisenbergTheDanger, @xditya
 async def fetch_feds(event, borg):
     fedList = []
@@ -554,5 +554,3 @@ async def fetch_feds(event, borg):
                     tempFedId += x
     await event.edit("`FeD List Fetched SucessFully.`")
     return fedList
-
-                  
