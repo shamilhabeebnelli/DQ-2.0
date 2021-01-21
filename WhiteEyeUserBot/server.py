@@ -1,13 +1,11 @@
-import datetime
 import asyncio
-import os
-import re
-import requests
-from WhiteEyeUserBot.Configs import Config
+import datetime
 
 from telethon.tl.tlobject import TLObject
 from telethon.tl.types import MessageEntityPre
 from telethon.utils import add_surrogate
+
+from WhiteEyeUserBot.Configs import Config
 
 
 def mentionuser(name, userid):
@@ -95,8 +93,8 @@ def yaml_format(obj, indent=0, max_str_len=256, max_byte_len=64):
         return repr(obj)
 
     return "".join(result)
-                          
-                          
+
+
 async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None):
     parse_mode = parse_mode or "md"
     link_preview = link_preview or False
@@ -115,4 +113,4 @@ async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None
             text, link_preview=link_preview, parse_mode=parse_mode
         )
     await asyncio.sleep(time)
-    return await catevent.delete()                          
+    return await catevent.delete()
