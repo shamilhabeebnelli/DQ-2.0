@@ -143,7 +143,7 @@ def load_module(shortname):
         mod.logger = logging.getLogger(shortname)
         # support for uniborg
         sys.modules["uniborg.util"] = WhiteEyeUserBot.utils
-        sys.modules["WhiteEye.util"] = WhiteEyeUserBot.utils
+        sys.modules["WhiteEyeUserBot.util"] = WhiteEyeUserBot.utils
         sys.modules["userbot.utils"] = WhiteEyeUserBot.utils
         sys.modules["userbot.plugins"] = WhiteEyeUserBot.modules
         sys.modules["plugins"] = WhiteEyeUserBot.modules
