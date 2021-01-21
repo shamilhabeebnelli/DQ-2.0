@@ -1,13 +1,14 @@
 import html
-from WhiteEyeUserBot.modules.sql_helper.gmute_sql import is_gmuted
-from WhiteEyeUserBot.modules.sql_helper.mute_sql import is_muted, mute, unmute
+
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
 from WhiteEyeUserBot import CMD_HELP, sclient
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.modules.sql_helper.gmute_sql import is_gmuted
+from WhiteEyeUserBot.modules.sql_helper.mute_sql import is_muted
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("info ?(.*)"))
@@ -171,7 +172,7 @@ async def gibinfo(event):
             oki = f"""<i>True</i>
 <b>~ Reason :</b> <i>{hmmyes.reason}</i>"""
         else:
-            oki = "<i>False</i>"
+            pass
     infomsg = (
         f"<b>Info Of</b> <a href=tg://user?id={lolu.user.id}>{lolu.user.first_name}</a>: \n"
         f"<b>- Username :</b> <i>{lolu.user.username}</i>\n"
