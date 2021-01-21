@@ -1,4 +1,9 @@
 import datetime
+import asyncio
+import os
+import re
+import requests
+from WhiteEyeUserBot.Configs import Config
 
 from telethon.tl.tlobject import TLObject
 from telethon.tl.types import MessageEntityPre
@@ -90,3 +95,24 @@ def yaml_format(obj, indent=0, max_str_len=256, max_byte_len=64):
         return repr(obj)
 
     return "".join(result)
+                          
+                          
+async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None):
+    parse_mode = parse_mode or "md"
+    link_preview = link_preview or False
+    time = time or 5
+    if event.sender_id in Config.SUDO_USERS:
+        reply_to = await event.get_reply_message()
+        catevent = (
+            await reply_to.reply(text, link_preview=link_preview, parse_mode=parse_mode)
+            if reply_to
+            else await event.reply(
+                text, link_preview=link_preview, parse_mode=parse_mode
+            )
+        )
+    else:
+        catevent = await event.edit(
+            text, link_preview=link_preview, parse_mode=parse_mode
+        )
+    await asyncio.sleep(time)
+    return await catevent.delete()                          
