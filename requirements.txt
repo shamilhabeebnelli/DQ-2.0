@@ -87,3 +87,4 @@ pyjokes
 cryptocompare
 googletrans
 PyDictionary
+pdf2docx
