@@ -5,8 +5,12 @@ DB Options: bots, commands, email, forward, url"""
 
 from telethon import events, functions, types
 
-from WhiteEyeUserBot.modules.sql_helper.locks_sql import get_locks, is_locked, update_lock
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.modules.sql_helper.locks_sql import (
+    get_locks,
+    is_locked,
+    update_lock,
+)
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("lock( (?P<target>\S+)|$)"))
@@ -94,7 +98,9 @@ async def _(event):
         update_lock(peer_id, input_str, False)
         await whiteeyegang.edit("UnLocked {}".format(input_str))
     else:
-        await whiteeyegang.edit("Use `.lock` without any parameters to unlock API locks")
+        await whiteeyegang.edit(
+            "Use `.lock` without any parameters to unlock API locks"
+        )
 
 
 @WhiteEye.on(WhiteEye_on_cmd("curenabledlocks"))
