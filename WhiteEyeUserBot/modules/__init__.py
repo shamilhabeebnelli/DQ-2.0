@@ -1,6 +1,7 @@
+from var import Var
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from var import Var
+
 issudousing = Config.SUDO_USERS
 islogokay = Config.PRIVATE_GROUP_ID
 isdbfine = Var.DB_URI
