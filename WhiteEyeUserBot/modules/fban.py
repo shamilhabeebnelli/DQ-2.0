@@ -1,3 +1,5 @@
+import asyncio
+
 from WhiteEyeUserBot.function import fetch_feds
 from WhiteEyeUserBot.modules.sql_helper.feds_sql import (
     add_fed,
@@ -5,7 +7,6 @@ from WhiteEyeUserBot.modules.sql_helper.feds_sql import (
     is_fed_indb,
     rmfed,
 )
-import asyncio
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 chnnl_grp = Config.FBAN_GROUP
@@ -72,7 +73,9 @@ async def _(event):
     errors = 0
     len_feds = len(all_fed)
     if len_feds == 0:
-        await event.edit("`No Fed IN DB, Add One To Do So. Please Do .fadd all to Add All Feds IN Database`")
+        await event.edit(
+            "`No Fed IN DB, Add One To Do So. Please Do .fadd all to Add All Feds IN Database`"
+        )
         return
     await event.edit(f"`FBanning in {len_feds} Feds.`")
     try:
