@@ -26,6 +26,7 @@ from logging import DEBUG, INFO, basicConfig, getLogger
 
 import pylast
 import wget
+from nospamplus.connect import Connect
 from dotenv import load_dotenv
 from pylast import LastFMNetwork, md5
 from pySmartDL import SmartDL
@@ -37,7 +38,6 @@ from telethon.sessions import StringSession
 from var import Var
 
 from .Configs import Config
-from .function import WhiteEyefunction as topfunc
 
 Lastupdate = time.time()
 sedprint = logging.getLogger("WARNING")
