@@ -1,14 +1,13 @@
-"""Get Telegram Profile Picture and other information
-Syntax: .info @username"""
 import html
-
+from WhiteEyeUserBot.modules.sql_helper.gmute_sql import is_gmuted
+from WhiteEyeUserBot.modules.sql_helper.mute_sql import is_muted, mute, unmute
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
 from WhiteEyeUserBot import CMD_HELP, sclient
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
+from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("info ?(.*)"))
@@ -47,13 +46,15 @@ async def _(event):
     except Exception as e:
         dc_id = "Unknown."
         str(e)
-    hmmyes = sclient.is_banned(user_id)
-    if hmmyes.banned == True:
-        oki = f"""<b>ANTISPAM INC BANNED:</b> <code>True</code> 
-<b>Reason :</b> <code>{hmmyes.reason}</code>"""
-    else:
-        oki = " "
     shazam = replied_user_profile_photos_count
+    if is_gmuted(user_id):
+        is_gbanned = "This User Is Gbanned"
+    elif not is_gmuted(user_id):
+        is_gbanned = False
+    if is_muted(user_id, "gmute"):
+        is_gmutted = "User is Tapped."
+    elif not is_muted(user_id, "gmute"):
+        is_gmutted = False
     caption = f"""<b>INFO<b>
 <b>Telegram ID</b>: <code>{user_id}</code>
 <b>Permanent Link</b>: <a href='tg://user?id={user_id}'>Click Here</a>
@@ -66,7 +67,8 @@ async def _(event):
 <b>VERIFIED</b>: <code>{replied_user.user.verified}</code>
 <b>IS A BOT</b>: <code>{replied_user.user.bot}</code>
 <b>Groups in Common</b>: <code>{common_chats}</code>
-{oki}
+<b>Is Gbanned</b>: <code>{is_gbanned}</code>
+<b>Is Gmutted</b>: <code>{is_gmutted}</code>
 """
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
@@ -89,14 +91,14 @@ async def get_full_user(event):
         if previous_message.forward:
             replied_user = await event.client(
                 GetFullUserRequest(
-                    previous_message.forward.from_id
+                    previous_message.forward.sender_id
                     or previous_message.forward.channel_id
                 )
             )
             return replied_user, None
         else:
             replied_user = await event.client(
-                GetFullUserRequest(previous_message.from_id)
+                GetFullUserRequest(previous_message.sender_id)
             )
             return replied_user, None
     else:
@@ -105,7 +107,14 @@ async def get_full_user(event):
             input_str = event.pattern_match.group(1)
         except IndexError as e:
             return None, e
-        if event.message.entities is not None:
+        if event.is_private:
+            try:
+                user_id = event.chat_id
+                replied_user = await event.client(GetFullUserRequest(user_id))
+                return replied_user, None
+            except Exception as e:
+                return None, e
+        elif event.message.entities is not None:
             mention_entity = event.message.entities
             probable_user_mention_entity = mention_entity[0]
             if isinstance(probable_user_mention_entity, MessageEntityMentionName):
@@ -120,13 +129,6 @@ async def get_full_user(event):
                     return replied_user, None
                 except Exception as e:
                     return None, e
-        elif event.is_private:
-            try:
-                user_id = event.chat_id
-                replied_user = await event.client(GetFullUserRequest(user_id))
-                return replied_user, None
-            except Exception as e:
-                return None, e
         else:
             try:
                 user_object = await event.client.get_entity(int(input_str))
@@ -137,10 +139,55 @@ async def get_full_user(event):
                 return None, e
 
 
+@WhiteEye.on(WhiteEye_on_cmd("wru ?(.*)"))
+@WhiteEye.on(sudo_cmd("wru ?(.*)", allow_sudo=True))
+async def gibinfo(event):
+    if not event.pattern_match.group(1):
+        user = (
+            (await event.get_reply_message()).sender if event.is_reply else event.sender
+        )
+        lolu = await event.client(GetFullUserRequest(user.id))
+    else:
+        try:
+            lolu = await event.client(GetFullUserRequest(event.pattern_match.group(1)))
+        except:
+            await event.edit("<i>No User Found.</i>", parse_mode="HTML")
+            return
+    try:
+        cas_url = f"https://combot.org/api/cas/check?user_id={lolu.user.id}"
+        r = get(cas_url, timeout=3)
+        data = r.json()
+    except:
+        data = None
+    if data and data["ok"]:
+        reason = f"<i>True</i>"
+    else:
+        reason = f"<i>False</i>"
+    if sclient is None:
+        oki = "<i>Token Invalid</i>"
+    elif sclient:
+        hmmyes = sclient.is_banned(lolu.user.id)
+        if hmmyes:
+            oki = f"""<i>True</i>
+<b>~ Reason :</b> <i>{hmmyes.reason}</i>"""
+        else:
+            oki = "<i>False</i>"
+    infomsg = (
+        f"<b>Info Of</b> <a href=tg://user?id={lolu.user.id}>{lolu.user.first_name}</a>: \n"
+        f"<b>- Username :</b> <i>{lolu.user.username}</i>\n"
+        f"<b>- ID :</b> <i>{lolu.user.id}</i>\n"
+        f"<b>- Bot :</b> <i>{lolu.user.bot}</i>\n"
+        f"<b>- CAS Banned :</b> {reason} \n"
+    )
+    await event.edit(infomsg, parse_mode="HTML")
+
+
 CMD_HELP.update(
     {
         "information": "**Information**\
 \n\n**Syntax : **`.info <mention a username/reply to a message>`\
-\n**Usage :** Gives you information about the username."
+\n**Usage :** Gives you information about the username.\
+\n\n**Syntax : **`.wru <mention a username/reply to a message>`\
+\n**Usage :** Shows if the person is banned in NospamPlus or not."
     }
 )
