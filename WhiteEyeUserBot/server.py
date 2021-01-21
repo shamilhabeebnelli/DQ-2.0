@@ -114,7 +114,8 @@ async def edit_delete(event, text, time=None, parse_mode=None, link_preview=None
         )
     await asyncio.sleep(time)
     return await catevent.delete()
-                          
+
+
 async def edit_or_reply(
     event,
     text,
@@ -178,4 +179,4 @@ async def edit_or_reply(
         return os.remove(file_name)
     await event.client.send_file(event.chat_id, file_name, caption=caption)
     await event.delete()
-    os.remove(file_name)                          
+    os.remove(file_name)
