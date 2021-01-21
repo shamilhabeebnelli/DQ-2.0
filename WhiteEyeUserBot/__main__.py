@@ -74,6 +74,7 @@ if Config.ENABLE_ASSISTANTBOT == "ENABLE":
 ██║███╗██║██╔══██║██║   ██║   ██╔══╝  ██╔══╝    ╚██╔╝  ██╔══╝      
 ╚███╔███╔╝██║  ██║██║   ██║   ███████╗███████╗   ██║   ███████╗    
  ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝    """
+    )    
 else:
     sed.info("WhiteEye Has Been Installed Sucessfully !")
     sed.info("You Can Visit @WhiteEyeDevs For Any Support Or Doubts")
