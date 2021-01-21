@@ -1,10 +1,6 @@
-from var import Var
-from WhiteEyeUserBot import topfunc
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-
-idgen = topfunc.id_generator
-findnemo = topfunc.stark_finder
+from var import Var
 issudousing = Config.SUDO_USERS
 islogokay = Config.PRIVATE_GROUP_ID
 isdbfine = Var.DB_URI
@@ -13,7 +9,7 @@ gdriveisshit = Config.AUTH_TOKEN_DATA
 wttrapi = Config.OPEN_WEATHER_MAP_APPID
 rmbg = Config.REM_BG_API_KEY
 hmmok = Config.LYDIA_API
-currentversion = "4.0"
+currentversion = "5.0"
 if issudousing:
     amiusingsudo = "Active ✅"
 else:
@@ -40,14 +36,14 @@ else:
     gendu = "Not Added ❌"
 
 if wttrapi:
-    dayamnoobs = "Added ✅"
+    starknoobs = "Added ✅"
 else:
-    dayamnoobs = "Not Added ❌"
+    starknoobs = "Not Added ❌"
 
 if hmmok:
-    arantxa = "Added ✅"
+    meiko = "Added ✅"
 else:
-    arantxa = "Not Added ❌"
+    meiko = "Not Added ❌"
 
 if isdbfine:
     dbstats = "Fine ✅"
