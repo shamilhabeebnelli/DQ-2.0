@@ -23,6 +23,7 @@ from pathlib import Path
 
 from telethon import events
 
+from var import Var
 from WhiteEyeUserBot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.wraptools import (
@@ -32,7 +33,7 @@ from WhiteEyeUserBot.wraptools import (
     ignore_grp,
     ignore_pm,
 )
-from var import Var
+
 sedprint = logging.getLogger("PLUGINS")
 cmdhandler = Config.COMMAND_HAND_LER
 bothandler = Config.BOT_HANDLER
