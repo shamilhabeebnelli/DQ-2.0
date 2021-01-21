@@ -5,12 +5,8 @@ DB Options: bots, commands, email, forward, url"""
 
 from telethon import events, functions, types
 
-from WhiteEyeUserBot.modules.sql_helper.locks_sql import (
-    get_locks,
-    is_locked,
-    update_lock,
-)
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
+from WhiteEyeUserBot.modules.sql_helper.locks_sql import get_locks, is_locked, update_lock
+from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd("lock( (?P<target>\S+)|$)"))
@@ -89,16 +85,16 @@ async def _(event):
 @WhiteEye.on(WhiteEye_on_cmd("unlock ?(.*)"))
 @WhiteEye.on(sudo_cmd("unlock ?(.*)", allow_sudo=True))
 async def _(event):
-    starkgang = await edit_or_reply(event, "Processing")
+    whiteeyegang = await edit_or_reply(event, "Processing")
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
     peer_id = event.chat_id
     if input_str in (("bots", "commands", "email", "forward", "url")):
         update_lock(peer_id, input_str, False)
-        await starkgang.edit("UnLocked {}".format(input_str))
+        await whiteeyegang.edit("UnLocked {}".format(input_str))
     else:
-        await starkgang.edit("Use `.lock` without any parameters to unlock API locks")
+        await whiteeyegang.edit("Use `.lock` without any parameters to unlock API locks")
 
 
 @WhiteEye.on(WhiteEye_on_cmd("curenabledlocks"))
@@ -209,7 +205,7 @@ async def _(event):
         # bots are limited Telegram accounts,
         # and cannot join by themselves
         if event.user_added:
-            users_added_by = event.action_message.from_id
+            users_added_by = event.action_message.sender_id
             is_ban_able = False
             rights = types.ChatBannedRights(until_date=None, view_messages=True)
             added_users = event.action_message.action.users
