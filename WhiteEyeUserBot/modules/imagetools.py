@@ -13,17 +13,21 @@
 
 
 import os
+import wget
 from shutil import rmtree
-
 import cv2
 import numpy as np
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from telegraph import upload_file
-
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.function import convert_to_image, crop_vid, runcmd
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
+import html
+from telethon.tl.functions.photos import GetUserPhotosRequest
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import MessageEntityMentionName
+from telethon.utils import get_input_location
 
 sedpath = "./WhiteEye/"
 if not os.path.isdir(sedpath):
