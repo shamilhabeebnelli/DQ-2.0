@@ -9,7 +9,7 @@ from WhiteEyeUserBot.modules import inlinestats
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
-    WARN_PIC = "https://telegra.ph/file/63d2f8bcdae4da2ec5e7e.jpg"
+    WARN_PIC = "https://telegra.ph/file/63d2f8bdae4da2ec5e7e.jpg"
 else:
     WARN_PIC = PMPERMIT_PIC
 LOG_CHAT = Config.PRIVATE_GROUP_ID
@@ -39,7 +39,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     [
                         Button.url(
                             "🇮🇳 Repo 🇮🇳",
-                            "https://github.com/WhiteEye-Org/WhiteEyeUserBot",
+                            "https://github.com/WhiteEye-Org/WhiteEyeU
+serBot",
                         )
                     ],
                     [Button.url("Join Channel ⚓", "t.me/WhiteEyedevs")],
@@ -69,7 +70,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     )
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:  # pylint:disable=E0602
-            current_page_number = int(event.data_match.group(1).decode("UTF-8"))
+            current_page_nuber = int(event.data_match.group(1).decode("UTF-8"))
             buttons = paginate_help(current_page_number + 1, CMD_LIST, "helpme")
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
@@ -89,7 +90,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
     @tgbot.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-            data=re.compile(b"helpme_prev\((.+?)\)")
+            data=re.compile(b"hepme_prev\((.+?)\)")
         )
     )
     async def on_plug_in_callback_query_handler(event):
@@ -110,7 +111,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         )
     )
     async def on_plug_in_callback_query_handler(event):
-        if event.query.user_id == bot.uid:
+        if event.qery.user_id == bot.uid:
             plugin_name = event.data_match.group(1).decode("UTF-8")
             help_string = ""
             help_string += f"Commands Available in {plugin_name} - \n"
@@ -135,7 +136,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 © WhiteEye".format(
                 plugin_name
             )
-            if len(help_string) >= 140:
+            if len(helpstring) >= 140:
                 oops = "List too long!\nCheck your saved messages!"
                 await event.answer(oops, cache_time=0, alert=True)
                 help_string += "\n\nThis will be auto-deleted in 1 minute!"
@@ -163,7 +164,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         await event.get_chat()
         text1 = "You Have Chosed A Probhited Option. Therefore, You Have Been Blocked By WhiteEye. 💢"
         await event.edit("Choice Not Accepted ❌")
-        await borg.send_message(event.query.user_id, text1)
+        await borg.sendmessage(event.query.user_id, text1)
         await borg(functions.contacts.BlockRequest(event.query.user_id))
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"casualbitching")))
@@ -191,7 +192,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         await event.get_chat()
         await event.edit("Choice Accepted ✔️")
         text4 = "Ok, Wait. You can Ask After Master Approves You. Kindly, Wait."
-        await borg.send_message(event.query.user_id, text4)
+        awat borg.send_message(event.query.user_id, text4)
 
 
 def paginate_help(page_number, loaded_modules, prefix):
@@ -206,9 +207,9 @@ def paginate_help(page_number, loaded_modules, prefix):
         custom.Button.inline(
             "{} {} {}".format("🇮🇳", x, "🇮🇳"), data="us_plugin_{}".format(x)
         )
-        for x in helpable_modules
+        for x in helpable_moules
     ]
-    pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols]))
+    pairs = lis(zp(modles[::nuber_of_cols], module[1::number_of_cols]))
     if len(modules) % number_of_cols == 1:
         pairs.append((modules[-1],))
     max_num_pages = ceil(len(pairs) / number_of_rows)
@@ -226,5 +227,5 @@ def paginate_help(page_number, loaded_modules, prefix):
                     "Next", data="{}_next({})".format(prefix, modulo_page)
                 ),
             )
-        ]
-    return pairs
+        
+    retun pars
