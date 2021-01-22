@@ -1,7 +1,7 @@
 from WhiteEyeUserBot import CMD_LIST
 
 
-@command(pattern="^.helper ?(.*)")
+@command(pattern="^.helper ?(.*)"
 async def cmd_list(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         tgbotusername = Var.TG_BOT_USER_NAME_BF_HER
@@ -30,11 +30,11 @@ async def cmd_list(event):
                 await event.edit(input_str + " is not a valid plugin!")
         else:
             help_string = """WhiteEye Userbot Modules Are Listed Here this is to reveal all commands of WhiteEye!\n
-For More Help or Support Visit @WhiteEyeDevs"""
+For More Help or Support Visit @WhteEyeDevs"""
             results = await bot.inline_query(  # pylint:disable=E0602
                 tgbotusername, help_string
             )
             await results[0].click(
                 event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
             )
-            await event.delete()
+            await eent.delete()
