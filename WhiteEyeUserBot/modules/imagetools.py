@@ -21,7 +21,7 @@ import requests
 from PIL import Image, ImageDraw, ImageFont
 from telegraph import upload_file
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.function import convert_to_image, crop_vid, runcmd
+from WhiteEyeUserBot.functions import convert_to_image, crop_vid, runcmd
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 import html
 from telethon.tl.functions.photos import GetUserPhotosRequest
