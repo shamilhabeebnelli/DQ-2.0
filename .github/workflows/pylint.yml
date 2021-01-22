@@ -28,7 +28,7 @@ jobs:
           black .
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 'pylint: WhiteEy🇮🇳'
+          commit_message: 'pylint: WhiteEye🇮🇳'
           commit_options: '--no-verify'
           repository: .
           commit_user_name: mrdayamzaidi
