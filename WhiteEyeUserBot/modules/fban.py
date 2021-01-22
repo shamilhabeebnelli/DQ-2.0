@@ -13,7 +13,7 @@
 
 import asyncio
 
-from WhiteEyeUserBot.function import fetch_feds
+from WhiteEyeUserBot.functions import fetch_feds
 from WhiteEyeUserBot.modules.sql_helper.feds_sql import (
     add_fed,
     get_all_feds,
