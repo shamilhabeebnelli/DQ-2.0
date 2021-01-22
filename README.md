@@ -87,8 +87,6 @@ python3 -m WhiteEyeBot
 
 [PAPERPLANE USERBOT](https://t.me/paperplanechannel)
 
-[FRIDAY USERBOT](https://t.me/FRIDAYSUPPORTOFFICIAL)
-
 
 
 
