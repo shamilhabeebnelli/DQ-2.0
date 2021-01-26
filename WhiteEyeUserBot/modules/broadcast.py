@@ -353,8 +353,6 @@ CMD_HELP.update(
         "broadcast": """**Plugin : ** `broadcast`
   •  **Syntax : **`.sendto category_name`
   •  **Function : **__will send the replied message to all the chats in give category__
-  •  **Syntax : **`.fwdto category_name`
-  •  **Function : **__will forward the replied message to all the chats in give category__
   •  **Syntax : **`.addto category_name`
   •  **Function : **__It will add this chat/user/channel to the category of the given name__
   •  **Syntax : **`.rmfrom category_name`
