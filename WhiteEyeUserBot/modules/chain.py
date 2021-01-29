@@ -11,6 +11,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 @WhiteEye.on(WhiteEye_on_cmd(pattern="chain"))
 @WhiteEye.on(sudo_cmd(pattern="chain", allow_sudo=True))
 async def _(event):
+    if event.fwd_from:
+        return
     pokemonlub = await edit_or_reply(event, "Counting...")
     count = -1
     message = event.message
