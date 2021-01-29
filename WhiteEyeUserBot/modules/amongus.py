@@ -9,6 +9,8 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "WhiteEye"
 @WhiteEye.on(WhiteEye_on_cmd(pattern="imp(|n) (.*)", outgoing=True))
 @WhiteEye.on(sudo_cmd(pattern="imp(|n) (.*)", allow_sudo=True))
 async def _(event):
+    if event.fwd_from:
+        return
     kraken = bot.uid
     USERNAME = f"tg://user?id={kraken}"
     name = event.pattern_match.group(2)
@@ -94,6 +96,8 @@ async def _(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern="timp(|n) (.*)", outgoing=True))
 @WhiteEye.on(sudo_cmd(pattern="timp(|n) (.*)", allow_sudo=True))
 async def _(event):
+    if event.fwd_from:
+        return
     name = event.pattern_match.group(2)
     cmd = event.pattern_match.group(1).lower()
     hellevent = await edit_or_reply(event, f"{name} is ejected.......")
