@@ -8,6 +8,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 @WhiteEye.on(WhiteEye_on_cmd(pattern="delpfp ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern="delpfp ?(.*)", allow_sudo=True))
 async def remove_profilepic(delpfp):
+    if event.fwd_from:
+        return
     """ For .delpfp command, delete your current profile picture in Telegram. """
     group = delpfp.text[8:]
     if group == "all":
