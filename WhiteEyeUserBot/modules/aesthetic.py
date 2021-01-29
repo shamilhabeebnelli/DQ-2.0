@@ -21,6 +21,8 @@ def aesthetify(string):
 @WhiteEye.on(WhiteEye_on_cmd(pattern="ae\s+(.+)"))
 @WhiteEye.on(events.MessageEdited(pattern=r".ae\s+(.+)", outgoing=True))
 async def _(event):
+    if event.fwd_from:
+        return
     text = event.pattern_match.group(1)
     text = "".join(aesthetify(text))
     await event.edit(text=text, parse_mode=None, link_preview=False)
