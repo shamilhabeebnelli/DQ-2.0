@@ -25,6 +25,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"echo (.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"echo ( .*)", allow_sudo=True))
 async def _(event):
+    if event.fwd_from:
+        return
     bxt = Var.TG_BOT_USER_NAME_BF_HER
     try:
         tex = str(event.text[6:])
