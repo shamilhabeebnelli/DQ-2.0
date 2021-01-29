@@ -20,6 +20,8 @@ if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
 
 @WhiteEye.on(WhiteEye_on_cmd(outgoing=True, pattern="pips(?: |$)(.*)"))
 async def pipcheck(pip):
+    if event.fwd_from:
+        return
     pipmodule = pip.pattern_match.group(1)
     if pipmodule:
         await pip.edit("`Searching . . .`")
