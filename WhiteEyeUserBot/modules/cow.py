@@ -9,6 +9,8 @@ from telethon import events
 
 @WhiteEye.on(events.NewMessage(pattern=r"^.(\w+)say (.*)", outgoing=True))
 async def univsaye(cowmsg):
+    if event.fwd_from:
+        return
     """ For .cowsay module, uniborg wrapper for cow which says things. """
     if not cowmsg.text[0].isalpha() and cowmsg.text[0] not in ("/", "#", "@", "!"):
         arg = cowmsg.pattern_match.group(1).lower()
