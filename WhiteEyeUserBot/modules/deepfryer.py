@@ -41,6 +41,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="deepfry(?: |$)(.*)", outgoing=True))
 async def deepfryer(event):
+    if event.fwd_from:
+        return
     try:
         frycount = int(event.pattern_match.group(1))
         if frycount < 1:
