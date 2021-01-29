@@ -13,6 +13,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 @WhiteEye.on(WhiteEye_on_cmd("dns (.*)"))
 @WhiteEye.on(sudo_cmd("dns (.*)", allow_sudo=True))
 async def _(event):
+    if event.fwd_from:
+        return
     starky = await edit_or_reply(event, "Processing.....")
     if event.fwd_from:
         return
@@ -28,6 +30,8 @@ async def _(event):
 @WhiteEye.on(WhiteEye_on_cmd("url (.*)"))
 @WhiteEye.on(sudo_cmd("dns (.*)", allow_sudo=True))
 async def _(event):
+    if event.fwd_from:
+        return
     starkxd = await edit_or_reply(event, "Processing....")
     if event.fwd_from:
         return
@@ -42,6 +46,8 @@ async def _(event):
 
 @WhiteEye.on(WhiteEye_on_cmd("unshort (.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
     sadness = await edit_or_reply(event, "Processing...")
     if event.fwd_from:
         return
