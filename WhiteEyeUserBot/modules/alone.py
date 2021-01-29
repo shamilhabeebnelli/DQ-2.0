@@ -6,6 +6,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="alone ?(.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("T")
         await asyncio.sleep(0.7)
