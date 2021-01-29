@@ -27,6 +27,8 @@ chnnl_grp = Config.FBAN_GROUP
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="fadd ?(.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
     nolol = 0
     yeslol = 0
     await event.edit("`Processing..`")
@@ -56,6 +58,8 @@ async def _(event):
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="frm ?(.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
     lol_s = event.pattern_match.group(1)
     await event.edit("`Processing..`")
     lol = get_all_feds()
@@ -78,6 +82,8 @@ async def _(event):
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="fban"))
 async def _(event):
+    if event.fwd_from:
+        return
     lol_s = event.text.split(" ", maxsplit=1)[1]
     if lol_s == None:
         await event.edit("`No user Found To Fban.`")
@@ -111,6 +117,8 @@ async def _(event):
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="unfban ?(.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
     lol_s = event.pattern_match.group(1)
     if lol_s == None:
         await event.edit("`No User Found To Fban.`")
