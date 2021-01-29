@@ -43,6 +43,8 @@ afk_start = {}
 async def _(event):
     if event.fwd_from:
         return
+    if event.fwd_from:
+        return
     global USER_AFK  # pylint:disable=E0602
     global afk_time  # pylint:disable=E0602
     global last_afk_message  # pylint:disable=E0602
@@ -83,6 +85,8 @@ async def _(event):
 
 @WhiteEye.on(events.NewMessage(outgoing=True))  # pylint:disable=E0602
 async def set_not_afk(event):
+    if event.fwd_from:
+        return
     global USER_AFK  # pylint:disable=E0602
     global afk_time  # pylint:disable=E0602
     global last_afk_message  # pylint:disable=E0602
