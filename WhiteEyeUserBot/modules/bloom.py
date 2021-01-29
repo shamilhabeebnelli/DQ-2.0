@@ -31,6 +31,8 @@ DEFAULTUSER = str(ALIVE_NAME)
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="bloom ?(.*)"))
 async def autopic(event):
+    if event.fwd_from:
+        return
     await event.edit("Bloom colour profile pic have been enabled")
     downloaded_file_name = "./ravana/original_pic.png"
     downloader = SmartDL(
