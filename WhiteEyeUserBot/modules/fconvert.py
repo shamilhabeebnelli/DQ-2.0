@@ -11,6 +11,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd, progress
 
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):
+    if event.fwd_from:
+        return
     """Generic progress_callback for uploads and downloads."""
     now = time.time()
     diff = now - start
