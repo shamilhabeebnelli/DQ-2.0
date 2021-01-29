@@ -10,6 +10,8 @@ from WhiteEyeUserBot.events import register
 
 @register(outgoing=True, pattern="^.create (b|g|c)(?: |$)(.*)")
 async def telegraphs(grop):
+    if event.fwd_from:
+        return
 
     """ For .create command, Creating New Group & Channel """
 
