@@ -8,6 +8,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="dump ?(.*)"))
 async def _(message):
+    if event.fwd_from:
+        return
     try:
         obj = message.pattern_match.group(1)
         if len(obj) != 3:
