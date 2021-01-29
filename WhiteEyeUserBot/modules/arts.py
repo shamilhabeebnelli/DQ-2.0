@@ -6,6 +6,8 @@ n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
 # @command(outgoing=True, pattern="^.ded$")
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"ded"))
 async def bluedevilded(ded):
+    if event.fwd_from:
+        return
     await ded.edit(
         n + " ==             |\n　　　　　|"
         "\n　　　　　| \n"
@@ -83,31 +85,43 @@ H = (
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"monster"))
 async def bluedevilmonster(monster):
+    if event.fwd_from:
+        return
     await monster.edit(M)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"pig"))
 async def bluedevipig(pig):
+    if event.fwd_from:
+        return
     await pig.edit(P)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"kiler"))
 async def bluedevikiller(kiler):
+    if event.fwd_from:
+        return
     await kiler.edit(K)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"gun"))
 async def bluedevigun(gun):
+    if event.fwd_from:
+        return
     await gun.edit(G)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"dog"))
 async def bluedevidog(dog):
+    if event.fwd_from:
+        return
     await dog.edit(D)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"hmf"))
 async def bluedevihmf(hmf):
+    if event.fwd_from:
+        return
     await hmf.edit(H)
 
 
