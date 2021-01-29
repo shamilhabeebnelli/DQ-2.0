@@ -4,6 +4,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"bid ?(.*)"))
 async def bid(event):
+    if event.fwd_from:
+        return
     giveVar = event.text
     bid = giveVar[4:5]
     if not bid:
