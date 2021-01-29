@@ -15,6 +15,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 @WhiteEye.on(WhiteEye_on_cmd("bye", outgoing=True))
 @WhiteEye.on(sudo_cmd("bye", allow_sudo=True))
 async def leave(e):
+    if event.fwd_from:
+        return
     starkgang = await edit_or_reply(e, "Bye Kek")
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await starkgang.edit("`I am leaving this chat.....!`")
