@@ -15,6 +15,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 @WhiteEye.on(WhiteEye_on_cmd("boobs$"))
 @WhiteEye.on(sudo_cmd(pattern="boobs$", allow_sudo=True))
 async def boobs(event):
+    if event.fwd_from:
+        return
     if not os.path.isdir(Var.TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Var.TEMP_DOWNLOAD_DIRECTORY)
     pic_loc = os.path.join(Var.TEMP_DOWNLOAD_DIRECTORY, "bobs.jpg")
@@ -32,6 +34,8 @@ async def boobs(event):
 @WhiteEye.on(WhiteEye_on_cmd("butts$"))
 @WhiteEye.on(sudo_cmd(pattern="butts$", allow_sudo=True))
 async def butts(event):
+    if event.fwd_from:
+        return
     if not os.path.isdir(Var.TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Var.TEMP_DOWNLOAD_DIRECTORY)
     pic_loc = os.path.join(Var.TEMP_DOWNLOAD_DIRECTORY, "butts.jpg")
