@@ -265,6 +265,8 @@ csclist = sorted(csclist)
 
 @WhiteEye.on(events.NewMessage(pattern=r"\.check", outgoing=True))
 async def checker(e):
+    if event.fwd_from:
+        return
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("Fetching Information, Wait!")
         print(e.text)
@@ -368,6 +370,8 @@ async def checker(e):
 
 @WhiteEye.on(events.NewMessage(pattern=r"\.otaup", outgoing=True))
 async def checker(e):
+    if event.fwd_from:
+        return
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("Fetching Information, Wait!")
         print(e.text)
