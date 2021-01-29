@@ -14,6 +14,8 @@ from ..utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 @WhiteEye.on(WhiteEye_on_cmd(pattern="app (.*)"))
 @WhiteEye.on(sudo_cmd(pattern="app (.*)", allow_sudo=True))
 async def apk(event):
+    if event.fwd_from:
+        return
     app_name = event.pattern_match.group(1)
     event = await edit_or_reply(event, "Searching!")
     try:
@@ -84,6 +86,8 @@ async def apk(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern="appr (.*)"))
 @WhiteEye.on(sudo_cmd(pattern="appr (.*)", allow_sudo=True))
 async def apkr(event):
+    if event.fwd_from:
+        return
     app_name = event.pattern_match.group(1)
     event = await edit_or_reply(event, "searching!")
     try:
