@@ -24,6 +24,8 @@ async def pcheck(event):
     await event.edit("`Processing..`")
     replymsg = await event.get_reply_message()
     photo = None
+    if event.fwd_from:
+        return
     if replymsg and replymsg.media:
         if isinstance(replymsg.media, MessageMediaPhoto):
             photo = await borg.download_media(message=replymsg.photo)
