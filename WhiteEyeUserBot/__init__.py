@@ -37,8 +37,6 @@ Lastupdate = time.time()
 sedprint = logging.getLogger("WARNING")
 from var import Var
 
-
-
 if Var.STRING_SESSION:
     session_name = str(Var.STRING_SESSION)
     bot = TelegramClient(StringSession(session_name), Var.APP_ID, Var.API_HASH)
@@ -46,11 +44,15 @@ else:
     session_name = "startup"
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
 if Config.STRING_SESSION_2:
-    client2 =  TelegramClient(StringSession(Config.STRING_SESSION_2), Var.APP_ID, Var.API_HASH)
+    client2 = TelegramClient(
+        StringSession(Config.STRING_SESSION_2), Var.APP_ID, Var.API_HASH
+    )
 else:
     client2 = None
 if Config.STRING_SESSION_3:
-    client3 =  TelegramClient(StringSession(Config.STRING_SESSION_3), Var.APP_ID, Var.API_HASH)
+    client3 = TelegramClient(
+        StringSession(Config.STRING_SESSION_3), Var.APP_ID, Var.API_HASH
+    )
 else:
     client3 = None
 
