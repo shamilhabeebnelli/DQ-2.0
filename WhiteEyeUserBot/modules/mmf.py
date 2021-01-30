@@ -25,6 +25,8 @@ sedpath = Config.TMP_DOWNLOAD_DIRECTORY
 @WhiteEye.on(WhiteEye_on_cmd(pattern="memify (.*)"))
 async def starkmeme(event):
     hmm = event.pattern_match.group(1)
+    if event.fwd_from:
+        return
     if hmm == None:
         await event.edit("Give Some Text")
         return
