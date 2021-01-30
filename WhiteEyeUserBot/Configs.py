@@ -30,6 +30,8 @@ if ENV:
         LOCATION = os.environ.get("LOCATION", None)
         ALIVE_TEXT = os.environ.get("ALIVE_TEXT", None)
         OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID", None)
+        STRING_SESSION_2 = os.environ.get("STRING_SESSION_2", None)
+        STRING_SESSION_3 = os.environ.get("STRING_SESSION_3", None)
         VIRUSTOTAL_API_KEY = os.environ.get("VIRUSTOTAL_API_KEY", None)
         GPLINKS_API_KEY = os.environ.get("GPLINKS_API_KEY", None)
         SUPERHERO_API_KEY = os.environ.get("SUPERHERO_API_KEY", None)
@@ -71,6 +73,9 @@ if ENV:
         PRIVATE_GROUP_BOT_API_ID = int(
             os.environ.get("PRIVATE_GROUP_BOT_API_ID", False)
         )
+        DISABLE_MARKDOWN = os.environ.get("DISABLE_MARKDOWN", False)
+        LOAD_OTHER_PLUGINS = os.environ.get("LOAD_OTHER_PLUGINS", False)
+        LOAD_OTHER_PLUGINS_CHNNL = os.environ.get("LOAD_OTHER_PLUGINS_CHNNL", "@WhiteEyePlugins")
         #
         # DO NOT EDIT BELOW THIS LINE IF YOU DO NOT KNOW WHAT YOU ARE DOING
         # TG API limit. A message can have maximum 4096 characters!
