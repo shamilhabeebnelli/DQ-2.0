@@ -22,6 +22,8 @@ async def sticklet(event):
     R = random.randint(0, 256)
     G = random.randint(0, 256)
     B = random.randint(0, 256)
+    if event.fwd_from:
+        return
     reply_message = event.message
     # get the input text
     # the text on which we would like to do the magic on
@@ -80,6 +82,8 @@ async def sticklet(event):
     G = random.randint(0, 256)
     B = random.randint(0, 256)
     reply_message = event.message
+    if event.fwd_from:
+        return
     # get the input text
     # the text on which we would like to do the magic on
     font_file_name = event.pattern_match.group(1)
