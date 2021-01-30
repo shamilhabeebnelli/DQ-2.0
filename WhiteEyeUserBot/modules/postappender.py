@@ -30,6 +30,8 @@ async def mstark(event):
     lul_id = event.chat_id
     append_text = event.pattern_match.group(1)
     is_foot = True
+    if event.fwd_from:
+        return
     if event.is_group:
         await event.edit("`No, LoL You Can't Set Channel Post Appender In Groups, lol`")
         return
@@ -53,6 +55,8 @@ async def _starky(event):
     lul_id = event.chat_id
     append_text = event.pattern_match.group(1)
     is_foot = False
+    if event.fwd_from:
+        return
     if event.is_group:
         await event.edit("`No, LoL You Can't Set Channel Append System In Groups, lol`")
         return
@@ -74,6 +78,8 @@ async def _starky(event):
 async def _m(event):
     await event.edit("`Processing..`")
     id_s = event.chat_id
+    if event.fwd_from:
+        return
     if is_data_indbs(id_s):
         remove_dataz(id_s)
         await event.edit("`Done, I have Removed This Channel From DB`")
@@ -86,6 +92,8 @@ async def luli(event):
     event.chat_id
     event.chat_id
     lol_text = event.text
+    if event.fwd_from:
+        return
     if is_data_indbs(event.chat_id):
         if event.text.startswith(tuple(lulstark)):
             return
@@ -101,6 +109,8 @@ async def luli(event):
 async def _m(event):
     await event.edit("`Processing..`")
     id_s = event.chat_id
+    if event.fwd_from:
+        return
     if is_data_indbs(id_s):
         await event.edit(
             f"`Channel ID : {id_s} \nIs Foot: {is_footer(event.chat_id)} \nText: {is_data_indbs(event.chat_id)}`"
