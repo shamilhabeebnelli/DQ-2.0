@@ -2,14 +2,12 @@ Pillow
 deezer-python
 google-trans-new
 nospamplus
-deethon
-deezloader
+eyed3
 pymediainfo
 apscheduler
 git+https://github.com/gleitz/howdoi
 pyseoanalyzer
 pokedex.py
-PyDictionary
 faker
 deep_translator
 pornhub-api
@@ -39,7 +37,7 @@ PyGithub
 pytesseract
 youtube-dl
 opencv-contrib-python
-telethon
+Telethon==1.19.0
 iplookup
 wget
 numpy
