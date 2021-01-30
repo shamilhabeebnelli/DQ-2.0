@@ -107,6 +107,7 @@ def command(**args):
         return decorator
 
 
+
 def load_module(shortname):
     if shortname.startswith("__"):
         pass
@@ -148,6 +149,9 @@ def load_module(shortname):
         sys.modules["userbot.plugins"] = WhiteEyeUserBot.modules
         sys.modules["plugins"] = WhiteEyeUserBot.modules
         sys.modules["userbot"] = WhiteEyeUserBot
+        mod.admin_cmd = WhiteEye_on_cmd
+        mod.sudo_cmd = sudo_cmd
+        mod.WhiteEye_on_cmd = WhiteEye_on_cmd
         mod.Config = Config
         mod.ignore_grp = ignore_grp()
         mod.ignore_pm = ignore_pm()
@@ -497,6 +501,63 @@ async def edit_or_reply(event, text):
             return await reply_to.reply(text)
         return await event.reply(text)
     return await event.edit(text)
+
+def load_module_dclient(shortname, client):
+    if shortname.startswith("__"):
+        pass
+    elif shortname.endswith("_"):
+        import importlib
+        import sys
+        from pathlib import Path
+
+        import WhiteEyeUserBot.modules
+        import WhiteEyeUserBot.utils
+
+        path = Path(f"WhiteEyeUserBot/modules/{shortname}.py")
+        name = "WhiteEyeUserBot.modules.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+    else:
+        import importlib
+        import sys
+        from pathlib import Path
+
+        import WhiteEyeUserBot.modules
+        import WhiteEyeUserBot.utils
+
+        path = Path(f"WhiteEyeUserBot/modules/{shortname}.py")
+        name = "WhiteEyeUserBot.modules.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        mod.bot = client
+        mod.tgbot = bot.tgbot
+        mod.Var = Var
+        mod.command = command
+        sedlu = str(shortname) + "- MClient -"
+        mod.logger = logging.getLogger(sedlu)
+        # support for uniborg
+        sys.modules["uniborg.util"] = WhiteEyeUserBot.utils
+        sys.modules["WhiteEyeUserBot.util"] = WhiteEyeUserBot.utils
+        sys.modules["userbot.utils"] = WhiteEyeUserBot.utils
+        sys.modules["userbot.plugins"] = WhiteEyeUserBot.modules
+        sys.modules["plugins"] = WhiteEyeUserBot.modules
+        sys.modules["userbot"] = WhiteEyeUserBot
+        mod.admin_cmd = WhiteEye_on_cmd
+        mod.sudo_cmd = sudo_cmd
+        mod.WhiteEye_on_cmd = WhiteEye_on_cmd
+        mod.Config = Config
+        mod.ignore_grp = ignore_grp()
+        mod.ignore_pm = ignore_pm()
+        mod.ignore_bot = ignore_bot()
+        mod.am_i_admin = am_i_admin()
+        mod.ignore_fwd = ignore_fwd()
+        mod.borg = client
+        mod.WhiteEye = client
+        # support for paperplaneextended
+        sys.modules["WhiteEyeUserBot.events"] = WhiteEyeUserBot.utils
+        spec.loader.exec_module(mod)
+        sys.modules["WhiteEyeUserBot.modules." + shortname] = mod
 
 
 #    Copyright (C) Midhun KM 2020
