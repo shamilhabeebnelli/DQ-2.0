@@ -12,6 +12,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 @WhiteEye.on(sudo_cmd("ttt ?(.*)", allow_sudo=True))
 async def noobishere(event):
     reply_to_id = event.message.id
+    if event.fwd_from:
+        return
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
     reply = await event.get_reply_message()
@@ -40,6 +42,8 @@ async def noobishere(event):
     reply_to_id = event.message.id
     text = event.pattern_match.group(1)
     input_str = event.pattern_match.group(1)
+    if event.fwd_from:
+        return
     if text:
         if ":" in text:
             stark = input_str.split(":", 1)
