@@ -17,6 +17,8 @@ from WhiteEyeUserBot.events import errors_handler, register
 @register(outgoing=True, pattern="^.hash (.*)")
 @errors_handler
 async def gethash(hash_q):
+    if event.fwd_from:
+        return
     """ For .hash command, find the md5, sha1, sha256, sha512 of the string. """
     hashtxt_ = hash_q.pattern_match.group(1)
     hashtxt = open("hashdis.txt", "w+")
@@ -62,6 +64,8 @@ async def gethash(hash_q):
 @register(outgoing=True, pattern="^.hbase (en|de) (.*)")
 @errors_handler
 async def endecrypt(query):
+    if event.fwd_from:
+        return
     """ For .base64 command, find the base64 encoding of the given string. """
     if query.pattern_match.group(1) == "en":
         lething = str(pybase64.b64encode(bytes(query.pattern_match.group(2), "utf-8")))[
