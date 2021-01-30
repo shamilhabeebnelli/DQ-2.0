@@ -15,6 +15,8 @@ from WhiteEyeUserBot.events import register
 
 @register(outgoing=True, pattern="^.random")
 async def randomise(items):
+    if event.fwd_from:
+        return
     """ For .random command, get a random item from the list of items. """
     if not items.text[0].isalpha() and items.text[0] not in ("/", "#", "@", "!"):
         itemo = (items.text[8:]).split()
@@ -30,6 +32,8 @@ async def randomise(items):
 
 @register(outgoing=True, pattern="^.sleep( [0-9]+)?$")
 async def sleepybot(time):
+    if event.fwd_from:
+        return
     """ For .sleep command, let the WhiteEyeUserBot snooze for a few second. """
     message = time.text
     if not message[0].isalpha() and message[0] not in ("/", "#", "@", "!"):
