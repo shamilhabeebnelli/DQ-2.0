@@ -20,16 +20,14 @@ if 1 == 1:
     @WhiteEye.on(WhiteEye_on_cmd(pattern="poto(.*)"))
     @WhiteEye.on(sudo_cmd(pattern="poto(.*)", allow_sudo=True))
     async def potocmd(event):
-
+        if event.fwd_from:
+            return
         """Gets the profile photos of replied users, channels or chats"""
         id = "".join(event.raw_text.split(maxsplit=2)[1:])
 
         user = await event.get_reply_message()
 
         chat = event.input_chat
-        
-        if event.fwd_from:
-        return
 
         if user:
 
@@ -84,8 +82,8 @@ if 1 == 1:
 
 CMD_HELP.update(
     {
-        "poto": "Poto\
-\n\nSyntax : .poto <reply>\
-\nUsage : Plugin to get all Profile Photo Of The User"
+        "poto": "**Poto**\
+\n\n**Syntax : **`.poto <reply to a user> <profile picture number>`\
+\n**Usage :** Downloads profile picture of replyed user."
     }
 )
