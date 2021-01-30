@@ -1,9 +1,10 @@
 import asyncio
 import os
 from pathlib import Path
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, load_module
-from WhiteEyeUserBot.function import get_all_modules
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.function import get_all_modules
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, load_module
 
 DELETE_TIMEOUT = 5
 
@@ -41,14 +42,18 @@ async def install(event):
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
 
-@borg.on(WhiteEye_on_cmd(pattern='pl ?(.*)'))
+
+@borg.on(WhiteEye_on_cmd(pattern="pl ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
     lul = event.pattern_match.group(1)
     yesm, nope, total_p = await get_all_modules(event, borg, lul)
-    await event.edit(f"Installed {yesm} PLugins. Failed To Install {nope} Plugins And There Were Total {total_p} Plugins")
-    
+    await event.edit(
+        f"Installed {yesm} PLugins. Failed To Install {nope} Plugins And There Were Total {total_p} Plugins"
+    )
+
+
 CMD_HELP.update(
     {
         "install": "**Install**\
