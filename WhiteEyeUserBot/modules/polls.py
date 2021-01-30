@@ -6,6 +6,8 @@ from uniborg.util import WhiteEye_on_cmd
 @WhiteEye.on(WhiteEye_on_cmd(pattern="get_poll"))
 async def _(event):
     reply_message = await event.get_reply_message()
+    if event.fwd_from:
+        return
     if reply_message.media is None:
         await event.edit(
             "Please reply to a media_type == @gPoll to view the questions and answers"
