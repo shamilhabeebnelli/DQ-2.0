@@ -31,9 +31,9 @@ import re
 
 from telethon import events
 
+from var import Var
 from WhiteEyeUserBot import bot
 from WhiteEyeUserBot.Configs import Config
-from var import Var
 
 
 def ignore_fwd():
