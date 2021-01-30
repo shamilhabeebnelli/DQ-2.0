@@ -24,7 +24,7 @@ from pathlib import Path
 from telethon import events
 
 from var import Var
-from WhiteEyeUserBot import CMD_LIST, LOAD_PLUG, SUDO_LIST, bot, client2, client3, CMD_HELP
+from WhiteEyeUserBot import CMD_HELP, CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.wraptools import (
     am_i_admin,
