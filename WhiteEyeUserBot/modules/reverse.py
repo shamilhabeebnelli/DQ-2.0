@@ -24,6 +24,8 @@ opener.addheaders = [("User-agent", useragent)]
 @WhiteEye.on(WhiteEye_on_cmd(outgoing=True, pattern=r"reverse(?: |$)(\d*)"))
 @errors_handler
 async def okgoogle(img):
+    if event.fwd_from:
+        return
     """ For .reverse command, Google search images and stickers. """
     if os.path.isfile("okgoogle.png"):
         os.remove("okgoogle.png")
