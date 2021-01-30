@@ -13,6 +13,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 @WhiteEye.on(WhiteEye_on_cmd("sd", outgoing=True))
 async def selfdestruct(destroy):
+    if event.fwd_from:
+        return
     """ For .sd command, make seflf-destructable messages. """
     if not destroy.text[0].isalpha() and destroy.text[0] not in ("/", "#", "@", "!"):
         message = destroy.text
