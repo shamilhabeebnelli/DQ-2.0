@@ -220,3 +220,13 @@ else:
     except Exception as e:
         sclient = None
         sedprint.info("[Warning] - " + str(e))
+        
+        
+# Avoid Doing This Again And Again In Plugins.     
+try:
+    if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
+        os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
+    if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
+        os.makedirs(TMP_DOWNLOAD_DIRECTORY)
+except:
+    pass        
