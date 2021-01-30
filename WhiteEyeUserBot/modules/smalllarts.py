@@ -250,56 +250,78 @@ K = (
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"spika"))
 async def kakashi(pikachu):
+    if event.fwd_from:
+        return
     await pikachu.edit(A)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"sshit"))
 async def kakashi(shit):
+    if event.fwd_from:
+        return
     await shit.edit(B)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"sxx"))
 async def kakashi(saxy):
+    if event.fwd_from:
+        return
     await saxy.edit(C)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"sporn"))
 async def kakashi(pornhub):
+    if event.fwd_from:
+        return
     await pornhub.edit(D)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"sthink"))
 async def kakashi(think):
+    if event.fwd_from:
+        return
     await think.edit(E)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"sdick"))
 async def kakashi(dick):
+    if event.fwd_from:
+        return
     await dick.edit(F)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"sfrog"))
 async def kakashi(frog):
+    if event.fwd_from:
+        return
     await frog.edit(G)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"sputin"))
 async def kakashi(putin):
+    if event.fwd_from:
+        return
     await putin.edit(H)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"sdead"))
 async def kakashi(dead):
+    if event.fwd_from:
+        return
     await dead.edit(I)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"strump"))
 async def kakashi(trump):
+    if event.fwd_from:
+        return
     await trump.edit(J)
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"schina"))
 async def kakashi(china):
+    if event.fwd_from:
+        return
     await china.edit(K)
 
 
