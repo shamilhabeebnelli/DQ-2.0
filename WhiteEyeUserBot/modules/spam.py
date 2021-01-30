@@ -13,6 +13,8 @@ from WhiteEyeUserBot import CMD_HELP
 
 @WhiteEye.on(events.NewMessage(pattern=r"\.spam", outgoing=True))
 async def spammer(e):
+    if event.fwd_from:
+        return
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text
         counter = int(message[6:8])
