@@ -1,12 +1,23 @@
-# @Fridayot
+#    Copyright (C) Midhun Km 2020-2021
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import requests
 from iplookup import iplookup
 from selenium import webdriver
 from youtube_search import YoutubeSearch
-
+from WhiteEyeUserBot.functions import apk_dl
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
+from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="wshot ?(.*)"))
@@ -18,15 +29,27 @@ async def _(event):
     sedlyfstarky = await edit_or_reply(event, "Capturing Webshot, Stay Tuned.")
     driver = webdriver.Chrome()
     driver.get(urlissed)
-    driver.get_screenshot_as_file("Webshot-@WhiteEyeot.png")
-    imgpath = "Webshot-@WhiteEyeot.png"
+    driver.get_screenshot_as_file("Webshot-@fridayot.png")
+    imgpath = "Webshot-@WhiteEyeDevs.png"
     await sedlyfstarky.edit("Completed. Uploading in Telegram..")
     await borg.send_file(
         event.chat_id,
         file=imgpath,
-        caption=f"**WEBSHOT OF** `{urlissed}` \n**Powered By @WhiteEyeot**",
+        caption=f"**WEBSHOT OF** `{urlissed}` \n**Powered By @WhiteEyeDevs**",
     )
-
+    
+    
+@WhiteEye.on(WhiteEye_on_cmd(pattern="rmeme$"))
+@WhiteEye.on(sudo_cmd(pattern="rmeme$", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    await event.delete()
+    hmm_s = 'https://some-random-api.ml/meme'
+    r = requests.get(url=hmm_s).json()
+    image_s = r['image']
+    await borg.send_file(event.chat_id, file=image_s, caption=r['caption'])
+    
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="lp ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern="lp ?(.*)", allow_sudo=True))
@@ -156,12 +179,30 @@ async def _(event):
         await stark_result.edit(noob, parse_mode="HTML")
     except:
         await event.edit("Some Thing Went Wrong.")
-
+        
+@WhiteEye.on(WhiteEye_on_cmd(pattern="akd ?(.*)"))
+@WhiteEye.on(sudo_cmd(pattern="akd ?(.*)", allow_sudo=True))
+async def _(event):
+    akkad = event.pattern_match.group(1)
+    if event.fwd_from:
+        return
+    pathz, name = await apk_dl(akkad, Config.TMP_DOWNLOAD_DIRECTORY, event)
+    await borg.send_file(event.chat_id, pathz, caption='Uploaded By @WhiteEyeDevs')
 
 CMD_HELP.update(
     {
-        "webtools": "WebTools\
-\n\nSyntax : .wshot<link> .ip<address>, .bin<code>, .iban<username>, .gitdl<link>, .yts<link>\
-\nUsage : Usefull Plugin For Coders"
+        "webtools": "**Web Tools**\
+\n\n**Syntax : **`.wshot <website URL>`\
+\n**Usage :** takes screenshot of webpage.\
+\n\n**Syntax : **`.lp <URL link>`\
+\n**Usage :** Gives whois information about website.\
+\n\n**Syntax : **`.bin <bin>`\
+\n**Usage :** Provides information about bin.\
+\n\n**Syntax : **`.iban <iban>`\
+\n**Usage :** Provides information about IBAN.\
+\n\n**Syntax : **`.gitdl <repository name>`\
+\n**Usage :** Gets repository link.\
+\n\n**Syntax : **`.yts <query>`\
+\n**Usage :** searches the query on YouTube and give results."
     }
 )
