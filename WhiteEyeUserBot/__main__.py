@@ -20,25 +20,27 @@ from sys import argv
 
 import telethon.utils
 from telethon import TelegramClient
+from telethon.tl.types import InputMessagesFilterDocument
 
+from var import Var
 from WhiteEyeUserBot import bot, client2, client3
 from WhiteEyeUserBot.Configs import Config
-from telethon.tl.types import InputMessagesFilterDocument
-from WhiteEyeUserBot.utils import load_module, start_assistant, load_module_dclient
-from var import Var
+from WhiteEyeUserBot.utils import load_module, load_module_dclient, start_assistant
 
 sed = logging.getLogger("WhiteEye")
 
-        
+
 async def add_bot(bot_token):
     await bot.start(bot_token)
     bot.me = await bot.get_me()
     bot.uid = telethon.utils.get_peer_id(bot.me)
-    
+
+
 async def lol_s(client):
     client.me = await client.get_me()
     client.uid = telethon.utils.get_peer_id(client.me)
-    
+
+
 def multiple_client():
     if client2:
         sed.info("Starting Client 2")
@@ -62,7 +64,8 @@ def multiple_client():
         sedbruh = True
     if not client3:
         lmaobruh = True
-    return sedbruh, lmaobruh    
+    return sedbruh, lmaobruh
+
 
 async def get_other_plugins(Config, client_s, sed):
     try:
@@ -80,6 +83,7 @@ async def get_other_plugins(Config, client_s, sed):
         await client_s.download_media(keky.media, "WhiteEyeUserBot/modules/")
     sed.info("Extra Plugins Downloaded.")
 
+
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
 else:
@@ -95,8 +99,8 @@ else:
         failed2, failed3 = multiple_client()
 
 if Config.LOAD_OTHER_PLUGINS:
-        bot.loop.run_until_complete(get_other_plugins(Config, bot, sed))
-        
+    bot.loop.run_until_complete(get_other_plugins(Config, bot, sed))
+
 import glob
 
 path = "WhiteEyeUserBot/modules/*.py"
@@ -106,10 +110,14 @@ for name in files:
         path1 = Path(f.name)
         shortname = path1.stem
         try:
-            load_module(shortname.replace(".py", ""))    
+            load_module(shortname.replace(".py", ""))
         except Exception as e:
             sed.info("------------------------")
-            sed.info("Failed To Load : " + str(shortname.replace(".py", "")) + f" Error : {str(e)}")
+            sed.info(
+                "Failed To Load : "
+                + str(shortname.replace(".py", ""))
+                + f" Error : {str(e)}"
+            )
             sed.info("------------------------")
         if failed2 is None:
             try:
@@ -147,4 +155,3 @@ if len(argv) not in (1, 3, 4):
     bot.disconnect()
 else:
     bot.run_until_disconnected()
-  
