@@ -15,6 +15,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 @WhiteEye.on(WhiteEye_on_cmd(pattern="img ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern="img ?(.*)", allow_sudo=True))
 async def img_sampler(event):
+    if event.fwd_from:
+        return
     await edit_or_reply(event, "`Processing...`")
     reply = await event.get_reply_message()
     if event.pattern_match.group(1):
