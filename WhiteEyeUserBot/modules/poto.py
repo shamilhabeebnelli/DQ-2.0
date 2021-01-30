@@ -27,6 +27,9 @@ if 1 == 1:
         user = await event.get_reply_message()
 
         chat = event.input_chat
+        
+        if event.fwd_from:
+        return
 
         if user:
 
