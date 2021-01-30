@@ -1,5 +1,5 @@
 import asyncio
-import datetime
+import datetim
 
 from telethon.tl.tlobject import TLObject
 from telethon.tl.types import MessageEntityPre
