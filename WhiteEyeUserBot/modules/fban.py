@@ -11,8 +11,6 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import asyncio
-
 from WhiteEyeUserBot.functions import fetch_feds
 from WhiteEyeUserBot.modules.sql_helper.feds_sql import (
     add_fed,
@@ -20,8 +18,9 @@ from WhiteEyeUserBot.modules.sql_helper.feds_sql import (
     is_fed_indb,
     rmfed,
 )
+import asyncio
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-
+from WhiteEyeUserBot import CMD_HELP
 chnnl_grp = Config.FBAN_GROUP
 
 
@@ -92,9 +91,7 @@ async def _(event):
     errors = 0
     len_feds = len(all_fed)
     if len_feds == 0:
-        await event.edit(
-            "`No Fed IN DB, Add One To Do So. Please Do .fadd all to Add All Feds IN Database`"
-        )
+        await event.edit("`No Fed IN DB, Add One To Do So. Please Do .fadd all to Add All Feds IN Database`")
         return
     await event.edit(f"`FBanning in {len_feds} Feds.`")
     try:
@@ -143,3 +140,22 @@ async def _(event):
     await event.edit(
         f"**Un-Fban Completed** \nTotal Sucess : `{len_feds - errors}` \nTotal Errors : `{errors}` \nTotal Fed Len : `{len_feds}`"
     )
+
+
+CMD_HELP.update(
+    {
+        "fed_ban": "**Fed Ban**\
+\n\n**Syntax : **`.fadd <fed-id>`\
+\n**Usage :** Adds The Given Fed In Fban database.\
+\n\n**Syntax : **`.fadd all`\
+\n**Usage :** Adds All The Feds In The Database Where You Are Admin.\
+\n\n**Syntax : **`.frm <fed-id>`\
+\n**Usage :** Removes The Given Fed From The Fban database.\
+\n**Example :** `.frm add`\
+\n**Note** :** Removes All The Feds From The Database.\
+\n**Example :** `.fban <username/User-ID>`\
+\n**Note** :** FBans The User.\
+\n**Example :** `.unfban <username/User-ID>`\
+\n**Note** :** UnFbans The User."
+    }
+)
