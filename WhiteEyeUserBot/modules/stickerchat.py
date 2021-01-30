@@ -70,6 +70,8 @@ if 1 == 1:
 
     @WhiteEye.on(WhiteEye_on_cmd(pattern="chat(.*)"))
     async def quotecmd(message):  # noqa: C901
+        if event.fwd_from:
+        return
         """Quote a message.
         Usage: .quote [template]
         If template is missing, possible templates are fetched."""
