@@ -33,6 +33,8 @@ if not os.path.isdir(sedpath):
 async def glitch(event):
     sed = await event.get_reply_message()
     okbruh = await event.edit("`Gli, Glitchiiingggg.....`")
+    if event.fwd_from:
+        return
     if isinstance(sed.media, MessageMediaPhoto):
         photolove = await borg.download_media(sed.media, sedpath)
     elif "image" in response.media.document.mime_type.split("/"):
