@@ -27,7 +27,7 @@ from telethon.tl.types import InputMessagesFilterDocument
 from WhiteEyeUserBot.utils import load_module, start_assistant, load_module_dclient
 from var import Var
 
-sed = logging.getLogger("Friday")
+sed = logging.getLogger("WhiteEyee")
 
         
 async def add_bot(bot_token):
