@@ -9,6 +9,8 @@ from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="selmun ?(.*)"))
 async def _(event):
+    if event.fwd_from:
+        return
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         await event.edit("😁Selmun Bhoi wants to go on a Ride😨")
         await asyncio.sleep(2)
