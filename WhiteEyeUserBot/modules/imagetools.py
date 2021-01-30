@@ -33,6 +33,8 @@ if not os.path.isdir(sedpath):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"cit"))
 @WhiteEye.on(sudo_cmd(pattern=r"cit", allow_sudo=True))
 async def hmm(event):
+    if event.fwd_from:
+        return
     if not event.reply_to_msg_id:
         await event.reply("Reply to any Image.")
         return
@@ -78,6 +80,8 @@ async def hmm(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"nst"))
 @WhiteEye.on(sudo_cmd(pattern=r"nst", allow_sudo=True))
 async def hmm(event):
+    if event.fwd_from:
+        return
     life = Config.DEEP_API_KEY
     if life == None:
         life = "quickstart-QUdJIGlzIGNvbWluZy4uLi4K"
@@ -107,6 +111,8 @@ async def hmm(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"thug"))
 @WhiteEye.on(sudo_cmd(pattern=r"thug", allow_sudo=True))
 async def iamthug(event):
+    if event.fwd_from:
+        return
     if not event.reply_to_msg_id:
         await event.reply("Reply to any Image.")
         return
@@ -139,6 +145,8 @@ async def iamthug(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"tni"))
 @WhiteEye.on(sudo_cmd(pattern=r"tni", allow_sudo=True))
 async def toony(event):
+    if event.fwd_from:
+        return
     if not event.reply_to_msg_id:
         await event.reply("Reply to any Image.")
         return
@@ -165,6 +173,8 @@ async def toony(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"tig"))
 @WhiteEye.on(sudo_cmd(pattern=r"tig", allow_sudo=True))
 async def lolmetrg(event):
+    if event.fwd_from:
+        return
     await event.edit("`Triggered This Image`")
     sed = await event.get_reply_message()
     img = await convert_to_image(event, borg)
@@ -185,6 +195,8 @@ async def lolmetrg(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"jail"))
 @WhiteEye.on(sudo_cmd(pattern=r"jail", allow_sudo=True))
 async def hmm(event):
+    if event.fwd_from:
+        return
     if not event.reply_to_msg_id:
         await event.reply("Reply to any Image.")
         return
@@ -216,6 +228,8 @@ async def hmm(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"greyscale"))
 @WhiteEye.on(sudo_cmd(pattern=r"greyscale", allow_sudo=True))
 async def hmm(event):
+    if event.fwd_from:
+        return
     if not event.reply_to_msg_id:
         await event.reply("Reply to any Image.")
         return
@@ -242,6 +256,8 @@ async def hmm(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"fgs ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"fgs ?(.*)", allow_sudo=True))
 async def img(event):
+    if event.fwd_from:
+        return
     text = event.pattern_match.group(1)
     if not text:
         await event.edit("No input found!")
@@ -271,6 +287,8 @@ async def img(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"lg"))
 @WhiteEye.on(sudo_cmd(pattern=r"lg", allow_sudo=True))
 async def lottiepie(event):
+    if event.fwd_from:
+        return
     await event.edit("`Prooooooccccesssssssinggggg.....`")
     message = await event.get_reply_message()
     if message.media and message.media.document:
@@ -301,6 +319,8 @@ async def lottiepie(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"ph ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"ph ?(.*)", allow_sudo=True))
 async def img(event):
+    if event.fwd_from:
+        return
     text = event.pattern_match.group(1)
     if not text:
         await event.edit("No input found!  --__--")
@@ -339,6 +359,8 @@ async def img(event):
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"spin ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"spin ?(.*)", allow_sudo=True))
 async def spinshit(message):
+    if event.fwd_from:
+        return
     reply = await message.get_reply_message()
     lmaodict = {"1": 1, "2": 3, "3": 6, "4": 12, "5": 24, "6": 60}
     lolshit = message.pattern_match.group(1)
@@ -390,6 +412,8 @@ async def spinshit(message):
 @WhiteEye.on(sudo_cmd(pattern=r"lnews ?(.*)", allow_sudo=True))
 async def hmm(event):
     text = event.pattern_match.group(1)
+    if event.fwd_from:
+        return
     if not text:
         await event.reply("No input found!  --__--")
         return
