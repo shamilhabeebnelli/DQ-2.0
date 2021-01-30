@@ -15,9 +15,10 @@ import requests
 from iplookup import iplookup
 from selenium import webdriver
 from youtube_search import YoutubeSearch
-from WhiteEyeUserBot.functions import apk_dl
+
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.functions import apk_dl
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="wshot ?(.*)"))
@@ -37,19 +38,19 @@ async def _(event):
         file=imgpath,
         caption=f"**WEBSHOT OF** `{urlissed}` \n**Powered By @WhiteEyeDevs**",
     )
-    
-    
+
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern="rmeme$"))
 @WhiteEye.on(sudo_cmd(pattern="rmeme$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     await event.delete()
-    hmm_s = 'https://some-random-api.ml/meme'
+    hmm_s = "https://some-random-api.ml/meme"
     r = requests.get(url=hmm_s).json()
-    image_s = r['image']
-    await borg.send_file(event.chat_id, file=image_s, caption=r['caption'])
-    
+    image_s = r["image"]
+    await borg.send_file(event.chat_id, file=image_s, caption=r["caption"])
+
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="lp ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern="lp ?(.*)", allow_sudo=True))
@@ -179,7 +180,8 @@ async def _(event):
         await stark_result.edit(noob, parse_mode="HTML")
     except:
         await event.edit("Some Thing Went Wrong.")
-        
+
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern="akd ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern="akd ?(.*)", allow_sudo=True))
 async def _(event):
@@ -187,7 +189,8 @@ async def _(event):
     if event.fwd_from:
         return
     pathz, name = await apk_dl(akkad, Config.TMP_DOWNLOAD_DIRECTORY, event)
-    await borg.send_file(event.chat_id, pathz, caption='Uploaded By @WhiteEyeDevs')
+    await borg.send_file(event.chat_id, pathz, caption="Uploaded By @WhiteEyeDevs")
+
 
 CMD_HELP.update(
     {
