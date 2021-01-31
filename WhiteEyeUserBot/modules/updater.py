@@ -16,8 +16,8 @@ from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot.Configs import Config
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 UPSTREAM_REPO_BRANCH = "master"
@@ -226,12 +226,3 @@ CMD_HELP.update(
         "\nUsage: Performs a full update (recommended)."
     }
 )
-
-
-
-
-
-
-
-
-   
