@@ -1,5 +1,5 @@
 from WhiteEyeUserBot import CMD_LIST
-
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 @borg.on(pattern="^.helper ?(.*)")
 async def cmd_list(event):
