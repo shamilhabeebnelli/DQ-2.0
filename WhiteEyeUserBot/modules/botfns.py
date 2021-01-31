@@ -18,7 +18,6 @@ from telegraph import Telegraph
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from heroku_config import Config
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
 
