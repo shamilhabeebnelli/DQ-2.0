@@ -6,7 +6,7 @@ import lyricsgenius
 from tswift import Song
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
+from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 
 GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 
@@ -57,7 +57,7 @@ async def _(event):
 
 @WhiteEye.on(WhiteEye_on_cmd(outgoing=True, pattern="glyrics(?: |$)(.*)"))
 async def lyrics(lyric):
-    if event.fwd_from:
+    if lyric.fwd_from:
         return
     if r"-" in lyric.text:
         pass
@@ -70,7 +70,7 @@ async def lyrics(lyric):
 
     if GENIUS is None:
         await lyric.edit(
-            "`Provide genius access token to config.py or Heroku Var first kthxbye!`"
+            "`Provide genius access token to config.py or Heroku Config first kthxbye!`"
         )
     else:
         genius = lyricsgenius.Genius(GENIUS)
