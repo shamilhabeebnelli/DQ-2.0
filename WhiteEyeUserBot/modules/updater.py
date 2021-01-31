@@ -15,9 +15,9 @@ from os import environ, execle, path, remove
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from var import Config
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+from WhiteEyeUserBot.Configs import Config
 
 UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 UPSTREAM_REPO_BRANCH = "master"
@@ -31,12 +31,12 @@ requirements_path = path.join(
 async def gen_chlog(repo, diff):
     ch_log = "**ChangeLog** \n\n"
     for c in repo.iter_commits(diff):
-        ch_log += f"🔨 **#{c.count()} :** [{c.summary}]({UPSTREAM_REPO_URL}/commit/{c}) 👷 __{c.author}__\n"
+        ch_log += f"🔨 **#{c.count()} :** [{c.summary}]({UPSTREAM_REPO_URL}/commit/{c}) 👷 __{c.author}__ \n"
     return ch_log
 
 
 async def print_changelogs(event, ac_br, changelog):
-    changelog_str = f"**Updates available in {ac_br} branch!\n\n{changelog}"
+    changelog_str = f"**Updates available in {ac_br} branch!**\n\n{changelog}"
     if len(changelog_str) > 4096:
         await event.edit("**Changelog is too big, sending as a file.**")
         file = open("output.txt", "w+")
@@ -134,6 +134,8 @@ async def update(event, repo, ups_rem, ac_br):
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"update( now| deploy|$)"))
 async def upstream(event):
+    if event.fwd_from:
+        return
     "For .update command, check if the bot is up to date, update if specified"
     await event.edit("**Checking for updates, please wait...**")
     conf = event.pattern_match.group(1).strip()
@@ -224,3 +226,12 @@ CMD_HELP.update(
         "\nUsage: Performs a full update (recommended)."
     }
 )
+
+
+
+
+
+
+
+
+   
