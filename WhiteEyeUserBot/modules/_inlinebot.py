@@ -104,50 +104,39 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             reply_pop_up_alert = "Please get your own WhiteEyeUserbot, and don't use mine Any Support Ask [WhiteEyeDevs](https://t.me/whiteeyedevs)!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-    @tgbot.on(
-        events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-            data=re.compile(b"us_plugin_(.*)")
-        )
+   @tgbot.on(
+    events.callbackquery.CallbackQuery(  # pylint:disable=E0602
+        data=re.compile(b"us_plugin_(.*)")
     )
-    async def on_plug_in_callback_query_handler(event):
-        if event.query.user_id == bot.uid:
-            plugin_name = event.data_match.group(1).decode("UTF-8")
-            help_string = ""
-            help_string += f"Commands Available in {plugin_name} - \n"
-            try:
-                if plugin_name in CMD_HELP:
-                    for i in CMD_HELP[plugin_name]:
-                        help_string += i
-                    help_string += "\n"
-                else:
-                    for i in CMD_LIST[plugin_name]:
-                        help_string += i
-                        help_string += "\n"
-            except BaseException:
-                pass
-            if help_string == "":
-                reply_pop_up_alert = "{} has no detailed info.\nUse .help {}".format(
-                    plugin_name, plugin_name
-                )
-            else:
-                reply_pop_up_alert = help_string
-            reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
-                © WhiteEye".format(
-                plugin_name
-            )
-            if len(help_string) >= 140:
-                oops = "List too long!\nCheck your saved messages!"
-                await event.answer(oops, cache_time=0, alert=True)
-                help_string += "\n\nThis will be auto-deleted in 1 minute!"
-                if bot is not None and event.query.user_id == bot.uid:
-                    ok = await bot.send_message("me", help_string)
-                    await asyncio.sleep(60)
-                    await ok.delete()
-            else:
-                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-        else:
-            reply_pop_up_alert = "Please Get Your Own WhiteEyeUserBot And Dont Use Mine Nedd Any Support Ask [WhiteEyeDevs](https://t.me/whiteeyedevs)"
-            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+)
+async def on_plug_in_callback_query_handler(event):
+    o = await all_pro_s(Config, client1, client2, client3)
+    if not event.query.user_id in o:
+        sedok = "Who The Fuck Are You? Get Your Own Friday."
+        await event.answer(sedok, cache_time=0, alert=True)
+        return
+    plugin_name, page_number = event.data_match.group(1).decode("UTF-8").split("|", 1)
+    if plugin_name in CMD_HELP:
+        help_string = f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
+    reply_pop_up_alert = help_string
+    reply_pop_up_alert += "\n\n**(C) @WhiteEyeDevs** ".format(plugin_name)
+    if len(reply_pop_up_alert) >= 4096:
+        crackexy = "`Pasting Your Help Menu.`"
+        await event.answer(crackexy, cache_time=0, alert=True)
+        out_file = reply_pop_up_alert
+        url = "https://del.dog/documents"
+        r = requests.post(url, data=out_file.encode("UTF-8")).json()
+        url = f"https://del.dog/{r['key']}"
+        await event.edit(
+            f"Pasted {plugin_name} to {url}",
+            link_preview=False,
+            buttons=[[custom.Button.inline("Go Back", data=f"backme_{page_number}")]],
+        )
+    else:
+        await event.edit(
+            message=reply_pop_up_alert,
+            buttons=[[custom.Button.inline("Go Back", data=f"backme_{page_number}")]],
+        )
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"terminator")))
     async def rip(event):
