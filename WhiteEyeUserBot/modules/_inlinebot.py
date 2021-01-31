@@ -103,7 +103,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             reply_pop_up_alert = "Please get your own WhiteEyeUserbot, and don't use mine Any Support Ask [WhiteEyeDevs](https://t.me/whiteeyedevs)!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-   
+
     @tgbot.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
             data=re.compile(b"us_plugin_(.*)")
@@ -115,9 +115,13 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             sedok = "Who The Fuck Are You? Get Your Own Friday."
             await event.answer(sedok, cache_time=0, alert=True)
             return
-        plugin_name, page_number = event.data_match.group(1).decode("UTF-8").split("|", 1)
+        plugin_name, page_number = (
+            event.data_match.group(1).decode("UTF-8").split("|", 1)
+        )
         if plugin_name in CMD_HELP:
-            help_string = f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
+            help_string = (
+                f"**💡 PLUGIN NAME 💡 :** `{plugin_name}` \n{CMD_HELP[plugin_name]}"
+            )
         reply_pop_up_alert = help_string
         reply_pop_up_alert += "\n\n**(C) @WhiteEyeDevs** ".format(plugin_name)
         if len(reply_pop_up_alert) >= 4096:
@@ -130,14 +134,18 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             await event.edit(
                 f"Pasted {plugin_name} to {url}",
                 link_preview=False,
-                buttons=[[custom.Button.inline("Go Back", data=f"backme_{page_number}")]],
+                buttons=[
+                    [custom.Button.inline("Go Back", data=f"backme_{page_number}")]
+                ],
             )
         else:
             await event.edit(
                 message=reply_pop_up_alert,
-                buttons=[[custom.Button.inline("Go Back", data=f"backme_{page_number}")]],
+                buttons=[
+                    [custom.Button.inline("Go Back", data=f"backme_{page_number}")]
+                ],
             )
-    
+
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"terminator")))
     async def rip(event):
         if event.query.user_id == bot.uid:
