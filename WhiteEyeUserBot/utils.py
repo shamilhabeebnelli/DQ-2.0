@@ -23,7 +23,7 @@ from pathlib import Path
 
 from telethon import events
 
-from var import Var
+from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot import CMD_HELP, CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.wraptools import (
@@ -138,7 +138,7 @@ def load_module(shortname):
         mod = importlib.util.module_from_spec(spec)
         mod.bot = bot
         mod.tgbot = bot.tgbot
-        mod.Var = Var
+        mod.Config = Config
         mod.command = command
         mod.logger = logging.getLogger(shortname)
         # support for uniborg
@@ -447,7 +447,7 @@ def time_formatter(milliseconds: int) -> str:
 
 class Loader:
     def __init__(self, func=None, **args):
-        self.Var = Var
+        self.Config = Config
         bot.add_event_handler(func, events.NewMessage(**args))
 
 
@@ -533,7 +533,8 @@ def load_module_dclient(shortname, client):
         mod = importlib.util.module_from_spec(spec)
         mod.bot = client
         mod.tgbot = bot.tgbot
-        mod.Var = Var
+        mod.Config = Config
+        mod.Var = Config
         mod.command = command
         sedlu = str(shortname) + "- MClient -"
         mod.logger = logging.getLogger(sedlu)
