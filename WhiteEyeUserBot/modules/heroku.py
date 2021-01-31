@@ -6,7 +6,7 @@ import heroku3
 import requests
 
 from WhiteEyeUserBot.functions.heroku_helper import HerokuHelper
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
@@ -102,7 +102,9 @@ async def dyno_usage(dyno):
 
 
 @WhiteEye.on(
-    WhiteEye_on_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True)
+    WhiteEye_on_cmd(
+        pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True
+    )
 )
 @WhiteEye.on(
     sudo_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", allow_sudo=True)
@@ -134,7 +136,8 @@ async def variable(var):
                 )
             else:
                 return await edit_or_reply(
-                    var, "**ConfigConfigs**:" f"\n\n`Error:\n-> {variable} don't exists`"
+                    var,
+                    "**ConfigConfigs**:" f"\n\n`Error:\n-> {variable} don't exists`",
                 )
         except IndexError:
             configs = prettyjson(heroku_var.to_dict(), indent=2)
@@ -170,7 +173,9 @@ async def variable(var):
             try:
                 value = var.pattern_match.group(2).split()[1]
             except IndexError:
-                return await edit_or_reply(var, ">`.set var <ConfigConfigs-name> <value>`")
+                return await edit_or_reply(
+                    var, ">`.set var <ConfigConfigs-name> <value>`"
+                )
         await asyncio.sleep(1.5)
         if variable in heroku_var:
             await edit_or_reply(
@@ -248,8 +253,6 @@ def prettyjson(obj, indent=2, maxlinelength=80):
         indent=indent,
     )
     return indentitems(items, indent, level=0)
-   
-   
 
 
 CMD_HELP.update(
@@ -268,4 +271,4 @@ CMD_HELP.update(
 \n\n**Syntax : **`.logs`\
 \n**Usage :** Gets logs from heroku."
     }
-)   
+)
