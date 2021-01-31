@@ -7,40 +7,45 @@ Available Commands:
 # file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html
 import os
 import sys
-
+from WhiteEyeUserBot.functions.heroku_helper import HerokuHelper
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-
+import heroku3
+import requests
+Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 
 @WhiteEye.on(WhiteEye_on_cmd("restart"))
 async def _(event):
     if event.fwd_from:
         return
-    # await asyncio.sleep(2)
-    # await event.edit("Restarting [██░] ...\n`.ping` me or `.help` to check if I am online after a lil bit.")
-    # await asyncio.sleep(2)
-    # await event.edit("Restarting [███]...\n`.ping` me or `.help` to check if I am online after a lil bit.")
-    # await asyncio.sleep(2)
-    await event.edit("Restarted. `.ping` me or `.helpme` to check if I am online")
-    await borg.disconnect()
-    # https://archive.is/im3rt
-    os.execl(sys.executable, sys.executable, *sys.argv)
-    # You probably don't need it but whatever
-    quit()
+    await event.edit("**Restarting WhiteEye ! If You Want To Check If I am Alive, Do** `.ping` After 2 Min!")
+    if Config.HEROKU_API_KEY:
+        herokuHelper = HerokuHelper(Config.HEROKU_APP_NAME, Config.HEROKU_API_KEY)
+        herokuHelper.restart()
+    else:
+        await borg.disconnect()
+        os.execl(sys.executable, sys.executable, *sys.argv)
 
 
 @WhiteEye.on(WhiteEye_on_cmd("shutdown"))
 async def _(event):
     if event.fwd_from:
         return
-    await event.edit("Turning off ...Manually turn me on later")
-    await borg.disconnect()
+    await event.edit("Turning off WhiteEye ...Manually turn me on later")
+    if Config.HEROKU_API_KEY:
+        app = Heroku.app(Config.HEROKU_APP_NAME)
+        app.dynos['worker.1'].kill()
+    else:
+        await bot.disconnect()
+        sys.exit(0)
 
 
 CMD_HELP.update(
     {
-        "power_tools": "Power_Tools\
-\n\nSyntax : .shutdown, .restart\
-\nUsage : Plugin to Shutdown Or Restart You Bot"
+        "power_tools": "**Power Tools**\
+\n\n**Syntax : **`.restart`\
+\n**Usage :** restarts your Friday userbot.\
+\n\n**Syntax : **`.shutdown`\
+\n**Usage :** Shuts down your Friday userbot."
     }
 )
