@@ -6,10 +6,12 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
 from telethon.tl import functions
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+
 from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 FONT_FILE_TO_USE = "Fonts/digital.ttf"
+
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="autopic"))
 async def autopic(event):
