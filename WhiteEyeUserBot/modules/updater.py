@@ -15,14 +15,14 @@ from os import environ, execle, path, remove
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from var import Var
+from var import Config
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 UPSTREAM_REPO_BRANCH = "master"
-HEROKU_APP_NAME = Var.HEROKU_APP_NAME
-HEROKU_API_KEY = Var.HEROKU_API_KEY
+HEROKU_APP_NAME = Config.HEROKU_APP_NAME
+HEROKU_API_KEY = Config.HEROKU_API_KEY
 requirements_path = path.join(
     path.dirname(path.dirname(path.dirname(__file__))), "requirements.txt"
 )
