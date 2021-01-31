@@ -11,34 +11,17 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-import asyncio
-import json
-import math
-import os
-import re
-import shlex
-import subprocess
-import time
-import webbrowser
-from os.path import basename
-from pathlib import Path
-from typing import List, Optional, Tuple, Union
-
-import hachoir
 import requests
-import telethon
 from bs4 import BeautifulSoup
-from bs4 import BeautifulSoup as bs
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from pymediainfo import MediaInfo
-from telethon import Button, custom, events, functions
-from telethon.tl.types import (
-    DocumentAttributeAudio,
-    InputMessagesFilterDocument,
-    MessageMediaPhoto,
-)
+import hachoir
+import asyncio
+import os
+from pathlib import Path
+import wget
+from WhiteEyeUserBot.utils import load_module
+from telethon.tl.types import DocumentAttributeAudio
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (
     ContentTooShortError,
@@ -50,17 +33,36 @@ from youtube_dl.utils import (
     UnavailableVideoError,
     XAttrMetadataError,
 )
-
-from WhiteEyeUserBot.utils import load_module
-
+import asyncio
+import json
+import math
+import os
+import re
+import shlex
+import subprocess
+import time
+import eyed3
+from os.path import basename
+from typing import List, Optional, Tuple
+import webbrowser
+from bs4 import BeautifulSoup
+import requests
+from bs4 import BeautifulSoup as bs
+import re
+from telethon.tl.types import InputMessagesFilterDocument
+import telethon
+from telethon import Button, custom, events, functions
+from pymediainfo import MediaInfo
+from telethon.tl.types import MessageMediaPhoto
+from typing import Union
 SIZE_UNITS = ["B", "KB", "MB", "GB", "TB", "PB"]
 BASE_URL = "https://isubtitles.org"
-import os
-import zipfile
-
-import aiohttp
-
 from WhiteEyeUserBot.Configs import Config
+import zipfile
+import os
+import aiohttp
+from WhiteEyeUserBot.functions.FastTelethon import upload_file
+
 
 sedpath = Config.TMP_DOWNLOAD_DIRECTORY
 from WhiteEyeUserBot import logging
@@ -68,16 +70,15 @@ from WhiteEyeUserBot import logging
 logger = logging.getLogger("[--WARNING--]")
 if not os.path.isdir(sedpath):
     os.makedirs(sedpath)
-
+    
 # Deethon // @aykxt
 session = aiohttp.ClientSession()
-
 
 async def fetch_json(link):
     async with session.get(link) as resp:
         return await resp.json()
-
-
+    
+    
 def get_readable_file_size(size_in_bytes: Union[int, float]) -> str:
     if size_in_bytes is None:
         return "0B"
@@ -108,8 +109,7 @@ def get_readable_time(secs: float) -> str:
     seconds = int(seconds)
     result += f"{seconds}s"
     return result
-
-
+    
 # Thanks To Userge-X
 async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
     """ run command in terminal """
@@ -126,31 +126,54 @@ async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
     )
 
 
+
 async def progress(current, total, event, start, type_of_ps, file_name=None):
     """Generic progress_callback for uploads and downloads."""
     now = time.time()
     diff = now - start
-    if round(diff % 10.00) == 0 or current != total:
+    if round(diff % 10.00) == 0 or current == total:
         percentage = current * 100 / total
         speed = current / diff
         elapsed_time = round(diff) * 1000
+        if elapsed_time == 0:
+            return
         time_to_completion = round((total - current) / speed) * 1000
         estimated_total_time = elapsed_time + time_to_completion
-        progress_str = "[{0}{1}] {2}%\n".format(
-            "".join(["■" for i in range(math.floor(percentage / 5))]),
-            "".join(["▢" for i in range(20 - math.floor(percentage / 5))]),
+        progress_str = "{0}{1} {2}%\n".format(
+            "".join(["▰" for i in range(math.floor(percentage / 10))]),
+            "".join(["▱" for i in range(10 - math.floor(percentage / 10))]),
             round(percentage, 2),
         )
         tmp = progress_str + "{0} of {1}\nETA: {2}".format(
             humanbytes(current), humanbytes(total), time_formatter(estimated_total_time)
         )
         if file_name:
-            await event.edit(
-                "{}\nFile Name: `{}`\n{}".format(type_of_ps, file_name, tmp)
-            )
+            try:
+                await event.edit(
+                    "{}\n**File Name:** `{}`\n{}".format(type_of_ps, file_name, tmp)
+                    
+                )
+            except:
+                pass
         else:
-            await event.edit("{}\n{}".format(type_of_ps, tmp))
-
+            try:
+                await event.edit("{}\n{}".format(type_of_ps, tmp))
+            except:
+                pass
+async def all_pro_s(Config, client2, client3, bot):
+    if not Config.SUDO_USERS:
+        lmao_s = []
+    else:
+        lmao_s = list(Config.SUDO_USERS)
+    sed1 = await bot.get_me()
+    lmao_s.append(sed1.id)
+    if client2:
+        sed2 = await client2.get_me()
+        lmao_s.append(sed2.id)
+    if client3:
+        sed3 = await client3.get_me()
+        lmao_s.append(sed3.id)
+    return lmao_s
 
 def humanbytes(size):
     """Input size in bytes,
@@ -167,7 +190,6 @@ def humanbytes(size):
         raised_to_pow += 1
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
-
 async def get_all_modules(event, borg, channel_id):
     await event.edit(f"Ìnstalling All Plugins from {channel_id}")
     try:
@@ -178,9 +200,7 @@ async def get_all_modules(event, borg, channel_id):
             search=".py",
         )
     except:
-        await event.edit(
-            "`Failed To Retrieve Modules. Please Check Channel Username / Id. Make Sure You Are On That Channel`"
-        )
+        await event.edit("`Failed To Retrieve Modules. Please Check Channel Username / Id. Make Sure You Are On That Channel`")
         return
     yesm = 0
     nom = 0
@@ -191,37 +211,29 @@ async def get_all_modules(event, borg, channel_id):
     await event.edit(f"**Found : {len_p} Plugins. Trying To Install**")
     for sed in a_plugins:
         try:
-            downloaded_file_name = await borg.download_media(
-                sed, "WhiteEyeUserBot/modules/"
-            )
+            downloaded_file_name = await borg.download_media(sed, "WhiteEyeUserBot/modules/")
             if "(" not in downloaded_file_name:
                 path1 = Path(downloaded_file_name)
                 shortname = path1.stem
                 load_module(shortname.replace(".py", ""))
-                await event.edit(
-                    "**Installed :** `{}`".format(
-                        os.path.basename(downloaded_file_name)
-                    )
-                )
+                await event.edit("**Installed :** `{}`".format(os.path.basename(downloaded_file_name)
+                                                              )
+                                )
             else:
                 nom += 1
-                await event.edit(
-                    "**Failed to Install [PLugin Already Found] :** `{}`".format(
-                        os.path.basename(downloaded_file_name)
-                    )
-                )
+                await event.edit("**Failed to Install [PLugin Already Found] :** `{}`".format(os.path.basename(downloaded_file_name)
+                                                              )
+                                )
                 os.remove(downloaded_file_name)
         except:
-            await event.edit(
-                "**Failed To Install :** `{}`".format(
-                    os.path.basename(downloaded_file_name)
-                )
-            )
-            os.remove(downloaded_file_name)
-            nom += 1
+                await event.edit("**Failed To Install :** `{}`".format(os.path.basename(downloaded_file_name)
+                                                              )
+                                )
+                os.remove(downloaded_file_name)
+                nom += 1
+                pass
     yesm = len_p - nom
     return yesm, nom, len_p
-
 
 def time_formatter(milliseconds: int) -> str:
     """Inputs time in milliseconds, to get beautified time,
@@ -231,11 +243,11 @@ def time_formatter(milliseconds: int) -> str:
     hours, minutes = divmod(minutes, 60)
     days, hours = divmod(hours, 24)
     tmp = (
-        ((str(days) + " day(s), ") if days else "")
-        + ((str(hours) + " hour(s), ") if hours else "")
-        + ((str(minutes) + " minute(s), ") if minutes else "")
-        + ((str(seconds) + " second(s), ") if seconds else "")
-        + ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
+            ((str(days) + " day(s), ") if days else "")
+            + ((str(hours) + " hour(s), ") if hours else "")
+            + ((str(minutes) + " minute(s), ") if minutes else "")
+            + ((str(seconds) + " second(s), ") if seconds else "")
+            + ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
     )
     return tmp[:-2]
 
@@ -245,14 +257,14 @@ def time_formatter(milliseconds: int) -> str:
 async def convert_to_image(event, borg):
     lmao = await event.get_reply_message()
     if not (
-        lmao.gif
-        or lmao.audio
-        or lmao.voice
-        or lmao.video
-        or lmao.video_note
-        or lmao.photo
-        or lmao.sticker
-        or lmao.media
+            lmao.gif
+            or lmao.audio
+            or lmao.voice
+            or lmao.video
+            or lmao.video_note
+            or lmao.photo
+            or lmao.sticker
+            or lmao.media
     ):
         await event.edit("`Format Not Supported.`")
         return
@@ -334,7 +346,7 @@ async def crop_vid(input_vid: str, final_path: str):
 
 # Thanks To Userge-X
 async def take_screen_shot(
-    video_file: str, duration: int, path: str = ""
+        video_file: str, duration: int, path: str = ""
 ) -> Optional[str]:
     """ take a screenshot """
     logger.info(
@@ -372,9 +384,7 @@ async def fetch_feds(event, borg):
     async with borg.conversation("@MissRose_bot") as bot_conv:
         await bot_conv.send_message("/start")
         await bot_conv.send_message("/myfeds")
-        await asyncio.sleep(3)
         response = await bot_conv.get_response(timeout=300)
-        await asyncio.sleep(3)
         if "You can only use fed commands once every 5 minutes" in response.text:
             await event.edit("`Try again after 5 mins.`")
             return
@@ -382,13 +392,14 @@ async def fetch_feds(event, borg):
             await event.edit(
                 "`Boss, You Real Peru. You Are Admin in So Many Feds. WoW!`"
             )
-            await asyncio.sleep(2)
             await response.click(0)
-            await asyncio.sleep(6)
             fedfile = await bot_conv.get_response()
             await asyncio.sleep(2)
+            if "You can only use fed commands once every 5 minutes" in fedfile.text:
+                await event.edit("`Try again after 5 mins.`")
+                return
             if fedfile.media:
-                downloaded_file_name = await borg.download_media(fedfile, "fedlist.txt")
+                downloaded_file_name = await borg.download_media(fedfile.media, "fedlist.txt")
                 await asyncio.sleep(1)
                 file = open(downloaded_file_name, "r")
                 lines = file.readlines()
@@ -397,7 +408,6 @@ async def fetch_feds(event, borg):
                         fedList.append(line[:36])
                     except BaseException:
                         pass
-                # CleanUp
                 os.remove(downloaded_file_name)
         else:
             In = False
@@ -448,8 +458,8 @@ async def get_subtitles(imdb_id, borg, event):
             sub_name_tag = row.find("td", class_=None)
             sub_name = (
                 str(sub_name_tag.find("a").text)
-                .replace("subtitle", "")
-                .replace("\n", "")
+                    .replace("subtitle", "")
+                    .replace("\n", "")
             )
             sub = (sub_name, sub_link)
             subtitles.append(sub)
@@ -471,51 +481,43 @@ async def get_subtitles(imdb_id, borg, event):
 
 # Thanks To TechoAryan For Scarpping
 async def apk_dl(app_name, path, event):
-    await event.edit(
-        "`Searching, For Apk File. This May Take Time Depending On Your App Size`"
-    )
+    await event.edit('`Searching, For Apk File. This May Take Time Depending On Your App Size`')
     res = requests.get(f"https://m.apkpure.com/search?q={app_name}")
-    soup = BeautifulSoup(res.text, "html.parser")
-    result = soup.select(".dd")
+    soup = BeautifulSoup(res.text, 'html.parser')
+    result = soup.select('.dd')
     for link in result[:1]:
-        s_for_name = requests.get("https://m.apkpure.com" + link.get("href"))
-        sfn = BeautifulSoup(s_for_name.text, "html.parser")
-        ttl = sfn.select_one("title").text
-        noneed = [" - APK Download"]
+        s_for_name = requests.get("https://m.apkpure.com" + link.get('href'))
+        sfn = BeautifulSoup(s_for_name.text, 'html.parser')
+        ttl = sfn.select_one('title').text
+        noneed = [' - APK Download']
         for i in noneed:
-            name = ttl.replace(i, "")
-            res2 = requests.get(
-                "https://m.apkpure.com" + link.get("href") + "/download?from=details"
-            )
-            soup2 = BeautifulSoup(res2.text, "html.parser")
-            result = soup2.select(".ga")
+            name = ttl.replace(i, '')
+            res2 = requests.get("https://m.apkpure.com" + link.get('href') + "/download?from=details")
+            soup2 = BeautifulSoup(res2.text, 'html.parser')
+            result = soup2.select('.ga')
         for link in result:
-            dl_link = link.get("href")
+            dl_link = link.get('href')
             r = requests.get(dl_link)
-            with open(f"{path}/{name}@WhiteEyeDevs.apk", "wb") as f:
+            with open(f"{path}/{name}@WhiteEyeDevs.apk", 'wb') as f:
                 f.write(r.content)
-    await event.edit("`Apk, Downloaded. Let me Upload It here.`")
-    final_path = f"{path}/{name}@WhiteEyeDevs.apk"
+    await event.edit('`Apk, Downloaded. Let me Upload It here.`')
+    final_path = f'{path}/{name}@WhiteEyeDevs.apk'
     return final_path, name
-
 
 async def check_if_subbed(channel_id, event, bot):
     try:
-        result = await bot(
-            functions.channels.GetParticipantRequest(
-                channel=channel_id, user_id=event.sender_id
+            result = await bot(
+                functions.channels.GetParticipantRequest(
+                    channel=channel_id, user_id=event.sender_id
+                )
             )
-        )
-        if result.participant:
-            return True
+            if result.participant:
+                return True
     except telethon.errors.rpcerrorlist.UserNotParticipantError:
         return False
-
-
+    
 async def _ytdl(url, is_it, event, tgbot):
-    await event.edit(
-        "`Ok Downloading This Video / Audio - Please Wait.` \n**Powered By @WhiteEyeDevs**"
-    )
+    await event.edit("`Ok Downloading This Video / Audio - Please Wait.` \n**Powered By @WhiteEyeDevs**")
     if is_it:
         opts = {
             "format": "bestaudio",
@@ -532,7 +534,7 @@ async def _ytdl(url, is_it, event, tgbot):
                     "preferredquality": "480",
                 }
             ],
-            "outtmpl": "%(id)s.mp3",
+            "outtmpl": "%(title)s.mp3",
             "quiet": True,
             "logtostderr": False,
         }
@@ -549,7 +551,7 @@ async def _ytdl(url, is_it, event, tgbot):
             "postprocessors": [
                 {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
             ],
-            "outtmpl": "%(id)s.mp4",
+            "outtmpl": "%(title)s.mp4",
             "logtostderr": False,
             "quiet": True,
         }
@@ -563,66 +565,94 @@ async def _ytdl(url, is_it, event, tgbot):
         return
     c_time = time.time()
     if song:
-        await event.edit(
-            f"**Uploading Audio**\
-        \n**Title :** `{ytdl_data['title']}`\
-        \n**Video Uploader :** `{ytdl_data['uploader']}`"
-        )
-        lol_m = await tgbot.upload_file(
-            file=f"{ytdl_data['id']}.mp3",
+        file_stark = f"{ytdl_data['title']}.mp3"
+        lol_m = await upload_file(
+            file_name=file_stark,
+            client=tgbot,
+            file=open(file_stark, 'rb'),
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d,
-                    t,
-                    event,
-                    c_time,
-                    "**Uploading Audio To TG**",
-                    f"{ytdl_data['title']}.mp3",
+                    d, t, event, c_time, "Uploading Youtube Audio..", file_stark
                 )
             ),
         )
         await event.edit(
-            file=lol_m, text=f"{ytdl_data['title']} \n**Uploaded Using @WhiteEyeDevs**"
+            file=lol_m,
+            text=f"{ytdl_data['title']} \n**Uploaded Using @WhiteEyeDevs**"
         )
-        os.remove(f"{ytdl_data['id']}.mp3")
+        os.remove(file_stark)
     elif video:
-        await event.edit(
-            f"**Uploading Video**\
-        \n**Title :** `{ytdl_data['title']}`\
-        \n**Video Uploader :** `{ytdl_data['uploader']}`"
-        )
-        hmmo = await tgbot.upload_file(
-            file=f"{ytdl_data['id']}.mp4",
+        file_stark = f"{ytdl_data['title']}.mp4"
+        lol_m = await upload_file(
+            file_name=file_stark,
+            client=tgbot,
+            file=open(file_stark, 'rb'),
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d,
-                    t,
-                    event,
-                    c_time,
-                    "**Uploading Video To TG**",
-                    f"{ytdl_data['title']}.mp4",
+                    d, t, event, c_time, "Uploading Youtube Video..", file_stark
                 )
             ),
         )
         await event.edit(
-            file=hmmo, text=f"{ytdl_data['title']} \n**Uploaded Using @WhiteEyeDevs**"
+            file=lol_m,
+            text=f"{ytdl_data['title']} \n**Uploaded Using @WhiteEyeDevs**"
         )
-        os.remove(f"{ytdl_data['id']}.mp4")
+        os.remove(file_stark)
 
 
+async def _deezer_dl(word, event, tgbot):
+    await event.edit("`Ok Downloading This Audio - Please Wait.` \n**Powered By @WhiteEyeDevs**")
+    urlp = f"https://starkapi.herokuapp.com/deezer/{word}"
+    datto = requests.get(url=urlp).json()
+    mus = datto.get("url")
+    mello = datto.get("artist")
+    #thums = urlhp["album"]["cover_medium"]
+    sname = f'''{datto.get("title")}.mp3'''
+    doc = requests.get(mus)
+    with open(sname, 'wb') as f:
+      f.write(doc.content)
+    car = f"""
+**Song Name :** {datto.get("title")}
+**Duration :** {datto.get('duration')} Seconds
+**Artist :** {mello}
+Music Downloaded And Uploaded By Friday Userbot
+Get Your WhiteEyeUserBot From @WhiteEyeDevs"""
+    await event.edit("Song Downloaded.  Waiting To Upload. 🥳🤗")
+    c_time = time.time()
+    uploaded_file = await upload_file(
+        	file_name=sname,
+            client=tgbot,
+            file=open(sname, 'rb'),
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(
+                    d, t, event, c_time, "Uploading..", sname
+                )
+            ),
+        )
+    
+    await event.edit(
+            file=uploaded_file,
+            text=car
+    )
+    os.remove(sname)
+
+
+
+
+                  
 async def get_all_admin_chats(event):
     lul_stark = []
     all_chats = [
         d.entity
-        for d in await event.client.get_dialogs()
-        if (d.is_group or d.is_channel)
-    ]
+            for d in await event.client.get_dialogs()
+            if (d.is_group or d.is_channel)
+        ]
     for i in all_chats:
         if i.creator or i.admin_rights:
             lul_stark.append(i.id)
     return lul_stark
 
-
+                  
 async def is_admin(event, user):
     sed = await event.client.get_permissions(event.chat_id, user)
     if sed.is_admin:
