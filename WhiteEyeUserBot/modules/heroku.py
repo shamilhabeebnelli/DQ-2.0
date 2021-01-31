@@ -1,126 +1,46 @@
-# Copyright (C) 2020 Adek Maulana.
-# All rights reserved.
-"""
-   Heroku manager for your WhiteEyeUserBot
-"""
-
 import asyncio
 import math
 import os
 
 import heroku3
 import requests
-from telegraph import Telegraph
 
-from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
+from WhiteEyeUserBot.functions.heroku_helper import HerokuHelper
+from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 
-telegraph = Telegraph()
-tgnoob = telegraph.create_account(short_name="WhiteEye 🇮🇳")
-
-Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
 
-@WhiteEye.on(
-    WhiteEye_on_cmd(
-        pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True
+@WhiteEye.on(WhiteEye_on_cmd(pattern="(logs|log)"))
+@WhiteEye.on(sudo_cmd(pattern="(logs|log)", allow_sudo=True))
+async def giblog(event):
+    if event.fwd_from:
+        return
+    herokuHelper = HerokuHelper(Config.HEROKU_APP_NAME, Config.HEROKU_API_KEY)
+    logz = herokuHelper.getLog()
+    with open("logs.txt", "w") as log:
+        log.write(logz)
+    await borg.send_file(
+        event.chat_id, "logs.txt", caption=f"**Logs Of {Config.HEROKU_APP_NAME}**"
     )
-)
-@WhiteEye.on(
-    sudo_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", allow_sudo=True)
-)
-async def variable(var):
-    """
-    Manage most of ConfigVars setting, set new var, get current var,
-    or delete var...
-    """
-    if Var.HEROKU_APP_NAME is not None:
-        app = Heroku.app(Var.HEROKU_APP_NAME)
-    else:
-        return await edit_or_reply(
-            var, "`[HEROKU]:" "\nPlease setup your` **HEROKU_APP_NAME**"
-        )
-    exe = var.pattern_match.group(1)
-    heroku_var = app.config()
-    if exe == "get":
-        await edit_or_reply(var, "`Getting information...`")
-        await asyncio.sleep(1.5)
-        try:
-            variable = var.pattern_match.group(2).split()[0]
-            if variable in heroku_var:
-                return await edit_or_reply(
-                    var,
-                    "**ConfigVars**:" f"\n\n`{variable} = {heroku_var[variable]}`\n",
-                )
-            else:
-                return await edit_or_reply(
-                    var, "**ConfigVars**:" f"\n\n`Error:\n-> {variable} don't exists`"
-                )
-        except IndexError:
-            configs = prettyjson(heroku_var.to_dict(), indent=2)
-            with open("configs.json", "w") as fp:
-                fp.write(configs)
-            with open("configs.json", "r") as fp:
-                result = fp.read()
-                if len(result) >= 4096:
-                    await var.client.send_file(
-                        var.chat_id,
-                        "configs.json",
-                        reply_to=var.id,
-                        caption="`Output too large, sending it as a file`",
-                    )
-                else:
-                    await edit_or_reply(
-                        var,
-                        "`[HEROKU]` ConfigVars:\n\n"
-                        "================================"
-                        f"\n```{result}```\n"
-                        "================================",
-                    )
-            os.remove("configs.json")
-            return
-    elif exe == "set":
-        await edit_or_reply(var, "`Setting information...`")
-        variable = var.pattern_match.group(2)
-        if not variable:
-            return await edit_or_reply(var, ">`.set var <ConfigVars-name> <value>`")
-        value = var.pattern_match.group(3)
-        if not value:
-            variable = variable.split()[0]
-            try:
-                value = var.pattern_match.group(2).split()[1]
-            except IndexError:
-                return await edit_or_reply(var, ">`.set var <ConfigVars-name> <value>`")
-        await asyncio.sleep(1.5)
-        if variable in heroku_var:
-            await edit_or_reply(
-                var, f"**{variable}**  `successfully changed to`  ->  **{value}**"
-            )
-        else:
-            await edit_or_reply(
-                var, f"**{variable}**  `successfully added with value`  ->  **{value}**"
-            )
-        heroku_var[variable] = value
-    elif exe == "del":
-        await edit_or_reply(var, "`Getting information to deleting variable...`")
-        try:
-            variable = var.pattern_match.group(2).split()[0]
-        except IndexError:
-            return await edit_or_reply(
-                var, "`Please specify ConfigVars you want to delete`"
-            )
-        await asyncio.sleep(1.5)
-        if variable in heroku_var:
-            await edit_or_reply(var, f"**{variable}**  `successfully deleted`")
-            del heroku_var[variable]
-        else:
-            return await edit_or_reply(var, f"**{variable}**  `is not exists`")
 
 
-@WhiteEye.on(WhiteEye_on_cmd(pattern="usage$", outgoing=True))
+@WhiteEye.on(WhiteEye_on_cmd(pattern="(rerun|restarts)"))
+@WhiteEye.on(sudo_cmd(pattern="(restart|restarts)", allow_sudo=True))
+async def restart_me(event):
+    if event.fwd_from:
+        return
+    herokuHelper = HerokuHelper(Config.HEROKU_APP_NAME, Config.HEROKU_API_KEY)
+    await event.edit("`App is Restarting. This is May Take Upto 10Min.`")
+    herokuHelper.restart()
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern="usage$"))
 @WhiteEye.on(sudo_cmd(pattern="usage$", allow_sudo=True))
 async def dyno_usage(dyno):
+    if dyno.fwd_from:
+        return
     """
     Get your account Dyno Usage
     """
@@ -133,7 +53,7 @@ async def dyno_usage(dyno):
     user_id = Heroku.account().id
     headers = {
         "User-Agent": useragent,
-        "Authorization": f"Bearer {Var.HEROKU_API_KEY}",
+        "Authorization": f"Bearer {Config.HEROKU_API_KEY}",
         "Accept": "application/vnd.heroku+json; version=3.account-quotas",
     }
     path = "/accounts/" + user_id + "/actions/get-quota"
@@ -171,7 +91,7 @@ async def dyno_usage(dyno):
     return await edit_or_reply(
         dyno,
         "**Dyno Usage Data**:\n\n"
-        f"✗ **APP NAME =>** `{Var.HEROKU_APP_NAME}` \n"
+        f"✗ **APP NAME =>** `{Config.HEROKU_APP_NAME}` \n"
         f"✗ **Usage in Hours And Minutes =>** `{AppHours}h`  `{AppMinutes}m`"
         f"✗ **Usage Percentage =>** [`{AppPercentage} %`]\n"
         "\n\n"
@@ -181,13 +101,139 @@ async def dyno_usage(dyno):
     )
 
 
-@command(pattern="^.info heroku")
-async def info(event):
-    await borg.send_message(
-        event.chat_id,
-        "**Info for Module to Manage Heroku:**\n\n`.usage`\nUsage:__Check your heroku dyno hours status.__\n\n`.set var <NEW VAR> <VALUE>`\nUsage: __add new variable or update existing value variable__\n**!!! WARNING !!!, after setting a variable the bot will restart.**\n\n`.get var or .get var <VAR>`\nUsage: __get your existing varibles, use it only on your private group!__\n**This returns all of your private information, please be cautious...**\n\n`.del var <VAR>`\nUsage: __delete existing variable__\n**!!! WARNING !!!, after deleting variable the bot will restarted**",
-    )
-    await event.delete()
+@WhiteEye.on(
+    WhiteEye_on_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True)
+)
+@WhiteEye.on(
+    sudo_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", allow_sudo=True)
+)
+async def variable(var):
+    if var.fwd_from:
+        return
+    """
+    Manage most of ConfigConfigs setting, set new var, get current var,
+    or delete var...
+    """
+    if Config.HEROKU_APP_NAME is not None:
+        app = Heroku.app(Config.HEROKU_APP_NAME)
+    else:
+        return await edit_or_reply(
+            var, "`[HEROKU]:" "\nPlease setup your` **HEROKU_APP_NAME**"
+        )
+    exe = var.pattern_match.group(1)
+    heroku_var = app.config()
+    if exe == "get":
+        await edit_or_reply(var, "`Getting information...`")
+        await asyncio.sleep(1.5)
+        try:
+            variable = var.pattern_match.group(2).split()[0]
+            if variable in heroku_var:
+                return await edit_or_reply(
+                    var,
+                    "**ConfigConfigs**:" f"\n\n`{variable} = {heroku_var[variable]}`\n",
+                )
+            else:
+                return await edit_or_reply(
+                    var, "**ConfigConfigs**:" f"\n\n`Error:\n-> {variable} don't exists`"
+                )
+        except IndexError:
+            configs = prettyjson(heroku_var.to_dict(), indent=2)
+            with open("configs.json", "w") as fp:
+                fp.write(configs)
+            with open("configs.json", "r") as fp:
+                result = fp.read()
+                if len(result) >= 4096:
+                    await var.client.send_file(
+                        var.chat_id,
+                        "configs.json",
+                        reply_to=var.id,
+                        caption="`Output too large, sending it as a file`",
+                    )
+                else:
+                    await edit_or_reply(
+                        var,
+                        "`[HEROKU]` ConfigConfigs:\n\n"
+                        "================================"
+                        f"\n```{result}```\n"
+                        "================================",
+                    )
+            os.remove("configs.json")
+            return
+    elif exe == "set":
+        await edit_or_reply(var, "`Setting information...`")
+        variable = var.pattern_match.group(2)
+        if not variable:
+            return await edit_or_reply(var, ">`.set var <ConfigConfigs-name> <value>`")
+        value = var.pattern_match.group(3)
+        if not value:
+            variable = variable.split()[0]
+            try:
+                value = var.pattern_match.group(2).split()[1]
+            except IndexError:
+                return await edit_or_reply(var, ">`.set var <ConfigConfigs-name> <value>`")
+        await asyncio.sleep(1.5)
+        if variable in heroku_var:
+            await edit_or_reply(
+                var, f"**{variable}**  `successfully changed to`  ->  **{value}**"
+            )
+        else:
+            await edit_or_reply(
+                var, f"**{variable}**  `successfully added with value`  ->  **{value}**"
+            )
+        heroku_var[variable] = value
+    elif exe == "del":
+        await edit_or_reply(var, "`Getting information to deleting variable...`")
+        try:
+            variable = var.pattern_match.group(2).split()[0]
+        except IndexError:
+            return await edit_or_reply(
+                var, "`Please specify ConfigConfigs you want to delete`"
+            )
+        await asyncio.sleep(1.5)
+        if variable in heroku_var:
+            await edit_or_reply(var, f"**{variable}**  `successfully deleted`")
+            del heroku_var[variable]
+        else:
+            return await edit_or_reply(var, f"**{variable}**  `is not exists`")
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern="shp ?(.*)"))
+async def lel(event):
+    if event.fwd_from:
+        return
+    cpass, npass = event.pattern_match.group(1).split(" ", 1)
+    await event.edit("`Changing You Pass`")
+    accountm = Heroku.account()
+    accountm.change_password(cpass, npass)
+    await event.edit(f"`Done !, Changed You Pass to {npass}")
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern="acolb (.*)"))
+async def sf(event):
+    if event.fwd_from:
+        return
+    hmm = event.pattern_match.group(1)
+    app = Heroku.app(Config.HEROKU_APP_NAME)
+    collaborator = app.add_collaborator(user_id_or_email=hmm, silent=0)
+    await event.edit("`Sent Invitation To Accept Your Collab`")
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern="tfa (.*)"))
+async def l(event):
+    if event.fwd_from:
+        return
+    hmm = event.pattern_match.group(1)
+    app = Heroku.app(Config.HEROKU_APP_NAME)
+    transfer = app.create_transfer(recipient_id_or_name=hmm)
+
+
+@WhiteEye.on(WhiteEye_on_cmd(pattern="exit$"))
+async def killdyno(event):
+    if event.fwd_from:
+        return
+    app = Heroku.app(Config.HEROKU_APP_NAME)
+    await event.edit("`Dyno Is Off. Manually Turn it On Later`")
+    app.kill_dyno("worker.1")
 
 
 def prettyjson(obj, indent=2, maxlinelength=80):
@@ -202,33 +248,8 @@ def prettyjson(obj, indent=2, maxlinelength=80):
         indent=indent,
     )
     return indentitems(items, indent, level=0)
-
-
-@WhiteEye.on(WhiteEye_on_cmd(pattern="logs$", outgoing=True))
-@WhiteEye.on(sudo_cmd(pattern="logs$", allow_sudo=True))
-async def _(givelogs):
-    try:
-        Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
-        app = Heroku.app(Var.HEROKU_APP_NAME)
-    except:
-        return await givelogs.reply(
-            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !"
-        )
-    await edit_or_reply(givelogs, "`Trying To Fetch Logs...`")
-    with open("logs.txt", "w") as log:
-        log.write(app.get_log())
-    hmm = app.get_log()
-    starky = f"<code> {hmm} </code>"
-    title_of_page = "WhiteEye UserBot Logs"
-    response = telegraph.create_page(title_of_page, html_content=starky)
-    km = response["path"]
-    suger = f"`Logs Can Be Found` [Here](https://telegra.ph/{km})"
-    await givelogs.client.send_file(
-        givelogs.chat_id,
-        "logs.txt",
-        reply_to=givelogs.id,
-        caption=suger,
-    )
+   
+   
 
 
 CMD_HELP.update(
@@ -247,4 +268,4 @@ CMD_HELP.update(
 \n\n**Syntax : **`.logs`\
 \n**Usage :** Gets logs from heroku."
     }
-)
+)   
