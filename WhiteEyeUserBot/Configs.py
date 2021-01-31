@@ -23,13 +23,16 @@ ENV = bool(os.environ.get("ENV", False))
 if not ENV:
     from local_config import Development as Config
 elif ENV:
+
     class Config(object):
         LOGGER = True
         APP_ID = int(os.environ.get("APP_ID", 6))
         API_HASH = os.environ.get("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
         STRING_SESSION = os.environ.get("STRING_SESSION", None)
         DB_URI = os.environ.get("DATABASE_URL", None)
-        TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", './WhiteEyeUserBot/DOWNLOADS/')
+        TEMP_DOWNLOAD_DIRECTORY = os.environ.get(
+            "TEMP_DOWNLOAD_DIRECTORY", "./WhiteEyeUserBot/DOWNLOADS/"
+        )
         LOGGER = True
         GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
         GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME", None)
@@ -112,7 +115,9 @@ elif ENV:
         DISABLE_MARKDOWN = os.environ.get("DISABLE_MARKDOWN", False)
         # Load Spammy Plugins, Which can be harmful.
         LOAD_OTHER_PLUGINS = os.environ.get("LOAD_OTHER_PLUGINS", False)
-        LOAD_OTHER_PLUGINS_CHNNL = os.environ.get("LOAD_OTHER_PLUGINS_CHNNL", "@WhiteEyePlugins")
+        LOAD_OTHER_PLUGINS_CHNNL = os.environ.get(
+            "LOAD_OTHER_PLUGINS_CHNNL", "@WhiteEyePlugins"
+        )
         #
         # DO NOT EDIT BELOW THIS LINE IF YOU DO NOT KNOW WHAT YOU ARE DOING
         # TG API limit. A message can have maximum 4096 characters!
@@ -226,14 +231,3 @@ elif ENV:
         TESSDATA_PREFIX = os.environ.get(
             "TESSDATA_PREFIX", "/usr/share/tesseract-ocr/4.00/tessdata"
         )
-
-
-
-
-
-
-
-
-
-
-    
