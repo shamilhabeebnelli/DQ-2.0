@@ -23,7 +23,6 @@ from pathlib import Path
 
 from telethon import events
 
-from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot import CMD_HELP, CMD_LIST, LOAD_PLUG, SUDO_LIST, bot
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.wraptools import (
