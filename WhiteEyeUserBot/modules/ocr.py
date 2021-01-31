@@ -8,7 +8,6 @@ import os
 import requests
 
 from WhiteEyeUserBot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
-from WhiteEyeUserBot.config import Configs
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 OCR_SPACE_API_KEY = Config.OCR_SPACE_API_KEY

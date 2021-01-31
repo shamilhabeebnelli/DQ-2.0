@@ -102,7 +102,9 @@ async def dyno_usage(dyno):
 
 
 @WhiteEye.on(
-    WhiteEye_on_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True)
+    WhiteEye_on_cmd(
+        pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", outgoing=True
+    )
 )
 @WhiteEye.on(
     sudo_cmd(pattern="(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)", allow_sudo=True)
