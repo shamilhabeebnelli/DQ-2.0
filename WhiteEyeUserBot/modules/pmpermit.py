@@ -29,7 +29,7 @@ CUSTOM_MIDDLE_PMP = (
 )
 USER_BOT_WARN_ZERO = "You Have Attempted To Spam Masters Inbox So Inorder To Avoid Over Spam , You Have Been Blocked By WhiteEye"
 
-botisnoob = Var.TG_BOT_USER_NAME_BF_HER
+botisnoob = Config.TG_BOT_USER_NAME_BF_HER
 
 USER_BOT_NO_WARN = (
     "**Hello, This is WhiteEye PM Protection Service ⚠️**\n\n"
@@ -37,7 +37,7 @@ USER_BOT_NO_WARN = (
     "**Then Wait And Choose A Reason Given Below For What Have You Come For.If You Tried To Spam Then I'll Make It Sure That You're Being Blocked.** \n\n"
 )
 
-if Var.PRIVATE_GROUP_ID is not None:
+if Config.PRIVATE_GROUP_ID is not None:
 
     @borg.on(WhiteEye_on_cmd(pattern="(a|approve)"))
     async def block(event):
@@ -127,7 +127,7 @@ if Var.PRIVATE_GROUP_ID is not None:
         if event.sender_id == bot.uid:
             return
 
-        if Var.PRIVATE_GROUP_ID is None:
+        if Config.PRIVATE_GROUP_ID is None:
             return
 
         if not event.is_private:
@@ -187,7 +187,7 @@ if Var.PRIVATE_GROUP_ID is not None:
                 return
             except BaseException:
                 return
-        botusername = Var.TG_BOT_USER_NAME_BF_HER
+        botusername = Config.TG_BOT_USER_NAME_BF_HER
         tap = await bot.inline_query(botusername, USER_BOT_NO_WARN)
         sed = await tap[0].click(event.chat_id)
         PM_WARNS[chat_ids] += 1
