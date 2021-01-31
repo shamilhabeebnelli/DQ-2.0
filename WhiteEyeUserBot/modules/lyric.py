@@ -6,7 +6,7 @@ import lyricsgenius
 from tswift import Song
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
 GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 
