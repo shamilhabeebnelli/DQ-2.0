@@ -1,22 +1,11 @@
 import os
 import re
-import urllib
-import json
 from math import ceil
-from re import findall
-import requests
-from youtube_search import YoutubeSearch
-from search_engine_parser import GoogleSearch
-from WhiteEyeUserBot.functions import _ytdl, fetch_json, _deezer_dl, all_pro_s
-from urllib.parse import quote
-import requests
+
 from telethon import Button, custom, events, functions
-from youtubesearchpython import VideosSearch
-from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, CMD_LIST, client2 as client1, client3 as client2, bot as client3
+
+from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, CMD_LIST
 from WhiteEyeUserBot.modules import inlinestats
-from pornhub_api import PornhubApi
-from telethon.tl.types import BotInlineResult, InputBotInlineMessageMediaAuto, DocumentAttributeImageSize, InputWebDocument, InputBotInlineResult
-from telethon.tl.functions.messages import SetInlineBotResultsRequest
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
