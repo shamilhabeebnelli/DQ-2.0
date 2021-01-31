@@ -1,6 +1,6 @@
 from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot.Configs import Config
+
 issudousing = Config.SUDO_USERS
 islogokay = Config.PRIVATE_GROUP_ID
 isdbfine = Config.DB_URI
