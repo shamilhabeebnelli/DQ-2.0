@@ -1,10 +1,13 @@
 from WhiteEyeUserBot import CMD_LIST
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
-@command(pattern="^.helper ?(.*)")
+@borg.on(pattern="^.helper ?(.*)")
 async def cmd_list(event):
+    if event.fwd_from:
+        return
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
-        tgbotusername = Var.TG_BOT_USER_NAME_BF_HER
+        tgbotusername = Config.TG_BOT_USER_NAME_BF_HER
         input_str = event.pattern_match.group(1)
         if tgbotusername is None or input_str == "text":
             string = ""
@@ -38,3 +41,5 @@ For More Help or Support Visit @WhiteEyeDevs"""
                 event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
             )
             await event.delete()
+
+
