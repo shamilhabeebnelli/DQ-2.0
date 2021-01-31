@@ -1,11 +1,23 @@
+
 import os
 import re
+import urllib
+import json
 from math import ceil
-
+from re import findall
+import requests
+from youtube_search import YoutubeSearch
+from search_engine_parser import GoogleSearch
+from WhiteEyeUserBot.functions import _ytdl, fetch_json, _deezer_dl, all_pro_s
+from urllib.parse import quote
+import requests
 from telethon import Button, custom, events, functions
-
-from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, CMD_LIST
+from youtubesearchpython import VideosSearch
+from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, CMD_LIST, client2 as client1, client3 as client2, bot as client3
 from WhiteEyeUserBot.modules import inlinestats
+from pornhub_api import PornhubApi
+from telethon.tl.types import BotInlineResult, InputBotInlineMessageMediaAuto, DocumentAttributeImageSize, InputWebDocument, InputBotInlineResult
+from telethon.tl.functions.messages import SetInlineBotResultsRequest
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
@@ -14,14 +26,15 @@ else:
     WARN_PIC = PMPERMIT_PIC
 LOG_CHAT = Config.PRIVATE_GROUP_ID
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "WhiteEye"
-if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
+if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
+        o = await all_pro_s(Config, client1, client2, client3)
         builder = event.builder
         result = None
         query = event.text
-        if event.query.user_id == bot.uid and query.startswith("WhiteEye"):
+         if event.query.user_id in o and query.startswith("WhiteEye"):
             rev_text = query[::-1]
             buttons = paginate_help(0, CMD_LIST, "helpme")
             result = builder.article(
@@ -30,7 +43,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 buttons=buttons,
                 link_preview=False,
             )
-        if event.query.user_id == bot.uid and query == "stats":
+        elif event.query.user_id in o and query == "stats":
             result = builder.article(
                 title="Stats",
                 text=f"**Showing Stats For {DEFAULTUSER}'s WhiteEye** \nNote --> Only Owner Can Check This \n(C) @WhiteEyeDevs",
@@ -45,7 +58,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     [Button.url("Join Channel ⚓", "t.me/WhiteEyedevs")],
                 ],
             )
-        if event.query.user_id == bot.uid and query.startswith("**Hello"):
+        elif event.query.user_id in o and query.startswith("**Hello"):
             result = builder.photo(
                 file=WARN_PIC,
                 text=query,
@@ -68,7 +81,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         )
     )
     async def on_plug_in_callback_query_handler(event):
-        if event.query.user_id == bot.uid:  # pylint:disable=E0602
+        o = await all_pro_s(Config, client1, client2, client3)
+        if event.query.user_id in o:  # pylint:disable=E0602
             current_page_number = int(event.data_match.group(1).decode("UTF-8"))
             buttons = paginate_help(current_page_number + 1, CMD_LIST, "helpme")
             # https://t.me/TelethonChat/115200
@@ -93,7 +107,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         )
     )
     async def on_plug_in_callback_query_handler(event):
-        if event.query.user_id == bot.uid:  # pylint:disable=E0602
+        o = await all_pro_s(Config, client1, client2, client3)
+        if event.query.user_id in o:  # pylint:disable=E0602
             current_page_number = int(event.data_match.group(1).decode("UTF-8"))
             buttons = paginate_help(
                 current_page_number - 1, CMD_LIST, "helpme"  # pylint:disable=E0602
@@ -112,7 +127,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     async def on_plug_in_callback_query_handler(event):
         o = await all_pro_s(Config, client1, client2, client3)
         if not event.query.user_id in o:
-            sedok = "Who The Fuck Are You? Get Your Own Friday."
+            sedok = "Who The Fuck Are You? Get Your Own WhiteEye."
             await event.answer(sedok, cache_time=0, alert=True)
             return
         plugin_name, page_number = (
@@ -148,7 +163,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"terminator")))
     async def rip(event):
-        if event.query.user_id == bot.uid:
+        o = await all_pro_s(Config, client1, client2, client3)
+    if event.query.user_id in o:
             text = inlinestats
             await event.answer(text, alert=True)
         else:
