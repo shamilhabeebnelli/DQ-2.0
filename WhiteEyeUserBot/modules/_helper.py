@@ -1,5 +1,4 @@
 from WhiteEyeUserBot import CMD_LIST
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 
 @borg.on(pattern="^.helper ?(.*)")
@@ -41,5 +40,3 @@ For More Help or Support Visit @WhiteEyeDevs"""
                 event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
             )
             await event.delete()
-
-
