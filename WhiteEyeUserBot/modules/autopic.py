@@ -6,19 +6,18 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
 from telethon.tl import functions
-
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot import CMD_HELP
 
 FONT_FILE_TO_USE = "Fonts/digital.ttf"
 
-
-@command(pattern="^.autopic", outgoing=True)
+@WhiteEye.on(WhiteEye_on_cmd(pattern="autopic"))
 async def autopic(event):
     if event.fwd_from:
         return
     downloaded_file_name = "WhiteEyeUserBot/original_pic.png"
     downloader = SmartDL(
-        Var.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=False
+        Config.DOWNLOAD_PFP_URL_CLOCK, downloaded_file_name, progress_bar=False
     )
     downloader.start(blocking=False)
     photo = "WhiteEyeUserBot/photo_pfp.png"
@@ -51,6 +50,6 @@ CMD_HELP.update(
     {
         "autopic": "**AutoPic**\
 \n\n**Syntax : **`.autopic`\
-\n**Usage :** Change PIC With Time"
+\n**Usage :** Change your profile PIC With Time"
     }
 )
