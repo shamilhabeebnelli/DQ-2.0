@@ -14,33 +14,32 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # you may not use this file except in compliance with the License.
+
 import logging
 from pathlib import Path
 from sys import argv
 
 import telethon.utils
 from telethon import TelegramClient
-from telethon.tl.types import InputMessagesFilterDocument
 
-from var import Var
 from WhiteEyeUserBot import bot, client2, client3
 from WhiteEyeUserBot.Configs import Config
-from WhiteEyeUserBot.utils import load_module, load_module_dclient, start_assistant
+from telethon.tl.types import InputMessagesFilterDocument
+from WhiteEyeUserBot.utils import load_module, start_assistant, load_module_dclient
+from WhiteEyeUserBot.Configs import Config
 
 sed = logging.getLogger("WhiteEye")
 
-
+        
 async def add_bot(bot_token):
     await bot.start(bot_token)
     bot.me = await bot.get_me()
     bot.uid = telethon.utils.get_peer_id(bot.me)
-
-
+    
 async def lol_s(client):
     client.me = await client.get_me()
     client.uid = telethon.utils.get_peer_id(client.me)
-
-
+    
 def multiple_client():
     if client2:
         sed.info("Starting Client 2")
@@ -64,8 +63,7 @@ def multiple_client():
         sedbruh = True
     if not client3:
         lmaobruh = True
-    return sedbruh, lmaobruh
-
+    return sedbruh, lmaobruh    
 
 async def get_other_plugins(Config, client_s, sed):
     try:
@@ -80,27 +78,26 @@ async def get_other_plugins(Config, client_s, sed):
         return
     sed.info(f"Downloading. {int(a_plugins.total)} Plugins !")
     for keky in a_plugins:
-        await client_s.download_media(keky.media, "WhiteEyeUserBot/modules/")
+        await client_s.download_media(keky.media, "WhiteEyeUserBot  /modules/")
     sed.info("Extra Plugins Downloaded.")
-
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
 else:
     bot.tgbot = None
-    if Var.TG_BOT_USER_NAME_BF_HER is not None:
+    if Config.TG_BOT_USER_NAME_BF_HER is not None:
         bot.tgbot = TelegramClient(
-            "TG_BOT_TOKEN", api_id=Var.APP_ID, api_hash=Var.API_HASH
-        ).start(bot_token=Var.TG_BOT_TOKEN_BF_HER)
+            "TG_BOT_TOKEN", api_id=Config.APP_ID, api_hash=Config.API_HASH
+        ).start(bot_token=Config.TG_BOT_TOKEN_BF_HER)
         failed2, failed3 = multiple_client()
-        bot.loop.run_until_complete(add_bot(Var.TG_BOT_USER_NAME_BF_HER))
+        bot.loop.run_until_complete(add_bot(Config.TG_BOT_USER_NAME_BF_HER))
     else:
         bot.start()
         failed2, failed3 = multiple_client()
 
 if Config.LOAD_OTHER_PLUGINS:
-    bot.loop.run_until_complete(get_other_plugins(Config, bot, sed))
-
+        bot.loop.run_until_complete(get_other_plugins(Config, bot, sed))
+        
 import glob
 
 path = "WhiteEyeUserBot/modules/*.py"
@@ -110,14 +107,10 @@ for name in files:
         path1 = Path(f.name)
         shortname = path1.stem
         try:
-            load_module(shortname.replace(".py", ""))
+            load_module(shortname.replace(".py", ""))    
         except Exception as e:
             sed.info("------------------------")
-            sed.info(
-                "Failed To Load : "
-                + str(shortname.replace(".py", ""))
-                + f" Error : {str(e)}"
-            )
+            sed.info("Failed To Load : " + str(shortname.replace(".py", "")) + f" Error : {str(e)}")
             sed.info("------------------------")
         if failed2 is None:
             try:
