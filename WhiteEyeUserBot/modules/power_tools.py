@@ -44,8 +44,8 @@ CMD_HELP.update(
     {
         "power_tools": "**Power Tools**\
 \n\n**Syntax : **`.restart`\
-\n**Usage :** restarts your Friday userbot.\
+\n**Usage :** restarts your WhiteEyeUserBot.\
 \n\n**Syntax : **`.shutdown`\
-\n**Usage :** Shuts down your Friday userbot."
+\n**Usage :** Shuts down your WhiteEyeUserBot."
     }
 )
