@@ -62,20 +62,20 @@ async def inline_handler(event):
         result = builder.photo(
             file=WARN_PIC,
             text=query,
-             buttons=[
-                    [
-                        custom.Button.inline("❌ Spamming", data="dontspamnigga"),
-                        custom.Button.inline("📝 Chatting", data="whattalk"),
-                    ],
-                    [
-                        custom.Button.inline("❓ Doubt", data="askme"),
-                        custom.Button.inline("🛑 Others", data="others"),
-                    ],
+            buttons=[
+                [
+                    custom.Button.inline("❌ Spamming", data="dontspamnigga"),
+                    custom.Button.inline("📝 Chatting", data="whattalk"),
                 ],
-            )
+                [
+                    custom.Button.inline("❓ Doubt", data="askme"),
+                    custom.Button.inline("🛑 Others", data="others"),
+                ],
+            ],
+        )
         await event.answer([result] if result else None)
-        
-        
+
+
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
