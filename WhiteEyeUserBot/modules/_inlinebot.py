@@ -49,7 +49,11 @@ async def inline_handler(event):
             text=f"**Showing Stats For {DEFAULTUSER}'s WhiteEye** \nNote --> Only Owner Can Check This \n(C) @WhiteEyeDevs",
             buttons=[
                 [custom.Button.inline("Show Stats ?", data="terminator")],
-                [Button.url("Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserBot")],
+                [
+                    Button.url(
+                        "Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
+                    )
+                ],
                 [Button.url("Join Channel ❤️", "t.me/WhiteEyeDevs")],
             ],
         )
@@ -70,7 +74,8 @@ async def inline_handler(event):
             ],
         )
         await event.answer([result])
-        
+
+
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
@@ -87,6 +92,7 @@ async def on_plug_in_callback_query_handler(event):
         reply_popp_up_alert = "Please get your own WhiteEyeUserBot, and don't use mine!"
         await event.answer(reply_popp_up_alert, cache_time=0, alert=True)
 
+
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_prev\((.+?)\)")
@@ -102,7 +108,9 @@ async def on_plug_in_callback_query_handler(event):
         # https://t.me/TelethonChat/115200
         await event.edit(buttons=buttons)
     else:
-        reply_pop_up_alert = "Please get your own WhiteEyeUserBot, and don't use mine! @WhiteEyeDevs"
+        reply_pop_up_alert = (
+            "Please get your own WhiteEyeUserBot, and don't use mine! @WhiteEyeDevs"
+        )
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
@@ -246,9 +254,12 @@ async def rip(event):
         return
     await event.get_chat()
     him_id = event.query.user_id
-    await event.edit("Ok, Wait. You can Ask Doubt After Master Approves You. Kindly, Wait.")
+    await event.edit(
+        "Ok, Wait. You can Ask Doubt After Master Approves You. Kindly, Wait."
+    )
     PM_E = f"**#PMEVENT** \nUser ID : {him_id} \n**This User Wanted To Ask You Something** \n[Contact Him](tg://user?id={him_id})"
     await borg.send_message(LOG_CHAT, message=PM_E)
+
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"others")))
 async def rip(event):
@@ -261,9 +272,8 @@ async def rip(event):
     him_id = event.query.user_id
     await event.edit("Ok, Wait. You can Ask After Master Approves You. Kindly, Wait.")
     PM_E = f"**#PMEVENT** \nUser ID : {him_id} \n**This User Wanted To Talk To You.** \n[Contact Him](tg://user?id={him_id})"
-    await borg.send_message(
-        LOG_CHAT,
-        message=PM_E)                           
+    await borg.send_message(LOG_CHAT, message=PM_E)
+
 
 def paginate_help(page_number, loaded_modules, prefix):
     number_of_rows = 8
