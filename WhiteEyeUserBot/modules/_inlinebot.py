@@ -58,24 +58,25 @@ async def inline_handler(event):
         result = builder.photo(
             file=WARN_PIC,
             text=query,
-           buttons=[
-                    [
-                        custom.Button.inline("❌ Spamming", data="dontspamnigga"),
-                        custom.Button.inline("📝 Chatting", data="whattalk"),
-                    ],
-                    [
-                        custom.Button.inline("❓ Doubt", data="askme"),
-                        custom.Button.inline("🛑 Others", data="others"),
-                    ],
+            buttons=[
+                [custom.Button.inline("Spamming", data="dontspamnigga")],
+                [
+                    custom.Button.inline(
+                        "Casual Talk",
+                        data="whattalk",
+                    )
                 ],
-            )
-        await event.answer([result]
+                [custom.Button.inline("Requesting", data="askme")],
+            ],
+        )
+        await event.answer([result])
+        
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
     )
 )
-def async on_plug_in_callback_query_handler(event):
+async def on_plug_in_callback_query_handler(event):
     o = await all_pro_s(Config, client1, client2, client3)
     if event.query.user_id in o:
         current_page_number = int(event.data_match.group(1).decode("UTF-8"))
