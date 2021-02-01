@@ -1,22 +1,23 @@
 import os
 import re
 import urllib
-import json
 from math import ceil
 from re import findall
-import requests
-from youtube_search import YoutubeSearch
-from search_engine_parser import GoogleSearch
-from WhiteEyeUserBot.functions import _ytdl, fetch_json, _deezer_dl, all_pro_s
 from urllib.parse import quote
+
 import requests
-from telethon import Button, custom, events, functions
-from youtubesearchpython import VideosSearch
-from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, CMD_LIST, client2 as client1, client3 as client2, bot as client3
-from WhiteEyeUserBot.modules import inlinestats
 from pornhub_api import PornhubApi
-from telethon.tl.types import BotInlineResult, InputBotInlineMessageMediaAuto, DocumentAttributeImageSize, InputWebDocument, InputBotInlineResult
-from telethon.tl.functions.messages import SetInlineBotResultsRequest
+from search_engine_parser import GoogleSearch
+from telethon import Button, custom, events, functions
+from youtube_search import YoutubeSearch
+
+from WhiteEyeUserBot import ALIVE_NAME, CMD_HELP, CMD_LIST
+from WhiteEyeUserBot import bot as client3
+from WhiteEyeUserBot import client2 as client1
+from WhiteEyeUserBot import client3 as client2
+from WhiteEyeUserBot.functions import _deezer_dl, _ytdl, all_pro_s
+from WhiteEyeUserBot.modules import inlinestats
+
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 if PMPERMIT_PIC is None:
     WARN_PIC = "https://telegra.ph/file/63d2f8bcdae4da2ec5e7e.jpg"
@@ -48,7 +49,11 @@ async def inline_handler(event):
             text=f"**Showing Stats For {DEFAULTUSER}'s WhiteEye** \nNote --> Only Owner Can Check This \n(C) @WhiteEyeDevs",
             buttons=[
                 [custom.Button.inline("Show Stats ?", data="terminator")],
-                [Button.url("Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserBot")],
+                [
+                    Button.url(
+                        "Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
+                    )
+                ],
                 [Button.url("Join Channel ❤️", "t.me/WhiteEyeDevs")],
             ],
         )
@@ -151,7 +156,8 @@ async def rip(event):
     else:
         txt = "You Can't View My Masters Stats"
         await event.answer(txt, alert=True)
-        
+
+
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"yt_dla_(.*)")))
 async def rip(event):
     o = await all_pro_s(Config, client1, client2, bot)
@@ -162,7 +168,7 @@ async def rip(event):
         await event.answer(text, alert=True)
         return
     is_it = True
-    ok = await _ytdl(link_s, is_it, event, tgbot)
+    await _ytdl(link_s, is_it, event, tgbot)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deezer_dl_(.*)")))
@@ -173,10 +179,9 @@ async def rip(event):
         text = f"Please Get Your Own Friday And Don't Waste My Resources"
         await event.answer(text, alert=True)
         return
-    ok = await _deezer_dl(sun, event, tgbot)
+    await _deezer_dl(sun, event, tgbot)
 
 
-    
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"yt_vid_(.*)")))
 async def rip(event):
     yt_dl_data = event.data_match.group(1).decode("UTF-8")
@@ -187,8 +192,9 @@ async def rip(event):
         await event.answer(text, alert=True)
         return
     is_it = False
-    ok = await _ytdl(link_s, is_it, event, tgbot)
-    
+    await _ytdl(link_s, is_it, event, tgbot)
+
+
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"dontspamnigga")))
 async def rip(event):
     o = await all_pro_s(Config, client1, client2, client3)
@@ -202,11 +208,9 @@ async def rip(event):
     await event.edit(text1)
     await borg(functions.contacts.BlockRequest(event.query.user_id))
     PM_E = f"**#PMEVENT** \nUser ID : {him_id} \n**This User Choose Probhited Option, So Has Been Blocked !** \n[Contact Him](tg://user?id={him_id})"
-    await borg.send_message(
-        LOG_CHAT,
-        message=PM_E)
-    
-    
+    await borg.send_message(LOG_CHAT, message=PM_E)
+
+
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"backme_(.*)")))
 async def sed(event):
     sedm = int(event.data_match.group(1).decode("UTF-8"))
@@ -232,11 +236,11 @@ async def rip(event):
         return
     await event.get_chat()
     him_id = event.query.user_id
-    await event.edit("Ok. Please Wait Until My Master Approves. Don't Spam Or Try Anything Stupid. \nThank You For Contacting Me.")
+    await event.edit(
+        "Ok. Please Wait Until My Master Approves. Don't Spam Or Try Anything Stupid. \nThank You For Contacting Me."
+    )
     PM_E = f"**#PMEVENT** \nUser ID : {him_id} \n**This User Wanted To Talk To You.** \n[Contact Him](tg://user?id={him_id})"
-    await borg.send_message(
-        LOG_CHAT,
-        message=PM_E)
+    await borg.send_message(LOG_CHAT, message=PM_E)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"askme")))
@@ -250,9 +254,7 @@ async def rip(event):
     him_id = event.query.user_id
     await event.edit("Ok, Wait. You can Ask After Master Approves You. Kindly, Wait.")
     PM_E = f"**#PMEVENT** \nUser ID : {him_id} \n**This User Wanted To Ask You Something** \n[Contact Him](tg://user?id={him_id})"
-    await borg.send_message(
-        LOG_CHAT,
-        message=PM_E)
+    await borg.send_message(LOG_CHAT, message=PM_E)
 
 
 def paginate_help(page_number, loaded_modules, prefix):
@@ -265,7 +267,8 @@ def paginate_help(page_number, loaded_modules, prefix):
     helpable_modules = sorted(helpable_modules)
     modules = [
         custom.Button.inline(
-            "{} {} {}".format("✘", x, "✘"), data="us_plugin_{}|{}".format(x, page_number)
+            "{} {} {}".format("✘", x, "✘"),
+            data="us_plugin_{}|{}".format(x, page_number),
         )
         for x in helpable_modules
     ]
@@ -406,7 +409,7 @@ async def inline_id_handler(event: events.InlineQuery.Event):
         stark_chnnl = moon["channel"]
         total_stark = moon["duration"]
         stark_views = moon["views"]
-        lol_desc = moon["long_desc"]
+        moon["long_desc"]
         kekme = f"https://img.youtube.com/vi/{hmm}/hqdefault.jpg"
         okayz = f"**Title :** `{stark_name}` \n**Link :** `{kek}` \n**Channel :** `{stark_chnnl}` \n**Views :** `{stark_views}` \n**Duration :** `{total_stark}`"
         hmmkek = f"Video Name : {stark_name} \nChannel : {stark_chnnl} \nDuration : {total_stark} \nViews : {stark_views}"
@@ -418,11 +421,11 @@ async def inline_id_handler(event: events.InlineQuery.Event):
                 text=okayz,
                 include_media=True,
                 buttons=[
-                [custom.Button.inline("Download Video - mp4", data=f"yt_vid_{mo}")],
-                [custom.Button.inline("Download Audio - mp3", data=f"yt_dla_{mo}")],
-                [Button.switch_inline("Search Again", query="yt ", same_peer=True)],
-                ]
-              )
+                    [custom.Button.inline("Download Video - mp4", data=f"yt_vid_{mo}")],
+                    [custom.Button.inline("Download Audio - mp3", data=f"yt_dla_{mo}")],
+                    [Button.switch_inline("Search Again", query="yt ", same_peer=True)],
+                ],
+            )
         )
     await event.answer(results)
 
@@ -471,8 +474,7 @@ async def inline_id_handler(event: events.InlineQuery.Event):
         )
     await event.answer(results)
 
-    
-        
+
 @tgbot.on(events.InlineQuery(pattern=r"google (.*)"))
 async def inline_id_handler(event: events.InlineQuery.Event):
     builder = event.builder
@@ -493,11 +495,10 @@ async def inline_id_handler(event: events.InlineQuery.Event):
         match = match.replace("page=" + page[0], "")
     except IndexError:
         page = 1
-    
+
     search_args = (str(match), int(page))
     gsearch = GoogleSearch()
     gresults = await gsearch.async_search(*search_args)
-    msg = ""
     for i in range(len(gresults["links"])):
         try:
             title = gresults["titles"][i]
@@ -519,7 +520,8 @@ async def inline_id_handler(event: events.InlineQuery.Event):
         except IndexError:
             break
     await event.answer(results)
-    
+
+
 @tgbot.on(events.InlineQuery(pattern=r"ph (.*)"))
 async def inline_id_handler(event: events.InlineQuery.Event):
     builder = event.builder
@@ -534,16 +536,12 @@ async def inline_id_handler(event: events.InlineQuery.Event):
     results = []
     input_str = event.pattern_match.group(1)
     api = PornhubApi()
-    data = api.search.search(
-    input_str,
-    ordering="mostviewed"
-    )
+    data = api.search.search(input_str, ordering="mostviewed")
     ok = 1
-    oik = ""
     for vid in data.videos:
-      if ok <= 5:
-        lul_m = (f"**PORN-HUB SEARCH** \n**Video title :** `{vid.title}` \n**Video link :** `https://www.pornhub.com/view_video.php?viewkey={vid.video_id}`")
-        results.append(
+        if ok <= 5:
+            lul_m = f"**PORN-HUB SEARCH** \n**Video title :** `{vid.title}` \n**Video link :** `https://www.pornhub.com/view_video.php?viewkey={vid.video_id}`"
+            results.append(
                 await event.builder.article(
                     title=vid.title,
                     text=lul_m,
@@ -554,10 +552,11 @@ async def inline_id_handler(event: events.InlineQuery.Event):
                     ],
                 )
             )
-      else:
-        pass
+        else:
+            pass
     await event.answer(results)
-    
+
+
 @tgbot.on(events.InlineQuery(pattern=r"xkcd (.*)"))
 async def inline_id_handler(event: events.InlineQuery.Event):
     builder = event.builder
@@ -569,7 +568,6 @@ async def inline_id_handler(event: events.InlineQuery.Event):
         )
         await event.answer([resultm])
         return
-    results = []
     input_str = event.pattern_match.group(1)
     xkcd_id = None
     if input_str:
@@ -606,18 +604,13 @@ Month: {}
 Year: {}""".format(
             xkcd_link, safe_title, alt, day, month, year
         )
-        lul_k = builder.photo(
-            file=img,
-            text=output_str
-        )
+        lul_k = builder.photo(file=img, text=output_str)
         await event.answer([lul_k])
     else:
-        resultm = builder.article(
-            title="- No Results :/ -",
-            text=f"No Results Found !"
-        )
+        resultm = builder.article(title="- No Results :/ -", text=f"No Results Found !")
         await event.answer([resultm])
-        
+
+
 @tgbot.on(events.InlineQuery(pattern=r"deezer ?(.*)"))
 async def inline_id_handler(event):
     builder = event.builder
@@ -633,23 +626,27 @@ async def inline_id_handler(event):
     input_str = event.pattern_match.group(1)
     link = f"https://api.deezer.com/search?q={input_str}&limit=7"
     dato = requests.get(url=link).json()
-    #data_s = json.loads(data_s)
+    # data_s = json.loads(data_s)
     for match in dato.get("data"):
-            ro = str(match.get("id"))
-            hmm_m = (f"Title : {match['title']} \nLink : {match['link']} \nDuration : {match['duration']} seconds \nBy : {match['artist']['name']}")
-            results.append(
-                await event.builder.document(
-                    file=match["album"]["cover_big"],
-                    title=match["title"],
-                    text=hmm_m,
-                    description=f"Artist: {match['artist']['name']}\nAlbum: {match['album']['title']}",
-                    buttons=[
-                       [custom.Button.inline("Download Audio - mp3", data=f"deezer_dl_{ro}")],
-                    ]
-                ),
-            )
+        ro = str(match.get("id"))
+        hmm_m = f"Title : {match['title']} \nLink : {match['link']} \nDuration : {match['duration']} seconds \nBy : {match['artist']['name']}"
+        results.append(
+            await event.builder.document(
+                file=match["album"]["cover_big"],
+                title=match["title"],
+                text=hmm_m,
+                description=f"Artist: {match['artist']['name']}\nAlbum: {match['album']['title']}",
+                buttons=[
+                    [
+                        custom.Button.inline(
+                            "Download Audio - mp3", data=f"deezer_dl_{ro}"
+                        )
+                    ],
+                ],
+            ),
+        )
     if results:
         try:
             await event.answer(results)
         except TypeError:
-            pass                   
+            pass
