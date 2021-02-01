@@ -75,7 +75,7 @@ async def inline_handler(event):
         data=re.compile(b"helpme_next\((.+?)\)")
     )
 )
-async def on_plug_in_callback_query_handler(event):
+def async on_plug_in_callback_query_handler(event):
     o = await all_pro_s(Config, client1, client2, client3)
     if event.query.user_id in o:
         current_page_number = int(event.data_match.group(1).decode("UTF-8"))
