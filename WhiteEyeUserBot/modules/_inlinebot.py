@@ -49,11 +49,7 @@ async def inline_handler(event):
             text=f"**Showing Stats For {DEFAULTUSER}'s WhiteEye** \nNote --> Only Owner Can Check This \n(C) @WhiteEyeDevs",
             buttons=[
                 [custom.Button.inline("Show Stats ?", data="terminator")],
-                [
-                    Button.url(
-                        "Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserBot"
-                    )
-                ],
+                [Button.url("Repo 🇮🇳", "https://github.com/WhiteEye-Org/WhiteEyeUserBot")],
                 [Button.url("Join Channel ❤️", "t.me/WhiteEyeDevs")],
             ],
         )
@@ -62,20 +58,18 @@ async def inline_handler(event):
         result = builder.photo(
             file=WARN_PIC,
             text=query,
-            buttons=[
-                [custom.Button.inline("Spamming", data="dontspamnigga")],
-                [
-                    custom.Button.inline(
-                        "Casual Talk",
-                        data="whattalk",
-                    )
+           buttons=[
+                    [
+                        custom.Button.inline("❌ Spamming", data="dontspamnigga"),
+                        custom.Button.inline("📝 Chatting", data="whattalk"),
+                    ],
+                    [
+                        custom.Button.inline("❓ Doubt", data="askme"),
+                        custom.Button.inline("🛑 Others", data="others"),
+                    ],
                 ],
-                [custom.Button.inline("Requesting", data="askme")],
-            ],
-        )
-        await event.answer([result])
-
-
+            )
+        await event.answer([result]
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
@@ -89,9 +83,18 @@ async def on_plug_in_callback_query_handler(event):
         # https://t.me/TelethonChat/115200
         await event.edit(buttons=buttons)
     else:
-        reply_popp_up_alert = "Please get your own Userbot, and don't use mine!"
+        reply_popp_up_alert = "Please get your own WhiteEyeUserBot, and don't use mine! @WhiteEyeDevs"
         await event.answer(reply_popp_up_alert, cache_time=0, alert=True)
 
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
+async def on_plug_in_callback_query_handler(event):
+    if event.query.user_id == bot.uid:
+        await event.edit(
+            "Menu Closed!!",
+        )
+    else:
+        reply_pop_up_alert = "Please get your own WhiteEyeuserbot from @WhiteEyeDevs "
+        await event.answer(reply_pop_up_alert, cache_time=0, alert=True)                           
 
 @tgbot.on(
     events.callbackquery.CallbackQuery(  # pylint:disable=E0602
@@ -108,7 +111,7 @@ async def on_plug_in_callback_query_handler(event):
         # https://t.me/TelethonChat/115200
         await event.edit(buttons=buttons)
     else:
-        reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
+        reply_pop_up_alert = "Please get your own WhiteEyeUserBot, and don't use mine! @WhiteEyeDevs"
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
@@ -164,7 +167,7 @@ async def rip(event):
     yt_dl_data = event.data_match.group(1).decode("UTF-8")
     link_s = yt_dl_data
     if event.query.user_id not in o:
-        text = f"Please Get Your Own Friday And Don't Waste My Resources"
+        text = f"Please Get Your Own WhiteEyeUserBot And Don't Waste My Resources"
         await event.answer(text, alert=True)
         return
     is_it = True
@@ -176,7 +179,7 @@ async def rip(event):
     sun = event.data_match.group(1).decode("UTF-8")
     o = await all_pro_s(Config, client1, client2, client3)
     if event.query.user_id not in o:
-        text = f"Please Get Your Own Friday And Don't Waste My Resources"
+        text = f"Please Get Your Own WhiteEyeUserBot And Don't Waste My Resources"
         await event.answer(text, alert=True)
         return
     await _deezer_dl(sun, event, tgbot)
@@ -188,7 +191,7 @@ async def rip(event):
     o = await all_pro_s(Config, client1, client2, client3)
     link_s = yt_dl_data
     if event.query.user_id not in o:
-        text = f"Please Get Your Own Friday And Don't Waste My Resources"
+        text = f"Please Get Your Own WhiteEyeUserBot And Don't Waste My Resources"
         await event.answer(text, alert=True)
         return
     is_it = False
@@ -204,7 +207,7 @@ async def rip(event):
         return
     await event.get_chat()
     him_id = event.query.user_id
-    text1 = "**You Have Chosed A Probhited Option. Therefore, You Have Been Blocked By UserBot.**"
+    text1 = "**You Have Chosed A Probhited Option. Therefore, You Have Been Blocked By WhiteEye. 💢.**"
     await event.edit(text1)
     await borg(functions.contacts.BlockRequest(event.query.user_id))
     PM_E = f"**#PMEVENT** \nUser ID : {him_id} \n**This User Choose Probhited Option, So Has Been Blocked !** \n[Contact Him](tg://user?id={him_id})"
@@ -252,10 +255,24 @@ async def rip(event):
         return
     await event.get_chat()
     him_id = event.query.user_id
-    await event.edit("Ok, Wait. You can Ask After Master Approves You. Kindly, Wait.")
+    await event.edit("Ok, Wait. You can Ask Doubt After Master Approves You. Kindly, Wait.")
     PM_E = f"**#PMEVENT** \nUser ID : {him_id} \n**This User Wanted To Ask You Something** \n[Contact Him](tg://user?id={him_id})"
     await borg.send_message(LOG_CHAT, message=PM_E)
 
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"others")))
+async def rip(event):
+    o = await all_pro_s(Config, client1, client2, client3)
+    if event.query.user_id in o:
+        sedok = "Master, You Don't Need To Use This."
+        await event.answer(sedok, cache_time=0, alert=True)
+        return
+    await event.get_chat()
+    him_id = event.query.user_id
+    await event.edit("Ok, Wait. You can Ask After Master Approves You. Kindly, Wait.")
+    PM_E = f"**#PMEVENT** \nUser ID : {him_id} \n**This User Wanted To Talk To You.** \n[Contact Him](tg://user?id={him_id})"
+    await borg.send_message(
+        LOG_CHAT,
+        message=PM_E)                           
 
 def paginate_help(page_number, loaded_modules, prefix):
     number_of_rows = 8
@@ -267,7 +284,7 @@ def paginate_help(page_number, loaded_modules, prefix):
     helpable_modules = sorted(helpable_modules)
     modules = [
         custom.Button.inline(
-            "{} {} {}".format("✘", x, "✘"),
+            "{} {} {}".format("🇮🇳", x, "🇮🇳"),
             data="us_plugin_{}|{}".format(x, page_number),
         )
         for x in helpable_modules
@@ -300,7 +317,7 @@ async def inline_id_handler(event: events.InlineQuery.Event):
     if event.query.user_id not in o:
         resultm = builder.article(
             title="Not Allowded",
-            text=f"You Can't Use This Bot. \nDeploy wHITEeYE To Get Your Own Assistant, Deploy Link [Here](https://whiteeye-org.github.io/WhiteEyeUserBot/)",
+            text=f"You Can't Use This Bot. \nDeploy WhiteEyeUserBot To Get Your Own Assistant, Deploy Link [Here](https://whiteeye-org.github.io/WhiteEyeUserBot/)",
         )
         await event.answer([resultm])
         return
