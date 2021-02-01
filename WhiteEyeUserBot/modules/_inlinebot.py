@@ -256,7 +256,7 @@ def paginate_help(page_number, loaded_modules, prefix):
     return pairs
 
                      
-tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"backme_(.*)")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"backme_(.*)")))
 async def sed(event):
     sedm = int(event.data_match.group(1).decode("UTF-8"))
     o = await all_pro_s(Config, client1, client2, client3)
