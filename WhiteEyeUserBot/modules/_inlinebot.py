@@ -148,14 +148,15 @@ async def on_plug_in_callback_query_handler(event):
             buttons=[[custom.Button.inline("Go Back", data=f"backme_{page_number}")]],
         )
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"terminator")))
-    async def rip(event):
-        if event.query.user_id == bot.uid:
-            text = inlinestats
-            await event.answer(text, alert=True)
-        else:
-            txt = "You Can't View My Masters Stats"
-            await event.answer(txt, alert=True)
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"terminator")))
+async def rip(event):
+    o = await all_pro_s(Config, client1, client2, client3)
+    if event.query.user_id in o:
+        text = inlinestats
+        await event.answer(text, alert=True)
+    else:
+        txt = "You Can't View My Masters Stats"
+        await event.answer(txt, alert=True)
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"wannaspam")))
 async def rip(event):
@@ -220,7 +221,7 @@ async def rip(event):
         message=PM_E)
 
 def paginate_help(page_number, loaded_modules, prefix):
-    number_of_rows = 10
+    number_of_rows = 8
     number_of_cols = 2
     helpable_modules = []
     for p in loaded_modules:
@@ -229,7 +230,7 @@ def paginate_help(page_number, loaded_modules, prefix):
     helpable_modules = sorted(helpable_modules)
     modules = [
         custom.Button.inline(
-            "{} {} {}".format("🇮🇳", x, "🇮🇳"), data="us_plugin_{}".format(x)
+            "{} {} {}".format("🇮🇳", x, "🇮🇳"), data="us_plugin_{}|{}".format(x, page_number)
         )
         for x in helpable_modules
     ]
@@ -253,6 +254,7 @@ def paginate_help(page_number, loaded_modules, prefix):
             )
         ]
     return pairs
+
                      
 tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"backme_(.*)")))
 async def sed(event):
