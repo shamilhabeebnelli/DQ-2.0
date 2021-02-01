@@ -76,15 +76,14 @@ async def inline_handler(event):
     )
 )
 async def on_plug_in_callback_query_handler(event):
-    if event.query.user_id == bot.uid:  # pylint:disable=E0602
+    o = await all_pro_s(Config, client1, client2, client3)
+    if event.query.user_id in o:
         current_page_number = int(event.data_match.group(1).decode("UTF-8"))
-        buttons = paginate_help(current_page_number + 1, CMD_LIST, "helpme")
+        buttons = paginate_help(current_page_number + 1, CMD_HELP, "helpme")
         # https://t.me/TelethonChat/115200
         await event.edit(buttons=buttons)
     else:
-        reply_popp_up_alert = (
-            "Please get your own WhiteEyeUserbot, and don't use mine!"
-        )
+        reply_popp_up_alert = "Please get your own WhiteEyeUserBot, and don't use mine!"
         await event.answer(reply_popp_up_alert, cache_time=0, alert=True)
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
