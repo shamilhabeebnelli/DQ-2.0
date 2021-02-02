@@ -1,30 +1,20 @@
-#    Copyright (C) Midhun KM 2020
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
 import os
+import wget
 from shutil import rmtree
-
 import cv2
+import cv2 as cv
 import numpy as np
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from telegraph import upload_file
-
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.functions import convert_to_image, crop_vid, runcmd
+from WhiteEyeUserBot.functions import convert_to_image, crop_vid, runcmd, tgs_to_gif
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
-
+import html
+from telethon.tl.functions.photos import GetUserPhotosRequest
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import MessageEntityMentionName
+from telethon.utils import get_input_location
 sedpath = "./WhiteEye/"
 if not os.path.isdir(sedpath):
     os.makedirs(sedpath)
@@ -45,7 +35,7 @@ async def hmm(event):
         "./resources/imgcolour/colouregex.prototxt",
         "./resources/imgcolour/colorization_release_v2.caffemodel",
     )
-
+    
     pts = np.load("./resources/imgcolour/pts_in_hull.npy")
     class8 = net.getLayerId("class8_ab")
     conv8 = net.getLayerId("conv8_313_rh")
@@ -132,7 +122,7 @@ async def iamthug(event):
         mask = mask.resize((w, h), Image.ANTIALIAS)
         offset = (x, y)
         background.paste(mask, offset, mask=mask)
-    file_name = "WhiteEyethug.png"
+    file_name = "WhiteEyeThug.png"
     ok = sedpath + "/" + file_name
     background.save(ok, "PNG")
     await borg.send_file(event.chat_id, ok)
@@ -141,7 +131,40 @@ async def iamthug(event):
         if files and os.path.exists(files):
             os.remove(files)
 
-
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"msk ?(.*)"))
+async def iamnone(event):
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        await event.reply("Reply to any Image.")
+        return
+    hmm = await event.edit("`Converting To Masked Image..`")
+    await event.get_reply_message()
+    img = await convert_to_image(event, borg)
+    imagePath = img
+    wget_s = wget.download(event.pattern_match.group(1), out=Config.TMP_DOWNLOAD_DIRECTORY)
+    maskPath = wget_s
+    cascPath = "./resources/thuglife/face_regex.xml"
+    faceCascade = cv2.CascadeClassifier(cascPath)
+    image = cv2.imread(imagePath)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    faces = faceCascade.detectMultiScale(gray, 1.15)
+    background = Image.open(imagePath)
+    for (x, y, w, h) in faces:
+        mask = Image.open(maskPath)
+        mask = mask.resize((w, h), Image.ANTIALIAS)
+        offset = (x, y)
+        background.paste(mask, offset, mask=mask)
+    file_name = "masked_img.png"
+    ok = sedpath + "/" + file_name
+    background.save(ok, "PNG")
+    await borg.send_file(event.chat_id, ok)
+    await hmm.delete()
+    for files in (ok, img, maskPath):
+        if files and os.path.exists(files):
+            os.remove(files)
+            
+            
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"tni"))
 @WhiteEye.on(sudo_cmd(pattern=r"tni", allow_sudo=True))
 async def toony(event):
@@ -190,7 +213,81 @@ async def lolmetrg(event):
     for files in (lolbruh, img):
         if files and os.path.exists(files):
             os.remove(files)
+            
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"geyuser"))
+@WhiteEye.on(sudo_cmd(pattern=r"geyuser", allow_sudo=True))
+async def lolmetrg(event):
+    if event.fwd_from:
+        return
+    await event.edit("`Meking This Guy Gey.`")
+    sed = await event.get_reply_message()
+    img = await convert_to_image(event, borg)
+    url_s = upload_file(img)
+    imglink = f"https://telegra.ph{url_s[0]}"
+    lolul = f"https://some-random-api.ml/canvas/gay?avatar={imglink}"
+    r = requests.get(lolul)
+    open("geys.png", "wb").write(r.content)
+    lolbruh = "geys.png"
+    await borg.send_file(
+        event.chat_id, lolbruh, caption="`You iz Gey.`", reply_to=sed
+    )
+    for files in (lolbruh, img):
+        if files and os.path.exists(files):
+            os.remove(files)
+            
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"pix"))
+@WhiteEye.on(sudo_cmd(pattern=r"pix", allow_sudo=True))
+async def lolmetrg(event):
+    if event.fwd_from:
+        return
+    await event.edit("`Pixing This Image.`")
+    sed = await event.get_reply_message()
+    img = await convert_to_image(event, borg)
+    url_s = upload_file(img)
+    imglink = f"https://telegra.ph{url_s[0]}"
+    lolul = f"https://some-random-api.ml/canvas/pixelate?avatar={imglink}"
+    r = requests.get(lolul)
+    open("pix.png", "wb").write(r.content)
+    lolbruh = "pix.png"
+    await borg.send_file(
+        event.chat_id, lolbruh, caption="`Pixeled This Image.`", reply_to=sed
+    )
+    for files in (lolbruh, img):
+        if files and os.path.exists(files):
+            os.remove(files)
 
+@WhiteEye.on(WhiteEye_on_cmd(pattern=r"ytc"))
+@WhiteEye.on(sudo_cmd(pattern=r"ytc", allow_sudo=True))
+async def lolmetrg(event):
+    if event.fwd_from:
+        return
+    await event.edit("`Making Comment`")
+    sed = await event.get_reply_message()
+    hmm_s = await event.client(GetFullUserRequest(sed.sender_id))
+    if not hmm_s.profile_photo:
+        imglink = 'https://telegra.ph/file/b9684cda357dfbe6f5748.jpg'
+    elif hmm_s.profile_photo:
+        img = await borg.download_media(hmm_s.profile_photo, sedpath)
+        url_s = upload_file(img)
+        imglink = f"https://telegra.ph{url_s[0]}"
+    first_name = html.escape(hmm_s.user.first_name)
+    if first_name is not None:
+        first_name = first_name.replace("\u2060", "")
+    if sed.text is None:
+        comment = 'Give Some Text'
+    else:
+        comment = sed.raw_text
+    lolul = f"https://some-random-api.ml/canvas/youtube-comment?avatar={imglink}&username={first_name}&comment={comment}"
+    r = requests.get(lolul)
+    open("ytc.png", "wb").write(r.content)
+    lolbruh = "ytc.png"
+    await event.delete()
+    await borg.send_file(
+        event.chat_id, lolbruh, caption="`Hmm Nice.`", reply_to=sed
+    )
+    for files in (lolbruh, img):
+        if files and os.path.exists(files):
+            os.remove(files)
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"jail"))
 @WhiteEye.on(sudo_cmd(pattern=r"jail", allow_sudo=True))
@@ -203,11 +300,10 @@ async def hmm(event):
     hmmu = await event.reply("hmm... Sending him to jail...🚶")
     await event.get_reply_message()
     img = await convert_to_image(event, borg)
-    await event.get_reply_message()
+    sed = await event.get_reply_message()
     img = await convert_to_image(event, borg)
     mon = "./resources/jail/jail.jpg"
     foreground = Image.open(mon).convert("RGBA")
-
     background = Image.open(img).convert("RGB")
     with Image.open(img) as img:
         width, height = img.size
@@ -279,7 +375,7 @@ async def img(event):
     ok = sedpath + "/" + file_name
     photo.save(ok)
     await event.delete()
-    await WhiteEye.send_file(event.chat_id, ok)
+    await friday.send_file(event.chat_id, ok)
     if os.path.exists(ok):
         os.remove(ok)
 
@@ -289,7 +385,7 @@ async def img(event):
 async def lottiepie(event):
     if event.fwd_from:
         return
-    await event.edit("`Prooooooccccesssssssinggggg.....`")
+    await event.edit("`WhiteEye Processing.....`")
     message = await event.get_reply_message()
     if message.media and message.media.document:
         mime_type = message.media.document.mime_type
@@ -348,18 +444,16 @@ async def img(event):
         if files and os.path.exists(files):
             os.remove(files)
         event.delete()
-
-
+        
 # Credits To These :
 # https://github.com/midnightmadwalk [TG: @MidnightMadwalk]
 # https://github.com/code-rgb [TG: @DeletedUser420]
-# Ported By  https://github.com/StarkGang/FridayUserbot [TG: @StarkXd]
 
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"spin ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"spin ?(.*)", allow_sudo=True))
 async def spinshit(message):
-    if event.fwd_from:
+    if message.fwd_from:
         return
     reply = await message.get_reply_message()
     lmaodict = {"1": 1, "2": 3, "3": 6, "4": 12, "5": 24, "6": 60}
@@ -408,12 +502,13 @@ async def spinshit(message):
     rmtree(path, ignore_errors=True)
 
 
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"lnews ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"lnews ?(.*)", allow_sudo=True))
 async def hmm(event):
-    text = event.pattern_match.group(1)
     if event.fwd_from:
         return
+    text = event.pattern_match.group(1)
     if not text:
         await event.reply("No input found!  --__--")
         return
@@ -423,20 +518,20 @@ async def hmm(event):
     hmmu = await event.reply("hmm... Starting Live News Stream...🚶")
     await event.get_reply_message()
     img = await convert_to_image(event, borg)
-    await event.get_reply_message()
+    sed = await event.get_reply_message()
     img = await convert_to_image(event, borg)
     background = Image.open(img)
     newss = "./resources/live/news.png"
     foreground = Image.open(newss)
     im = background.resize((2800, 1500))
-    im.paste(foreground, (0, 0), mask=foreground)
+    im.paste(foreground, (0,0), mask = foreground)
     d1 = ImageDraw.Draw(im)
-    myFont = ImageFont.truetype("./resources/live/font(1).ttf", 165)
-    d1.text((7, 1251), text, font=myFont, fill=(0, 0, 0))
+    myFont = ImageFont.truetype("./resources/live/font.ttf", 165)
+    d1.text((7, 1251), text, font=myFont, fill =(0, 0, 0))
 
     im.save("./WhiteEye/livenews.png")
     file_name = "livenews.png"
-    ok = "./starkgangz/" + file_name
+    ok = "./WhiteEye/" + file_name
     await borg.send_file(event.chat_id, ok)
     await hmmu.delete()
     for files in (ok, img):
@@ -444,6 +539,80 @@ async def hmm(event):
             os.remove(files)
 
 
+@WhiteEye.on(WhiteEye_on_cmd(pattern="(flip|blur|tresh|hsv|lab)"))
+async def warnerstark_s(event):
+    if event.fwd_from:
+        return
+    ws = event.pattern_match.group(1)
+    img = await convert_to_image(event, borg)
+    image = cv2.imread(img)
+    await event.edit("`Processing..`")
+    if ws == "flip":
+        flipped = cv2.flip(image, 0)
+        file_name = "Flipped.png"
+        ok = sedpath + "/" + file_name
+        cv2.imwrite(ok, flipped)
+        warnerstark = "Hehe, Flipped"
+    elif ws == "blur":
+        blurred = cv2.blur(image, (8,8))
+        file_name = "Blurred.png"
+        ok = sedpath + "/" + file_name
+        cv2.imwrite(ok, blurred)
+        warnerstark = "Hehe, Blurred"
+    elif ws == "tresh":
+        treshold, WhiteEyeDevs = cv2.threshold(image, 150, 225, cv2.THRESH_BINARY)
+        file_name = "Tresh.png"
+        ok = sedpath + "/" + file_name
+        cv2.imwrite(ok, WhiteEyeDevs)
+        warnerstark = "Hehe, TreshHolded."
+    elif ws == "hsv":
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        file_name = "Hsv.png"
+        ok = sedpath + "/" + file_name
+        cv2.imwrite(ok, hsv)
+        warnerstark = "Hehe, Hsv"
+    elif ws == "lab":
+        lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+        file_name = "Lab.png"
+        ok = sedpath + "/" + file_name
+        cv2.imwrite(ok, lab)
+        warnerstark = "Hehe, Lab"
+    await event.delete()
+    await borg.send_file(event.chat_id, file=ok, caption=warnerstark)
+    for files in (ok, img):
+        if files and os.path.exists(files):
+            os.remove(files)
+     
+@WhiteEye.on(WhiteEye_on_cmd(pattern="aic$"))
+async def warnerstarkgang(event):
+    if event.fwd_from:
+        return
+    img = await convert_to_image(event, borg)
+    await event.edit("`Coverting This Media To Image Now.`")
+    so = "**Powered By @WhiteEyeDevs**"
+    await event.delete()
+    await borg.send_file(event.chat_id, file=img, caption=so)
+    
+@WhiteEye.on(WhiteEye_on_cmd(pattern="tgstogif(?: |$)(.*)"))
+async def warnerstarkgangz(event):
+    if event.fwd_from:
+        return
+    if not event.reply_to_msg_id:
+        await event.edit("`Please Reply To Tgs To Convert To Gif.`")
+        return
+    if event.pattern_match.group(1):
+        quality = event.pattern_match.group(1)
+    else:
+        quality = 512
+    await event.edit("`Processing..`")
+    hmm_ws = await event.get_reply_message()
+    warner_s = await friday.download_media(hmm_ws.media)
+    ok_stark = tgs_to_gif(warner_s, quality)
+    so = "**Powered By @WhiteEyeDevs**"
+    await event.edit("`Converting This Tgs To Gif Now !`")
+    await event.delete()
+    await borg.send_file(event.chat_id, file=ok_stark, caption=so)
+        
 CMD_HELP.update(
     {
         "imagetools": "**imagetools**\
