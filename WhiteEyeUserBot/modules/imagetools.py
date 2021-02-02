@@ -528,7 +528,7 @@ async def hmm(event):
     im = background.resize((2800, 1500))
     im.paste(foreground, (0, 0), mask=foreground)
     d1 = ImageDraw.Draw(im)
-    myFont = ImageFont.truetype("./resources/live/font.ttf", 165)
+    myFont = ImageFont.truetype("./resources/live/font.(1)ttf", 165)
     d1.text((7, 1251), text, font=myFont, fill=(0, 0, 0))
 
     im.save("./WhiteEye/livenews.png")
