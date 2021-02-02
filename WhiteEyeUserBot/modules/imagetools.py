@@ -1,20 +1,19 @@
+import html
 import os
-import wget
 from shutil import rmtree
+
 import cv2
-import cv2 as cv
 import numpy as np
 import requests
+import wget
 from PIL import Image, ImageDraw, ImageFont
 from telegraph import upload_file
+from telethon.tl.functions.users import GetFullUserRequest
+
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.functions import convert_to_image, crop_vid, runcmd, tgs_to_gif
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, sudo_cmd
-import html
-from telethon.tl.functions.photos import GetUserPhotosRequest
-from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import MessageEntityMentionName
-from telethon.utils import get_input_location
+
 sedpath = "./WhiteEye/"
 if not os.path.isdir(sedpath):
     os.makedirs(sedpath)
@@ -35,7 +34,7 @@ async def hmm(event):
         "./resources/imgcolour/colouregex.prototxt",
         "./resources/imgcolour/colorization_release_v2.caffemodel",
     )
-    
+
     pts = np.load("./resources/imgcolour/pts_in_hull.npy")
     class8 = net.getLayerId("class8_ab")
     conv8 = net.getLayerId("conv8_313_rh")
@@ -131,6 +130,7 @@ async def iamthug(event):
         if files and os.path.exists(files):
             os.remove(files)
 
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"msk ?(.*)"))
 async def iamnone(event):
     if event.fwd_from:
@@ -142,7 +142,9 @@ async def iamnone(event):
     await event.get_reply_message()
     img = await convert_to_image(event, borg)
     imagePath = img
-    wget_s = wget.download(event.pattern_match.group(1), out=Config.TMP_DOWNLOAD_DIRECTORY)
+    wget_s = wget.download(
+        event.pattern_match.group(1), out=Config.TMP_DOWNLOAD_DIRECTORY
+    )
     maskPath = wget_s
     cascPath = "./resources/thuglife/face_regex.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
@@ -163,8 +165,8 @@ async def iamnone(event):
     for files in (ok, img, maskPath):
         if files and os.path.exists(files):
             os.remove(files)
-            
-            
+
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"tni"))
 @WhiteEye.on(sudo_cmd(pattern=r"tni", allow_sudo=True))
 async def toony(event):
@@ -213,7 +215,8 @@ async def lolmetrg(event):
     for files in (lolbruh, img):
         if files and os.path.exists(files):
             os.remove(files)
-            
+
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"geyuser"))
 @WhiteEye.on(sudo_cmd(pattern=r"geyuser", allow_sudo=True))
 async def lolmetrg(event):
@@ -228,13 +231,12 @@ async def lolmetrg(event):
     r = requests.get(lolul)
     open("geys.png", "wb").write(r.content)
     lolbruh = "geys.png"
-    await borg.send_file(
-        event.chat_id, lolbruh, caption="`You iz Gey.`", reply_to=sed
-    )
+    await borg.send_file(event.chat_id, lolbruh, caption="`You iz Gey.`", reply_to=sed)
     for files in (lolbruh, img):
         if files and os.path.exists(files):
             os.remove(files)
-            
+
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"pix"))
 @WhiteEye.on(sudo_cmd(pattern=r"pix", allow_sudo=True))
 async def lolmetrg(event):
@@ -256,6 +258,7 @@ async def lolmetrg(event):
         if files and os.path.exists(files):
             os.remove(files)
 
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"ytc"))
 @WhiteEye.on(sudo_cmd(pattern=r"ytc", allow_sudo=True))
 async def lolmetrg(event):
@@ -265,7 +268,7 @@ async def lolmetrg(event):
     sed = await event.get_reply_message()
     hmm_s = await event.client(GetFullUserRequest(sed.sender_id))
     if not hmm_s.profile_photo:
-        imglink = 'https://telegra.ph/file/b9684cda357dfbe6f5748.jpg'
+        imglink = "https://telegra.ph/file/b9684cda357dfbe6f5748.jpg"
     elif hmm_s.profile_photo:
         img = await borg.download_media(hmm_s.profile_photo, sedpath)
         url_s = upload_file(img)
@@ -274,7 +277,7 @@ async def lolmetrg(event):
     if first_name is not None:
         first_name = first_name.replace("\u2060", "")
     if sed.text is None:
-        comment = 'Give Some Text'
+        comment = "Give Some Text"
     else:
         comment = sed.raw_text
     lolul = f"https://some-random-api.ml/canvas/youtube-comment?avatar={imglink}&username={first_name}&comment={comment}"
@@ -282,12 +285,11 @@ async def lolmetrg(event):
     open("ytc.png", "wb").write(r.content)
     lolbruh = "ytc.png"
     await event.delete()
-    await borg.send_file(
-        event.chat_id, lolbruh, caption="`Hmm Nice.`", reply_to=sed
-    )
+    await borg.send_file(event.chat_id, lolbruh, caption="`Hmm Nice.`", reply_to=sed)
     for files in (lolbruh, img):
         if files and os.path.exists(files):
             os.remove(files)
+
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"jail"))
 @WhiteEye.on(sudo_cmd(pattern=r"jail", allow_sudo=True))
@@ -300,7 +302,7 @@ async def hmm(event):
     hmmu = await event.reply("hmm... Sending him to jail...🚶")
     await event.get_reply_message()
     img = await convert_to_image(event, borg)
-    sed = await event.get_reply_message()
+    await event.get_reply_message()
     img = await convert_to_image(event, borg)
     mon = "./resources/jail/jail.jpg"
     foreground = Image.open(mon).convert("RGBA")
@@ -444,7 +446,8 @@ async def img(event):
         if files and os.path.exists(files):
             os.remove(files)
         event.delete()
-        
+
+
 # Credits To These :
 # https://github.com/midnightmadwalk [TG: @MidnightMadwalk]
 # https://github.com/code-rgb [TG: @DeletedUser420]
@@ -502,7 +505,6 @@ async def spinshit(message):
     rmtree(path, ignore_errors=True)
 
 
-
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"lnews ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"lnews ?(.*)", allow_sudo=True))
 async def hmm(event):
@@ -518,16 +520,16 @@ async def hmm(event):
     hmmu = await event.reply("hmm... Starting Live News Stream...🚶")
     await event.get_reply_message()
     img = await convert_to_image(event, borg)
-    sed = await event.get_reply_message()
+    await event.get_reply_message()
     img = await convert_to_image(event, borg)
     background = Image.open(img)
     newss = "./resources/live/news.png"
     foreground = Image.open(newss)
     im = background.resize((2800, 1500))
-    im.paste(foreground, (0,0), mask = foreground)
+    im.paste(foreground, (0, 0), mask=foreground)
     d1 = ImageDraw.Draw(im)
     myFont = ImageFont.truetype("./resources/live/font.ttf", 165)
-    d1.text((7, 1251), text, font=myFont, fill =(0, 0, 0))
+    d1.text((7, 1251), text, font=myFont, fill=(0, 0, 0))
 
     im.save("./WhiteEye/livenews.png")
     file_name = "livenews.png"
@@ -554,7 +556,7 @@ async def warnerstark_s(event):
         cv2.imwrite(ok, flipped)
         warnerstark = "Hehe, Flipped"
     elif ws == "blur":
-        blurred = cv2.blur(image, (8,8))
+        blurred = cv2.blur(image, (8, 8))
         file_name = "Blurred.png"
         ok = sedpath + "/" + file_name
         cv2.imwrite(ok, blurred)
@@ -582,7 +584,8 @@ async def warnerstark_s(event):
     for files in (ok, img):
         if files and os.path.exists(files):
             os.remove(files)
-     
+
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern="aic$"))
 async def warnerstarkgang(event):
     if event.fwd_from:
@@ -592,7 +595,8 @@ async def warnerstarkgang(event):
     so = "**Powered By @WhiteEyeDevs**"
     await event.delete()
     await borg.send_file(event.chat_id, file=img, caption=so)
-    
+
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern="tgstogif(?: |$)(.*)"))
 async def warnerstarkgangz(event):
     if event.fwd_from:
@@ -612,7 +616,8 @@ async def warnerstarkgangz(event):
     await event.edit("`Converting This Tgs To Gif Now !`")
     await event.delete()
     await borg.send_file(event.chat_id, file=ok_stark, caption=so)
-        
+
+
 CMD_HELP.update(
     {
         "imagetools": "**imagetools**\
