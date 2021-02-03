@@ -12,12 +12,11 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from anime_downloader.sites import get_anime_class
+from mal import Anime, AnimeSearch, Manga, MangaSearch
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
-from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
 
-from mal import AnimeSearch, Anime, MangaSearch, Manga
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="anime ?(.*)"))
 @WhiteEye.on(sudo_cmd(pattern="anime ?(.*)", allow_sudo=True))
@@ -28,19 +27,22 @@ async def _(event):
     ommhg = await edit_or_reply(event, "Searching For Anime.....")
     lmao = input_str.split(":", 1)
     try:
-       site = lmao[1]
+        site = lmao[1]
     except:
-       site = "animeonline360"
-       await edit_or_reply(event, "Please Provide Site Name From Next Time. Now Continuing With Default Site.")
+        site = "animeonline360"
+        await edit_or_reply(
+            event,
+            "Please Provide Site Name From Next Time. Now Continuing With Default Site.",
+        )
 
     lol = lmao[0]
     why = site.lower()
 
     Twist = get_anime_class(why)
     try:
-       search = Twist.search(lol)
+        search = Twist.search(lol)
     except:
-       await ommhg.edit("Please Try Different Site. Given Site Is Down.")
+        await ommhg.edit("Please Try Different Site. Given Site Is Down.")
 
     title1 = search[0].title
     url1 = search[0].url
@@ -53,7 +55,11 @@ async def _(event):
     title5 = search[4].title
     url5 = search[4].url
     NopZ = f"<b><u>Anime Search Complete</b></u> \n\n\n<b>Title</b>:-  <code>{title1}</code> \n<b>URL Link</b>:- {url1}\n\n<b>Title</b>:-  <code>{title2}</code> \n<b>URL Link</b>:- {url2}\n\n<b>Title</b>:-  <code>{title3}</code>\n<b>URL Link</b>:- {url3}\n\n<b>Title</b>:-  <code>{title4}</code> \n<b>URL Link</b>:- {url4}\n\n<b>Title</b>:-  <code>{title5}</code> \n<b>URL Link</b>:- {url5}\n\n<b>Links Gathered By Friday\nGet Your Own Friday From @FRIDAYCHAT</b>"
-    await borg.send_message(event.chat_id, NopZ, parse_mode="HTML",)
+    await borg.send_message(
+        event.chat_id,
+        NopZ,
+        parse_mode="HTML",
+    )
     await ommhg.delete()
 
 
@@ -69,10 +75,10 @@ async def _(event):
     anime = Anime(ID)
     jp = ""
     for x in anime.genres:
-      jp += x + ";  "
+        jp += x + ";  "
     link = anime.image_url
     if link == None:
-      link = search.results[0].image_url
+        link = search.results[0].image_url
     By = f"""<u><b>Anime Information Gathered</b></u>
 <b>tlele:- {search.results[0].title}
 Mal ID:- {search.results[0].mal_id}
@@ -111,10 +117,10 @@ async def _(event):
     manga = Manga(ID)
     jp = ""
     for x in manga.genres:
-      jp += x + ";  "
+        jp += x + ";  "
     link = manga.image_url
     if link == None:
-      link = search.results[0].image_url
+        link = search.results[0].image_url
     By = f"""<u><b>manga Information Gathered</b></u>
 <b>tlele:- {search.results[0].title}
 Mal ID:- {search.results[0].mal_id}
@@ -139,8 +145,6 @@ favorites:- {manga.favorites}</b>
         silent=True,
     )
     await LeO.delete()
-
-
 
 
 CMD_HELP.update(
