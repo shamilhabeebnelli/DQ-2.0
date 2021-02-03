@@ -46,6 +46,8 @@ elif ENV:
         # Send .get_id in any channel to fill this value.
         PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", -100))
         PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID", -100))
+        NO_SONGS = bool(os.environ.get("NO_SONGS", False))
+        PING_SERVERS = bool(os.environ.get("PING_SERVERS", False))
         TG_BOT_USER_NAME_BF_HER = os.environ.get("TG_BOT_USER_NAME_BF_HER", None)
         NO_SONGS = bool(os.environ.get("NO_SONGS", False))
         DOWNLOAD_PFP_URL_CLOCK = os.environ.get("DOWNLOAD_PFP_URL_CLOCK", None)
