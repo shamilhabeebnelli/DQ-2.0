@@ -3,8 +3,8 @@
 import random
 import re
 
-from WhiteEyeUserBot import CMD_HELP, bot
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd, edit_or_reply, sudo_cmd
+from WhiteEyeUserBot import CMD_HELP
+from WhiteEyeUserBot.utils import edit_or_reply, WhiteEye_on_cmd, sudo_cmd
 
 EMOJI_PATTERN = re.compile(
     "["
@@ -32,10 +32,8 @@ def deEmojify(inputString: str) -> str:
 @WhiteEye.on(WhiteEye_on_cmd(pattern=r"waifu(?: |$)(.*)"))
 @WhiteEye.on(sudo_cmd(pattern=r"waifu(?: |$)(.*)", allow_sudo=True))
 async def waifu(animu):
-    if event.fwd_from:
+    if animu.fwd_from:
         return
-    # """Creates random anime sticker!"""
-
     text = animu.pattern_match.group(1)
     if not text:
         if animu.is_reply:
@@ -58,4 +56,10 @@ async def waifu(animu):
     await animu.delete()
 
 
-CMD_HELP.update({"waifu": ".waifu : Anime that makes your writing fun."})
+CMD_HELP.update(
+    {
+        "waifu": "**Waifu**\
+\n\n**Syntax : **`.waifu media <text>`\
+\n**Usage :** Make your text funny."
+    }
+)
