@@ -11,11 +11,10 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from uniborg.util import WhiteEye_on_cmd
 import requests
+
 from WhiteEyeUserBot import CMD_HELP
 from WhiteEyeUserBot.utils import admin_cmd
-
 
 
 @WhiteEye.on(admin_cmd(pattern="ekart (.*)"))
@@ -23,8 +22,11 @@ async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    urlo = "https://track.aftership.com/trackings?courier=ekart&tracking-numbers=" + str(input_str)
-    
+    urlo = (
+        "https://track.aftership.com/trackings?courier=ekart&tracking-numbers="
+        + str(input_str)
+    )
+
     url = "https://ekart-api-chi.vercel.app/check?id=" + str(input_str)
     r = requests.get(url)
     h = r.json()
@@ -36,8 +38,7 @@ async def _(event):
     ar = oqwz.get("Time")
     place = oqwz.get("Place")
     status = oqwz.get("Status")
-    
-    
+
     caption = f""" <b>Ekart Tracking </b>
 Merchant Name:- {merchant}
 Order Status:- {order_status}
@@ -57,7 +58,6 @@ Get Your Own WhiteEye From @WhiteEyeDevs.</b></u>
         parse_mode="HTML",
     )
     await event.delete()
-
 
 
 CMD_HELP.update(
