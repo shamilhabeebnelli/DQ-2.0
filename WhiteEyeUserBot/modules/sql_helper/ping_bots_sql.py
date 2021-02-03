@@ -6,6 +6,7 @@ from . import BASE, SESSION
 class Botchecker(BASE):
     __tablename__ = "botchecker"
     bot_username = Column(String(14), primary_key=True)
+
     def __init__(self, bot_username):
         self.bot_username = bot_username
 
@@ -27,7 +28,11 @@ def get_all_bot():
 
 def is_bot_already_added(bot_username):
     try:
-        return SESSION.query(Botchecker).filter(Botchecker.bot_username == str(bot_username)).one()
+        return (
+            SESSION.query(Botchecker)
+            .filter(Botchecker.bot_username == str(bot_username))
+            .one()
+        )
     except:
         return None
     finally:
