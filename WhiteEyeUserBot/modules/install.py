@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 from WhiteEyeUserBot import CMD_HELP
-from WhiteEyeUserBot.function import get_all_modules
+from WhiteEyeUserBot.functions import get_all_modules
 from WhiteEyeUserBot.utils import WhiteEye_on_cmd, load_module
 
 DELETE_TIMEOUT = 5
