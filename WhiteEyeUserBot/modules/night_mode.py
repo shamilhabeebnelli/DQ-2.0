@@ -1,9 +1,9 @@
-from apscheduler.schedulers.asyncio import AsyncIOScheduler 
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from telethon import functions
-from WhiteEyeUserBot.functions import get_all_admin_chats, is_admin
 from telethon.tl.types import ChatBannedRights
-from WhiteEyeUserBot import WhiteEye_on_cmd
 
+from WhiteEyeUserBot import WhiteEye_on_cmd
+from WhiteEyeUserBot.functions import is_admin
 
 hehes = ChatBannedRights(
     until_date=None,
@@ -31,6 +31,8 @@ openhehe = ChatBannedRights(
     pin_messages=True,
     change_info=True,
 )
+
+
 @WhiteEye.on(WhiteEye_on_cmd(pattern="scgrp$"))
 async def close_ws(event):
     if not event.is_group:
@@ -40,14 +42,17 @@ async def close_ws(event):
         from WhiteEyeUserBot.modules.sql_helper import night_mode_sql as ws
     except:
         logger.info("Hehe, Kanger")
-    if not await is_admin(event, bot.uid): 
+    if not await is_admin(event, bot.uid):
         await event.edit("`You Should Be Admin To Do This!`")
         return
     if ws.is_nightmode_indb(event.chat_id):
         await event.edit("This Chat is Has Already Enabled Night Mode.")
         return
     ws.add_nightmode(event.chat_id)
-    await event.edit(f"**Added Chat {event.chat.title} With Id {event.chat_id} To Database. This Group Will Be Closed On 12Am(IST) And Will Opened On 06Am(IST)**")
+    await event.edit(
+        f"**Added Chat {event.chat.title} With Id {event.chat_id} To Database. This Group Will Be Closed On 12Am(IST) And Will Opened On 06Am(IST)**"
+    )
+
 
 @WhiteEye.on(WhiteEye_on_cmd(pattern="rsgrp$"))
 async def disable_ws(event):
@@ -58,14 +63,16 @@ async def disable_ws(event):
         from WhiteEyeUserBot.modules.sql_helper import night_mode_sql as ws
     except:
         logger.info("Hehe, Kanger")
-    if not await is_admin(event, bot.uid): 
+    if not await is_admin(event, bot.uid):
         await event.edit("`You Should Be Admin To Do This!`")
         return
     if not ws.is_nightmode_indb(event.chat_id):
         await event.edit("This Chat is Has Not Enabled Night Mode.")
         return
     ws.rmnightmode(event.chat_id)
-    await event.edit(f"**Removed Chat {event.chat.title} With Id {event.chat_id} From Database. This Group Will Be No Longer Closed On 12Am(IST) And Will Opened On 06Am(IST)**")
+    await event.edit(
+        f"**Removed Chat {event.chat.title} With Id {event.chat_id} From Database. This Group Will Be No Longer Closed On 12Am(IST) And Will Opened On 06Am(IST)**"
+    )
 
 
 async def job_close():
@@ -79,15 +86,17 @@ async def job_close():
     for warner in ws_chats.chat_id:
         try:
             await WhiteEye.send_message(
-              warner, "`12:00 Am, Group Is Closing Till 6 Am. Night Mode Started !` \n**Powered By @WhiteEyeDevs**"
+                warner,
+                "`12:00 Am, Group Is Closing Till 6 Am. Night Mode Started !` \n**Powered By @WhiteEyeDevs**",
             )
             await WhiteEye(
-            functions.messages.EditChatDefaultBannedRightsRequest(
-                peer=warner, banned_rights=hehes
+                functions.messages.EditChatDefaultBannedRightsRequest(
+                    peer=warner, banned_rights=hehes
+                )
             )
-        )
         except:
             pass
+
 
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
 scheduler.add_job(job_close, trigger="cron", hour=23, minute=59)
@@ -105,15 +114,16 @@ async def job_open():
     for warner in ws_chats.chat_id:
         try:
             await WhiteEye.send_message(
-              warner, "`06:00 Am, Group Is Opening.`\n**Powered By @WhiteEyeDevs**"
+                warner, "`06:00 Am, Group Is Opening.`\n**Powered By @WhiteEyeDevs**"
             )
             await WhiteEye(
-            functions.messages.EditChatDefaultBannedRightsRequest(
-                peer=warner, banned_rights=openhehe
+                functions.messages.EditChatDefaultBannedRightsRequest(
+                    peer=warner, banned_rights=openhehe
+                )
             )
-        )
         except:
             pass
+
 
 # Run everyday at 06
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
