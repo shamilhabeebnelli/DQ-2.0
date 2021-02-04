@@ -17,7 +17,6 @@ from pathlib import Path
 
 from telethon.tl.types import InputMessagesFilterDocument
 
-from WhiteEyeUserBot.Configs import Config
 from WhiteEyeUserBot.utils import command, load_module
 
 
