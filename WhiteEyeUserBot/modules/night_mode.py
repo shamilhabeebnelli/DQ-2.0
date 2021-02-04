@@ -2,8 +2,8 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from telethon import functions
 from telethon.tl.types import ChatBannedRights
 
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 from WhiteEyeUserBot.functions import is_admin
+from WhiteEyeUserBot.utils import WhiteEye_on_cmd
 
 hehes = ChatBannedRights(
     until_date=None,
