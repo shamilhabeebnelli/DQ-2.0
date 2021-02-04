@@ -1,8 +1,8 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler 
 from telethon import functions
-from WhiteEyeUserBot.function import get_all_admin_chats, is_admin
+from WhiteEyeUserBot.functions import get_all_admin_chats, is_admin
 from telethon.tl.types import ChatBannedRights
-from WhiteEyeUserBot.utils import WhiteEye_on_cmd
+from WhiteEyeUserBot import WhiteEye_on_cmd
 
 
 hehes = ChatBannedRights(
@@ -95,6 +95,10 @@ scheduler.start()
 
 
 async def job_open():
+    try:
+        from WhiteEyeUserBot.modules.sql_helper import night_mode_sql as ws
+    except:
+        logger.info("Hehe, Kanger")
     ws_chats = ws.get_all_chat_id()
     if len(ws_chats.chat_id) == 0:
         return
@@ -113,5 +117,5 @@ async def job_open():
 
 # Run everyday at 06
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(job_open, trigger="cron", hour=06)
+scheduler.add_job(job_open, trigger="cron", hour=6)
 scheduler.start()
