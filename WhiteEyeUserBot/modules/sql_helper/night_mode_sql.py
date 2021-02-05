@@ -28,15 +28,15 @@ def rmnightmode(chat_id):
 
 
 def get_all_chat_id():
-    dayam = SESSION.query(Nightmode).all()
+    stark = SESSION.query(Nightmode).all()
     SESSION.close()
-    return dayam
+    return stark
 
 
 def is_nightmode_indb(chat_id):
     try:
-        return SESSION.query(Nightmode).filter(Nightmode.chat_id == chat_id).one()
-    except:
-        return None
+        s__ = SESSION.query(NightMode).get(chat_id)
+        if s__:
+            return str(s__.chat_id)
     finally:
         SESSION.close()
