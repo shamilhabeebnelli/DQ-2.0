@@ -86,20 +86,22 @@ async def job_close():
     for warner in ws_chats.chat_id:
         try:
             await WhiteEye.send_message(
-                warner,
-                "`12:00 Am, Group Is Closing Till 6 Am. Night Mode Started !` \n**Powered By @WhiteEyeDevs**",
+              warner, "`12:00 Am, Group Is Closing Till 6 Am. Night Mode Started !` \n**Powered By @WhiteEyeDevs**"
             )
             await WhiteEye(
-                functions.messages.EditChatDefaultBannedRightsRequest(
-                    peer=warner, banned_rights=hehes
-                )
+            functions.messages.EditChatDefaultBannedRightsRequest(
+                peer=warner, banned_rights=hehes
             )
+            if Config.CLEAN_GROUPS:
+                async for user in friday.iter_participants(warner):
+                    if user.deleted:
+                        await WhiteEye.edit_permissions(warner, user.id, view_messages=False)
+        )
         except:
             pass
 
-
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(job_close, trigger="cron", hour=23, minute=59)
+scheduler.add_job(job_close, trigger="cron", hour=9, minute=59)
 scheduler.start()
 
 
@@ -114,18 +116,17 @@ async def job_open():
     for warner in ws_chats.chat_id:
         try:
             await WhiteEye.send_message(
-                warner, "`06:00 Am, Group Is Opening.`\n**Powered By @WhiteEyeDevs**"
+              warner, "`06:00 Am, Group Is Opening.`\n**Powered By @WhiteEyeDevs**"
             )
-            await WhiteEye(
-                functions.messages.EditChatDefaultBannedRightsRequest(
-                    peer=warner, banned_rights=openhehe
-                )
+            await friday(
+            functions.messages.EditChatDefaultBannedRightsRequest(
+                peer=warner, banned_rights=openhehe
             )
+        )
         except:
             pass
 
-
 # Run everyday at 06
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(job_open, trigger="cron", hour=6)
+scheduler.add_job(job_open, trigger="cron", hour=10, minute=10)
 scheduler.start()
