@@ -91,17 +91,17 @@ async def job_close():
             await WhiteEye(
             functions.messages.EditChatDefaultBannedRightsRequest(
                 peer=warner, banned_rights=hehes
+             )
             )
             if Config.CLEAN_GROUPS:
-                async for user in friday.iter_participants(warner):
+                async for user in WhiteEye.iter_participants(warner):
                     if user.deleted:
                         await WhiteEye.edit_permissions(warner, user.id, view_messages=False)
-        )
         except:
             pass
 
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(job_close, trigger="cron", hour=9, minute=59)
+scheduler.add_job(job_close, trigger="cron", hour=10, minute=15)
 scheduler.start()
 
 
@@ -118,7 +118,7 @@ async def job_open():
             await WhiteEye.send_message(
               warner, "`06:00 Am, Group Is Opening.`\n**Powered By @WhiteEyeDevs**"
             )
-            await friday(
+            await WhiteEye(
             functions.messages.EditChatDefaultBannedRightsRequest(
                 peer=warner, banned_rights=openhehe
             )
@@ -128,5 +128,5 @@ async def job_open():
 
 # Run everyday at 06
 scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
-scheduler.add_job(job_open, trigger="cron", hour=10, minute=10)
+scheduler.add_job(job_open, trigger="cron", hour=10, minute=20)
 scheduler.start()
